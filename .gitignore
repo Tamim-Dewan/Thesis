@@ -1,0 +1,11 @@
+# LaTeX auxiliary
+*.aux
+*.log
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.out
+*.toc
+*.bbl
+*.blg
+.DS_Store
