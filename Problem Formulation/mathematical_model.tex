@@ -346,7 +346,7 @@ Each available UAV is assigned to at most one survivor at a time:
 where $\mathcal{D}_{\text{avail}}(t)=\{j \mid A_j=1\}$ and $N'=|\mathcal{Q}_{\text{high}}(t)|$, $M'=|\mathcal{D}_{\text{avail}}(t)|$. The $\leq 1$ allows partial matching: a survivor may remain unassigned if no feasible UAV, and a UAV may stay idle if no high-confidence survivor.
 
 \subsection{Feasibility Enforcement}
-Feasibility is enforced via the cost guard: $C_{ij}(t)=\infty$ if $\neg\text{Feasible}(i,j)$ (includes $c_i < c_{\text{thresh}}$, $A_j=0$, no route, or battery violation), so any optimal solution automatically has $x_{ij}=0$ for infeasible pairs. No separate $x_{ij}\leq A_j$ needed.
+If a pair $(i,j)$ is not feasible, its cost is set to infinity: $C_{ij}(t)=\infty$ when $\neg\text{Feasible}(i,j)$. This includes $c_i < c_{\text{thresh}}$, $A_j=0$, no route, or battery violation. Any optimal solution will then have $x_{ij}=0$ for such pairs. No separate $x_{ij}\leq A_j$ is needed.
 
 \section{Objective Function}
 
