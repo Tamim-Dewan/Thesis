@@ -357,28 +357,6 @@ The snapshot offloading problem $\text{OFF-SNAP}(t)$ over $\mathcal{Q}_{\text{hi
 \end{equation}
 If $\mathcal{Q}_{\text{high}}(t)=\emptyset$ or all $C_{ij}=\infty$, the optimum is $x_{ij}=0$ (no dispatch, wait for next event). The constraint matrix is totally unimodular, so the LP relaxation yields an integral optimum. It is solvable optimally by the Hungarian algorithm on a square pad of size $\max(N',M')$ with dummy $\infty$ entries ($O(\max(N',M')^3)$), or greedily by sorting $\mathcal{Q}_{\text{high}}$ by $u_i c_i$ and assigning cheapest feasible $j$ ($O(N'M'\log N')$) for fast online seconds-scale execution.
 
-\subsection{Alternative: Maximize Value (Remark)}
-The value-maximization variant is a special case of the cost model with $w_T=w_E=0$, $w_U=1$:
-
-\begin{equation}
-\max_{\mathbf{x}(t)} \sum_{i=1}^{N(t)} \sum_{j=1}^{M} x_{ij}(t) \cdot u_i(t) \cdot c_i
-\end{equation}
-This ignores time and energy and is not used as V1 primary; V1 primary remains the normalized min-cost above.
-
-subject to:
-\begin{equation}
-\sum_{j \in \mathcal{D}_{\text{avail}}(t)} x_{ij}(t) \leq 1 \quad \forall i \in \mathcal{Q}_{\text{high}}(t)
-\end{equation}
-\begin{equation}
-\sum_{i \in \mathcal{Q}_{\text{high}}(t)} x_{ij}(t) \leq 1 \quad \forall j \in \mathcal{D}_{\text{avail}}(t)
-\end{equation}
-\begin{equation}
-x_{ij}(t) \in \{0, 1\}
-\end{equation}
-\begin{equation}
-C_{ij}(t)=\infty \text{ enforces } x_{ij}=0 \text{ if } \neg\text{Feasible}(i,j)
-\end{equation}
-
 \section{Global System State}
 
 \subsection{Complete State Definition}
