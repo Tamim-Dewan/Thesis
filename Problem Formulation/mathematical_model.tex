@@ -290,35 +290,31 @@ A complete feasibility check is:
 \section{Assignment Constraints}
 
 \subsection{Single Assignment per Survivor}
-Each survivor is assigned to at most one Responder UAV:
+Each survivor in $\mathcal{Q}_{\text{high}}(t)$ is assigned to at most one Responder UAV:
 
 \begin{equation}
-\sum_{j=1}^{M} x_{ij}(t) \leq 1 \quad \forall i \in \mathcal{S}(t)
+\sum_{j \in \mathcal{D}_{\text{avail}}(t)} x_{ij}(t) \leq 1 \quad \forall i \in \mathcal{Q}_{\text{high}}(t)
 \end{equation}
 
 \subsection{Single Task per UAV}
-Each UAV is assigned to at most one survivor at a time:
+Each available UAV is assigned to at most one survivor at a time:
 
 \begin{equation}
-\sum_{i=1}^{N(t)} x_{ij}(t) \leq 1 \quad \forall j \in \mathcal{D}(t)
+\sum_{i \in \mathcal{Q}_{\text{high}}(t)} x_{ij}(t) \leq 1 \quad \forall j \in \mathcal{D}_{\text{avail}}(t)
 \end{equation}
+where $\mathcal{D}_{\text{avail}}(t)=\{j \mid A_j=1\}$ and $N'=|\mathcal{Q}_{\text{high}}(t)|$, $M'=|\mathcal{D}_{\text{avail}}(t)|$. The $\leq 1$ allows partial matching: a survivor may remain unassigned if no feasible UAV, and a UAV may stay idle if no high-confidence survivor.
 
 \subsection{Feasibility Enforcement}
-\begin{equation}
-x_{ij}(t) = 0 \quad \text{if } \neg \text{Feasible}(i,j) \quad \text{(includes } c_i < c_{\text{thresh}} \text{)}
-\end{equation}
-
-\subsection{Assignment to Available UAVs Only}
-\begin{equation}
-x_{ij}(t) \leq A_j \quad \forall i, j
-\end{equation}
+Feasibility is enforced via the cost guard: $C_{ij}(t)=\infty$ if $\neg\text{Feasible}(i,j)$ (includes $c_i < c_{\text{thresh}}$, $A_j=0$, no route, or battery violation), so any optimal solution automatically has $x_{ij}=0$ for infeasible pairs. No separate $x_{ij}\leq A_j$ needed.
 
 \section{Objective Function}
 
 \subsection{Primary Objective: Minimize Cost}
+The snapshot offloading problem $\text{OFF-SNAP}(t)$ over $\mathcal{Q}_{\text{high}}(t) \times \mathcal{D}_{\text{avail}}(t)$ is:
 \begin{equation}
-\min_{\mathbf{x}(t)} \sum_{i=1}^{N(t)} \sum_{j=1}^{M} x_{ij}(t) \cdot C_{ij}(t)
+\min_{\mathbf{x}(t)} \sum_{i \in \mathcal{Q}_{\text{high}}(t)} \sum_{j \in \mathcal{D}_{\text{avail}}(t)} x_{ij}(t) \cdot C_{ij}(t)
 \end{equation}
+If $\mathcal{Q}_{\text{high}}(t)=\emptyset$ or all $C_{ij}=\infty$, the optimum is $x_{ij}=0$ (no dispatch, wait for next event). The constraint matrix is totally unimodular, so the LP relaxation yields an integral optimum. It is solvable optimally by the Hungarian algorithm on a square pad of size $\max(N',M')$ with dummy $\infty$ entries ($O(\max(N',M')^3)$), or greedily by sorting $\mathcal{Q}_{\text{high}}$ by $u_i c_i$ and assigning cheapest feasible $j$ ($O(N'M'\log N')$) for fast online seconds-scale execution.
 
 \subsection{Alternative: Maximize Value (Remark)}
 The value-maximization variant is a special case of the cost model with $w_T=w_E=0$, $w_U=1$:
@@ -330,16 +326,16 @@ This ignores time and energy and is not used as V1 primary; V1 primary remains t
 
 subject to:
 \begin{equation}
-\sum_{j=1}^{M} x_{ij}(t) \leq 1 \quad \forall i
+\sum_{j \in \mathcal{D}_{\text{avail}}(t)} x_{ij}(t) \leq 1 \quad \forall i \in \mathcal{Q}_{\text{high}}(t)
 \end{equation}
 \begin{equation}
-\sum_{i=1}^{N(t)} x_{ij}(t) \leq 1 \quad \forall j
+\sum_{i \in \mathcal{Q}_{\text{high}}(t)} x_{ij}(t) \leq 1 \quad \forall j \in \mathcal{D}_{\text{avail}}(t)
 \end{equation}
 \begin{equation}
 x_{ij}(t) \in \{0, 1\}
 \end{equation}
 \begin{equation}
-x_{ij}(t) = 0 \quad \text{if } \neg \text{Feasible}(i,j)
+C_{ij}(t)=\infty \text{ enforces } x_{ij}=0 \text{ if } \neg\text{Feasible}(i,j)
 \end{equation}
 
 \section{Global System State}
@@ -405,7 +401,7 @@ At each event time $t$, the Command Center computes:
 
 where:
 \begin{itemize}
-\item $\mathbf{x}(t) = [x_{ij}(t)]$: Assignment matrix of size $N(t) \times M$
+\item $\mathbf{x}(t) = [x_{ij}(t)]$: Assignment matrix of size $N'(t) \times M'(t)$ over $\mathcal{Q}_{\text{high}}(t) \times \mathcal{D}_{\text{avail}}(t)$
 \item $\mathbf{P}(t) = [P_{ij}(t)]$: Route matrix for all assignments
 \end{itemize}
 
@@ -430,8 +426,11 @@ The decision $\pi(t)$ is recomputed at:
 \begin{enumerate}
 \item \textbf{New Survivor Detection}: $\mathcal{S}(t) \leftarrow \mathcal{S}(t) \cup \{S_{\text{new}}\}$
 \item \textbf{UAV Becomes Available}: $A_j = 0 \rightarrow A_j = 1$
-\item \textbf{Periodic Re-evaluation}: Every $\Delta T$ seconds (optional)
+\item \textbf{Verification Promotion}: $c_i < c_{\text{thresh}} \rightarrow c_i' \geq c_{\text{thresh}}$ moves $S_i$ from $\mathcal{Q}_{\text{low}}$ to $\mathcal{Q}_{\text{high}}$
+\item \textbf{Expiration/Fairness}: $\Delta t > T_{\text{exp}}$ or $u_i < u_{\min}$ removes $S_i$ from $\mathcal{Q}$; if $\sigma_i>0.8$ and wait $>T_{\text{fair}}$ promotes $S_i$ to top of $\mathcal{Q}_{\text{high}}$
+\item \textbf{Periodic Re-evaluation}: Every $\Delta T$ seconds due to $u_i(t)$ decay (optional)
 \end{enumerate}
+Note: In V1, dispatched assignments are irrevocable (non-preemptive); no recourse/reassignment until mission completes. Cost-bounded recourse is Future Work.
 
 \subsection{State Transition Functions}
 
@@ -462,8 +461,22 @@ D_j: \text{status}_j \leftarrow \text{AtSurvivor}
 D_j: A_j &\leftarrow 1 \\
 D_j: s_j &\leftarrow \emptyset \\
 D_j: \text{status}_j &\leftarrow \text{Idle} \\
-B_j &\leftarrow B_j - E_{ij}^{\text{consumed}}
+D_j: (x_j,y_j,z_j) &\leftarrow p_j^{\text{base}} \\
+B_j &\leftarrow B_j - E_{ij}^{\text{consumed}} \quad (E_{ij}^{\text{consumed}}=E_{ij}^{\text{total}})
 \end{align}
+
+\subsubsection{Verification Promotion}
+\begin{align}
+\mathcal{Q}_{\text{low}}(t^+) &= \mathcal{Q}_{\text{low}}(t^-) \setminus \{S_i\}, \quad c_i \rightarrow c_i' \geq c_{\text{thresh}} \\
+\mathcal{Q}_{\text{high}}(t^+) &= \mathcal{Q}_{\text{high}}(t^-) \cup \{S_i\}
+\end{align}
+
+\subsubsection{Expiration and Fairness}
+\begin{align}
+\text{Expire: } & \text{if } t - t_i^{\text{det}} > T_{\text{exp}} \text{ or } u_i(t) < u_{\min} \Rightarrow \mathcal{Q}(t^+) \leftarrow \mathcal{Q}(t^-) \setminus \{S_i\} \\
+\text{Fairness: } & \text{if } \sigma_i > 0.8 \land (t - t_i^{\text{det}}) > T_{\text{fair}} \Rightarrow \text{promote } S_i \text{ to top of } \mathcal{Q}_{\text{high}}
+\end{align}
+with e.g., $T_{\text{exp}}=90$ min, $u_{\min}=0.05$, $T_{\text{fair}}=15$ min.
 
 \section{Routing Model}
 
