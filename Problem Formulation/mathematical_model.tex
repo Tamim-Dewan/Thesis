@@ -355,7 +355,7 @@ The snapshot offloading problem $\text{OFF-SNAP}(t)$ over $\mathcal{Q}_{\text{hi
 \begin{equation}
 \min_{\mathbf{x}(t)} \sum_{i \in \mathcal{Q}_{\text{high}}(t)} \sum_{j \in \mathcal{D}_{\text{avail}}(t)} x_{ij}(t) \cdot C_{ij}(t)
 \end{equation}
-If $\mathcal{Q}_{\text{high}}(t)=\emptyset$ or all $C_{ij}=\infty$, the optimum is $x_{ij}=0$ (no dispatch, wait for next event). The constraint matrix is totally unimodular, so the LP relaxation yields an integral optimum. It is solvable optimally by the Hungarian algorithm on a square pad of size $\max(N',M')$ with dummy $\infty$ entries ($O(\max(N',M')^3)$), or greedily by sorting $\mathcal{Q}_{\text{high}}$ by $u_i c_i$ and assigning cheapest feasible $j$ ($O(N'M'\log N')$) for fast online seconds-scale execution.
+If $\mathcal{Q}_{\text{high}}(t)=\emptyset$ or all $C_{ij}=\infty$, the optimum is $x_{ij}=0$ (no dispatch, wait for next event).
 
 \section{Scope and Limitations}
 
