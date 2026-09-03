@@ -174,18 +174,13 @@ A_j = \begin{cases}
 \end{equation}
 
 \subsection{Environment Model}
-The disaster environment is represented as:
+The disaster environment is represented as continuous sets:
 
 \begin{equation}
 \mathcal{E} = (V, O)
 \end{equation}
 
-where:
-\begin{itemize}
-\item $V \subset \mathbb{R}^3$: Navigable free space
-\item $O \subset \mathbb{R}^3$: Static obstacle set (buildings, rubble, no-fly zones)
-\end{itemize}
-Note: The hazard map $R: V \rightarrow [0,1]$ is deferred to the Routing Problem formulation.
+where $V \subset \mathbb{R}^3$ is navigable free space and $O \subset \mathbb{R}^3$ is the static obstacle set (buildings, rubble, no-fly zones), with $V \cap O = \emptyset$. For Version 1, $O(t)=O$ (static) and the hazard map $R: V \rightarrow [0,1]$ is set to $R=0$ and deferred. A route $P$ is feasible iff $P \subset V$ (all waypoints lie in free space). No discretization or algorithm is assumed at formulation level.
 
 \subsection{Task Queue}
 The ordered queue of unassigned survivors is defined as a derived view:
