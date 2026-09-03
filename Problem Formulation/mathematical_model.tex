@@ -6,6 +6,12 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{cite}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{microtype}
+\setlength{\parskip}{0.5ex}
+\setlength{\jot}{4pt}
+\allowdisplaybreaks
 
 \title{Mathematical Formulation of the Proactive Golden-Hour Bridge Model (PGBM) for Post-Earthquake UAV-Assisted Response}
 
@@ -46,6 +52,32 @@ The PGBM consists of four primary actors:
 \section{Mathematical Notation}
 Throughout this formulation, bold uppercase letters denote sets, bold lowercase denote vectors, and scalar values use standard notation. The time variable $t$ denotes the current decision time (continuous). All decisions are event-triggered.
 
+\begin{table}[h]
+\centering
+\caption{Notation Summary}
+\label{tab:notation}
+\begin{tabularx}{\columnwidth}{l X}
+\toprule
+\textbf{Symbol} & \textbf{Description} \\
+\midrule
+$\mathcal{S}(t), \mathcal{D}(t), \mathcal{E}$ & Survivor set, Responder UAV set, Environment \\
+$\mathcal{Q}_{\text{high}}, \mathcal{Q}_{\text{low}}$ & High/low confidence queues ($c_i \geq c_{\text{thresh}}$) \\
+$S_i=(p_i,t_i^{\text{det}},c_i,\sigma_i,u_i,a_i)$ & Survivor task \\
+$D_j=(p_j,p_j^{\text{base}},B_j,\text{status}_j)$ & Responder UAV \\
+$p_i, p_j, p_j^{\text{base}} \in \mathbb{R}^3$ & Positions and base station \\
+$\sigma_i \in[0,1], c_i\in[0,1]$ & Severity, confidence \\
+$u_i(t)=\sigma_i e^{-\alpha(t-t_i^{\text{det}})}$ & Time-decayed urgency, $\alpha=\ln2/T_{\text{half}}$ \\
+$B_j(t)\in[0,B_{\max}], B_{\max}$ & Remaining/max battery \\
+$A_j\in\{0,1\}, \text{status}_j$ & Availability (derived from Idle) \\
+$T_{ij}, E_{ij}^{\text{total}}, E_{\text{return}}$ & Travel time, total/return energy \\
+$C_{ij}(t), w_T,w_E,w_U$ & Assignment cost and weights ($w_T+w_E+w_U=1$) \\
+$T_{\max},E_{\max}$ & Normalization constants \\
+$x_{ij}(t)\in\{0,1\}$ & Assignment variable \\
+$X(t)=(\mathcal{S},\mathcal{D},\mathcal{E},\mathcal{Q})$ & Global state \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
 \section{System Entities and State Definitions}
 
 \subsection{Survivor Task Model}
@@ -60,10 +92,11 @@ with the following parameters:
 \begin{table}[h]
 \centering
 \caption{Survivor Task Parameters}
-\begin{tabular}{|l|l|l|}
-\hline
+\label{tab:survivor}
+\begin{tabular}{lll}
+\toprule
 \textbf{Parameter} & \textbf{Symbol} & \textbf{Domain} \\
-\hline
+\midrule
 Location & $(x_i,y_i,z_i)$ & $\mathbb{R}^3$ \\
 Detection Time & $t_i^{\text{det}}$ & $\mathbb{R}^+$ \\
 Confidence Score & $c_i$ & $[0,1]$ \\
@@ -71,7 +104,7 @@ Severity & $\sigma_i$ & $[0,1]$ \\
 Urgency & $u_i(t)$ & $[0,1]$ \\
 Assignment Flag & $a_i$ & $\{0,1\}$ \\
 Assigned UAV & $\text{assigned\_to}_i$ & $\mathcal{D}(t) \cup \{\emptyset\}$ \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 Severity $\sigma_i$ denotes the static medical criticality at detection (independent of time), with $\sigma_i=1$ representing the most critical condition. Two possible scenarios for obtaining $\sigma_i$ are: (1) \textit{Scout AI Inference}: estimated automatically from Scout UAV thermal/optical imagery and rubble context via a classification model (e.g., motion/heat signature analysis), and (2) \textit{Human-in-the-Loop}: tagged manually by the Command Center operator reviewing the Scout video feed. If no severity estimate is available, $\sigma_i = 1$ uniformly.
@@ -115,17 +148,18 @@ with the following parameters:
 \begin{table}[h]
 \centering
 \caption{Responder UAV Parameters}
-\begin{tabular}{|l|l|l|}
-\hline
+\label{tab:uav}
+\begin{tabular}{lll}
+\toprule
 \textbf{Parameter} & \textbf{Symbol} & \textbf{Domain} \\
-\hline
+\midrule
 Position & $(x_j,y_j,z_j)$ & $\mathbb{R}^3$ \\
 Base Station & $p_j^{\text{base}}$ & $\mathbb{R}^3$ \\
 Remaining Battery & $B_j$ & $\mathbb{R}^+$ \\
 Availability & $A_j$ & $\{0,1\}$ \\
 Current Task & $s_j$ & $\mathcal{S}(t) \cup \{\emptyset\}$ \\
 Mission Status & $\text{status}_j$ & $\{\text{Idle}, \text{EnRoute}, \text{AtSurvivor}, \text{Returning}\}$ \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
