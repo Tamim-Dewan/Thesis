@@ -110,21 +110,20 @@ Assigned UAV & $\text{assigned\_to}_i$ & $\mathcal{D}(t) \cup \{\emptyset\}$ \\
 Severity $\sigma_i$ denotes the static medical criticality at detection (independent of time), with $\sigma_i=1$ representing the most critical condition. Two possible scenarios for obtaining $\sigma_i$ are: (1) \textit{Scout AI Inference}: estimated automatically from Scout UAV thermal/optical imagery and rubble context via a classification model (e.g., motion/heat signature analysis), and (2) \textit{Human-in-the-Loop}: tagged manually by the Command Center operator reviewing the Scout video feed. If no severity estimate is available, $\sigma_i = 1$ uniformly.
 
 \subsection{Urgency Decay Function}
-The urgency of survivor $i$ decays over time according to the Golden Hour principle. The primary model (Version 1) is exponential decay:
+The urgency of survivor $i$ decays exponentially with waiting time according to the Golden Hour principle:
 
 \begin{equation}
 u_i(t) = \sigma_i \cdot e^{-\alpha (t - t_i^{\text{det}})}
+\label{eq:urgency}
 \end{equation}
 
-where $\alpha > 0$ is the decay rate constant with $\alpha = \ln 2 / T_{\text{half}}$ and $T_{\text{half}}$ is the half-life of urgency (e.g., 30 minutes), and $\sigma_i$ is the severity at detection so that $u_i(t_i^{\text{det}}) = \sigma_i$. This captures that a survivor found 10 minutes ago has higher salvageability than one found 90 minutes ago at the same current time $t$, with value decaying as waiting time increases.
-
-\textit{Alternative (Remark):} A logistic decay model can capture the "critical threshold" phenomenon:
+where $\sigma_i \in[0,1]$ is the severity at detection so that $u_i(t_i^{\text{det}})=\sigma_i$, $\Delta t = t - t_i^{\text{det}} \geq 0$ is the waiting time, and $\alpha>0$ is the decay rate. The rate is defined via the half-life $T_{\text{half}}$ (e.g., $T_{\text{half}}=30$ min) as
 
 \begin{equation}
-u_i(t) = \sigma_i \cdot \frac{1}{1 + e^{k(t - t_i^{\text{det}} - T_{\text{half}})}}
+\alpha = \frac{\ln 2}{T_{\text{half}}},
 \end{equation}
 
-where $k$ controls the steepness of the decay. This alternative is deferred to future work for injury-specific cliff modeling.
+so that $u_i(t_i^{\text{det}}+T_{\text{half}})=\sigma_i/2$. For $T_{\text{half}}=30$ min, $\alpha \approx 0.023$ min$^{-1}$ ($3.8\times10^{-4}$ s$^{-1}$); $T_{\text{half}}=60$ min gives $\alpha\approx0.0115$ min$^{-1}$. A survivor found 10 min ago ($\Delta t=10$) has $u\approx0.79\sigma_i$, while one found 90 min ago has $u\approx0.12\sigma_i$ at the same current time $t$, capturing higher salvageability of fresher detections.
 
 \subsection{Confidence Score and Verification Policy}
 Each detection carries a confidence score $c_i \in [0,1]$ representing the Scout UAV detector's estimated probability that the detection is a true survivor (e.g., thermal/optical AI output). A threshold $c_{\text{thresh}} \in [0,1]$ (e.g., $0.5$) separates high- and low-confidence regimes:
