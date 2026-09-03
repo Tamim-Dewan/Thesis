@@ -199,9 +199,10 @@ ordered by priority:
 \text{priority}(i) = \beta_1 \cdot u_i(t) + \beta_2 \cdot c_i - \beta_3 \cdot (t - t_i^{\text{det}})
 \end{equation}
 Note: $\mathcal{Q}(t)$ is not an independent state component but a derived view of $\mathcal{S}(t)$ for scheduling. With verification threshold $c_{\text{thresh}}$, the queue partitions as:
-\begin{equation}
-\mathcal{Q}_{\text{high}}(t) = \{ S_i \in \mathcal{Q}(t) \mid c_i \geq c_{\text{thresh}} \}, \quad \mathcal{Q}_{\text{low}}(t) = \{ S_i \in \mathcal{Q}(t) \mid c_i < c_{\text{thresh}} \}
-\end{equation}
+\begin{align}
+\mathcal{Q}_{\text{high}}(t) &= \{ S_i \in \mathcal{Q}(t) \mid c_i \geq c_{\text{thresh}} \}, \\
+\mathcal{Q}_{\text{low}}(t) &= \{ S_i \in \mathcal{Q}(t) \mid c_i < c_{\text{thresh}} \}
+\end{align}
 Only $\mathcal{Q}_{\text{high}}(t)$ is eligible for the offloading assignment; $\mathcal{Q}_{\text{low}}(t)$ is held for verification. Note: $\text{priority}(i)$ is a pre-filter ordering heuristic for $\mathcal{Q}_{\text{high}}(t)$ (e.g., for greedy fallback or tie-breaking); the optimal assignment is determined by the ILP cost $C_{ij}(t)$, not by priority order.
 
 \section{Decision Variables}
@@ -259,7 +260,10 @@ E_{\text{hover}} = e_{\text{hover}} \cdot T_{\text{service}}
 The energy to return from survivor $i$ to the base of UAV $j$ is:
 
 \begin{equation}
-E_{\text{return}}(i,j) = E(P_{i \rightarrow \text{base}(j)}) = \sum_{k=1}^{K'} \left( e_{\text{travel}} \cdot \|p_k - p_{k-1}\| + e_{\text{vert}} \cdot \Delta z_k \right)
+\begin{aligned}
+E_{\text{return}}(i,j) &= E(P_{i \rightarrow \text{base}(j)}) \\
+&= \sum_{k=1}^{K'} \left( e_{\text{travel}} \|p_k - p_{k-1}\| + e_{\text{vert}} \Delta z_k \right)
+\end{aligned}
 \end{equation}
 
 where $P_{i \rightarrow \text{base}(j)} = \{p_0=p_i, \dots, p_{K'}=p_j^{\text{base}}\}$ is the feasible route from $p_i$ to $p_j^{\text{base}}$ with $p_k \in V$. This explicitly uses $p_j^{\text{base}}$ from the UAV model and is generally \textit{not} equal to $E(P_{ij})$ due to differing start position $p_j \neq p_j^{\text{base}}$ during online operation and asymmetric vertical cost.
@@ -280,9 +284,13 @@ The cost of assigning UAV $j$ to survivor $i$ is:
 
 \begin{equation}
 C_{ij}(t) = \begin{cases}
-w_T \cdot \frac{T_{ij}}{T_{\max}} + w_E \cdot \frac{E_{ij}^{\text{total}}}{E_{\max}} - w_U \cdot u_i(t) \cdot c_i & \text{if Feasible}(i,j) \\
+\begin{aligned}
+&w_T \frac{T_{ij}}{T_{\max}} + w_E \frac{E_{ij}^{\text{total}}}{E_{\max}} \\
+&\quad - w_U u_i(t) c_i
+\end{aligned} & \text{if Feasible}(i,j) \\
 \infty & \text{otherwise}
 \end{cases}
+\label{eq:cost}
 \end{equation}
 
 where $w_T, w_E, w_U > 0$ are weighting coefficients (cost weights, distinct from priority weights $\beta_1,\beta_2,\beta_3$; e.g., $w_T+w_E+w_U=1$ for normalized trade-off), $T_{\max}$ and $E_{\max}$ are normalization constants (maximum feasible time/energy), and the term $-w_U \cdot u_i(t)\cdot c_i$ is the expected urgency reward: higher $u_i\cdot c_i$ reduces cost, incentivizing assignment to more urgent/confident survivors. Infeasible pairs have infinite cost and are excluded from the ILP.
@@ -318,7 +326,10 @@ x_{ij}(t) \leq A_j
 A complete feasibility check is:
 
 \begin{equation}
-\text{Feasible}(i,j) = (A_j = 1) \land (c_i \geq c_{\text{thresh}}) \land (P_{ij} \text{ exists}) \land (E(P_{j \rightarrow i}) + E_{\text{hover}} + E_{\text{return}}(i,j) + E_{\text{reserve}} \leq B_j(t))
+\begin{aligned}
+\text{Feasible}(i,j) = &(A_j = 1) \land (c_i \geq c_{\text{thresh}}) \land (P_{ij} \text{ exists}) \\
+&\land (E(P_{j \rightarrow i}) + E_{\text{hover}} + E_{\text{return}}(i,j) + E_{\text{reserve}} \leq B_j(t))
+\end{aligned}
 \end{equation}
 
 \section{Assignment Constraints}
