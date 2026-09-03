@@ -197,7 +197,7 @@ Note: $\mathcal{Q}(t)$ is not an independent state component but a derived view 
 \mathcal{Q}_{\text{high}}(t) &= \{ S_i \in \mathcal{Q}(t) \mid c_i \geq c_{\text{thresh}} \}, \\
 \mathcal{Q}_{\text{low}}(t) &= \{ S_i \in \mathcal{Q}(t) \mid c_i < c_{\text{thresh}} \}
 \end{align}
-Only $\mathcal{Q}_{\text{high}}(t)$ is eligible for the offloading assignment; $\mathcal{Q}_{\text{low}}(t)$ is held for verification. Note: $\text{priority}(i)$ is a pre-filter ordering heuristic for $\mathcal{Q}_{\text{high}}(t)$ (e.g., for greedy fallback or tie-breaking); the optimal assignment is determined by the ILP cost $C_{ij}(t)$, not by priority order.
+Only $\mathcal{Q}_{\text{high}}(t)$ is eligible for the offloading assignment; $\mathcal{Q}_{\text{low}}(t)$ is held for verification. \textit{Uncertainty handling:} The partition manages detection uncertainty (false positives from Scout thermal/optical AI). High-confidence detections are directly eligible, while low-confidence detections are buffered in $\mathcal{Q}_{\text{low}}$ for verification (re-scan/operator review) before promotion, preventing scarce Responder UAVs from being wasted on likely false alarms. Note: $\text{priority}(i)$ is a pre-filter ordering heuristic for $\mathcal{Q}_{\text{high}}(t)$ (e.g., for greedy fallback or tie-breaking); the optimal assignment is determined by the ILP cost $C_{ij}(t)$, not by priority order.
 
 \section{Decision Variables}
 
