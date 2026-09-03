@@ -323,9 +323,11 @@ A complete feasibility check is:
 \begin{equation}
 \begin{aligned}
 \text{Feasible}(i,j) = &(A_j = 1) \land (c_i \geq c_{\text{thresh}}) \land (P_{ij} \text{ exists}) \\
-&\land (E(P_{j \rightarrow i}) + E_{\text{hover}} + E_{\text{return}}(i,j) + E_{\text{reserve}} \leq B_j(t))
+&\land (E_{ij}^{\text{total}} + E_{\text{reserve}} \leq B_j(t))
 \end{aligned}
+\label{eq:feasible}
 \end{equation}
+where $E_{ij}^{\text{total}}=E(P_{j \rightarrow i})+E_{\text{hover}}+E_{\text{return}}(i,j)$.
 
 \section{Assignment Constraints}
 
