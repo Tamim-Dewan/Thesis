@@ -294,13 +294,14 @@ where $w_T, w_E, w_U > 0$ are weighting coefficients (cost weights, distinct fro
 \section{Feasibility Constraints}
 
 \subsection{Battery Constraint}
-A UAV $j$ can be assigned to survivor $i$ only if:
+A UAV $j$ can be assigned to survivor $i$ only if it has sufficient energy to complete the entire roundtrip mission plus a safety reserve:
 
 \begin{equation}
 E_{ij}^{\text{total}} + E_{\text{reserve}} \leq B_j(t)
+\label{eq:battery}
 \end{equation}
 
-where $E_{\text{reserve}} = 0.2 \cdot B_{\max}$ is a safety reserve (20\% of maximum battery capacity $B_{\max}$), $B_j(t) \in [0, B_{\max}]$ is the remaining battery, and $B_{\max}, T_{\text{service}}, e_{\text{travel}}, e_{\text{vert}}, e_{\text{hover}}, v_{\max}$ are global V1 constants.
+where $E_{ij}^{\text{total}} = E(P_{j \rightarrow i}) + E_{\text{hover}} + E_{\text{return}}(i,j)$ is the roundtrip energy (outbound, hover $T_{\text{service}}=300$ s, and return to $p_j^{\text{base}}$), $E_{\text{reserve}} = 0.2\,B_{\max}$ is a 20\% safety buffer for wind, detours, and model error, $B_j(t) \in [0,B_{\max}]$ is the remaining battery at time $t$, and $B_{\max}, T_{\text{service}}, e_{\text{travel}}, e_{\text{vert}}, e_{\text{hover}}, v_{\max}$ are global V1 constants. If \eqref{eq:battery} is violated, $\text{Feasible}(i,j)=\text{false}$ and $C_{ij}(t)=\infty$.
 
 \subsection{Reachability Constraint}
 A route $P_{ij}$ exists only if:
