@@ -255,15 +255,7 @@ where $v_{\max}$ is the maximum UAV speed.
 E_{ij} = E(P_{ij}^*) = \sum_{k=1}^{K} \left( e_{\text{travel}}(p_k,m,w(p_k)) \|p_k - p_{k-1}\| + e_{\text{vert}}(m) \Delta z_k \right)
 \end{equation}
 
-where
-\begin{itemize}
-\item $\Delta z_k = \max(0, z_k - z_{k-1})$ is the vertical climb at segment $k$,
-\item $m$ is the payload mass (kg), available in realtime from the parcel manifest,
-\item $w(p_k)$ is the wind speed (m/s) at $p_k$, available in realtime from the onboard anemometer or weather API,
-\item $e_{\text{travel}}(p_k,m,w) = e_0 + k_m\,m + k_w\,w(p_k)$ is the horizontal energy coefficient, with $e_0$ the base cost, $k_m$ the payload factor, and $k_w$ the wind factor,
-\item $e_{\text{vert}}(m) = m\,g/\eta_{\text{vert}}$ is the vertical energy coefficient, with $g=9.8$ m/s$^2$ and $\eta_{\text{vert}}$ the vertical propulsive efficiency,
-\item $e_0, k_m, k_w, \eta_{\text{vert}}$ are calibrated constants (identified once offline from flight tests).
-\end{itemize}
+where $\Delta z_k = \max(0, z_k - z_{k-1})$ is the vertical climb, $m$ is the payload mass (kg) available in realtime from the parcel manifest, $w(p_k)$ is the wind speed (m/s) at $p_k$ available in realtime from the onboard anemometer or weather API, $e_{\text{travel}}(p_k,m,w) = e_0 + k_m\,m + k_w\,w(p_k)$ with $e_0$ the base cost, $k_m$ the payload factor and $k_w$ the wind factor, $e_{\text{vert}}(m) = m\,g/\eta_{\text{vert}}$ with $g=9.8$ m/s$^2$ and $\eta_{\text{vert}}$ the vertical efficiency, and $e_0, k_m, k_w, \eta_{\text{vert}}$ are calibrated constants identified offline from flight tests.
 
 \subsection{Service-Related Energy}
 If the UAV hovers at the survivor location for duration $T_{\text{service}}$ (V1 fixed parameter, e.g., $T_{\text{service}}=300$\,s):
