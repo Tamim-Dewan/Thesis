@@ -205,18 +205,24 @@ Only $\mathcal{Q}_{\text{high}}(t)$ is eligible for the offloading assignment; $
 
 \section{Decision Variables}
 
-\subsection{Tour Variable (Primary)}
-The primary decision is the tour $\pi_j(t)=(i_1,\dots,i_k)$ with $k=\text{len}(\pi_j)$ ordered survivors, where $\sum_{i\in\pi_j}|\mathcal{R}_i|\leq K$ (e.g., $K=4$ items). Unlike the single-assignment $x_{ij}$, a tour may serve multiple survivors in a single sortie (e.g., $\pi_j=(A,C)$ with $\mathcal{R}_A=\{\text{med}\},\mathcal{R}_C=\{\text{water}\}$) and the order matters for travel time and payload-dependent energy. An empty tour $\pi_j=\emptyset$ denotes an idle UAV.
-
-\subsection{Route Variable (Multi-Drop Tour)}
-For multi-drop, the decision is an ordered tour $\pi_j = (i_1,i_2,\dots,i_k)$ with $k = \text{len}(\pi_j)$, where $\sum_{i\in\pi_j} |\mathcal{R}_i| \leq K$ and the order matters: $T(\pi_j),E(\pi_j)$ and thus $C(\pi_j)$ depend on the sequence via leg distances, climb, and decreasing $m$. The offloading optimizes over both selection and order, i.e., $\min_{\pi_j,\text{order}(\pi_j)}\sum C(\pi_j)$ (TSP-like; for a given set the oracle evaluates $k!$ orders). The tour route is the concatenation
+\subsection{Tour Variable (Primary Decision)}
+At any decision time $t$, the offloading decision for each available UAV $j$ is an ordered tour
 
 \begin{equation}
-P_{\pi_j} = P_{p_j \to p_{i_1}} \circ P_{p_{i_1} \to p_{i_2}} \circ \cdots \circ P_{p_{i_k} \to p_j^{\text{base}}}
+\pi_j(t) = (i_1, i_2, \dots, i_k), \quad k = \text{len}(\pi_j), \quad \sum_{i\in\pi_j} |\mathcal{R}_i| \leq K
+\end{equation}
+
+where $i_l \in \mathcal{Q}_{\text{high}}(t)$ is the $l$-th survivor to be served, $|\mathcal{R}_i|$ is the number of items demanded by $i$, and $K$ (e.g., 4) is the UAV item capacity. Thus $\pi_j$ encodes both \textit{selection} (which survivors) and \textit{order} (in which sequence). For example, $\pi_j=(A,C)$ with $\mathcal{R}_A=\{\text{med}\}$ and $\mathcal{R}_C=\{\text{water},\text{food}\}$ carries $|\pi_j|=3\leq4$ items to two survivors; $\pi_j=(C,A)$ is a different tour with different travel distance, climb, and payload-dependent energy. An empty tour $\pi_j=\emptyset$ means the UAV stays idle at base. The set of all tours $\{\pi_j\}_{j\in\mathcal{D}_{\text{avail}}}$ partitions $\mathcal{Q}_{\text{high}}$ (each survivor in at most one tour).
+
+\subsection{Tour Route (Geometric Realization)}
+A tour $\pi_j$ is realized geometrically as the concatenation of its $k+1$ optimal leg paths:
+
+\begin{equation}
+P_{\pi_j} = P_{p_j \to p_{i_1}}^* \circ P_{p_{i_1} \to p_{i_2}}^* \circ \cdots \circ P_{p_{i_k} \to p_j^{\text{base}}}^*
 \label{eq:tour}
 \end{equation}
 
-where $\circ$ denotes concatenation and each leg $P_{a\to b}=\{a=p_0,p_1,\dots,p_L=b\}$ is itself a waypoint sequence with $p_k\in V$ (e.g., $P_{p_j\to i_1}$ may be $\{p_j,x_1,x_2,p_{i_1}\}$). The tour is obtained from the routing oracle: each leg is queried as $\text{RoutingOracle}(p_a,p_b)$, which returns $(T_{ab},E_{ab})$ for the optimal leg or $(\infty,\infty)$ if no $P_{a\to b}\subset V$ exists. Thus $P_{\pi_j}$ is the concatenation of $k+1$ leg paths, and $T(\pi_j),E(\pi_j)$ are the sums of the leg $T$ and $E$.
+where each leg $P_{a\to b}^*=\{a=p_0,p_1,\dots,p_L=b\}$ is the cheapest feasible waypoint sequence with $p_k\in V$ (e.g., $P_{p_j\to i_1}^*=\{p_j,x_1,x_2,p_{i_1}\}$ avoiding $O$). If any leg has no feasible path in $V$, the whole tour is infeasible. The routing oracle provides each leg: $\text{RoutingOracle}(p_a,p_b)\to(T_{ab},E_{ab})$ or $(\infty,\infty)$ if infeasible. The tour aggregates $T(\pi_j)=\sum_l T_l + k\cdot T_{\text{hover}}$ and $E(\pi_j)=\sum_l E_l(m_{l-1}) + \sum_{i\in\pi_j}E_{\text{hover}}$, where $m_{l-1}$ is the payload before leg $l$ and thus early legs cost more. Offloading optimizes $\min_{\{\pi_j\},\text{order}}\sum_j C(\pi_j)$, i.e., both selection and order (TSP-like; $k!$ orders per set evaluated via the oracle).
 
 \section{Cost Functions}
 
