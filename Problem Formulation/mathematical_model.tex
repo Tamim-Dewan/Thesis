@@ -107,7 +107,7 @@ Assigned UAV & $\text{assigned\_to}_i$ & $\mathcal{D}(t) \cup \{\emptyset\}$ \\
 \end{tabular}
 \end{table}
 $\mathcal{R}_i$ is the set of relief items required by $i$ (e.g., $\{\text{med}\}$, $\{\text{med},\text{water}\}$) provided by the Scout/Command Center; $|\mathcal{R}_i|\geq1$ and $|\mathcal{R}_i|>1$ denotes multiple demands at the same location.
-Severity $\sigma_i$ denotes the static medical criticality at detection (independent of time), with $\sigma_i=1$ representing the most critical condition. Two possible scenarios for obtaining $\sigma_i$ are: (1) \textit{Scout AI Inference}: estimated automatically from Scout UAV thermal/optical imagery and rubble context via a classification model (e.g., motion/heat signature analysis), and (2) \textit{Human-in-the-Loop}: tagged manually by the Command Center operator reviewing the Scout video feed. If no severity estimate is available, $\sigma_i = 1$ uniformly.
+Severity $\sigma_i$ denotes the static medical criticality at detection (independent of time), with $\sigma_i=1$ representing the most critical condition. Two possible scenarios for obtaining $\sigma_i$ are: (1) \textit{Scout AI Inference}: estimated automatically from Scout UAV thermal/optical imagery and rubble context via a classification model (e.g., motion/heat signature analysis), and (2) \textit{Human-in-the-Loop}: tagged manually by the Command Center operator reviewing the Scout video feed.
 
 \subsection{Urgency Decay Function}
 The urgency of survivor $i$ decays exponentially with waiting time according to the Golden Hour principle:
