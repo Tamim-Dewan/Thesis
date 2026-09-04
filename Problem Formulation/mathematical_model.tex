@@ -366,11 +366,10 @@ If a tour $\pi_j$ is not feasible, its cost is set to infinity: $C(\pi_j)=\infty
 
 \subsection{Primary Objective: Minimize Cost}
 The snapshot problem $\text{OFF-SNAP}(t)$ over tours $\{\pi_j\}$ is:
-\begin{equation}
-\min_{\{\pi_j\}} \sum_{j\in\mathcal{D}_{\text{avail}}(t)} C(\pi_j), \quad 
-C(\pi_j)=\sum_{i\in\pi_j}\left[w_T\frac{T_{\text{leg}}(i)}{T_{\max}}+w_E\frac{E_{\text{leg}}(i)}{E_{\max}}-w_U u_i(t)c_i\right]
-\label{eq:obj}
-\end{equation}
+\begin{align}
+\min_{\{\pi_j\}} &\sum_{j\in\mathcal{D}_{\text{avail}}(t)} C(\pi_j) \label{eq:obj} \\
+\text{where } &C(\pi_j)=\sum_{i\in\pi_j}\left[w_T\frac{T_{\text{leg}}(i)}{T_{\max}}+w_E\frac{E_{\text{leg}}(i)}{E_{\max}}-w_U u_i(t)c_i\right] \nonumber
+\end{align}
 where $T_{\text{leg}}(i),E_{\text{leg}}(i)$ include travel to $i$ plus $15$s hover. If $\mathcal{Q}_{\text{high}}=\emptyset$ or all $C(\pi_j)=\infty$, the optimum is $\pi_j=\emptyset$ (idle).
 
 \subsection{State Update for Tours}
