@@ -222,7 +222,7 @@ P_{\pi_j} = P_{p_j \to p_{i_1}}^* \circ P_{p_{i_1} \to p_{i_2}}^* \circ \cdots \
 \label{eq:tour}
 \end{equation}
 
-where each leg $P_{a\to b}^*=\{a=p_0,p_1,\dots,p_L=b\}$ is the cheapest feasible waypoint sequence with $p_k\in V$. If any leg has no feasible path in $V$, the whole tour is infeasible. The routing oracle provides each leg: $\text{RoutingOracle}(p_a,p_b)\to(T_{ab},E_{ab})$ or $(\infty,\infty)$ if infeasible. The tour aggregates $T(\pi_j)=\sum_l T_l + k\cdot T_{\text{hover}}$ and $E(\pi_j)=\sum_l E_l(m_{l-1}) + \sum_{i\in\pi_j}E_{\text{hover}}$, where $m_{l-1}$ is the payload before leg $l$ and thus early legs cost more. Offloading optimizes $\min_{\{\pi_j\},\text{order}}\sum_j C(\pi_j)$, i.e., both selection and order (TSP-like; $k!$ orders per set evaluated via the oracle).
+where each leg $P_{a\to b}^*=\{a=p_0,p_1,\dots,p_L=b\}$ is the cheapest feasible waypoint sequence with $p_k\in V$. If any leg has no feasible path in $V$, the whole tour is infeasible. The routing oracle provides each leg: $\text{RoutingOracle}(p_a,p_b)\to(T_{ab},E_{ab})$ or $(\infty,\infty)$ if infeasible.
 
 \section{Cost Functions}
 
