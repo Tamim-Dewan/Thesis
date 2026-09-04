@@ -365,11 +365,16 @@ If a tour $\pi_j$ is not feasible, its cost is set to infinity: $C(\pi_j)=\infty
 \section{Objective Function}
 
 \subsection{Primary Objective: Minimize Cost}
-The snapshot offloading problem $\text{OFF-SNAP}(t)$ over $\mathcal{Q}_{\text{high}}(t) \times \mathcal{D}_{\text{avail}}(t)$ is:
+The snapshot problem $\text{OFF-SNAP}(t)$ over tours $\{\pi_j\}$ is:
 \begin{equation}
-\min_{\mathbf{x}(t)} \sum_{i \in \mathcal{Q}_{\text{high}}(t)} \sum_{j \in \mathcal{D}_{\text{avail}}(t)} x_{ij}(t) \cdot C_{ij}(t)
+\min_{\{\pi_j\}} \sum_{j\in\mathcal{D}_{\text{avail}}(t)} C(\pi_j), \quad 
+C(\pi_j)=\sum_{i\in\pi_j}\left[w_T\frac{T_{\text{leg}}(i)}{T_{\max}}+w_E\frac{E_{\text{leg}}(i)}{E_{\max}}-w_U u_i(t)c_i\right]
+\label{eq:obj}
 \end{equation}
-If $\mathcal{Q}_{\text{high}}(t)=\emptyset$ or all $C_{ij}=\infty$, the optimum is $x_{ij}=0$ (no dispatch, wait for next event).
+where $T_{\text{leg}}(i),E_{\text{leg}}(i)$ include travel to $i$ plus $15$s hover. If $\mathcal{Q}_{\text{high}}=\emptyset$ or all $C(\pi_j)=\infty$, the optimum is $\pi_j=\emptyset$ (idle).
+
+\subsection{State Update for Tours}
+Dispatching $\pi_j=(i_1,\dots,i_k)$ updates: $\mathcal{Q}(t^+)=\mathcal{Q}(t^-)\setminus\{i_1,\dots,i_k\}$, $B_j(t^+)=B_j(t^-)-E(\pi_j)$, $I_j(t^+)=I_j(t^-)\setminus\bigcup_{i\in\pi_j}\mathcal{R}_i$, $m(t^+)=m(t^-)-\sum_{i\in\pi_j} weight(\mathcal{R}_i)$, $\text{status}_j\leftarrow\text{EnRoute}$ until return to $p_j^{\text{base}}$ for reload.
 
 \section{Scope and Limitations}
 
