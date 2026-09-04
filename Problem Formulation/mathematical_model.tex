@@ -223,24 +223,39 @@ where $p_0 = (x_j, y_j, z_j)$, $p_K = (x_i, y_i, z_i)$, $p_k \in V$. The offload
 
 \section{Cost Functions}
 
+\subsection{Path Cost}
+The generic cost of a path $P=\{p_0,\dots,p_K\}$ is:
+
+\begin{equation}
+\text{Cost}(P) = \sum_{k=1}^{K} \left( w_d \|p_k-p_{k-1}\| + w_z \max(0, z_k-z_{k-1}) \right)
+\label{eq:pathcost}
+\end{equation}
+
+where $w_d,w_z>0$ weight horizontal distance and vertical climb.
+
+\subsection{Optimal Path}
+The optimal feasible path is:
+
+\begin{equation}
+P_{ij}^* = \arg\min_{P \subset V} \text{Cost}(P) \quad \text{s.t. } p_0=p_j,\,p_K=p_i
+\label{eq:optpath}
+\end{equation}
+
+If no $P\subset V$ exists, $P_{ij}^*$ is infeasible. All $T_{ij},E_{ij}$ below are derived from this single $P_{ij}^*$.
+
 \subsection{Travel Time}
 \begin{equation}
-T_{ij} = T(P_{ij}) = \sum_{k=1}^{K} \frac{\|p_k - p_{k-1}\|}{v_{\max}}
+T_{ij} = T(P_{ij}^*) = \sum_{k=1}^{K} \frac{\|p_k - p_{k-1}\|}{v_{\max}}
 \end{equation}
 
 where $v_{\max}$ is the maximum UAV speed.
 
 \subsection{Energy Consumption}
 \begin{equation}
-E_{ij} = E(P_{ij}) = \sum_{k=1}^{K} \left( e_{\text{travel}} \cdot \|p_k - p_{k-1}\| + e_{\text{vert}} \cdot \Delta z_k \right)
+E_{ij} = E(P_{ij}^*) = \sum_{k=1}^{K} \left( e_{\text{travel}} \|p_k - p_{k-1}\| + e_{\text{vert}} \Delta z_k \right)
 \end{equation}
 
-where:
-\begin{itemize}
-\item $e_{\text{travel}}$: Energy per unit horizontal distance
-\item $e_{\text{vert}}$: Energy penalty for vertical climb
-\item $\Delta z_k = \max(0, z_k - z_{k-1})$: Vertical gain
-\end{itemize}
+where $\Delta z_k=\max(0,z_k-z_{k-1})$, $e_{\text{travel}}$ is energy per horizontal distance and $e_{\text{vert}}$ per vertical climb.
 
 \subsection{Service-Related Energy}
 If the UAV hovers at the survivor location for duration $T_{\text{service}}$ (V1 fixed parameter, e.g., $T_{\text{service}}=300$\,s):
@@ -250,24 +265,21 @@ E_{\text{hover}} = e_{\text{hover}} \cdot T_{\text{service}}
 \end{equation}
 
 \subsection{Return Energy}
-The energy to return from survivor $i$ to the base of UAV $j$ is:
+The return energy reuses the same $E(P)$ model on $P_{i \rightarrow \text{base}(j)}^*=\arg\min_{P\subset V}\text{Cost}(P)$ from $p_i$ to $p_j^{\text{base}}$:
 
 \begin{equation}
-\begin{aligned}
-E_{\text{return}}(i,j) &= E(P_{i \rightarrow \text{base}(j)}) \\
-&= \sum_{k=1}^{K'} \left( e_{\text{travel}} \|p_k - p_{k-1}\| + e_{\text{vert}} \Delta z_k \right)
-\end{aligned}
+E_{\text{return}}(i,j) = E(P_{i \rightarrow \text{base}(j)}^*)
 \end{equation}
 
-where $P_{i \rightarrow \text{base}(j)} = \{p_0=p_i, \dots, p_{K'}=p_j^{\text{base}}\}$ is the feasible route from $p_i$ to $p_j^{\text{base}}$ with $p_k \in V$. This explicitly uses $p_j^{\text{base}}$ from the UAV model and is generally \textit{not} equal to $E(P_{ij})$ due to differing start position $p_j \neq p_j^{\text{base}}$ during online operation and asymmetric vertical cost.
+which is generally not equal to $E(P_{ij}^*)$ due to $p_j \neq p_j^{\text{base}}$ and asymmetric climb.
 
 \subsection{Total Energy Required}
-The worst-case (conservative) total energy for a roundtrip mission is:
+The worst-case total energy for a roundtrip mission is:
 
 \begin{equation}
-E_{ij}^{\text{total}} = E(P_{ij}) + E_{\text{hover}} + E_{\text{return}}(i,j)
+E_{ij}^{\text{total}} = E(P_{ij}^*) + E_{\text{hover}} + E_{\text{return}}(i,j)
 \end{equation}
-where $P_{ij}=P_{j \rightarrow i}$ is the outbound route from current position $p_j$ to survivor $p_i$. Variant for landing at survivor (no return): $E_{ij}^{\text{oneway}} = E(P_{ij}) + E_{\text{hover}}$, deferred to future work; V1 assumes roundtrip.
+where $P_{ij}^*=P_{j \rightarrow i}^*$. Variant $E_{ij}^{\text{oneway}} = E(P_{ij}^*) + E_{\text{hover}}$ (landing) is deferred; V1 assumes roundtrip.
 
 % E_roundtrip identical to E_total under roundtrip assumption; kept for reference
 % E_{ij}^{\text{roundtrip}} = E(P_{ij}) + E_{\text{hover}} + E_{\text{return}}(i,j)
