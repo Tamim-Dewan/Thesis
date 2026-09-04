@@ -84,7 +84,7 @@ $X(t)=(\mathcal{S},\mathcal{D},\mathcal{E},\mathcal{Q})$ & Global state \\
 Each survivor detection is modeled as a task $i \in \mathcal{S}(t)$, where $\mathcal{S}(t)$ is the set of all known survivor tasks at time $t$. Survivor $i$ is defined as:
 
 \begin{equation}
-S_i = (x_i, y_i, z_i, t_i^{\text{det}}, c_i, \sigma_i, u_i(t), a_i, \text{assigned\_to}_i)
+S_i = (x_i, y_i, z_i, t_i^{\text{det}}, c_i, \sigma_i, a_i, \text{assigned\_to}_i)
 \end{equation}
 
 with the following parameters:
@@ -101,7 +101,6 @@ Location & $(x_i,y_i,z_i)$ & $\mathbb{R}^3$ \\
 Detection Time & $t_i^{\text{det}}$ & $\mathbb{R}^+$ \\
 Confidence Score & $c_i$ & $[0,1]$ \\
 Severity & $\sigma_i$ & $[0,1]$ \\
-Urgency & $u_i(t)$ & $[0,1]$ \\
 Assignment Flag & $a_i$ & $\{0,1\}$ \\
 Assigned UAV & $\text{assigned\_to}_i$ & $\mathcal{D}(t) \cup \{\emptyset\}$ \\
 \bottomrule
