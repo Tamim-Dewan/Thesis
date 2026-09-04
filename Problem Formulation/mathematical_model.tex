@@ -344,22 +344,23 @@ A tour $\pi_j$ is feasible iff all of the above hold:
 \section{Assignment Constraints}
 
 \subsection{Single Assignment per Survivor}
-Each survivor in $\mathcal{Q}_{\text{high}}(t)$ is assigned to at most one Responder UAV:
+Each survivor in $\mathcal{Q}_{\text{high}}(t)$ appears in at most one tour:
 
 \begin{equation}
-\sum_{j \in \mathcal{D}_{\text{avail}}(t)} x_{ij}(t) \leq 1 \quad \forall i \in \mathcal{Q}_{\text{high}}(t)
+\sum_{j} \mathbf{1}\{i\in\pi_j(t)\} \leq 1 \quad \forall i \in \mathcal{Q}_{\text{high}}(t)
 \end{equation}
 
-\subsection{Single Task per UAV}
-Each available UAV is assigned to at most one survivor at a time:
+\subsection{Capacity per Tour}
+Each tour respects item capacity:
 
 \begin{equation}
-\sum_{i \in \mathcal{Q}_{\text{high}}(t)} x_{ij}(t) \leq 1 \quad \forall j \in \mathcal{D}_{\text{avail}}(t)
+|\pi_j(t)| = \sum_{i\in\pi_j(t)} |\mathcal{R}_i| \leq K \quad \forall j \in \mathcal{D}_{\text{avail}}(t)
 \end{equation}
-where $\mathcal{D}_{\text{avail}}(t)=\{j \mid A_j=1\}$ and $N'=|\mathcal{Q}_{\text{high}}(t)|$, $M'=|\mathcal{D}_{\text{avail}}(t)|$. The $\leq 1$ allows partial matching: a survivor may remain unassigned if no feasible UAV, and a UAV may stay idle if no high-confidence survivor.
+
+where $K$ is the UAV capacity (e.g., 4) and $|\mathcal{R}_i|$ is the number of items demanded by $i$. A UAV may stay idle ($\pi_j=\emptyset$) if no feasible tour exists.
 
 \subsection{Feasibility Enforcement}
-If a pair $(i,j)$ is not feasible, its cost is set to infinity: $C_{ij}(t)=\infty$ when $\neg\text{Feasible}(i,j)$. This includes $c_i < c_{\text{thresh}}$, $A_j=0$, no route, or battery violation. Any optimal solution will then have $x_{ij}=0$ for such pairs. No separate $x_{ij}\leq A_j$ is needed.
+If a tour $\pi_j$ is not feasible, its cost is set to infinity: $C(\pi_j)=\infty$ when $\neg\text{Feasible}(\pi_j)$ (includes $c_i<c_{\text{thresh}}$, $A_j=0$, $P_l\not\subset V$, $\mathcal{R}_{i_l}\not\subseteq I_j^{(l-1)}$, or $E(\pi_j)+E_{\text{reserve}}>B_j$). Any optimal solution will have such tours excluded.
 
 \section{Objective Function}
 
