@@ -284,6 +284,9 @@ where $P_{ij}^*=P_{j \rightarrow i}^*$. Variant $E_{ij}^{\text{oneway}} = E(P_{i
 % E_roundtrip identical to E_total under roundtrip assumption; kept for reference
 % E_{ij}^{\text{roundtrip}} = E(P_{ij}) + E_{\text{hover}} + E_{\text{return}}(i,j)
 
+\subsection{Coupling to Offloading}
+Routing provides $(T_{ij},E_{ij}^{\text{total}})$ via the oracle for each pair $(i,j)$. Offloading uses these values in the feasibility check \eqref{eq:battery} and the assignment cost \eqref{eq:cost}. Both the outbound leg $p_j\!\to\!p_i$ and the return leg $p_i\!\to\!p_j^{\text{base}}$ must be feasible; otherwise $C_{ij}(t)=\infty$.
+
 \subsection{Assignment Cost}
 The cost of assigning UAV $j$ to survivor $i$ is:
 
