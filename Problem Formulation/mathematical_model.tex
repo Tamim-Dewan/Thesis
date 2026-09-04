@@ -304,37 +304,39 @@ where $w_T, w_E, w_U > 0$ are weighting coefficients (cost weights, distinct fro
 
 \section{Feasibility Constraints}
 
-\subsection{Battery Constraint}
-A UAV $j$ can be assigned to survivor $i$ only if it has sufficient energy to complete the entire roundtrip mission plus a safety reserve:
+\subsection{Battery Constraint for Tour}
+A tour $\pi_j$ is feasible only if the whole tour plus reserve fits the remaining battery:
 
 \begin{equation}
-E_{ij}^{\text{total}} + E_{\text{reserve}} \leq B_j(t)
+E(\pi_j) + E_{\text{reserve}} \leq B_j(t)
 \label{eq:battery}
 \end{equation}
 
-where $E_{ij}^{\text{total}} = E(P_{j \rightarrow i}) + E_{\text{hover}} + E_{\text{return}}(i,j)$ is the roundtrip energy (outbound, hover $T_{\text{service}}=300$ s, and return to $p_j^{\text{base}}$), $E_{\text{reserve}} = 0.2\,B_{\max}$ is a 20\% safety buffer for wind, detours, and model error, $B_j(t) \in [0,B_{\max}]$ is the remaining battery at time $t$, and $B_{\max}, T_{\text{service}}, e_{\text{travel}}, e_{\text{vert}}, e_{\text{hover}}, v_{\max}$ are global V1 constants. If \eqref{eq:battery} is violated, $\text{Feasible}(i,j)=\text{false}$ and $C_{ij}(t)=\infty$.
+where $E(\pi_j)=\sum_{l}E_{\text{leg}}(l)+\sum_{i\in\pi_j}E_{\text{hover}}(i)$ from Step 4 and $E_{\text{reserve}}=0.2\,B_{\max}$.
 
-\subsection{Reachability Constraint}
-A route $P_{ij}$ exists only if:
+\subsection{Demand Matching}
+Each demand set must be satisfied from the remaining inventory:
 
 \begin{equation}
-p_k \in V \quad \forall k \in \{0, 1, \dots, K\}
+\mathcal{R}_{i_l} \subseteq I_j^{(l-1)} \quad \forall i_l\in\pi_j
 \end{equation}
 
-i.e., the entire path lies in navigable space. Reachability is a boolean oracle provided by the Routing Problem (e.g., 3D A* over $V \setminus O$); offloading consumes $\text{exists}(P_{ij})$ without defining discretization.
+where $I_j^{(l-1)}$ is the inventory before stop $l$ ($I_j^{(0)}=I_j$). If $\mathcal{R}_{i_l}\not\subseteq I_j^{(l-1)}$, the tour is infeasible.
 
-\subsection{Availability Constraint}
-\begin{equation}
-x_{ij}(t) \leq A_j
-\end{equation}
+\subsection{Reachability per Leg}
+Each leg must lie in free space: $P_{l}\subset V$ for all $l$, i.e., $p_k\in V$ for every waypoint. Reachability is an oracle per leg; one infeasible leg makes the whole tour infeasible.
 
-\subsection{Feasible Assignment Condition}
-A complete feasibility check is:
+\subsection{Capacity and Availability}
+$|\pi_j|=\sum_{i\in\pi_j}|\mathcal{R}_i|\leq K$ and $A_j=1$ (Idle). If $A_j=0$ or capacity exceeded, the tour is infeasible.
+
+\subsection{Feasible Tour Condition}
+A tour $\pi_j$ is feasible iff all of the above hold:
 
 \begin{equation}
 \begin{aligned}
-\text{Feasible}(i,j) = &(A_j = 1) \land (c_i \geq c_{\text{thresh}}) \land (P_{ij} \text{ exists}) \\
-&\land (E_{ij}^{\text{total}} + E_{\text{reserve}} \leq B_j(t))
+\text{Feasible}(\pi_j) = &(A_j=1) \land (|\pi_j|\leq K) \land (\forall i\in\pi_j: c_i\geq c_{\text{thresh}}) \\
+&\land (\forall l: P_{l}\subset V) \land (\forall i_l\in\pi_j: \mathcal{R}_{i_l}\subseteq I_j^{(l-1)}) \\
+&\land (E(\pi_j)+E_{\text{reserve}}\leq B_j(t))
 \end{aligned}
 \label{eq:feasible}
 \end{equation}
