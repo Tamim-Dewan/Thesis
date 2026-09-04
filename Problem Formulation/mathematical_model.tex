@@ -288,19 +288,16 @@ Routing provides $(T_{ij},E_{ij}^{\text{total}})$ via the oracle for each pair $
 The cost of assigning UAV $j$ to survivor $i$ is:
 
 \begin{equation}
-C_{ij}(t) = \begin{cases}
-\begin{aligned}
-&w_T \frac{T_{ij}}{T_{\max}} + w_E \frac{E_{ij}^{\text{total}}}{E_{\max}} \\
-&\quad - w_U u_i(t) c_i
-\end{aligned} & \text{if Feasible}(i,j) \\
+C(\pi_j,t) = \begin{cases}
+\sum_{i\in\pi_j}\left[w_T \frac{T_{\text{leg}}(i)}{T_{\max}} + w_E \frac{E_{\text{leg}}(i)}{E_{\max}} - w_U u_i(t) c_i\right] & \text{if Feasible}(\pi_j) \\
 \infty & \text{otherwise}
 \end{cases}
 \label{eq:cost}
 \end{equation}
 
-where $w_T, w_E, w_U > 0$ are weighting coefficients (cost weights, distinct from priority weights $\beta_1,\beta_2,\beta_3$; e.g., $w_T+w_E+w_U=1$ for normalized trade-off), $T_{\max}$ and $E_{\max}$ are normalization constants (maximum feasible time/energy), and the term $-w_U \cdot u_i(t)\cdot c_i$ is the expected urgency reward: higher $u_i\cdot c_i$ reduces cost, incentivizing assignment to more urgent/confident survivors. Infeasible pairs have infinite cost and are excluded from the ILP.
+where $w_T, w_E, w_U > 0$ are tour cost weights ($w_T+w_E+w_U=1$ baseline), $T_{\max},E_{\max}$ are normalization constants, and $-w_U u_i c_i$ rewards urgency/confidence per survivor in the tour. Infeasible tours have $\infty$ cost. The single-pair $C_{ij}(t)$ is the special case $k=1$ where $\pi_j=(i)$, i.e., $C_{ij}=C(\pi_j=(i))$.
 
-\textit{Rationale:} The cost is a dimensionless trade-off among (1) response time $w_T T_{ij}/T_{\max}$, (2) energy $w_E E_{ij}^{\text{total}}/E_{\max}$, and (3) expected value $-w_U u_i(t)c_i$ with $u_i(t)=\sigma_i e^{-\alpha(t-t_i^{\text{det}})}$. Normalization makes $w_T,w_E,w_U$ comparable ($w_T+w_E+w_U=1$ baseline); increasing $w_U$ favors urgent/confident survivors despite distance, while larger $w_T,w_E$ favor nearest, cheapest assignments. $\infty$ enforces feasibility before optimization.
+\textit{Rationale:} The tour cost is a dimensionless trade-off among time, energy, and expected value summed over the tour; $C_{ij}$ is $k=1$.
 
 \section{Feasibility Constraints}
 
