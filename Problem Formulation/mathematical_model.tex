@@ -219,7 +219,7 @@ x_{ij}(t) = \begin{cases}
 \end{equation}
 
 \subsection{Route Variable (Multi-Drop Tour)}
-For multi-drop, the decision is a tour $\pi_j = (i_1,i_2,\dots,i_k)$ with $k \leq K$ ordered survivors, where $|\pi_j| = \sum_{i\in\pi_j} |\mathcal{R}_i| \leq K$. The tour route is the concatenation
+For multi-drop, the decision is a tour $\pi_j = (i_1,i_2,\dots,i_k)$ with $k = \text{len}(\pi_j)$ ordered survivors, where $\sum_{i\in\pi_j} |\mathcal{R}_i| \leq K$ (total items) and $k \leq K$. The tour route is the concatenation
 
 \begin{equation}
 P_{\pi_j} = P_{p_j \to p_{i_1}} \circ P_{p_{i_1} \to p_{i_2}} \circ \cdots \circ P_{p_{i_k} \to p_j^{\text{base}}}
@@ -324,14 +324,14 @@ where $I_j^{(l-1)}$ is the inventory before stop $l$ ($I_j^{(0)}=I_j$). If $\mat
 Each leg must lie in free space: $P_{l}\subset V$ for all $l$, i.e., $p_k\in V$ for every waypoint. Reachability is an oracle per leg; one infeasible leg makes the whole tour infeasible.
 
 \subsection{Capacity and Availability}
-$|\pi_j|=\sum_{i\in\pi_j}|\mathcal{R}_i|\leq K$ and $A_j=1$ (Idle). If $A_j=0$ or capacity exceeded, the tour is infeasible.
+$\sum_{i\in\pi_j}|\mathcal{R}_i|\leq K$ (total items) and $A_j=1$ (Idle). If $A_j=0$ or capacity exceeded, the tour is infeasible. Here $\text{len}(\pi_j)=k$ is the number of survivors and $\sum|\mathcal{R}_i|$ is the number of items.
 
 \subsection{Feasible Tour Condition}
 A tour $\pi_j$ is feasible iff all of the above hold:
 
 \begin{equation}
 \begin{aligned}
-\text{Feasible}(\pi_j) = &(A_j=1) \land (|\pi_j|\leq K) \land (\forall i\in\pi_j: c_i\geq c_{\text{thresh}}) \\
+\text{Feasible}(\pi_j) = &(A_j=1) \land (\sum_{i\in\pi_j}|\mathcal{R}_i|\leq K) \land (\forall i\in\pi_j: c_i\geq c_{\text{thresh}}) \\
 &\land (\forall l: P_{l}\subset V) \land (\forall i_l\in\pi_j: \mathcal{R}_{i_l}\subseteq I_j^{(l-1)}) \\
 &\land (E(\pi_j)+E_{\text{reserve}}\leq B_j(t))
 \end{aligned}
@@ -351,10 +351,10 @@ Each survivor in $\mathcal{Q}_{\text{high}}(t)$ appears in at most one tour:
 Each tour respects item capacity:
 
 \begin{equation}
-|\pi_j(t)| = \sum_{i\in\pi_j(t)} |\mathcal{R}_i| \leq K \quad \forall j \in \mathcal{D}_{\text{avail}}(t)
+\sum_{i\in\pi_j(t)} |\mathcal{R}_i| \leq K \quad \forall j \in \mathcal{D}_{\text{avail}}(t)
 \end{equation}
 
-where $K$ is the UAV capacity (e.g., 4) and $|\mathcal{R}_i|$ is the number of items demanded by $i$. A UAV may stay idle ($\pi_j=\emptyset$) if no feasible tour exists.
+where $K$ is the item capacity (e.g., 4), $\text{len}(\pi_j)=k$ is the number of survivors and $\sum|\mathcal{R}_i|$ is the number of items. A UAV may stay idle ($\pi_j=\emptyset$) if no feasible tour exists.
 
 \subsection{Feasibility Enforcement}
 If a tour $\pi_j$ is not feasible, its cost is set to infinity: $C(\pi_j)=\infty$ when $\neg\text{Feasible}(\pi_j)$ (includes $c_i<c_{\text{thresh}}$, $A_j=0$, $P_l\not\subset V$, $\mathcal{R}_{i_l}\not\subseteq I_j^{(l-1)}$, or $E(\pi_j)+E_{\text{reserve}}>B_j$). Any optimal solution will have such tours excluded.
