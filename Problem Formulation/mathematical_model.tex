@@ -218,14 +218,14 @@ x_{ij}(t) = \begin{cases}
 \end{cases}
 \end{equation}
 
-\subsection{Route Variable (Routing Oracle Output)}
-The route $P_{ij}(t)$ is provided by the Routing Problem as an oracle output, not an offloading decision variable. When queried with $(p_j, p_i, p_j^{\text{base}})$, the oracle returns $P_{ij}$ and $P_{i \rightarrow \text{base}(j)}$ if feasible, otherwise infeasibility. For reference, a route is a sequence:
+\subsection{Route Variable (Multi-Drop Tour)}
+For multi-drop, the decision is a tour $\pi_j = (i_1,i_2,\dots,i_k)$ with $k \leq K$ ordered survivors, where $|\pi_j| = \sum_{i\in\pi_j} |\mathcal{R}_i| \leq K$. The tour route is the concatenation
 
 \begin{equation}
-P_{ij} = \{p_0, p_1, \dots, p_K\}
+P_{\pi_j} = P_{p_j \to p_{i_1}} \oplus P_{p_{i_1} \to p_{i_2}} \oplus \cdots \oplus P_{p_{i_k} \to p_j^{\text{base}}}
 \end{equation}
 
-where $p_0 = (x_j, y_j, z_j)$, $p_K = (x_i, y_i, z_i)$, $p_k \in V$. The offloading decision is solely $x_{ij}(t)$; $T_{ij}$ and $E_{ij}$ below are consumed from this oracle as $(T_{ij}, E_{ij}) = \text{RoutingOracle}(p_j,p_i)$.
+where each leg $P_{a\to b} = \{p_0,\dots,p_K\}$ has $p_0=a$, $p_K=b$, $p_k\in V$. The tour is provided by the Routing oracle: each leg is queried as $\text{RoutingOracle}(p_a,p_b)$ returning $T,E$ or infeasibility. The offloading decision is the tour $\pi_j$; $T(\pi_j),E(\pi_j)$ are the sums over legs.
 
 \section{Cost Functions}
 
