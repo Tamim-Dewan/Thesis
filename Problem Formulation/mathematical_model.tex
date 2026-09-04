@@ -208,16 +208,6 @@ Only $\mathcal{Q}_{\text{high}}(t)$ is eligible for the offloading assignment; $
 \subsection{Tour Variable (Primary)}
 The primary decision is the tour $\pi_j(t)=(i_1,\dots,i_k)$ with $k=\text{len}(\pi_j)$ ordered survivors, where $\sum_{i\in\pi_j}|\mathcal{R}_i|\leq K$ (e.g., $K=4$ items). Unlike the single-assignment $x_{ij}$, a tour may serve multiple survivors in a single sortie (e.g., $\pi_j=(A,C)$ with $\mathcal{R}_A=\{\text{med}\},\mathcal{R}_C=\{\text{water}\}$) and the order matters for travel time and payload-dependent energy. An empty tour $\pi_j=\emptyset$ denotes an idle UAV.
 
-\subsection{Single-Assignment Variable (Special Case $k=1$)}
-For the single-survivor case, $x_{ij}(t)\in\{0,1\}$ with $x_{ij}=1$ iff $\pi_j(t)=(i)$ ($k=1$):
-
-\begin{equation}
-x_{ij}(t) = \begin{cases}
-1 & \text{if } \pi_j(t)=(i) \\
-0 & \text{otherwise}
-\end{cases}
-\end{equation}
-
 \subsection{Route Variable (Multi-Drop Tour)}
 For multi-drop, the decision is an ordered tour $\pi_j = (i_1,i_2,\dots,i_k)$ with $k = \text{len}(\pi_j)$, where $\sum_{i\in\pi_j} |\mathcal{R}_i| \leq K$ and the order matters: $T(\pi_j),E(\pi_j)$ and thus $C(\pi_j)$ depend on the sequence via leg distances, climb, and decreasing $m$. The offloading optimizes over both selection and order, i.e., $\min_{\pi_j,\text{order}(\pi_j)}\sum C(\pi_j)$ (TSP-like; for a given set the oracle evaluates $k!$ orders). The tour route is the concatenation
 
