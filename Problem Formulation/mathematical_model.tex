@@ -219,7 +219,7 @@ x_{ij}(t) = \begin{cases}
 \end{equation}
 
 \subsection{Route Variable (Multi-Drop Tour)}
-For multi-drop, the decision is a tour $\pi_j = (i_1,i_2,\dots,i_k)$ with $k = \text{len}(\pi_j)$ ordered survivors, where $\sum_{i\in\pi_j} |\mathcal{R}_i| \leq K$ (total items) and $k \leq K$. The tour route is the concatenation
+For multi-drop, the decision is an ordered tour $\pi_j = (i_1,i_2,\dots,i_k)$ with $k = \text{len}(\pi_j)$, where $\sum_{i\in\pi_j} |\mathcal{R}_i| \leq K$ and the order matters: $T(\pi_j),E(\pi_j)$ and thus $C(\pi_j)$ depend on the sequence via leg distances, climb, and decreasing $m$. The offloading optimizes over both selection and order, i.e., $\min_{\pi_j,\text{order}(\pi_j)}\sum C(\pi_j)$ (TSP-like; for a given set the oracle evaluates $k!$ orders). The tour route is the concatenation
 
 \begin{equation}
 P_{\pi_j} = P_{p_j \to p_{i_1}} \circ P_{p_{i_1} \to p_{i_2}} \circ \cdots \circ P_{p_{i_k} \to p_j^{\text{base}}}
