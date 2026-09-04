@@ -226,25 +226,25 @@ P_{\pi_j} = P_{p_j \to p_{i_1}} \circ P_{p_{i_1} \to p_{i_2}} \circ \cdots \circ
 \label{eq:tour}
 \end{equation}
 
-where $\circ$ denotes concatenation and each leg $P_{a\to b}=\{a=p_0,p_1,\dots,p_K=b\}$ is itself a waypoint sequence with $p_k\in V$ (e.g., $P_{p_j\to i_1}$ may be $\{p_j,x_1,x_2,p_{i_1}\}$). The tour is obtained from the routing oracle: each leg is queried as $\text{RoutingOracle}(p_a,p_b)$, which returns $(T_{ab},E_{ab})$ for the optimal leg or $(\infty,\infty)$ if no $P_{a\to b}\subset V$ exists. Thus $P_{\pi_j}$ is the concatenation of $k+1$ leg paths, and $T(\pi_j),E(\pi_j)$ are the sums of the leg $T$ and $E$.
+where $\circ$ denotes concatenation and each leg $P_{a\to b}=\{a=p_0,p_1,\dots,p_L=b\}$ is itself a waypoint sequence with $p_k\in V$ (e.g., $P_{p_j\to i_1}$ may be $\{p_j,x_1,x_2,p_{i_1}\}$). The tour is obtained from the routing oracle: each leg is queried as $\text{RoutingOracle}(p_a,p_b)$, which returns $(T_{ab},E_{ab})$ for the optimal leg or $(\infty,\infty)$ if no $P_{a\to b}\subset V$ exists. Thus $P_{\pi_j}$ is the concatenation of $k+1$ leg paths, and $T(\pi_j),E(\pi_j)$ are the sums of the leg $T$ and $E$.
 
 \section{Cost Functions}
 
 \subsection{Path Cost}
-The generic cost of a path $P=\{p_0,\dots,p_K\}$ is:
+The cost of a path $P=\{p_0,\dots,p_L\}$ is defined as its energy:
 
 \begin{equation}
-\text{Cost}(P) = \sum_{k=1}^{K} \left( w_d \|p_k-p_{k-1}\| + w_z \max(0, z_k-z_{k-1}) \right)
+\text{Cost}(P) = E(P) = \sum_{k=1}^{L} \left( e_{\text{travel}}(p_k,m,w_0) \|p_k-p_{k-1}\| + e_{\text{vert}}(m)\max(0, z_k-z_{k-1}) \right)
 \label{eq:pathcost}
 \end{equation}
 
-where $w_d,w_z>0$ weight horizontal distance and vertical climb.
+where $L$ is the number of waypoints and $e_{\text{travel}},e_{\text{vert}}$ are as defined below. Thus $w_d,w_z$ are absorbed into $e_{\text{travel}},e_{\text{vert}}$ and $\text{Cost}(P)=E(P)$.
 
 \subsection{Optimal Path}
 The cheapest feasible path from $p_j$ to $p_i$ is
 
 \begin{equation}
-P_{ij}^* = \arg\min_{P \subset V,\,p_0=p_j,\,p_K=p_i} \text{Cost}(P)
+P_{ij}^* = \arg\min_{P \subset V,\,p_0=p_j,\,p_L=p_i} \text{Cost}(P)
 \label{eq:optpath}
 \end{equation}
 
