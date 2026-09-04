@@ -140,7 +140,7 @@ Detections with $c_i \geq c_{\text{thresh}}$ enter the high-confidence queue $\m
 Each Responder UAV $j \in \mathcal{D}(t)$ is defined as:
 
 \begin{equation}
-D_j = (x_j, y_j, z_j, p_j^{\text{base}}, B_j, A_j, s_j, \text{status}_j)
+D_j = (x_j, y_j, z_j, p_j^{\text{base}}, B_j, K, I_j, m, A_j, s_j, \text{status}_j)
 \end{equation}
 
 with the following parameters:
@@ -156,12 +156,16 @@ with the following parameters:
 Position & $(x_j,y_j,z_j)$ & $\mathbb{R}^3$ \\
 Base Station & $p_j^{\text{base}}$ & $\mathbb{R}^3$ \\
 Remaining Battery & $B_j$ & $\mathbb{R}^+$ \\
+Capacity & $K$ & $\mathbb{N}$ (e.g., 4 items) \\
+Inventory & $I_j$ & multiset $\subseteq\{\text{med},\text{water},\text{food}\}$ \\
+Payload Mass & $m$ & $\mathbb{R}^+$ (kg, $m=\sum_{item\in I_j} weight(item)$) \\
 Availability & $A_j$ & $\{0,1\}$ \\
 Current Task & $s_j$ & $\mathcal{S}(t) \cup \{\emptyset\}$ \\
 Mission Status & $\text{status}_j$ & $\{\text{Idle}, \text{EnRoute}, \text{AtSurvivor}, \text{Returning}\}$ \\
 \bottomrule
 \end{tabular}
 \end{table}
+$K$ is the maximum number of items, $I_j$ is the loaded inventory (e.g., $[ \text{med},\text{water},\text{food},\text{med}]$), and $m$ is the derived total weight of $I_j$ which decreases after each drop and affects $e_{\text{travel}}$ per leg.
 
 \subsection{Availability States}
 The availability $A_j$ is derived from the UAV's status:
