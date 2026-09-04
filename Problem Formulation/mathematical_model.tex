@@ -243,6 +243,8 @@ P_{ij}^* = \arg\min_{P \subset V} \text{Cost}(P) \quad \text{s.t. } p_0=p_j,\,p_
 
 If no $P\subset V$ exists, $P_{ij}^*$ is infeasible. All $T_{ij},E_{ij}$ below are derived from this single $P_{ij}^*$.
 
+The routing oracle is defined as $\text{RoutingOracle}(p_a,p_b)$: if $\exists P\subset V$ from $p_a$ to $p_b$ it returns $(P^*_{ab}, T_{ab}, E_{ab})$, otherwise $(\text{infeasible}, \infty, \infty)$. Offloading obtains $(T_{ij},E_{out})=\text{Oracle}(p_j,p_i)$ and $E_{\text{return}}=\text{Oracle}(p_i,p_j^{\text{base}}).E$; $\text{Feasible}(i,j)$ requires both calls feasible.
+
 \subsection{Travel Time}
 \begin{equation}
 T_{ij} = T(P_{ij}^*) = \sum_{k=1}^{K} \frac{\|p_k - p_{k-1}\|}{v_{\max}}
