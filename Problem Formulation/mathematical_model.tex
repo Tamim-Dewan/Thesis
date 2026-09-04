@@ -45,8 +45,8 @@ The PGBM consists of four primary actors:
 \begin{itemize}
 \item Obstacles are static during a single mission (Version 1).
 \item Communication between all actors is reliable.
-\item Each Responder UAV serves one survivor at a time.
-\item Survivor tasks are independent and non-preemptive (baseline).
+\item Each Responder UAV executes one tour at a time, serving up to $K$ demand items (possibly multiple survivors, e.g., $K=4$).
+\item Survivor tasks are independent except via shared tour capacity $K$, inventory $I_j$, and tour energy $E(\pi_j)$; each tour is non-preemptive (once dispatched, the order is fixed until return to base).
 \end{itemize}
 
 \section{Mathematical Notation}
@@ -62,18 +62,17 @@ Throughout this formulation, bold uppercase letters denote sets, bold lowercase 
 \midrule
 $\mathcal{S}(t), \mathcal{D}(t), \mathcal{E}$ & Survivor set, Responder UAV set, Environment \\
 $\mathcal{Q}_{\text{high}}, \mathcal{Q}_{\text{low}}$ & High/low confidence queues ($c_i \geq c_{\text{thresh}}$) \\
-$S_i=(p_i,t_i^{\text{det}},c_i,\sigma_i,u_i,a_i)$ & Survivor task \\
-$D_j=(p_j,p_j^{\text{base}},B_j,\text{status}_j)$ & Responder UAV \\
+$S_i=(p_i,t_i^{\text{det}},c_i,\sigma_i,\mathcal{R}_i,a_i,\text{assigned\_to}_i)$ & Survivor task with demand set $\mathcal{R}_i$ \\
+$D_j=(p_j,p_j^{\text{base}},B_j,K,I_j,m,A_j,s_j,\text{status}_j)$ & Responder UAV with capacity $K$, inventory $I_j$, payload $m$ \\
 $p_i, p_j, p_j^{\text{base}} \in \mathbb{R}^3$ & Positions and base station \\
-$\sigma_i \in[0,1], c_i\in[0,1]$ & Severity, confidence \\
-$u_i(t)=\sigma_i e^{-\alpha(t-t_i^{\text{det}})}$ & Time-decayed urgency, $\alpha=\ln2/T_{\text{half}}$ \\
-$B_j(t)\in[0,B_{\max}], B_{\max}$ & Remaining/max battery \\
-$A_j\in\{0,1\}, \text{status}_j$ & Availability (derived from Idle) \\
-$T_{ij}, E_{ij}^{\text{total}}, E_{\text{return}}$ & Travel time, total/return energy \\
-$C_{ij}(t), w_T,w_E,w_U$ & Assignment cost and weights ($w_T+w_E+w_U=1$) \\
-$T_{\max},E_{\max}$ & Normalization constants \\
-$x_{ij}(t)\in\{0,1\}$ & Assignment variable \\
-$X(t)=(\mathcal{S},\mathcal{D},\mathcal{E},\mathcal{Q})$ & Global state \\
+$\sigma_i, c_i\in[0,1], \mathcal{R}_i$ & Severity, confidence, demand set $\subseteq\{\text{med},\text{water},\text{food}\}$ \\
+$u_i(t)=\sigma_i e^{-\alpha(t-t_i^{\text{det}})}$ & Derived urgency, $\alpha=\ln2/T_{\text{half}}$ \\
+$B_j(t)\in[0,B_{\max}], B_{\max}, E_{\text{reserve}}$ & Battery, max, reserve $0.2B_{\max}$ \\
+$A_j\in\{0,1\}, \text{status}_j, s_j$ & Availability (Idle), status, current tour $\pi_j$ \\
+$T(\pi_j), E(\pi_j), C(\pi_j)$ & Tour time, energy, cost (primary); $T_{ij},E_{ij},C_{ij}$ is $k=1$ special case \\
+$T_{\max},E_{\max}, c_{\text{thresh}}, \alpha, T_{\text{half}}, K$ & Normalization, threshold, half-life, capacity \\
+$\pi_j, P_{\pi_j}, x_{ij}$ & Tour $(i_1,\dots,i_k)$, tour route, single-leg assignment ($k=1$) \\
+$X(t)=(\mathcal{S},\mathcal{D},\mathcal{E},\mathcal{Q})$ & Global state ($\mathcal{Q}=\mathcal{Q}_{\text{high}}\cup\mathcal{Q}_{\text{low}}$) \\
 \bottomrule
 \end{tabularx}
 \end{table}
