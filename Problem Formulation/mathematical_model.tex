@@ -286,20 +286,21 @@ Routing provides $(T(\pi_j),E(\pi_j))$ via the oracle for each tour. Offloading 
 
 \begin{figure}[h]
 \centering
+\footnotesize
 \begin{tabular}{c}
-$\mathcal{Q}_{\text{high}}(t), \mathcal{D}_{\text{avail}}(t)$ \\
-$\downarrow$ \\
-For each candidate tour $\pi_j=(i_1,\dots,i_k)$: \\
-$\downarrow$ \\
-For each leg $l:0\to k$ query $\text{RoutingOracle}(p_{l},p_{l+1})\to(T_l,E_l)$ or $\infty$ \\
-$\downarrow$ \\
-$\text{Feasible}(\pi_j)?$ \quad $E(\pi_j)+E_{\text{reserve}}\leq B_j \land \mathcal{R}_{i_l}\subseteq I_j^{(l-1)} \land P_l\subset V$ \\
-$\downarrow$ \\
-$C(\pi_j)=\sum_{i\in\pi_j}[w_T T_{\text{leg}}/T_{\max}+w_E E_{\text{leg}}/E_{\max}-w_U u_i c_i]$ or $\infty$ \\
-$\downarrow$ \\
-ILP $\min_{\{\pi_j\}}\sum_j C(\pi_j) \to \{\pi_j^*\}$ \\
-$\downarrow$ \\
-Dispatch tours, update $X(t^+)$: $\mathcal{Q}\setminus\pi_j^*$, $B_j-E(\pi_j^*)$, $I_j\setminus\cup\mathcal{R}_i$ \\
+$\mathcal{Q}_{\text{high}}(t),\, \mathcal{D}_{\text{avail}}(t)$ \\[2pt]
+$\downarrow$ \\[2pt]
+For each tour $\pi_j=(i_1,\dots,i_k)$ \\[2pt]
+$\downarrow$ \\[2pt]
+For each leg $l$ query $\text{Oracle}(p_l,p_{l+1})\!\to\!(T_l,E_l)$ or $\infty$ \\[2pt]
+$\downarrow$ \\[2pt]
+$\text{Feasible}(\pi_j)$? \; $E(\pi_j)+E_{\text{res}}\!\leq\!B_j \land \mathcal{R}_{i_l}\!\subseteq\!I_j^{(l-1)} \land P_l\!\subset\!V$ \\[2pt]
+$\downarrow$ \\[2pt]
+$C(\pi_j)=\sum_{i\in\pi_j}[w_T\frac{T}{T_{\max}}+w_E\frac{E}{E_{\max}}-w_U u_i c_i]$ or $\infty$ \\[2pt]
+$\downarrow$ \\[2pt]
+$\displaystyle\min_{\{\pi_j\}}\sum_j C(\pi_j)\;\to\;\{\pi_j^*\}$ \\[2pt]
+$\downarrow$ \\[2pt]
+Dispatch $\{\pi_j^*\}$, update $X(t^+)$ \\[2pt]
 \end{tabular}
 \caption{PGBM coupling flow: Offloading queries Routing oracle per leg, aggregates $T(\pi_j),E(\pi_j)$, checks feasibility, computes $C(\pi_j)$, solves tour ILP, and updates state.}
 \label{fig:coupling}
