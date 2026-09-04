@@ -234,16 +234,14 @@ The generic cost of a path $P=\{p_0,\dots,p_K\}$ is:
 where $w_d,w_z>0$ weight horizontal distance and vertical climb.
 
 \subsection{Optimal Path}
-The optimal feasible path is:
+The cheapest feasible path from $p_j$ to $p_i$ is
 
 \begin{equation}
-P_{ij}^* = \arg\min_{P \subset V} \text{Cost}(P) \quad \text{s.t. } p_0=p_j,\,p_K=p_i
+P_{ij}^* = \arg\min_{P \subset V,\,p_0=p_j,\,p_K=p_i} \text{Cost}(P)
 \label{eq:optpath}
 \end{equation}
 
-If no $P\subset V$ exists, $P_{ij}^*$ is infeasible. All $T_{ij},E_{ij}$ below are derived from this single $P_{ij}^*$.
-
-The routing oracle is defined as $\text{RoutingOracle}(p_a,p_b)$: if $\exists P\subset V$ from $p_a$ to $p_b$ it returns $(P^*_{ab}, T_{ab}, E_{ab})$, otherwise $(\text{infeasible}, \infty, \infty)$. Offloading obtains $(T_{ij},E_{out})=\text{Oracle}(p_j,p_i)$ and $E_{\text{return}}=\text{Oracle}(p_i,p_j^{\text{base}}).E$; $\text{Feasible}(i,j)$ requires both calls feasible.
+where the minimum is taken over all paths lying entirely in $V$. If no such path exists, $P_{ij}^*$ is infeasible and the pair $(i,j)$ is unreachable. When feasible, the travel time $T_{ij}$ and energy $E_{ij}$ are both derived from this single path $P_{ij}^*$. The routing oracle encapsulates this: given any two points it returns the corresponding $T$, $E$, or infinity if no feasible path exists. Offloading queries the oracle twice, for the outbound leg $p_j\!\to\!p_i$ and the return leg $p_i\!\to\!p_j^{\text{base}}$; both must be feasible for the assignment to be feasible.
 
 \subsection{Travel Time}
 \begin{equation}
