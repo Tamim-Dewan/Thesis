@@ -205,14 +205,15 @@ Only $\mathcal{Q}_{\text{high}}(t)$ is eligible for the offloading assignment; $
 
 \section{Decision Variables}
 
-\subsection{Assignment Variable}
-\begin{equation}
-x_{ij}(t) \in \{0, 1\}
-\end{equation}
+\subsection{Tour Variable (Primary)}
+The primary decision is the tour $\pi_j(t)=(i_1,\dots,i_k)$ with $k\leq K$.
+
+\subsection{Single-Assignment Variable (Special Case $k=1$)}
+For the single-survivor case, $x_{ij}(t)\in\{0,1\}$ with $x_{ij}=1$ iff $\pi_j(t)=(i)$ ($k=1$):
 
 \begin{equation}
 x_{ij}(t) = \begin{cases}
-1 & \text{if UAV } j \text{ is assigned to survivor } i \text{ at time } t \\
+1 & \text{if } \pi_j(t)=(i) \\
 0 & \text{otherwise}
 \end{cases}
 \end{equation}
