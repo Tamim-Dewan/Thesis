@@ -250,42 +250,32 @@ P_{ij}^* = \arg\min_{P \subset V,\,p_0=p_j,\,p_K=p_i} \text{Cost}(P)
 
 where the minimum is taken over all paths lying entirely in $V$. If no such path exists, $P_{ij}^*$ is infeasible and the pair $(i,j)$ is unreachable. When feasible, the travel time $T_{ij}$ and energy $E_{ij}$ are both derived from this single path $P_{ij}^*$. The routing oracle encapsulates this: given any two points it returns the corresponding $T$, $E$, or infinity if no feasible path exists. Offloading queries the oracle twice, for the outbound leg $p_j\!\to\!p_i$ and the return leg $p_i\!\to\!p_j^{\text{base}}$; both must be feasible for the assignment to be feasible.
 
-\subsection{Travel Time}
-\begin{equation}
-T_{ij} = T(P_{ij}^*) = \sum_{k=1}^{K} \frac{\|p_k - p_{k-1}\|}{v_{\max}}
-\end{equation}
-
-where $v_{\max}$ is the maximum UAV speed.
-
-\subsection{Energy Consumption}
-\begin{equation}
-E_{ij} = E(P_{ij}^*) = \sum_{k=1}^{K} \left( e_{\text{travel}}(p_k,m,w(p_k)) \|p_k - p_{k-1}\| + e_{\text{vert}}(m) \Delta z_k \right)
-\end{equation}
-
-where $\Delta z_k = \max(0, z_k - z_{k-1})$ is the vertical climb at segment $k$ (descent is free), $m$ is the payload mass (kg) carried for the current mission and is available in realtime from the parcel manifest, $w(p_k)$ is the local wind speed (m/s) at $p_k$ available in realtime from the onboard anemometer or an external weather API, $e_{\text{travel}}(p_k,m,w) = e_0 + k_m\,m + k_w\,w(p_k)$ models the horizontal energy per meter as a sum of a base cost $e_0$ for level flight of the empty platform, a payload-proportional term $k_m\,m$ and a wind-proportional drag term $k_w\,w(p_k)$, $e_{\text{vert}}(m) = m\,g/\eta_{\text{vert}}$ models the climb energy from the increase in potential energy $m g \Delta z_k$ scaled by the vertical propulsive efficiency $\eta_{\text{vert}}\in(0,1]$ with $g=9.8$ m/s$^2$, and the coefficients $e_0, k_m, k_w, \eta_{\text{vert}}$ are platform-specific constants identified once offline from controlled flight tests and thereafter used to compute $e_{\text{travel}}$ and $e_{\text{vert}}$ online from the realtime $m$ and $w(p_k)$.
-
-\subsection{Service-Related Energy}
-If the UAV hovers at the survivor location for duration $T_{\text{service}}$ (V1 fixed parameter, e.g., $T_{\text{service}}=300$\,s):
+\subsection{Travel Time per Tour}
+For a tour $\pi_j=(i_1,\dots,i_k)$, the total travel time is the sum over legs:
 
 \begin{equation}
-E_{\text{hover}} = e_{\text{hover}} \cdot T_{\text{service}}
+T(\pi_j) = \sum_{l=0}^{k} T_{\text{leg}}(l), \quad T_{\text{leg}}(l)=\frac{\|P_{l}\|}{v_{\max}}
 \end{equation}
 
-\subsection{Return Energy}
-The return energy reuses the same $E(P)$ model on $P_{i \rightarrow \text{base}(j)}^*=\arg\min_{P\subset V}\text{Cost}(P)$ from $p_i$ to $p_j^{\text{base}}$:
+where $P_{0}=P_{p_j\to p_{i_1}}^*$, $P_{l}=P_{p_{i_l}\to p_{i_{l+1}}}^*$ for $1\le l<k$, $P_{k}=P_{p_{i_k}\to p_j^{\text{base}}}^*$, $v_{\max}$ is the maximum speed, and an additional $T_{\text{hover}}=15$ s per stop is added for drop confirmation.
+
+\subsection{Energy per Tour}
+Let $m_0=\sum_{item\in I_j} weight(item)$ be the initial payload and $m_l$ the remaining payload before leg $l$ ($m_{l}=m_{l-1}-\sum_{item\in\mathcal{R}_{i_l}} weight(item)$). The energy of leg $l$ is
 
 \begin{equation}
-E_{\text{return}}(i,j) = E(P_{i \rightarrow \text{base}(j)}^*)
+E_{\text{leg}}(l)= e_{\text{travel}}(p_l,m_{l-1},w(p_l))\|P_{l}\| + e_{\text{vert}}(m_{l-1})\Delta z_{l}
 \end{equation}
 
-which is generally not equal to $E(P_{ij}^*)$ due to $p_j \neq p_j^{\text{base}}$ and asymmetric climb.
-
-\subsection{Total Energy Required}
-The worst-case total energy for a roundtrip mission is:
+with $e_{\text{travel}}(p,m,w)=e_0+k_m m+k_w w(p)$ and $e_{\text{vert}}(m)=m g/\eta_{\text{vert}}$ as above ($m,w(p_l)$ realtime). The total tour energy is
 
 \begin{equation}
-E_{ij}^{\text{total}} = E(P_{ij}^*) + E_{\text{hover}} + E_{\text{return}}(i,j)
+E(\pi_j) = \sum_{l=0}^{k} E_{\text{leg}}(l) + \sum_{i\in\pi_j} E_{\text{hover}}(i), \quad E_{\text{hover}}=e_{\text{hover}}T_{\text{hover}}
 \end{equation}
+
+with $T_{\text{hover}}=15$ s per stop. Early legs use larger $m$ and thus higher $e_{\text{travel}}$.
+
+\subsection{Total Energy per Tour}
+The total energy for tour $\pi_j$ is $E(\pi_j)$ as defined above; the single-leg $E_{ij}^{\text{total}}$ is the special case $k=1$.
 where $P_{ij}^*=P_{j \rightarrow i}^*$. Variant $E_{ij}^{\text{oneway}} = E(P_{ij}^*) + E_{\text{hover}}$ (landing) is deferred; V1 assumes roundtrip.
 
 % E_roundtrip identical to E_total under roundtrip assumption; kept for reference
