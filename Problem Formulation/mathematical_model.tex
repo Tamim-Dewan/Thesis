@@ -226,62 +226,46 @@ where each leg $P_{a\to b}^*=\{a=p_0,p_1,\dots,p_L=b\}$ is the cheapest feasible
 
 \section{Cost Functions}
 
-\subsection{Path Cost}
-The cost of a path $P=\{p_0,\dots,p_L\}$ is defined as its energy:
+\subsection{Path Cost and Optimal Path}
+For any path $P=\{p_0,\dots,p_L\}\subset V$, the traversal cost is defined as its energy:
 
 \begin{equation}
-\begin{aligned}
-\text{Cost}(P) = E(P) &= \sum_{k=1}^{L} e_{\text{travel}}(p_k,m,w_0)\|p_k-p_{k-1}\| \\
-&\quad + e_{\text{vert}}(m)\max(0, z_k-z_{k-1})
-\end{aligned}
+\text{Cost}(P)=E(P)=\sum_{k=1}^{L}\left[e_{\text{travel}}(p_k,m,w_0)\|p_k-p_{k-1}\|+e_{\text{vert}}(m)\max(0,z_k-z_{k-1})\right]
 \label{eq:pathcost}
 \end{equation}
 
-where $L$ is the number of waypoints and $e_{\text{travel}},e_{\text{vert}}$ are as defined below. Thus $w_d,w_z$ are absorbed into $e_{\text{travel}},e_{\text{vert}}$ and $\text{Cost}(P)=E(P)$.
-
-\subsection{Optimal Path}
-The cheapest feasible path from $p_j$ to $p_i$ is
+where $L$ is the number of waypoints and $e_{\text{travel}},e_{\text{vert}}$ are defined below. The cheapest feasible path between two points is
 
 \begin{equation}
-P_{ij}^* = \arg\min_{P \subset V,\,p_0=p_j,\,p_L=p_i} \text{Cost}(P)
+P_{a\to b}^*=\arg\min_{P\subset V,\,p_0=a,\,p_L=b}\text{Cost}(P)
 \label{eq:optpath}
 \end{equation}
 
-where the minimum is taken over all paths lying entirely in $V$. If no such path exists, $P_{ij}^*$ is infeasible and the pair $(i,j)$ is unreachable. When feasible, the travel time $T_{ij}$ and energy $E_{ij}$ are both derived from this single path $P_{ij}^*$. The routing oracle encapsulates this: given any two points it returns the corresponding $T$, $E$, or infinity if no feasible path exists. Offloading queries the oracle twice, for the outbound leg $p_j\!\to\!p_i$ and the return leg $p_i\!\to\!p_j^{\text{base}}$; both must be feasible for the assignment to be feasible.
+If no $P\subset V$ exists, the path is infeasible. The routing oracle encapsulates this: $\text{RoutingOracle}(a,b)$ returns $(T_{ab},E_{ab})$ for $P_{a\to b}^*$ or $(\infty,\infty)$ if infeasible.
 
-\subsection{Travel Time per Tour}
-For a tour $\pi_j=(i_1,\dots,i_k)$, the total travel time is the sum over legs plus per-stop hover:
-
-\begin{equation}
-T(\pi_j) = \sum_{l=0}^{k} T_{\text{leg}}(l) + \sum_{i\in\pi_j} T_{\text{hover}}(i), \quad T_{\text{leg}}(l)=\frac{\|P_{l}\|}{v_{\max}}
-\end{equation}
-
-where $P_{0}=P_{p_j\to p_{i_1}}^*$, $P_{l}=P_{p_{i_l}\to p_{i_{l+1}}}^*$ for $1\le l<k$, $P_{k}=P_{p_{i_k}\to p_j^{\text{base}}}^*$, $v_{\max}$ is the maximum speed, and $T_{\text{hover}}(i)=T_{\text{drop}}+T_{\text{verify}}=10\text{s}+5\text{s}=15$ s per stop (V1 fixed for drop and confirmation; future $\sigma$-dependent variable).
-
-\subsection{Energy per Tour}
-Let $m_0=\sum_{item\in I_j} weight(item)$ be the initial payload and $m_l$ the remaining payload before leg $l$ ($m_{l}=m_{l-1}-\sum_{item\in\mathcal{R}_{i_l}} weight(item)$). The energy of leg $l$ is
+\subsection{Tour Time and Energy}
+For a tour $\pi_j=(i_1,\dots,i_k)$, let $P_0=P_{p_j\to p_{i_1}}^*$, $P_l=P_{p_{i_l}\to p_{i_{l+1}}}^*$ ($1\le l<k$), and $P_k=P_{p_{i_k}\to p_j^{\text{base}}}^*$. With $v_{\max}$ the maximum speed and $T_{\text{hover}}=T_{\text{drop}}+T_{\text{verify}}=15$ s per stop,
 
 \begin{equation}
-E_{\text{leg}}(l)= e_{\text{travel}}(p_l,m_{l-1},w_0)\|P_{l}\| + e_{\text{vert}}(m_{l-1})\Delta z_{l}
+T(\pi_j)=\sum_{l=0}^{k}\frac{\|P_l\|}{v_{\max}}+\sum_{i\in\pi_j}T_{\text{hover}}(i)
 \end{equation}
 
-with $e_{\text{travel}}(p,m,w_0)=e_0+k_m m+k_w w_0$ and $e_{\text{vert}}(m)=m g/\eta_{\text{vert}}$ as above ($m,w_0$ realtime; $w_0$ is uniform wind scalar, $w(p)$ deferred). The total tour energy is
+Let $m_0=\sum_{item\in I_j}weight(item)$ and $m_l=m_{l-1}-\sum_{item\in\mathcal{R}_{i_l}}weight(item)$ be the payload before leg $l$. Then
 
 \begin{equation}
-E(\pi_j) = \sum_{l=0}^{k} E_{\text{leg}}(l) + \sum_{i\in\pi_j} E_{\text{hover}}(i), \quad E_{\text{hover}}(i)=e_{\text{hover}}T_{\text{hover}}(i)
+E_{\text{leg}}(l)=e_{\text{travel}}(p_l,m_{l-1},w_0)\|P_l\|+e_{\text{vert}}(m_{l-1})\Delta z_l
 \end{equation}
 
-with $T_{\text{hover}}(i)=15$ s ($10$s drop $+$ $5$s verify) per stop. Early legs use larger $m$ and thus higher $e_{\text{travel}}$.
+with $e_{\text{travel}}(p,m,w_0)=e_0+k_m m+k_w w_0$, $e_{\text{vert}}(m)=mg/\eta_{\text{vert}}$ ($m,w_0$ realtime; $w_0$ uniform wind, $w(p)$ deferred; $e_0,k_m,k_w,\eta_{\text{vert}}$ calibrated offline). The total tour cost and energy are
 
-\subsection{Total Energy per Tour}
-The total energy for tour $\pi_j$ is $E(\pi_j)$ as defined above; the single-leg $E_{ij}^{\text{total}}$ is the special case $k=1$.
-where $P_{ij}^*=P_{j \rightarrow i}^*$. Variant $E_{ij}^{\text{oneway}} = E(P_{ij}^*) + E_{\text{hover}}$ (landing) is deferred; V1 assumes roundtrip.
+\begin{equation}
+E(\pi_j)=\sum_{l=0}^{k}E_{\text{leg}}(l)+\sum_{i\in\pi_j}e_{\text{hover}}T_{\text{hover}}(i)
+\end{equation}
 
-% E_roundtrip identical to E_total under roundtrip assumption; kept for reference
-% E_{ij}^{\text{roundtrip}} = E(P_{ij}) + E_{\text{hover}} + E_{\text{return}}(i,j)
+Early legs carry larger $m$ and thus higher $e_{\text{travel}}$. The single-leg case $k=1$ gives $E_{ij}^{\text{total}}=E(\pi_j=(i))$.
 
 \subsection{Coupling to Offloading}
-Routing provides $(T(\pi_j),E(\pi_j))$ via the oracle for each tour. Offloading uses these values in the feasibility check \eqref{eq:battery} and the tour cost \eqref{eq:cost}. All $k+1$ legs $p_j\!\to\!p_{i_1}\to\cdots\to p_{i_k}\!\to\!p_j^{\text{base}}$ must be feasible; otherwise $C(\pi_j)=\infty$.
+Routing provides $(T(\pi_j),E(\pi_j))$ via the oracle for each candidate tour. Offloading uses them in the feasibility check \eqref{eq:battery} and tour cost \eqref{eq:cost}. All $k+1$ legs must be feasible; otherwise $C(\pi_j)=\infty$ (Fig.~\ref{fig:coupling}).
 
 \begin{figure}[h]
 \centering
@@ -305,8 +289,7 @@ Dispatch $\{\pi_j^*\}$, update $X(t^+)$ \\[2pt]
 \label{fig:coupling}
 \end{figure}
 
-\subsection{Assignment Cost}
-The cost of assigning UAV $j$ to survivor $i$ is:
+\subsection{Tour Assignment Cost}
 
 \begin{equation}
 C(\pi_j,t) = \begin{cases}
