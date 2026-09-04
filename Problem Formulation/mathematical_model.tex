@@ -252,10 +252,10 @@ where $v_{\max}$ is the maximum UAV speed.
 
 \subsection{Energy Consumption}
 \begin{equation}
-E_{ij} = E(P_{ij}^*) = \sum_{k=1}^{K} \left( e_{\text{travel}} \|p_k - p_{k-1}\| + e_{\text{vert}} \Delta z_k \right)
+E_{ij} = E(P_{ij}^*) = \sum_{k=1}^{K} \left( e_{\text{travel}}(p_k,m,w(p_k)) \|p_k - p_{k-1}\| + e_{\text{vert}}(m) \Delta z_k \right)
 \end{equation}
 
-where $\Delta z_k=\max(0,z_k-z_{k-1})$, $e_{\text{travel}}$ is energy per horizontal distance and $e_{\text{vert}}$ per vertical climb.
+where $\Delta z_k=\max(0,z_k-z_{k-1})$, $m$ is payload mass and $w(p_k)$ is wind at $p_k$ (both realtime available from manifest and onboard/weather API), $e_{\text{travel}}(p_k,m,w)=e_0+k_m m+k_w w(p_k)$ and $e_{\text{vert}}(m)=m g/\eta_{\text{vert}}$ are computed from realtime data ($e_0,k_m,k_w,\eta_{\text{vert}}$ are calibrated constants, $g=9.8$).
 
 \subsection{Service-Related Energy}
 If the UAV hovers at the survivor location for duration $T_{\text{service}}$ (V1 fixed parameter, e.g., $T_{\text{service}}=300$\,s):
