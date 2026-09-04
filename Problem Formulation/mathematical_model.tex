@@ -282,7 +282,28 @@ where $P_{ij}^*=P_{j \rightarrow i}^*$. Variant $E_{ij}^{\text{oneway}} = E(P_{i
 % E_{ij}^{\text{roundtrip}} = E(P_{ij}) + E_{\text{hover}} + E_{\text{return}}(i,j)
 
 \subsection{Coupling to Offloading}
-Routing provides $(T_{ij},E_{ij}^{\text{total}})$ via the oracle for each pair $(i,j)$. Offloading uses these values in the feasibility check \eqref{eq:battery} and the assignment cost \eqref{eq:cost}. Both the outbound leg $p_j\!\to\!p_i$ and the return leg $p_i\!\to\!p_j^{\text{base}}$ must be feasible; otherwise $C_{ij}(t)=\infty$.
+Routing provides $(T(\pi_j),E(\pi_j))$ via the oracle for each tour. Offloading uses these values in the feasibility check \eqref{eq:battery} and the tour cost \eqref{eq:cost}. All $k+1$ legs $p_j\!\to\!p_{i_1}\to\cdots\to p_{i_k}\!\to\!p_j^{\text{base}}$ must be feasible; otherwise $C(\pi_j)=\infty$.
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{c}
+$\mathcal{Q}_{\text{high}}(t), \mathcal{D}_{\text{avail}}(t)$ \\
+$\downarrow$ \\
+For each candidate tour $\pi_j=(i_1,\dots,i_k)$: \\
+$\downarrow$ \\
+For each leg $l:0\to k$ query $\text{RoutingOracle}(p_{l},p_{l+1})\to(T_l,E_l)$ or $\infty$ \\
+$\downarrow$ \\
+$\text{Feasible}(\pi_j)?$ \quad $E(\pi_j)+E_{\text{reserve}}\leq B_j \land \mathcal{R}_{i_l}\subseteq I_j^{(l-1)} \land P_l\subset V$ \\
+$\downarrow$ \\
+$C(\pi_j)=\sum_{i\in\pi_j}[w_T T_{\text{leg}}/T_{\max}+w_E E_{\text{leg}}/E_{\max}-w_U u_i c_i]$ or $\infty$ \\
+$\downarrow$ \\
+ILP $\min_{\{\pi_j\}}\sum_j C(\pi_j) \to \{\pi_j^*\}$ \\
+$\downarrow$ \\
+Dispatch tours, update $X(t^+)$: $\mathcal{Q}\setminus\pi_j^*$, $B_j-E(\pi_j^*)$, $I_j\setminus\cup\mathcal{R}_i$ \\
+\end{tabular}
+\caption{PGBM coupling flow: Offloading queries Routing oracle per leg, aggregates $T(\pi_j),E(\pi_j)$, checks feasibility, computes $C(\pi_j)$, solves tour ILP, and updates state.}
+\label{fig:coupling}
+\end{figure}
 
 \subsection{Assignment Cost}
 The cost of assigning UAV $j$ to survivor $i$ is:
