@@ -230,7 +230,10 @@ where each leg $P_{a\to b}^*=\{a=p_0,p_1,\dots,p_L=b\}$ is the cheapest feasible
 For any path $P=\{p_0,\dots,p_L\}\subset V$, the traversal cost is defined as its energy:
 
 \begin{equation}
-\text{Cost}(P)=E(P)=\sum_{k=1}^{L}\left[e_{\text{travel}}(p_k,m,w_0)\|p_k-p_{k-1}\|+e_{\text{vert}}(m)\max(0,z_k-z_{k-1})\right]
+\begin{aligned}
+\text{Cost}(P)=E(P)&=\sum_{k=1}^{L} e_{\text{travel}}(p_k,m,w_0)\|p_k-p_{k-1}\| \\
+&\quad + e_{\text{vert}}(m)\max(0,z_k-z_{k-1})
+\end{aligned}
 \label{eq:pathcost}
 \end{equation}
 
