@@ -251,28 +251,28 @@ P_{ij}^* = \arg\min_{P \subset V,\,p_0=p_j,\,p_L=p_i} \text{Cost}(P)
 where the minimum is taken over all paths lying entirely in $V$. If no such path exists, $P_{ij}^*$ is infeasible and the pair $(i,j)$ is unreachable. When feasible, the travel time $T_{ij}$ and energy $E_{ij}$ are both derived from this single path $P_{ij}^*$. The routing oracle encapsulates this: given any two points it returns the corresponding $T$, $E$, or infinity if no feasible path exists. Offloading queries the oracle twice, for the outbound leg $p_j\!\to\!p_i$ and the return leg $p_i\!\to\!p_j^{\text{base}}$; both must be feasible for the assignment to be feasible.
 
 \subsection{Travel Time per Tour}
-For a tour $\pi_j=(i_1,\dots,i_k)$, the total travel time is the sum over legs:
+For a tour $\pi_j=(i_1,\dots,i_k)$, the total travel time is the sum over legs plus per-stop hover:
 
 \begin{equation}
-T(\pi_j) = \sum_{l=0}^{k} T_{\text{leg}}(l), \quad T_{\text{leg}}(l)=\frac{\|P_{l}\|}{v_{\max}}
+T(\pi_j) = \sum_{l=0}^{k} T_{\text{leg}}(l) + \sum_{i\in\pi_j} T_{\text{hover}}(i), \quad T_{\text{leg}}(l)=\frac{\|P_{l}\|}{v_{\max}}
 \end{equation}
 
-where $P_{0}=P_{p_j\to p_{i_1}}^*$, $P_{l}=P_{p_{i_l}\to p_{i_{l+1}}}^*$ for $1\le l<k$, $P_{k}=P_{p_{i_k}\to p_j^{\text{base}}}^*$, $v_{\max}$ is the maximum speed, and an additional $T_{\text{hover}}=15$ s per stop is added for drop confirmation.
+where $P_{0}=P_{p_j\to p_{i_1}}^*$, $P_{l}=P_{p_{i_l}\to p_{i_{l+1}}}^*$ for $1\le l<k$, $P_{k}=P_{p_{i_k}\to p_j^{\text{base}}}^*$, $v_{\max}$ is the maximum speed, and $T_{\text{hover}}(i)=T_{\text{drop}}+T_{\text{verify}}=10\text{s}+5\text{s}=15$ s per stop (V1 fixed for drop and confirmation; future $\sigma$-dependent variable).
 
 \subsection{Energy per Tour}
 Let $m_0=\sum_{item\in I_j} weight(item)$ be the initial payload and $m_l$ the remaining payload before leg $l$ ($m_{l}=m_{l-1}-\sum_{item\in\mathcal{R}_{i_l}} weight(item)$). The energy of leg $l$ is
 
 \begin{equation}
-E_{\text{leg}}(l)= e_{\text{travel}}(p_l,m_{l-1},w(p_l))\|P_{l}\| + e_{\text{vert}}(m_{l-1})\Delta z_{l}
+E_{\text{leg}}(l)= e_{\text{travel}}(p_l,m_{l-1},w_0)\|P_{l}\| + e_{\text{vert}}(m_{l-1})\Delta z_{l}
 \end{equation}
 
-with $e_{\text{travel}}(p,m,w)=e_0+k_m m+k_w w(p)$ and $e_{\text{vert}}(m)=m g/\eta_{\text{vert}}$ as above ($m,w(p_l)$ realtime). The total tour energy is
+with $e_{\text{travel}}(p,m,w_0)=e_0+k_m m+k_w w_0$ and $e_{\text{vert}}(m)=m g/\eta_{\text{vert}}$ as above ($m,w_0$ realtime; $w_0$ is uniform wind scalar, $w(p)$ deferred). The total tour energy is
 
 \begin{equation}
-E(\pi_j) = \sum_{l=0}^{k} E_{\text{leg}}(l) + \sum_{i\in\pi_j} E_{\text{hover}}(i), \quad E_{\text{hover}}=e_{\text{hover}}T_{\text{hover}}
+E(\pi_j) = \sum_{l=0}^{k} E_{\text{leg}}(l) + \sum_{i\in\pi_j} E_{\text{hover}}(i), \quad E_{\text{hover}}(i)=e_{\text{hover}}T_{\text{hover}}(i)
 \end{equation}
 
-with $T_{\text{hover}}=15$ s per stop. Early legs use larger $m$ and thus higher $e_{\text{travel}}$.
+with $T_{\text{hover}}(i)=15$ s ($10$s drop $+$ $5$s verify) per stop. Early legs use larger $m$ and thus higher $e_{\text{travel}}$.
 
 \subsection{Total Energy per Tour}
 The total energy for tour $\pi_j$ is $E(\pi_j)$ as defined above; the single-leg $E_{ij}^{\text{total}}$ is the special case $k=1$.
