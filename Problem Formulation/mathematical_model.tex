@@ -235,17 +235,17 @@ For any path $P=\{p_0,\dots,p_L\}\subset V$, let $T(P)=\sum_{k}\|p_k-p_{k-1}\|/v
 E(P)=\sum_{k=1}^{L}\left[e_{\text{travel}}(p_k,m,w_0)\|p_k-p_{k-1}\|+e_{\text{vert}}(m)\max(0,z_k-z_{k-1})\right]
 \end{equation}
 
-where $L$ is the number of waypoints. The traversal cost is
+be the travel time and energy. The routing-layer objective is
 
 \begin{equation}
-\text{Cost}(P)=w_T\frac{T(P)}{T_{\max}}+w_E\frac{E(P)}{E_{\max}}
+J_{\text{route}}(P)=w_T\frac{T(P)}{T_{\max}}+w_E\frac{E(P)}{E_{\max}}
 \label{eq:pathcost}
 \end{equation}
 
 with $w_T,w_E>0$. The cheapest feasible path is
 
 \begin{equation}
-P_{a\to b}^*=\arg\min_{P\subset V,\,p_0=a,\,p_L=b}\text{Cost}(P)
+P_{a\to b}^*=\arg\min_{P\subset V,\,p_0=a,\,p_L=b}J_{\text{route}}(P)
 \label{eq:optpath}
 \end{equation}
 
@@ -273,7 +273,7 @@ E(\pi_j)=\sum_{l=0}^{k}E_{\text{leg}}(l)+\sum_{i\in\pi_j}e_{\text{hover}}T_{\tex
 Early legs carry larger $m$ and thus higher $e_{\text{travel}}$. The single-leg case $k=1$ gives $E_{ij}^{\text{total}}=E(\pi_j=(i))$.
 
 \subsection{Coupling to Offloading}
-Routing provides $(T(\pi_j),E(\pi_j))$ via the oracle for each candidate tour. Offloading uses them in the feasibility check \eqref{eq:battery} and tour cost \eqref{eq:cost}. All $k+1$ legs must be feasible; otherwise $C(\pi_j)=\infty$ (Fig.~\ref{fig:coupling}).
+Routing provides $(T(\pi_j),E(\pi_j))$ via the oracle for each candidate tour. Offloading uses them in the feasibility check \eqref{eq:battery} and tour cost \eqref{eq:costpi}. All $k+1$ legs must be feasible; otherwise $J_{\text{tour}}(\pi_j)=C(\pi_j)=\infty$ (Fig.~\ref{fig:coupling}). Here $J_{\text{tour}}(\pi_j)=C(\pi_j)$ and $J_{\text{route}}(P)$ is defined in \eqref{eq:pathcost}.
 
 \begin{figure}[h]
 \centering
@@ -289,22 +289,22 @@ $\text{Feasible}(\pi_j)$? \; $E(\pi_j)+E_{\text{res}}\!\leq\!B_j \land \mathcal{
 $\downarrow$ \\[2pt]
 $C(\pi_j)=\sum_{i\in\pi_j}[w_T\frac{T}{T_{\max}}+w_E\frac{E}{E_{\max}}-w_U u_i c_i]$ or $\infty$ \\[2pt]
 $\downarrow$ \\[2pt]
-$\displaystyle\min_{\{\pi_j\}}\sum_j C(\pi_j)\;\to\;\{\pi_j^*\}$ \\[2pt]
+$\displaystyle\min_{\{\pi_j\}}\sum_j J_{\text{tour}}(\pi_j)\;\to\;\{\pi_j^*\}$ \\[2pt]
 $\downarrow$ \\[2pt]
 Dispatch $\{\pi_j^*\}$, update $X(t^+)$ \\[2pt]
 \end{tabular}
-\caption{PGBM coupling flow: Offloading queries Routing oracle per leg, aggregates $T(\pi_j),E(\pi_j)$, checks feasibility, computes $C(\pi_j)$, solves tour ILP, and updates state.}
+\caption{PGBM coupling flow: Offloading queries Routing oracle per leg, aggregates $T(\pi_j),E(\pi_j)$, checks feasibility, computes $J_{\text{tour}}(\pi_j)=C(\pi_j)$, solves tour, and updates state.}
 \label{fig:coupling}
 \end{figure}
 
 \subsection{Tour Assignment Cost}
 
 \begin{equation}
-C(\pi_j,t) = \begin{cases}
+J_{\text{tour}}(\pi_j,t)=C(\pi_j,t)= \begin{cases}
 \sum_{i\in\pi_j}\left[w_T \frac{T_{\text{leg}}(i)}{T_{\max}} + w_E \frac{E_{\text{leg}}(i)}{E_{\max}} - w_U u_i(t) c_i\right] & \text{if Feasible}(\pi_j) \\
 \infty & \text{otherwise}
 \end{cases}
-\label{eq:cost}
+\label{eq:costpi}
 \end{equation}
 
 where $w_T, w_E, w_U > 0$ are tour cost weights ($w_T+w_E+w_U=1$ baseline), $T_{\max}=\max_{\text{feasible}}T_{\text{leg}}$ (e.g., $600$ s for $2$km map at $v_{\max}=10$ m/s) and $E_{\max}=B_{\max}$ (e.g., $50000$ J) are normalization constants (alternatively adaptive $T_{\max}(t)=\max_{i\in\mathcal{Q}_{\text{high}}}T_{ij}$ per snapshot), and $-w_U u_i c_i$ rewards urgency/confidence per survivor in the tour. Infeasible tours have $\infty$ cost. The single-pair $C_{ij}(t)$ is the special case $k=1$ where $\pi_j=(i)$, i.e., $C_{ij}=C(\pi_j=(i))$.
@@ -382,7 +382,7 @@ The snapshot problem $\text{OFF-SNAP}(t)$ over tours $\{\pi_j\}$ is:
 where
 \begin{equation}
 C(\pi_j)=\sum_{i\in\pi_j}\left[w_T\frac{T_{\text{leg}}(i)}{T_{\max}}+w_E\frac{E_{\text{leg}}(i)}{E_{\max}}-w_U u_i(t)c_i\right]
-\label{eq:costpi}
+\label{eq:tourcost}
 \end{equation}
 Note that the single-assignment cost $C_{ij}(t)$ in \S5.6 is the $k=1$ special case $C(\pi_j=(i))=C_{ij}(t)$.
 where $T_{\text{leg}}(i),E_{\text{leg}}(i)$ include travel to $i$ plus $15$s hover. If $\mathcal{Q}_{\text{high}}=\emptyset$ or all $C(\pi_j)=\infty$, the optimum is $\pi_j=\emptyset$ (idle).
