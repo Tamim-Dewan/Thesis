@@ -327,13 +327,13 @@ A tour $\pi_j$ is feasible only if
 where $E_{\text{leg}}(l,i)$ is precomputed via oracle for position $l$, $M=B_{\max}$ is big-M, and $z_j\in\{0,1\}$ with $z_j=1$ iff $\pi_j$ feasible; $E(\pi_j)=\sum_{l,i}y_{jil}E_{\text{leg}}(l,i)+\sum_{i,l}y_{jil}E_{\text{hover}}$. If $z_j=0$, $C(\pi_j)=\infty$.
 
 \subsection{Demand Matching}
-Each demand must be satisfied per type:
+Each demand must be satisfied per type with explicit consumption:
 
 \begin{equation}
-r_{i_l}^q \leq I_j^{q,(l-1)} \quad \forall q\in\{\text{med},\text{water},\text{food}\},\; \forall i_l\in\pi_j
+I_j^{q,(l)} = I_j^{q,(l-1)} - r_{i_l}^q, \quad I_j^{q,(0)}=I_j^q, \quad I_j^{q,(l)} \geq 0 \;\; \forall q,\; \forall l
 \end{equation}
 
-where $I_j^{q,(l-1)}$ is the inventory of type $q$ before stop $l$ ($I_j^{q,(0)}=I_j^q$). If $r_{i_l}^q > I_j^{q,(l-1)}$ for any $q$, the tour is infeasible.
+Equivalently $r_{i_l}^q \leq I_j^{q,(l-1)}$ for all $q$ and $i_l\in\pi_j$; if $r_{i_l}^q > I_j^{q,(l-1)}$ the tour is infeasible. This sequential check is stronger than the aggregated $\sum|\mathcal{R}_i|\leq K$.
 
 \subsection{Reachability per Leg}
 Each leg must lie in free space: $P_{l}\subset V$ for all $l$, i.e., $p_k\in V$ for every waypoint. Reachability is an oracle per leg; one infeasible leg makes the whole tour infeasible.
