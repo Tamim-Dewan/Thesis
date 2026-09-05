@@ -435,13 +435,12 @@ A_j &\leftarrow 1
 \toprule
 \textbf{Parameter} & \textbf{Value} & \textbf{Meaning} \\
 \midrule
-$T_{\text{exp}}$ & $90$ min & Max wait before expiry (remove from $\mathcal{Q}$) \\
 $u_{\min}$ & $0.05$ & Min urgency threshold ($u<u_{\min}\Rightarrow$ expire) \\
 $T_{\text{fair}}$ & $15$ min & Fairness wait for $\sigma_i>0.8$ (promote to top of $\mathcal{Q}_{\text{high}}$) \\
 \bottomrule
 \end{tabular}
 \end{table}
-\noindent Expire: if $t-t_i^{\text{det}}>T_{\text{exp}}$ or $u_i(t)<u_{\min}\Rightarrow\mathcal{Q}\leftarrow\mathcal{Q}\setminus\{S_i\}$. Fairness: if $\sigma_i>0.8\land(t-t_i^{\text{det}})>T_{\text{fair}}\Rightarrow$ promote $S_i$ to top of $\mathcal{Q}_{\text{high}}$.
+\noindent Expire: if $u_i(t)<u_{\min}\Rightarrow\mathcal{Q}\leftarrow\mathcal{Q}\setminus\{S_i\}$. Fairness: if $\sigma_i>0.8\land(t-t_i^{\text{det}})>T_{\text{fair}}\Rightarrow$ promote $S_i$ to top of $\mathcal{Q}_{\text{high}}$.
 
 \section{Scope and Limitations}
 
