@@ -78,11 +78,11 @@ For any path $P=\{p_0,\dots,p_L\}\subset V$, let $T(P)=\sum_{k}\|p_k-p_{k-1}\|/v
 \section{Tour Feasibility}
 A tour $\pi_j=(i_1,\dots,i_k)$ is feasible iff:
 \begin{itemize}
-\item \textbf{Capacity:} $\sum_{i\in\pi_j}\sum_q r_i^q \leq K$,
-\item \textbf{Inventory:} $I_j^{q,(l)}=I_j^{q,(l-1)}-r_{i_l}^q,\; I_j^{q,(l)}\geq0\;\forall q,l$,
-\item \textbf{Battery:} $E(\pi_j)+E_{\text{reserve}}\leq B_j(t)$,
-\item \textbf{Reachability:} $P_l\subset V\;\forall l$,
-\item \textbf{Confidence:} $c_i\geq c_{\text{thresh}}\;\forall i\in\pi_j$.
+\item Capacity: $\sum_{i\in\pi_j}\sum_q r_i^q \leq K$,
+\item Inventory: $I_j^{q,(l)}=I_j^{q,(l-1)}-r_{i_l}^q,\; I_j^{q,(l)}\geq0\;\forall q,l$,
+\item Battery: $E(\pi_j)+E_{\text{reserve}}\leq B_j(t)$,
+\item Reachability: $P_l\subset V\;\forall l$,
+\item Confidence: $c_i\geq c_{\text{thresh}}\;\forall i\in\pi_j$.
 \end{itemize}
 If any fails, $\text{Feasible}(\pi_j)=\text{false}$ and $C(\pi_j)=\infty$.
 
