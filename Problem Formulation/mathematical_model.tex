@@ -42,6 +42,17 @@ Central decision unit that maintains global state $X(t)$, queries the routing or
 \subsection{Environment}
 Disaster area $\mathcal{E}=(V,O)$ with $V\subset\mathbb{R}^3$ free space and $O\subset\mathbb{R}^3$ static obstacles (buildings, rubble), $V\cap O=\emptyset$; hazard $R(p)$ is deferred to $R=0$ in V1.
 
+\section{System State at Time $t$}
+
+\subsection{Survivor Set}
+$\mathcal{S}(t)=\{S_i\}$, $\mathcal{Q}_{\text{high}}(t)=\{i\in\mathcal{S}(t)\mid a_i=0\land c_i\ge c_{\text{thresh}}\}$ ordered by $V_i(t)$, $\mathcal{Q}_{\text{low}}(t)=\{i\mid a_i=0\land c_i<c_{\text{thresh}}\}$.
+
+\subsection{UAV Set}
+$\mathcal{D}(t)=\{D_j\}$, $\mathcal{D}_{\text{avail}}(t)=\{j\mid \text{status}_j=\text{Idle}\}$.
+
+\subsection{Global State}
+$X(t)=(\mathcal{S}(t),\mathcal{D}(t),\mathcal{E},\mathcal{Q}_{\text{high}}(t),\mathcal{Q}_{\text{low}}(t))$.
+
 \section{System Model}
 % Define entities, environment, tasks
 
