@@ -72,6 +72,9 @@ $\pi_j(t)=(i_1,\dots,i_k)$ with $k=\text{len}(\pi_j)$ and $\sum_{i\in\pi_j}\sum_
 \subsection{Example}
 $K=4$, $I_j=[\text{med},\text{water},\text{food},\text{med}]$, $\pi_j=(A,C)$ with $\mathcal{R}_A=\{\text{med}\}$, $\mathcal{R}_C=\{\text{water},\text{food}\}$ carries $3$ items to $2$ survivors: $\text{base}(2.8\text{kg})\to A(10\text{s},3300\text{J})\to C(5\text{s},1500\text{J})\to\text{base}(12\text{s})$.
 
+\section{Routing Module}
+For any path $P=\{p_0,\dots,p_L\}\subset V$, let $T(P)=\sum_{k}\|p_k-p_{k-1}\|/v_{\max}$ be travel time and $E(P)=\sum_{k}[e_{\text{travel}}(p_k,m,w_0)\|p_k-p_{k-1}\|+e_{\text{vert}}(m)\max(0,z_k-z_{k-1})]$ be energy, where $L$ is waypoints. A path $P$ is feasible iff $P\subset V$.
+
 \section{System Model}
 % Define entities, environment, tasks
 
