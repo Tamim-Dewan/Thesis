@@ -366,13 +366,22 @@ Each survivor in $\mathcal{Q}_{\text{high}}(t)$ appears in at most one tour:
 Each tour respects item capacity:
 
 \begin{equation}
-\sum_{i\in\pi_j(t)} |\mathcal{R}_i| \leq K \quad \forall j \in \mathcal{D}_{\text{avail}}(t)
+\sum_{i\in\mathcal{Q}_{\text{high}}(t)}\sum_{l=1}^{K} |\mathcal{R}_i|\,y_{jil}(t) \leq K \quad \forall j \in \mathcal{D}_{\text{avail}}(t)
 \end{equation}
 
-where $K$ is the item capacity (e.g., 4), $\text{len}(\pi_j)=k$ is the number of survivors and $\sum|\mathcal{R}_i|$ is the number of items. A UAV may stay idle ($\pi_j=\emptyset$) if no feasible tour exists.
+where $K$ is the item capacity (e.g., 4). Equivalently $\sum_{i\in\pi_j}|\mathcal{R}_i|\leq K$. A UAV may stay idle ($\pi_j=\emptyset$, all $y_{jil}=0$) if no feasible tour exists.
+
+\subsection{MILP Ordering Constraints}
+For $y_{jil}(t)\in\{0,1\}$ ($l=1,\dots,K$):
+
+\begin{equation}
+\sum_{i} y_{jil}(t) \leq 1 \;\; \forall j,l, \qquad \sum_{l} y_{jil}(t) = x_{ij}(t) \;\; \forall i,j, \qquad \sum_{j} x_{ij}(t) \leq 1 \;\; \forall i
+\end{equation}
+
+and $\sum_i y_{jil} \geq \sum_i y_{j,i,l+1}$ (no gap: position $l+1$ occupied only if $l$ occupied).
 
 \subsection{Feasibility Enforcement}
-If a tour $\pi_j$ is not feasible, its cost is set to infinity: $C(\pi_j)=\infty$ when $\neg\text{Feasible}(\pi_j)$ (includes $c_i<c_{\text{thresh}}$, $A_j=0$, $P_l\not\subset V$, $\mathcal{R}_{i_l}\not\subseteq I_j^{(l-1)}$, or $E(\pi_j)+E_{\text{reserve}}>B_j$). Any optimal solution will have such tours excluded.
+If a tour $\pi_j$ is not feasible, its cost is set to infinity: $C(\pi_j)=\infty$ when $\neg\text{Feasible}(\pi_j)$ (includes $c_i<c_{\text{thresh}}$, $A_j=0$, $P_l\not\subset V$, $\mathcal{R}_{i_l}\not\subseteq I_j^{(l-1)}$, or $E(\pi_j)+E_{\text{reserve}}>B_j$). Any optimal solution will have such tours excluded. In MILP form, $C(\pi_j)=\sum_{i,l} y_{jil}\,c_{jil}$ with $c_{jil}=w_T T_{\text{leg}}(l,i)/T_{\max}+w_E E_{\text{leg}}(l,i)/E_{\max}-w_U u_i c_i$.
 
 \section{Objective Function}
 
