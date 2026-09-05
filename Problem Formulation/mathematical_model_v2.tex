@@ -53,6 +53,17 @@ $\mathcal{D}(t)=\{D_j\}$, $\mathcal{D}_{\text{avail}}(t)=\{j\mid \text{status}_j
 \subsection{Global State}
 $X(t)=(\mathcal{S}(t),\mathcal{D}(t),\mathcal{E},\mathcal{Q}_{\text{high}}(t),\mathcal{Q}_{\text{low}}(t))$.
 
+\section{Survivor Priority and Value}
+
+\subsection{Urgency}
+$u_i(t)=\sigma_i e^{-\alpha(t-t_i^{\text{det}})}$, $\alpha=\ln2/T_{\text{half}}$, $T_{\text{half}}=30$ min, $u_i\in[0,1]$ proportional decay $du/dt=-\alpha u$, half-life, never negative.
+
+\subsection{Service Value}
+$V_i(t)=\frac{2\,u_i(t)\,c_i}{u_i(t)+c_i}\in[0,1]$ (harmonic mean, $V_i=0$ if $u_i=0$ or $c_i=0$) unified expected value; $c_i\geq c_{\text{thresh}}$ hard eligibility for $\mathcal{Q}_{\text{high}}$.
+
+\subsection{Queue Priority}
+$\text{priority}(i)=\beta\,V_i(t)$, $\mathcal{Q}_{\text{high}}$ ordered by $V_i$ descending.
+
 \section{System Model}
 % Define entities, environment, tasks
 
