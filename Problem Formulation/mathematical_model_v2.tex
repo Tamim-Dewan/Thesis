@@ -10,7 +10,7 @@
 
 \title{Mathematical Formulation of the Proactive Golden-Hour Bridge Model (PGBM) for Post-Earthquake UAV-Assisted Response}
 
-\author{\IEEEauthorblockN{Tamim Dewan || Faiaz Mahmud}
+\author{\IEEEauthorblockN{Author Name}
 \IEEEauthorblockA{\textit{Department of Computer Science and Engineering}\\
 \textit{University Name}\\
 Email: author@email.com}
@@ -74,6 +74,17 @@ $K=4$, $I_j=[\text{med},\text{water},\text{food},\text{med}]$, $\pi_j=(A,C)$ wit
 
 \section{Routing Module}
 For any path $P=\{p_0,\dots,p_L\}\subset V$, let $T(P)=\sum_{k}\|p_k-p_{k-1}\|/v_{\max}$ be travel time and $E(P)=\sum_{k}[e_{\text{travel}}(p_k,m,w_0)\|p_k-p_{k-1}\|+e_{\text{vert}}(m)\max(0,z_k-z_{k-1})]$ be energy, where $L$ is waypoints. A path $P$ is feasible iff $P\subset V$.
+
+\section{Tour Feasibility}
+A tour $\pi_j=(i_1,\dots,i_k)$ is feasible iff:
+\begin{itemize}
+\item \textbf{Capacity:} $\sum_{i\in\pi_j}\sum_q r_i^q \leq K$,
+\item \textbf{Inventory:} $I_j^{q,(l)}=I_j^{q,(l-1)}-r_{i_l}^q,\; I_j^{q,(l)}\geq0\;\forall q,l$,
+\item \textbf{Battery:} $E(\pi_j)+E_{\text{reserve}}\leq B_j(t)$,
+\item \textbf{Reachability:} $P_l\subset V\;\forall l$,
+\item \textbf{Confidence:} $c_i\geq c_{\text{thresh}}\;\forall i\in\pi_j$.
+\end{itemize}
+If any fails, $\text{Feasible}(\pi_j)=\text{false}$ and $C(\pi_j)=\infty$.
 
 \section{System Model}
 % Define entities, environment, tasks
