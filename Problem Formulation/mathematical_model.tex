@@ -157,14 +157,14 @@ Base Station & $p_j^{\text{base}}$ & $\mathbb{R}^3$ \\
 Remaining Battery & $B_j$ & $\mathbb{R}^+$ \\
 Capacity & $K$ & $\mathbb{N}$ (e.g., 4 items) \\
 Inventory & $I_j^q$ & $\mathbb{Z}_{\ge0},\,q\in\{\text{med},\text{water},\text{food}\}$ \\
-Payload Mass & $m$ & $\mathbb{R}^+$ (kg, $m=\sum_q I_j^q\,weight(q)$) \\
+Payload Mass & $m_j(t)=\sum_q I_j^q(t)w_q$ & $\mathbb{R}^+$ (kg, derived) \\
 Availability & $A_j$ & $\{0,1\}$ \\
 Current Task & $s_j$ & $\mathcal{S}(t) \cup \{\emptyset\}$ \\
 Mission Status & $\text{status}_j$ & $\{\text{Idle}, \text{EnRoute}, \text{AtSurvivor}, \text{Returning}\}$ \\
 \bottomrule
 \end{tabular}
 \end{table}
-$K$ is the maximum number of items, $I_j^q$ is the inventory count of type $q$ (e.g., $I_j^{\text{med}}=2$, $I_j^{\text{water}}=1$), and $m$ is the derived total weight of $I_j$ which decreases after each drop and affects $e_{\text{travel}}$ per leg.
+$K$ is the maximum number of items and $I_j^q$ is the inventory count of type $q$ (e.g., $I_j^{\text{med}}=2$). Payload $m_j(t)=\sum_q I_j^q(t)w_q$ is derived ($w_q$ weight of type $q$) and decreases as $I_j^q$ is consumed, affecting $e_{\text{travel}}$ per leg.
 
 \subsection{Availability States}
 The availability $A_j$ is derived from the UAV's status:
@@ -410,10 +410,10 @@ Dispatching tour $\pi_j=(i_1,\dots,i_k)$:
 \begin{align}
 \mathcal{Q}(t^+) &= \mathcal{Q}(t^-) \setminus \{i_1,\dots,i_k\} \\
 B_j(t^+) &= B_j(t^-) - E(\pi_j) \\
-I_j(t^+) &= I_j(t^-) \setminus \bigcup_{i\in\pi_j}\mathcal{R}_i \\
-m(t^+) &= \sum_{item\in I_j(t^+)} weight(item) \\
+I_j^{q}(t^+) &= I_j^{q}(t^-) - \sum_{i\in\pi_j} r_i^q \quad \forall q \\
 \text{status}_j &\leftarrow \text{EnRoute}
 \end{align}
+with $m_j(t^+)=\sum_q I_j^{q}(t^+)w_q$ derived.
 
 \subsection{Tour Completes (Return to Base)}
 Upon return to $p_j^{\text{base}}$:
