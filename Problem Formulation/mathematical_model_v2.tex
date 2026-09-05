@@ -24,67 +24,91 @@ Email: author@email.com}
 This document presents the mathematical formulation of the Proactive Golden-Hour Bridge Model (PGBM).
 \end{abstract}
 
-\section{Survivor Priority and Service Value}
+\section{Introduction}
+\subsection{Problem in One Sentence}
+After Scout UAVs detect survivors, the Command Center must decide at each event time $t$ which available Responder UAVs should execute which feasible tours---ordered sequences $\pi_j=(i_1,\dots,i_k)$---to maximize expected lifesaving value under battery, payload-item, and 3D reachability constraints, before ground rescue arrives.
 
-For each detected survivor $i$, let $\sigma_i \in [0,1]$ denote
-severity, $c_i \in [0,1]$ denote detection confidence, and
-$t_i^{det}$ denote the detection time. The time-dependent urgency
-of survivor $i$ at decision time $t$ is defined as
+\section{System Entities}
+
+\subsection{Survivors}
+Detected tasks $i$, each with location $p_i\in\mathbb{R}^3$, detection time $t_i^{\text{det}}$, confidence $c_i\in[0,1]$, severity $\sigma_i\in[0,1]$, and demand vector $r_i^q\in\mathbb{Z}_{\ge0}$ for $q\in\{\text{med},\text{water},\text{food}\}$.
+
+\subsection{Responder UAVs}
+Platforms $j$ that execute tours, each with current position $p_j$, base $p_j^{\text{base}}\in\mathbb{R}^3$, battery $B_j(t)\in[0,B_{\max}]$, item capacity $K$, inventory $I_j^q$, payload $m_j=\sum_q I_j^q w_q$, and status $\in\{\text{Idle},\text{EnRoute}\}$.
+
+\subsection{Command Center}
+Central decision unit that maintains global state $X(t)$, queries the routing oracle for each candidate tour, solves the assignment optimization, and dispatches tours $\pi_j$.
+
+\subsection{Environment}
+Disaster area $\mathcal{E}=(V,O)$ with $V\subset\mathbb{R}^3$ free space and $O\subset\mathbb{R}^3$ static obstacles (buildings, rubble), $V\cap O=\emptyset$; hazard $R(p)$ is deferred to $R=0$ in V1.
+
+\section{System State at Time $t$}
+
+\subsection{Survivor Set}
+$\mathcal{S}(t)=\{S_i\}$, $\mathcal{Q}_{\text{high}}(t)=\{i\in\mathcal{S}(t)\mid a_i=0\land c_i\ge c_{\text{thresh}}\}$ ordered by $V_i(t)$, $\mathcal{Q}_{\text{low}}(t)=\{i\mid a_i=0\land c_i<c_{\text{thresh}}\}$.
+
+\subsection{UAV Set}
+$\mathcal{D}(t)=\{D_j\}$, $\mathcal{D}_{\text{avail}}(t)=\{j\mid \text{status}_j=\text{Idle}\}$.
+
+\subsection{Global State}
+$X(t)=(\mathcal{S}(t),\mathcal{D}(t),\mathcal{E},\mathcal{Q}_{\text{high}}(t),\mathcal{Q}_{\text{low}}(t))$.
+
+\section{Survivor Priority and Value}
+
+\subsection{Urgency}
+$u_i(t)=\sigma_i e^{-\alpha(t-t_i^{\text{det}})}$, $\alpha=\ln2/T_{\text{half}}$, $T_{\text{half}}=30$ min, $u_i\in[0,1]$ proportional decay $du/dt=-\alpha u$, half-life, never negative.
+
+\subsection{Service Value}
+$V_i(t)=\frac{2\,u_i(t)\,c_i}{u_i(t)+c_i}\in[0,1]$ (harmonic mean, $V_i=0$ if $u_i=0$ or $c_i=0$) unified expected value; $c_i\geq c_{\text{thresh}}$ hard eligibility for $\mathcal{Q}_{\text{high}}$.
+
+\subsection{Queue Priority}
+$\text{priority}(i)=\beta\,V_i(t)$, $\mathcal{Q}_{\text{high}}$ ordered by $V_i$ descending.
+
+\section{UAV Mission and Tour}
+
+\subsection{Tour Definition}
+$\pi_j(t)=(i_1,\dots,i_k)$ with $k=\text{len}(\pi_j)$ and $\sum_{i\in\pi_j}\sum_q r_i^q \leq K$ (e.g., $K=4$). $P_{\pi_j}=P_{p_j\to p_{i_1}}\circ\cdots\circ P_{p_{i_k}\to p_j^{\text{base}}}$.
+
+\subsection{Example}
+$K=4$, $I_j=[\text{med},\text{water},\text{food},\text{med}]$, $\pi_j=(A,C)$ with $\mathcal{R}_A=\{\text{med}\}$, $\mathcal{R}_C=\{\text{water},\text{food}\}$ carries $3$ items to $2$ survivors: $\text{base}(2.8\text{kg})\to A(10\text{s},3300\text{J})\to C(5\text{s},1500\text{J})\to\text{base}(12\text{s})$.
+
+\section{Routing Module}
+For any path $P=\{p_0,\dots,p_L\}\subset V$, let $T(P)=\sum_{k}\|p_k-p_{k-1}\|/v_{\max}$ be travel time and $E(P)=\sum_{k}[e_{\text{travel}}(p_k,m,w_0)\|p_k-p_{k-1}\|+e_{\text{vert}}(m)\max(0,z_k-z_{k-1})]$ be energy, where $L$ is waypoints. A path $P$ is feasible iff $P\subset V$.
+
+\section{Tour Feasibility}
+A tour $\pi_j=(i_1,\dots,i_k)$ is feasible iff:
+\begin{itemize}
+\item Capacity: $\sum_{i\in\pi_j}\sum_q r_i^q \leq K$,
+\item Inventory: $I_j^{q,(l)}=I_j^{q,(l-1)}-r_{i_l}^q,\; I_j^{q,(l)}\geq0\;\forall q,l$,
+\item Battery: $E(\pi_j)+E_{\text{reserve}}\leq B_j(t)$,
+\item Reachability: $P_l\subset V\;\forall l$,
+\item Confidence: $c_i\geq c_{\text{thresh}}\;\forall i\in\pi_j$.
+\end{itemize}
+If any fails, $\text{Feasible}(\pi_j)=\text{false}$ and $C(\pi_j)=\infty$.
+
+\section{Tour Cost and Utility}
+For a feasible tour $\pi_j=(i_1,\dots,i_k)$ with $T(\pi_j),E(\pi_j)$ from routing and $V_i(t)$ from \S4,
+\begin{equation}
+J_{\text{tour}}(\pi_j,t)=w_T\frac{T(\pi_j)}{T_{\max}}+w_E\frac{E(\pi_j)}{E_{\max}}-w_U\frac{\sum_{i\in\pi_j}V_i(t)}{K}
+\end{equation}
+where $w_T+w_E+w_U=1$, $T_{\max}=600$s, $E_{\max}=B_{\max}-E_{\text{reserve}}$, $V_i=2u_ic_i/(u_i+c_i)$, $K$ capacity. If $\text{Feasible}(\pi_j)=\text{false}$ then $J_{\text{tour}}=\infty$.
+
+\section{Assignment Optimization}
+The primary assignment objective is to maximize total effective service value:
 
 \begin{equation}
-u_i(t)
-=
-\sigma_i
-\exp\left[-\alpha\left(t-t_i^{det}\right)\right],
-\qquad
-\alpha=\frac{\ln 2}{T_{half}},
+\max_{x_i} \sum_{i\in\mathcal{S}(t)} V_i(t)\,x_i \quad \text{s.t. } x_i\in\{0,1\}\;\forall i
 \end{equation}
 
-where $T_{half}$ is the urgency half-life. Thus, urgency decreases
-exponentially as the survivor waits for assistance.
+where $V_i(t)=2u_i(t)c_i/(u_i(t)+c_i)$ is the harmonic service value from \S4, $u_i(t)=\sigma_i\exp[-\alpha(t-t_i^{\text{det}})]$ with $\alpha=\ln2/T_{\text{half}}$, and $V_i(t)\in[0,1]$. The assignment is realized via feasible tours $\{\pi_j\}$ with $x_i=1$ iff $i\in\bigcup_j\pi_j$, subject to payload, inventory, battery, and 3D reachability constraints from \S7, and confidence threshold $c_i\geq c_{\text{thresh}}\;\forall i$ assigned to a tour (Eq. 7). Energy is a feasibility constraint ($E(\pi_j)+E_{\text{reserve}}\leq B_j$) rather than an independent optimization objective. Each survivor appears in at most one tour; unassigned survivors remain in $\mathcal{Q}_{\text{high}}$ for the next event. The tour cost $J_{\text{tour}}(\pi_j)$ from \S8 is retained as an alternative weighted formulation $J_{\text{tour}}=w_TT/T_{\max}+w_EE/E_{\max}-w_U\sum V_i/K$ for $w_T+w_E+w_U=1$.
 
-To jointly account for survivor urgency and detection reliability,
-the effective service value is defined as
+\section{System Model}
+% Define entities, environment, tasks
 
-\begin{equation}
-V_i(t)
-=
-\frac{2u_i(t)c_i}{u_i(t)+c_i},
-\qquad
-V_i(t)\in[0,1].
-\end{equation}
+\section{Problem Formulation}
+% Offloading + Routing
 
-The harmonic-mean formulation ensures that a survivor receives a
-high service value only when both urgency and detection confidence
-are sufficiently high. A low value of either component reduces
-$V_i(t)$.
+\section{Conclusion}
+% Summary
 
-Let
-
-\begin{equation}
-x_i =
-\begin{cases}
-1, & \text{if survivor } i \text{ is served},\\
-0, & \text{otherwise}.
-\end{cases}
-\end{equation}
-
-The primary assignment objective is therefore to maximize the total
-effective service value of the survivors served by the available
-Responder UAVs:
-
-\begin{equation}
-\max
-\sum_{i\in S(t)} V_i(t)x_i.
-\end{equation}
-
-The objective is subject to UAV payload, inventory, battery, and
-3D reachability constraints. Hence, energy is treated as a
-feasibility constraint rather than an independent optimization
-objective. Confidence thresholding may additionally be applied as
-
-\begin{equation}
-c_i \geq c_{\mathrm{thresh}},
-\qquad \forall i \text{ assigned to a tour}.
-\end{equation}
 \end{document}
