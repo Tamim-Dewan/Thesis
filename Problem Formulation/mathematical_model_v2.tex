@@ -31,16 +31,16 @@ After Scout UAVs detect survivors, the Command Center must decide at each event 
 \section{System Entities}
 
 \subsection{Survivors}
-Tasks $i$ with $p_i\in\mathbb{R}^3$, $t_i^{\text{det}}$, $c_i\in[0,1]$, $\sigma_i\in[0,1]$, $r_i^q\in\mathbb{Z}_{\ge0}$ for $q\in\{\text{med},\text{water},\text{food}\}$.
+Detected tasks $i$, each with location $p_i\in\mathbb{R}^3$, detection time $t_i^{\text{det}}$, confidence $c_i\in[0,1]$, severity $\sigma_i\in[0,1]$, and demand vector $r_i^q\in\mathbb{Z}_{\ge0}$ for $q\in\{\text{med},\text{water},\text{food}\}$.
 
 \subsection{Responder UAVs}
-Platforms $j$ with $p_j$, $p_j^{\text{base}}\in\mathbb{R}^3$, $B_j(t)\in[0,B_{\max}]$, capacity $K$, inventory $I_j^q$, payload $m_j=\sum_q I_j^q w_q$, status $\in\{\text{Idle},\text{EnRoute},\text{Returning}\}$.
+Platforms $j$ that execute tours, each with current position $p_j$, base $p_j^{\text{base}}\in\mathbb{R}^3$, battery $B_j(t)\in[0,B_{\max}]$, item capacity $K$, inventory $I_j^q$, payload $m_j=\sum_q I_j^q w_q$, and status $\in\{\text{Idle},\text{EnRoute},\text{Returning}\}$.
 
 \subsection{Command Center}
-% To be filled later
+Central decision unit that maintains global state $X(t)$, queries the routing oracle for each candidate tour, solves the assignment optimization, and dispatches tours $\pi_j$.
 
 \subsection{Environment}
-$\mathcal{E}=(V,O)$ with $V\subset\mathbb{R}^3$ free space, $O\subset\mathbb{R}^3$ static obstacles, $V\cap O=\emptyset$, hazard $R(p)$ deferred to $R=0$ in V1.
+Disaster area $\mathcal{E}=(V,O)$ with $V\subset\mathbb{R}^3$ free space and $O\subset\mathbb{R}^3$ static obstacles (buildings, rubble), $V\cap O=\emptyset$; hazard $R(p)$ is deferred to $R=0$ in V1.
 
 \section{System Model}
 % Define entities, environment, tasks
