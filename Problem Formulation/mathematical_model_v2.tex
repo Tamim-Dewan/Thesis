@@ -73,7 +73,7 @@ $\pi_j(t)=(i_1,\dots,i_k)$ with $k=\text{len}(\pi_j)$ and $\sum_{i\in\pi_j}\sum_
 $K=4$, $I_j=[\text{med},\text{water},\text{food},\text{med}]$, $\pi_j=(A,C)$ with $\mathcal{R}_A=\{\text{med}\}$, $\mathcal{R}_C=\{\text{water},\text{food}\}$ carries $3$ items to $2$ survivors: $\text{base}(2.8\text{kg})\to A(10\text{s},3300\text{J})\to C(5\text{s},1500\text{J})\to\text{base}(12\text{s})$.
 
 \section{Routing Module}
-For any path $P=\{p_0,\dots,p_L\}\subset V$, let $T(P)=\sum_{k}\|p_k-p_{k-1}\|/v_{\max}$ and $E(P)=\sum_{k}[e_{\text{travel}}(p_k,m,w_0)\|p_k-p_{k-1}\|+e_{\text{vert}}(m)\max(0,z_k-z_{k-1})]$ be travel time and energy, where $L$ is waypoints. A path $P$ is feasible iff $P\subset V$. The routing cost is $J_{\text{route}}(P)=w_T T(P)/T_{\max}+w_E E(P)/E_{\max}$ and the optimal path is $P_{a\to b}^*=\arg\min_{P\subset V,\,p_0=a,\,p_L=b}J_{\text{route}}(P)$ (infeasible if no $P\subset V$ exists); the oracle returns $(T_{ab},E_{ab})$ for $P_{a\to b}^*$ or $(\infty,\infty)$.
+For any path $P=\{p_0,\dots,p_L\}\subset V$, let $T(P)=\sum_{k}\|p_k-p_{k-1}\|/v_{\max}$ and $E(P)=\sum_{k}[e_{\text{travel}}(p_k,m,w_0)\|p_k-p_{k-1}\|+e_{\text{vert}}(m)\max(0,z_k-z_{k-1})]$ be travel time and energy. A path $P$ is feasible iff $P\subset V$. For a leg $a\to b$, $T_{ab}=T(P_{a\to b})$ and $E_{ab}=E(P_{a\to b})$ denote its time and energy.
 
 \section{Tour Feasibility}
 A tour $\pi_j=(i_1,\dots,i_k)$ is feasible iff:
@@ -87,15 +87,15 @@ A tour $\pi_j=(i_1,\dots,i_k)$ is feasible iff:
 If any fails, $\text{Feasible}(\pi_j)=\text{false}$ and $C(\pi_j)=\infty$.
 
 \section{Tour Cost and Utility}
-For a feasible tour $\pi_j=(i_1,\dots,i_k)$ with $T(\pi_j),E(\pi_j)$ from routing and $V_i(t)$ from \S4,
+For a feasible tour $\pi_j=(i_1,\dots,i_k)$ with leg paths $\{P_l\}_{l=0}^{k}$ where $P_l\subset V$,
 \begin{equation}
-J_{\text{tour}}(\pi_j,t)=w_T\frac{T(\pi_j)}{T_{\max}}+w_E\frac{E(\pi_j)}{E_{\max}}-w_U\frac{\sum_{i\in\pi_j}V_i(t)}{K}
+J_{\text{tour}}(\pi_j,\{P_l\},t)=\sum_{l=0}^{k}\left[w_T\frac{T(P_l)}{T_{\max}}+w_E\frac{E(P_l)}{E_{\max}}\right]-w_U\frac{\sum_{i\in\pi_j}V_i(t)}{K}
 \end{equation}
-where $w_T+w_E+w_U=1$, $T_{\max}=600$s, $E_{\max}=B_{\max}-E_{\text{reserve}}$, $V_i=2u_ic_i/(u_i+c_i)$, $K$ capacity. If $\text{Feasible}(\pi_j)=\text{false}$ then $J_{\text{tour}}=\infty$.
+where $T(P_l),E(P_l)$ are from \S6, $V_i=2u_ic_i/(u_i+c_i)$, $w_T+w_E+w_U=1$, $T_{\max}=600$s, $E_{\max}=B_{\max}-E_{\text{reserve}}$. If any $P_l\not\subset V$ or $\text{Feasible}(\pi_j)=\text{false}$ then $J_{\text{tour}}=\infty$. Thus routing ($P_l$) and allocation ($\pi_j$) are jointly optimized via $J_{\text{tour}}$.
 
 \section{Assignment Optimization}
 \begin{equation}
-\min_{\{\pi_j\}_{j\in\mathcal{D}_{\text{avail}}}} \sum_{j} J_{\text{tour}}(\pi_j,t) \quad \text{s.t. } \sum_{j}\mathbf{1}\{i\in\pi_j\}\leq1\;\forall i\in\mathcal{Q}_{\text{high}},\; \text{Feasible}(\pi_j)\;\forall j
+\min_{\{\pi_j\},\{P_l\}} \sum_{j} J_{\text{tour}}(\pi_j,\{P_l\},t) \quad \text{s.t. } \sum_{j}\mathbf{1}\{i\in\pi_j\}\leq1\;\forall i\in\mathcal{Q}_{\text{high}},\; \text{Feasible}(\pi_j,\{P_l\})\;\forall j
 \end{equation}
 where $J_{\text{tour}}(\pi_j)$ is from \S8 and $\text{Feasible}(\pi_j)$ from \S7. Each survivor appears in at most one tour; unassigned survivors remain in $\mathcal{Q}_{\text{high}}$ for the next event. The single-assignment $x_{ij}$ is the $k=1$ case.
 
