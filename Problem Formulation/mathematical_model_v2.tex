@@ -24,101 +24,67 @@ Email: author@email.com}
 This document presents the mathematical formulation of the Proactive Golden-Hour Bridge Model (PGBM).
 \end{abstract}
 
-\section{Introduction}
-\subsection{Problem in One Sentence}
-After Scout UAVs detect survivors, the Command Center must decide at each event time $t$ which available Responder UAVs should execute which feasible tours---ordered sequences $\pi_j=(i_1,\dots,i_k)$---to maximize expected lifesaving value under battery, payload-item, and 3D reachability constraints, before ground rescue arrives.
+\section{Survivor Priority and Service Value}
 
-\section{System Entities}
+For each detected survivor $i$, let $\sigma_i \in [0,1]$ denote
+severity, $c_i \in [0,1]$ denote detection confidence, and
+$t_i^{det}$ denote the detection time. The time-dependent urgency
+of survivor $i$ at decision time $t$ is defined as
 
-\subsection{Survivors}
-Detected tasks $i$, each with location $p_i\in\mathbb{R}^3$, detection time $t_i^{\text{det}}$, confidence $c_i\in[0,1]$, severity $\sigma_i\in[0,1]$, and demand vector $r_i^q\in\mathbb{Z}_{\ge0}$ for $q\in\{\text{med},\text{water},\text{food}\}$.
-
-\subsection{Responder UAVs}
-Platforms $j$ that execute tours, each with current position $p_j$, base $p_j^{\text{base}}\in\mathbb{R}^3$, battery $B_j(t)\in[0,B_{\max}]$, item capacity $K$, inventory $I_j^q$, payload $m_j=\sum_q I_j^q w_q$, and status $\in\{\text{Idle},\text{EnRoute}\}$.
-
-\subsection{Command Center}
-Central decision unit that maintains global state $X(t)$, queries the routing oracle for each candidate tour, solves the assignment optimization, and dispatches tours $\pi_j$.
-
-\subsection{Environment}
-Disaster area $\mathcal{E}=(V,O)$ with $V\subset\mathbb{R}^3$ free space and $O\subset\mathbb{R}^3$ static obstacles (buildings, rubble), $V\cap O=\emptyset$; hazard $R(p)$ is deferred to $R=0$ in V1.
-
-\section{System State at Time $t$}
-
-\subsection{Survivor Set}
-$\mathcal{S}(t)=\{S_i\}$, $\mathcal{Q}_{\text{high}}(t)=\{i\in\mathcal{S}(t)\mid a_i=0\land c_i\ge c_{\text{thresh}}\}$ ordered by $V_i(t)$, $\mathcal{Q}_{\text{low}}(t)=\{i\mid a_i=0\land c_i<c_{\text{thresh}}\}$.
-
-\subsection{UAV Set}
-$\mathcal{D}(t)=\{D_j\}$, $\mathcal{D}_{\text{avail}}(t)=\{j\mid \text{status}_j=\text{Idle}\}$.
-
-\subsection{Global State}
-$X(t)=(\mathcal{S}(t),\mathcal{D}(t),\mathcal{E},\mathcal{Q}_{\text{high}}(t),\mathcal{Q}_{\text{low}}(t))$.
-
-\section{Survivor Priority and Value}
-
-\subsection{Urgency}
-$u_i(t)=\sigma_i e^{-\alpha(t-t_i^{\text{det}})}$, $\alpha=\ln2/T_{\text{half}}$, $T_{\text{half}}=30$ min, $u_i\in[0,1]$ proportional decay $du/dt=-\alpha u$, half-life, never negative.
-
-\subsection{Service Value}
-$V_i(t)=\frac{2\,u_i(t)\,c_i}{u_i(t)+c_i}\in[0,1]$ (harmonic mean, $V_i=0$ if $u_i=0$ or $c_i=0$) unified expected value; $c_i\geq c_{\text{thresh}}$ hard eligibility for $\mathcal{Q}_{\text{high}}$.
-
-\subsection{Queue Priority}
-$\text{priority}(i)=\beta\,V_i(t)$, $\mathcal{Q}_{\text{high}}$ ordered by $V_i$ descending.
-
-\section{UAV Mission and Tour}
-
-\subsection{Tour Definition}
-$\pi_j(t)=(i_1,\dots,i_k)$ with $k=\text{len}(\pi_j)$ and $\sum_{i\in\pi_j}\sum_q r_i^q \leq K$ (e.g., $K=4$). $P_{\pi_j}=P_{p_j\to p_{i_1}}\circ\cdots\circ P_{p_{i_k}\to p_j^{\text{base}}}$.
-
-\subsection{Example}
-$K=4$, $I_j=[\text{med},\text{water},\text{food},\text{med}]$, $\pi_j=(A,C)$ with $\mathcal{R}_A=\{\text{med}\}$, $\mathcal{R}_C=\{\text{water},\text{food}\}$ carries $3$ items to $2$ survivors: $\text{base}(2.8\text{kg})\to A(10\text{s},3300\text{J})\to C(5\text{s},1500\text{J})\to\text{base}(12\text{s})$.
-
-\section{Routing Module}
-For any path $P=\{p_0,\dots,p_L\}\subset V$, let $T(P)=\sum_{k}\|p_k-p_{k-1}\|/v_{\max}$ and $E(P)=\sum_{k}[e_{\text{travel}}(p_k,m,w_0)\|p_k-p_{k-1}\|+e_{\text{vert}}(m)\max(0,z_k-z_{k-1})]$ be travel time and energy. A path $P$ is feasible iff $P\subset V$. For a leg $a\to b$, $T_{ab}=T(P_{a\to b})$ and $E_{ab}=E(P_{a\to b})$ denote its time and energy.
-
-\section{Tour Feasibility}
-A tour $\pi_j=(i_1,\dots,i_k)$ is feasible iff:
-\begin{itemize}
-\item Capacity: $\sum_{i\in\pi_j}\sum_q r_i^q \leq K$,
-\item Inventory: $I_j^{q,(l)}=I_j^{q,(l-1)}-r_{i_l}^q,\; I_j^{q,(l)}\geq0\;\forall q,l$,
-\item Battery: $E(\pi_j)+E_{\text{reserve}}\leq B_j(t)$,
-\item Reachability: $P_l\subset V\;\forall l$,
-\item Confidence: $c_i\geq c_{\text{thresh}}\;\forall i\in\pi_j$.
-\end{itemize}
-If any fails, $\text{Feasible}(\pi_j)=\text{false}$ and $C(\pi_j)=\infty$.
-
-\section{Tour Cost and Utility}
-For a feasible tour $\pi_j=(i_1,\dots,i_k)$ with leg paths $\{P_l\}_{l=0}^{k}$ where $P_l\subset V$,
 \begin{equation}
-J_{\text{tour}}(\pi_j,\{P_l\},t)=\sum_{l=0}^{k}\left[w_T\frac{T(P_l)}{T_{\max}}+w_E\frac{E(P_l)}{E_{\max}}\right]-w_U\frac{\sum_{i\in\pi_j}V_i(t)}{K}
+u_i(t)
+=
+\sigma_i
+\exp\left[-\alpha\left(t-t_i^{det}\right)\right],
+\qquad
+\alpha=\frac{\ln 2}{T_{half}},
 \end{equation}
-where $T(P_l),E(P_l)$ are from \S6, $V_i=2u_ic_i/(u_i+c_i)$, $w_T+w_E+w_U=1$, $T_{\max}=600$s, $E_{\max}=B_{\max}-E_{\text{reserve}}$. If any $P_l\not\subset V$ or $\text{Feasible}(\pi_j)=\text{false}$ then $J_{\text{tour}}=\infty$. Thus routing ($P_l$) and allocation ($\pi_j$) are jointly optimized via $J_{\text{tour}}$.
 
-\section{Assignment Optimization}
+where $T_{half}$ is the urgency half-life. Thus, urgency decreases
+exponentially as the survivor waits for assistance.
+
+To jointly account for survivor urgency and detection reliability,
+the effective service value is defined as
+
 \begin{equation}
-\min_{\{\pi_j\}_{j\in\mathcal{D}_{\text{avail}}}} \sum_{j} J_{\text{tour}}(\pi_j,t) \quad \text{s.t. } \sum_{j}\mathbf{1}\{i\in\pi_j\}\leq1\;\forall i\in\mathcal{Q}_{\text{high}},\; \text{Feasible}(\pi_j)\;\forall j
+V_i(t)
+=
+\frac{2u_i(t)c_i}{u_i(t)+c_i},
+\qquad
+V_i(t)\in[0,1].
 \end{equation}
-where $J_{\text{tour}}(\pi_j)$ is from \S8 and $\text{Feasible}(\pi_j)$ from \S7. Each survivor appears in at most one tour; unassigned survivors remain in $\mathcal{Q}_{\text{high}}$ for the next event.
 
-\section{Online Event-Triggered Loop}
-At event times $t_0<t_1<\dots$:
-\begin{enumerate}
-\item New Detection: $S_{\text{new}}\to\mathcal{S}(t^+)=\mathcal{S}(t^-)\cup\{S_{\text{new}}\}$, $\mathcal{Q}$ update,
-\item Update State: $X(t)=(\mathcal{S},\mathcal{D},\mathcal{E},\mathcal{Q}_{\text{high}},\mathcal{Q}_{\text{low}})$, $V_i(t)$,
-\item Generate Candidates: $B$ tours $\pi_j$ with $|\pi_j|\leq K$ via beam search/clustering,
-\item Route Evaluation: for each leg $l$ in each $\pi_j$, $T(P_l),E(P_l)$ or $\infty$,
-\item Optimize: $\min_{\pi_j,\{P_l\}}\sum_j J_{\text{tour}}(\pi_j,\{P_l\})$ s.t. assignment and feasibility,
-\item Dispatch: $\pi_j^*\to j\in\mathcal{D}_{\text{avail}}$, $\text{status}_j:\text{Idle}\to\text{EnRoute}$,
-\item Update State: $\mathcal{Q}\leftarrow\mathcal{Q}\setminus\pi_j^*$, $B_j-=E(\pi_j^*)$, $I_j^q-= \sum r_i^q$, $m=\sum_q I_j^q w_q$.
-\end{enumerate}
-Next trigger: new detection, UAV return (Idle), verification promotion, or $u_i<u_{\min}$ expiry.
+The harmonic-mean formulation ensures that a survivor receives a
+high service value only when both urgency and detection confidence
+are sufficiently high. A low value of either component reduces
+$V_i(t)$.
 
-\section{System Model}
-% Define entities, environment, tasks
+Let
 
-\section{Problem Formulation}
-% Offloading + Routing
+\begin{equation}
+x_i =
+\begin{cases}
+1, & \text{if survivor } i \text{ is served},\\
+0, & \text{otherwise}.
+\end{cases}
+\end{equation}
 
-\section{Conclusion}
-% Summary
+The primary assignment objective is therefore to maximize the total
+effective service value of the survivors served by the available
+Responder UAVs:
 
+\begin{equation}
+\max
+\sum_{i\in S(t)} V_i(t)x_i.
+\end{equation}
+
+The objective is subject to UAV payload, inventory, battery, and
+3D reachability constraints. Hence, energy is treated as a
+feasibility constraint rather than an independent optimization
+objective. Confidence thresholding may additionally be applied as
+
+\begin{equation}
+c_i \geq c_{\mathrm{thresh}},
+\qquad \forall i \text{ assigned to a tour}.
+\end{equation}
 \end{document}
