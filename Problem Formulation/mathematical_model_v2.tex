@@ -95,9 +95,22 @@ where $T(P_l),E(P_l)$ are from \S6, $V_i=2u_ic_i/(u_i+c_i)$, $w_T+w_E+w_U=1$, $T
 
 \section{Assignment Optimization}
 \begin{equation}
-\min_{\{\pi_j\},\{P_l\}} \sum_{j} J_{\text{tour}}(\pi_j,\{P_l\},t) \quad \text{s.t. } \sum_{j}\mathbf{1}\{i\in\pi_j\}\leq1\;\forall i\in\mathcal{Q}_{\text{high}},\; \text{Feasible}(\pi_j,\{P_l\})\;\forall j
+\min_{\{\pi_j\}_{j\in\mathcal{D}_{\text{avail}}}} \sum_{j} J_{\text{tour}}(\pi_j,t) \quad \text{s.t. } \sum_{j}\mathbf{1}\{i\in\pi_j\}\leq1\;\forall i\in\mathcal{Q}_{\text{high}},\; \text{Feasible}(\pi_j)\;\forall j
 \end{equation}
-where $J_{\text{tour}}(\pi_j)$ is from \S8 and $\text{Feasible}(\pi_j)$ from \S7. Each survivor appears in at most one tour; unassigned survivors remain in $\mathcal{Q}_{\text{high}}$ for the next event. The single-assignment $x_{ij}$ is the $k=1$ case.
+where $J_{\text{tour}}(\pi_j)$ is from \S8 and $\text{Feasible}(\pi_j)$ from \S7. Each survivor appears in at most one tour; unassigned survivors remain in $\mathcal{Q}_{\text{high}}$ for the next event.
+
+\section{Online Event-Triggered Loop}
+At event times $t_0<t_1<\dots$:
+\begin{enumerate}
+\item New Detection: $S_{\text{new}}\to\mathcal{S}(t^+)=\mathcal{S}(t^-)\cup\{S_{\text{new}}\}$, $\mathcal{Q}$ update,
+\item Update State: $X(t)=(\mathcal{S},\mathcal{D},\mathcal{E},\mathcal{Q}_{\text{high}},\mathcal{Q}_{\text{low}})$, $V_i(t)$,
+\item Generate Candidates: $B$ tours $\pi_j$ with $|\pi_j|\leq K$ via beam search/clustering,
+\item Route Evaluation: for each leg $l$ in each $\pi_j$, $T(P_l),E(P_l)$ or $\infty$,
+\item Optimize: $\min_{\pi_j,\{P_l\}}\sum_j J_{\text{tour}}(\pi_j,\{P_l\})$ s.t. assignment and feasibility,
+\item Dispatch: $\pi_j^*\to j\in\mathcal{D}_{\text{avail}}$, $\text{status}_j:\text{Idle}\to\text{EnRoute}$,
+\item Update State: $\mathcal{Q}\leftarrow\mathcal{Q}\setminus\pi_j^*$, $B_j-=E(\pi_j^*)$, $I_j^q-= \sum r_i^q$, $m=\sum_q I_j^q w_q$.
+\end{enumerate}
+Next trigger: new detection, UAV return (Idle), verification promotion, or $u_i<u_{\min}$ expiry.
 
 \section{System Model}
 % Define entities, environment, tasks
