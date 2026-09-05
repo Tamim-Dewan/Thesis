@@ -64,6 +64,14 @@ $V_i(t)=\frac{2\,u_i(t)\,c_i}{u_i(t)+c_i}\in[0,1]$ (harmonic mean, $V_i=0$ if $u
 \subsection{Queue Priority}
 $\text{priority}(i)=\beta\,V_i(t)$, $\mathcal{Q}_{\text{high}}$ ordered by $V_i$ descending.
 
+\section{UAV Mission and Tour}
+
+\subsection{Tour Definition}
+$\pi_j(t)=(i_1,\dots,i_k)$ with $k=\text{len}(\pi_j)$ and $\sum_{i\in\pi_j}\sum_q r_i^q \leq K$ (e.g., $K=4$). $P_{\pi_j}=P_{p_j\to p_{i_1}}\circ\cdots\circ P_{p_{i_k}\to p_j^{\text{base}}}$.
+
+\subsection{Example}
+$K=4$, $I_j=[\text{med},\text{water},\text{food},\text{med}]$, $\pi_j=(A,C)$ with $\mathcal{R}_A=\{\text{med}\}$, $\mathcal{R}_C=\{\text{water},\text{food}\}$ carries $3$ items to $2$ survivors: $\text{base}(2.8\text{kg})\to A(10\text{s},3300\text{J})\to C(5\text{s},1500\text{J})\to\text{base}(12\text{s})$.
+
 \section{System Model}
 % Define entities, environment, tasks
 
