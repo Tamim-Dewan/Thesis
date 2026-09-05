@@ -28,6 +28,20 @@ This document presents the mathematical formulation of the Proactive Golden-Hour
 \subsection{Problem in One Sentence}
 After Scout UAVs detect survivors, the Command Center must decide at each event time $t$ which available Responder UAVs should execute which feasible tours---ordered sequences $\pi_j=(i_1,\dots,i_k)$---to maximize expected lifesaving value under battery, payload-item, and 3D reachability constraints, before ground rescue arrives.
 
+\section{System Entities}
+
+\subsection{Survivors}
+Tasks $i$ with $p_i\in\mathbb{R}^3$, $t_i^{\text{det}}$, $c_i\in[0,1]$, $\sigma_i\in[0,1]$, $r_i^q\in\mathbb{Z}_{\ge0}$ for $q\in\{\text{med},\text{water},\text{food}\}$.
+
+\subsection{Responder UAVs}
+Platforms $j$ with $p_j$, $p_j^{\text{base}}\in\mathbb{R}^3$, $B_j(t)\in[0,B_{\max}]$, capacity $K$, inventory $I_j^q$, payload $m_j=\sum_q I_j^q w_q$, status $\in\{\text{Idle},\text{EnRoute},\text{Returning}\}$.
+
+\subsection{Command Center}
+% To be filled later
+
+\subsection{Environment}
+$\mathcal{E}=(V,O)$ with $V\subset\mathbb{R}^3$ free space, $O\subset\mathbb{R}^3$ static obstacles, $V\cap O=\emptyset$, hazard $R(p)$ deferred to $R=0$ in V1.
+
 \section{System Model}
 % Define entities, environment, tasks
 
