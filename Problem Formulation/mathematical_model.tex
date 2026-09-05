@@ -34,7 +34,7 @@ After Scout UAVs detect survivors, the Command Center must decide at each event 
 Detected tasks $i$, each with location $p_i\in\mathbb{R}^3$, detection time $t_i^{\text{det}}$, confidence $c_i\in[0,1]$, severity $\sigma_i\in[0,1]$, and demand vector $r_i^q\in\mathbb{Z}_{\ge0}$ for $q\in\{\text{med},\text{water},\text{food}\}$.
 
 \subsection{Responder UAVs}
-Platforms $j$ that execute tours, each with current position $p_j$, base $p_j^{\text{base}}\in\mathbb{R}^3$, battery $B_j(t)\in[0,B_{\max}]$, item capacity $K$, inventory $I_j^q$, payload $m_j=\sum_q I_j^q w_q$, and status $\in\{\text{Idle},\text{EnRoute},\text{Returning}\}$.
+Platforms $j$ that execute tours, each with current position $p_j$, base $p_j^{\text{base}}\in\mathbb{R}^3$, battery $B_j(t)\in[0,B_{\max}]$, item capacity $K$, inventory $I_j^q$, payload $m_j=\sum_q I_j^q w_q$, and status $\in\{\text{Idle},\text{EnRoute}\}$.
 
 \subsection{Command Center}
 Central decision unit that maintains global state $X(t)$, queries the routing oracle for each candidate tour, solves the assignment optimization, and dispatches tours $\pi_j$.
