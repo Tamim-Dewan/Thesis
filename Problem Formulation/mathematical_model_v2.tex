@@ -73,7 +73,7 @@ $\pi_j(t)=(i_1,\dots,i_k)$ with $k=\text{len}(\pi_j)$ and $\sum_{i\in\pi_j}\sum_
 $K=4$, $I_j=[\text{med},\text{water},\text{food},\text{med}]$, $\pi_j=(A,C)$ with $\mathcal{R}_A=\{\text{med}\}$, $\mathcal{R}_C=\{\text{water},\text{food}\}$ carries $3$ items to $2$ survivors: $\text{base}(2.8\text{kg})\to A(10\text{s},3300\text{J})\to C(5\text{s},1500\text{J})\to\text{base}(12\text{s})$.
 
 \section{Routing Module}
-For any path $P=\{p_0,\dots,p_L\}\subset V$, let $T(P)=\sum_{k}\|p_k-p_{k-1}\|/v_{\max}$ be travel time and $E(P)=\sum_{k}[e_{\text{travel}}(p_k,m,w_0)\|p_k-p_{k-1}\|+e_{\text{vert}}(m)\max(0,z_k-z_{k-1})]$ be energy, where $L$ is waypoints. A path $P$ is feasible iff $P\subset V$.
+For any path $P=\{p_0,\dots,p_L\}\subset V$, let $T(P)=\sum_{k}\|p_k-p_{k-1}\|/v_{\max}$ and $E(P)=\sum_{k}[e_{\text{travel}}(p_k,m,w_0)\|p_k-p_{k-1}\|+e_{\text{vert}}(m)\max(0,z_k-z_{k-1})]$ be travel time and energy, where $L$ is waypoints. A path $P$ is feasible iff $P\subset V$. The routing cost is $J_{\text{route}}(P)=w_T T(P)/T_{\max}+w_E E(P)/E_{\max}$ and the optimal path is $P_{a\to b}^*=\arg\min_{P\subset V,\,p_0=a,\,p_L=b}J_{\text{route}}(P)$ (infeasible if no $P\subset V$ exists); the oracle returns $(T_{ab},E_{ab})$ for $P_{a\to b}^*$ or $(\infty,\infty)$.
 
 \section{Tour Feasibility}
 A tour $\pi_j=(i_1,\dots,i_k)$ is feasible iff:
