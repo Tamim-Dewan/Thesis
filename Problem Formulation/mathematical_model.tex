@@ -310,7 +310,7 @@ w_T\frac{T(\pi_j)}{T_{\max}}+w_E\frac{E(\pi_j)}{E_{\max}}-w_U\frac{\sum_{i\in\pi
 \label{eq:cost}
 \end{equation}
 
-where $w_T, w_E, w_U > 0$ are tour cost weights ($w_T+w_E+w_U=1$ baseline), $T_{\max}=600$ s (fixed for $2$km map at $v_{\max}=10$ m/s) and $E_{\max}=B_{\max}$ ($50000$ J) are fixed global normalization constants ensuring stable scale across snapshots, and $-w_U u_i c_i$ rewards urgency/confidence per survivor in the tour. Infeasible tours have $\infty$ cost. The single-pair $C_{ij}(t)$ is the special case $k=1$ where $\pi_j=(i)$.
+where $w_T, w_E, w_U > 0$ are tour cost weights ($w_T+w_E+w_U=1$ baseline), $T_{\max}=600$ s (fixed for $2$km map at $v_{\max}=10$ m/s) and $E_{\max}=B_{\max}-E_{\text{reserve}}$ ($40000$ J, usable max with $E_{\text{reserve}}=0.2B_{\max}$) are fixed global normalization constants ensuring stable scale across snapshots ($T(\pi)/T_{\max},E(\pi)/E_{\max}\in[0,1]$), and $-w_U u_i c_i$ rewards urgency/confidence per survivor in the tour. Infeasible tours have $\infty$ cost. The single-pair $C_{ij}(t)$ is the special case $k=1$ where $\pi_j=(i)$.
 
 \textit{Rationale:} The tour cost is a dimensionless trade-off among time, energy, and expected value summed over the tour; $C_{ij}$ is $k=1$.
 
