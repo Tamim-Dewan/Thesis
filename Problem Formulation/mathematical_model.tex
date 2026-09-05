@@ -229,15 +229,20 @@ where each leg $P_{a\to b}^*=\{a=p_0,p_1,\dots,p_L=b\}$ is the cheapest feasible
 \subsection{Path Cost and Optimal Path}
 For any path $P=\{p_0,\dots,p_L\}\subset V$, the traversal cost is defined as its energy:
 
+For any path $P=\{p_0,\dots,p_L\}\subset V$, let $T(P)=\sum_{k}\|p_k-p_{k-1}\|/v_{\max}$ and
+
 \begin{equation}
-\begin{aligned}
-\text{Cost}(P)=E(P)&=\sum_{k=1}^{L} e_{\text{travel}}(p_k,m,w_0)\|p_k-p_{k-1}\| \\
-&\quad + e_{\text{vert}}(m)\max(0,z_k-z_{k-1})
-\end{aligned}
+E(P)=\sum_{k=1}^{L}\left[e_{\text{travel}}(p_k,m,w_0)\|p_k-p_{k-1}\|+e_{\text{vert}}(m)\max(0,z_k-z_{k-1})\right]
+\end{equation}
+
+where $L$ is the number of waypoints. The traversal cost is
+
+\begin{equation}
+\text{Cost}(P)=w_T\frac{T(P)}{T_{\max}}+w_E\frac{E(P)}{E_{\max}}
 \label{eq:pathcost}
 \end{equation}
 
-where $L$ is the number of waypoints and $e_{\text{travel}},e_{\text{vert}}$ are defined below. The cheapest feasible path between two points is
+with $w_T,w_E>0$. The cheapest feasible path is
 
 \begin{equation}
 P_{a\to b}^*=\arg\min_{P\subset V,\,p_0=a,\,p_L=b}\text{Cost}(P)
