@@ -194,8 +194,9 @@ The ordered queue of unassigned survivors is defined as a derived view:
 
 ordered by priority:
 \begin{equation}
-\text{priority}(i) = \beta_1 \cdot u_i(t) + \beta_2 \cdot c_i
+V_i(t)=u_i(t)c_i, \quad \text{priority}(i)=\beta\,V_i(t)
 \end{equation}
+where $V_i(t)\in[0,1]$ is the unified expected service value.
 Note: $\mathcal{Q}(t)$ is not an independent state component but a derived view of $\mathcal{S}(t)$ for scheduling. With verification threshold $c_{\text{thresh}}$, the queue partitions as:
 \begin{align}
 \mathcal{Q}_{\text{high}}(t) &= \{ S_i \in \mathcal{Q}(t) \mid c_i \geq c_{\text{thresh}} \}, \\
@@ -304,13 +305,13 @@ Dispatch $\{\pi_j^*\}$, update $X(t^+)$ \\[2pt]
 
 \begin{equation}
 J_{\text{tour}}(\pi_j,t)=C(\pi_j,t)= \begin{cases}
-w_T\frac{T(\pi_j)}{T_{\max}}+w_E\frac{E(\pi_j)}{E_{\max}}-w_U\frac{\sum_{i\in\pi_j}u_i(t)c_i}{K} & \text{if Feasible}(\pi_j) \\
+w_T\frac{T(\pi_j)}{T_{\max}}+w_E\frac{E(\pi_j)}{E_{\max}}-w_U\frac{\sum_{i\in\pi_j}V_i(t)}{K} & \text{if Feasible}(\pi_j) \\
 \infty & \text{otherwise}
 \end{cases}
 \label{eq:cost}
 \end{equation}
 
-where $w_T, w_E, w_U > 0$ are tour cost weights ($w_T+w_E+w_U=1$ baseline), $T_{\max}=600$ s (fixed for $2$km map at $v_{\max}=10$ m/s) and $E_{\max}=B_{\max}-E_{\text{reserve}}$ ($40000$ J, usable max with $E_{\text{reserve}}=0.2B_{\max}$) are fixed global normalization constants ensuring stable scale across snapshots ($T(\pi)/T_{\max},E(\pi)/E_{\max}\in[0,1]$), and $-w_U u_i c_i$ rewards urgency/confidence per survivor in the tour. Infeasible tours have $\infty$ cost. The single-pair $C_{ij}(t)$ is the special case $k=1$ where $\pi_j=(i)$.
+where $w_T, w_E, w_U > 0$ are tour cost weights ($w_T+w_E+w_U=1$ baseline), $T_{\max}=600$ s (fixed) and $E_{\max}=B_{\max}-E_{\text{reserve}}$ ($40000$ J) are fixed global constants, $V_i(t)=u_i(t)c_i$ is the unified service value, and $-w_U V_i$ rewards expected urgency per survivor. Infeasible tours have $\infty$ cost. The single-pair $C_{ij}$ is $k=1$ where $\pi_j=(i)$.
 
 \textit{Rationale:} The tour cost is a dimensionless trade-off among time, energy, and expected value summed over the tour; $C_{ij}$ is $k=1$.
 
@@ -391,7 +392,7 @@ The snapshot MILP over $y_{jil}$ is:
 \min_{x_{ij},y_{jil}} \sum_{j\in\mathcal{D}_{\text{avail}}}\sum_{l=1}^{K}\sum_{i\in\mathcal{Q}_{\text{high}}} y_{jil}\,c_{jil}(t)
 \label{eq:obj}
 \end{equation}
-where $c_{jil}(t)=w_T T_{\text{leg}}(l,i)/T_{\max}+w_E E_{\text{leg}}(l,i)/E_{\max}-w_U u_i(t)c_i/K$ per survivor normalized by $K$ (so $\sum_{i\in\pi_j}u_i c_i/K\in[0,1]$ tour-level), precomputed via oracle for position $l$, and $C(\pi_j)=w_T T(\pi_j)/T_{\max}+w_E E(\pi_j)/E_{\max}-w_U(\sum_{i\in\pi_j}u_i c_i)/K=\sum_{l,i}y_{jil}c_{jil}$. The single-pair $C_{ij}$ is $k=1$ where $y_{ji1}=1$.
+where $c_{jil}(t)=w_T T_{\text{leg}}/T_{\max}+w_E E_{\text{leg}}/E_{\max}-w_U V_i(t)/K$ per survivor normalized by $K$ (so $\sum_{i\in\pi_j}u_i c_i/K\in[0,1]$ tour-level), precomputed via oracle for position $l$, and $C(\pi_j)=w_T T(\pi_j)/T_{\max}+w_E E(\pi_j)/E_{\max}-w_U(\sum_{i\in\pi_j}u_i c_i)/K=\sum_{l,i}y_{jil}c_{jil}$. The single-pair $C_{ij}$ is $k=1$ where $y_{ji1}=1$.
 where $T_{\text{leg}}(i),E_{\text{leg}}(i)$ include travel to $i$ plus $15$s hover. If $\mathcal{Q}_{\text{high}}=\emptyset$ or all $C(\pi_j)=\infty$, the optimum is $\pi_j=\emptyset$ (idle).
 
 \subsection{State Update for Tours}
