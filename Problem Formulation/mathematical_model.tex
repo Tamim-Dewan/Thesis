@@ -316,15 +316,15 @@ where $w_T, w_E, w_U > 0$ are tour cost weights ($w_T+w_E+w_U=1$ baseline), $T_{
 
 \section{Feasibility Constraints}
 
-\subsection{Battery Constraint for Tour}
-A tour $\pi_j$ is feasible only if the whole tour plus reserve fits the remaining battery:
+\subsection{Battery Constraint for Tour (Big-M)}
+A tour $\pi_j$ is feasible only if
 
 \begin{equation}
-E(\pi_j) + E_{\text{reserve}} \leq B_j(t)
+\sum_{l,i} y_{jil}E_{\text{leg}}(l,i) + E_{\text{reserve}} \leq B_j(t) + M(1-z_j)
 \label{eq:battery}
 \end{equation}
 
-where $E(\pi_j)=\sum_{l}E_{\text{leg}}(l)+\sum_{i\in\pi_j}E_{\text{hover}}(i)$ from Step 4 and $E_{\text{reserve}}=0.2\,B_{\max}$.
+where $E_{\text{leg}}(l,i)$ is precomputed via oracle for position $l$, $M=B_{\max}$ is big-M, and $z_j\in\{0,1\}$ with $z_j=1$ iff $\pi_j$ feasible; $E(\pi_j)=\sum_{l,i}y_{jil}E_{\text{leg}}(l,i)+\sum_{i,l}y_{jil}E_{\text{hover}}$. If $z_j=0$, $C(\pi_j)=\infty$.
 
 \subsection{Demand Matching}
 Each demand set must be satisfied from the remaining inventory:
