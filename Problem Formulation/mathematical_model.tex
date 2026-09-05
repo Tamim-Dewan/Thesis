@@ -386,17 +386,12 @@ If a tour $\pi_j$ is not feasible, its cost is set to infinity: $C(\pi_j)=\infty
 \section{Objective Function}
 
 \subsection{Primary Objective: Minimize Cost}
-The snapshot problem $\text{OFF-SNAP}(t)$ over tours $\{\pi_j\}$ is:
+The snapshot MILP over $y_{jil}$ is:
 \begin{equation}
-\min_{\{\pi_j\}} \sum_{j\in\mathcal{D}_{\text{avail}}(t)} C(\pi_j)
+\min_{x_{ij},y_{jil}} \sum_{j\in\mathcal{D}_{\text{avail}}}\sum_{l=1}^{K}\sum_{i\in\mathcal{Q}_{\text{high}}} y_{jil}\,c_{jil}(t)
 \label{eq:obj}
 \end{equation}
-where
-\begin{equation}
-C(\pi_j)=\sum_{i\in\pi_j}\left[w_T\frac{T_{\text{leg}}(i)}{T_{\max}}+w_E\frac{E_{\text{leg}}(i)}{E_{\max}}-w_U u_i(t)c_i\right]
-\label{eq:tourcost}
-\end{equation}
-Note that the single-assignment cost $C_{ij}(t)$ in \S5.6 is the $k=1$ special case $C(\pi_j=(i))=C_{ij}(t)$.
+where $c_{jil}(t)=w_T T_{\text{leg}}(l,i)/T_{\max}+w_E E_{\text{leg}}(l,i)/E_{\max}-w_U u_i(t)c_i$ is precomputed via the routing oracle for position $l$ (with $m_{l-1},w_0$) and $C(\pi_j)=\sum_{i\in\pi_j}[\cdots]=\sum_{l,i}y_{jil}c_{jil}$. The single-pair $C_{ij}$ is $k=1$ where $y_{ji1}=1$.
 where $T_{\text{leg}}(i),E_{\text{leg}}(i)$ include travel to $i$ plus $15$s hover. If $\mathcal{Q}_{\text{high}}=\emptyset$ or all $C(\pi_j)=\infty$, the optimum is $\pi_j=\emptyset$ (idle).
 
 \subsection{State Update for Tours}
