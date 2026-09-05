@@ -277,7 +277,7 @@ E(\pi_j)=\sum_{l=0}^{k}E_{\text{leg}}(l)+\sum_{i\in\pi_j}e_{\text{hover}}T_{\tex
 Early legs carry larger $m$ and thus higher $e_{\text{travel}}$. The single-leg case $k=1$ gives $E_{ij}^{\text{total}}=E(\pi_j=(i))$.
 
 \subsection{Coupling to Offloading}
-Routing provides $(T(\pi_j),E(\pi_j))$ via the oracle for each candidate tour. Offloading uses them in the feasibility check \eqref{eq:battery} and tour cost \eqref{eq:costpi}. All $k+1$ legs must be feasible; otherwise $J_{\text{tour}}(\pi_j)=C(\pi_j)=\infty$ (Fig.~\ref{fig:coupling}). Here $J_{\text{tour}}(\pi_j)=C(\pi_j)$ and $J_{\text{route}}(P)$ is defined in \eqref{eq:pathcost}.
+Routing provides $(T(\pi_j),E(\pi_j))$ via the oracle for each candidate tour. Offloading uses them in the feasibility check \eqref{eq:battery} and tour cost \eqref{eq:costpi}. All $k+1$ legs must be feasible; otherwise $J_{\text{tour}}(\pi_j)=C(\pi_j)=\infty$ (Fig.~\ref{fig:coupling}). Here $J_{\text{tour}}(\pi_j)=C(\pi_j)$ and $J_{\text{route}}(P)$ is defined in \eqref{eq:pathcost}. Note: Exhaustive enumeration $\sum_{k=1}^{K}P(N,k)$ is exponential (e.g., $N=20,K=4\Rightarrow123\,520$ tours per UAV); practical implementation prunes candidates via urgency-ranked beam search or spatial clustering to $B\approx100$ tours before querying the oracle. The formulation defines the full set for completeness.
 
 \begin{figure}[h]
 \centering
