@@ -93,6 +93,12 @@ J_{\text{tour}}(\pi_j,t)=w_T\frac{T(\pi_j)}{T_{\max}}+w_E\frac{E(\pi_j)}{E_{\max
 \end{equation}
 where $w_T+w_E+w_U=1$, $T_{\max}=600$s, $E_{\max}=B_{\max}-E_{\text{reserve}}$, $V_i=2u_ic_i/(u_i+c_i)$, $K$ capacity. If $\text{Feasible}(\pi_j)=\text{false}$ then $J_{\text{tour}}=\infty$.
 
+\section{Assignment Optimization}
+\begin{equation}
+\min_{\{\pi_j\}_{j\in\mathcal{D}_{\text{avail}}}} \sum_{j} J_{\text{tour}}(\pi_j,t) \quad \text{s.t. } \sum_{j}\mathbf{1}\{i\in\pi_j\}\leq1\;\forall i\in\mathcal{Q}_{\text{high}},\; \text{Feasible}(\pi_j)\;\forall j
+\end{equation}
+where $J_{\text{tour}}(\pi_j)$ is from \S8 and $\text{Feasible}(\pi_j)$ from \S7. Each survivor appears in at most one tour; unassigned survivors remain in $\mathcal{Q}_{\text{high}}$ for the next event. The single-assignment $x_{ij}$ is the $k=1$ case.
+
 \section{System Model}
 % Define entities, environment, tasks
 
