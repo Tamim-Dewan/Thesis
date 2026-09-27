@@ -1,0 +1,184 @@
+%%%% Basic Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt,a4paper,oneside]{extbook}          % I'm using a double-sided book style
+%\usepackage{geometry}
+%\geometry{left=3.5cm,right=3.5cm,top=4.2cm,bottom=4.2cm}
+                                    % Geometry package for easy page margin
+                                    % setup
+
+\oddsidemargin 0.28in
+\evensidemargin 0.09in
+\topmargin 0.1in
+\textwidth 14.9cm
+\textheight 22.8cm
+\usepackage{ifthen}
+\usepackage{sidecap}
+\usepackage{multirow}
+\usepackage{hhline}
+
+%\usepackage{gensymb}
+%\usepackage{times}
+%\usepackage{vmargin}
+%\usepackage{phdthesis}
+\usepackage{amsmath,amssymb}        % AMS Math
+\usepackage{rotating}               % Sideways of figures & tables
+\usepackage[sectionbib]{natbib}     % Cross-reference package (Natural BiB)
+%\usepackage{chapterbib}             % Put References at the end of each chapter
+                                    % Do not put 'sectionbib' option here.
+                                    % Sectionbib option in 'natbib' will do.
+\usepackage{fancyhdr}               % Fancy Header and Footer
+\usepackage{pstricks,pst-node,pst-tree}
+\usepackage[hang,tight]{subfigure}
+\usepackage{epsfig}
+%\usepackage{program}
+\usepackage{latexsym}
+\usepackage{paralist}
+\usepackage{wasysym}
+\usepackage{amsmath}
+% \usepackage[vlined, ruled, algochapter]{algorithm2e}
+% \usepackage{algorithmicx}
+% \usepackage{setspace}               % Line spacing
+% \usepackage{url}
+% \usepackage{algorithmicx}
+% \usepackage{algorithm2e}
+% \usepackage{algpseudocode}
+% Algorithms
+% \usepackage{algorithm}
+% \usepackage{algpseudocode}
+% Algorithms
+\usepackage[vlined,ruled,algochapter]{algorithm2e}
+
+% URL support
+\usepackage{url}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{longtable}
+%\usepackage{algorithm}
+%\usepackage{algorithmicx}
+%\usepackage{algorithm2e}
+\usepackage{color}
+\usepackage{enumitem}
+
+% Load hyperref near the end of the preamble
+\usepackage[
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+]{hyperref}
+\usepackage{float}
+
+%% Define a new 'leo' style for the package that will use a smaller font.
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
+\makeatother
+%% Now actually use the newly defined style.
+\urlstyle{leo}
+
+%\usepackage{url} 
+%\doublespacing
+%\onehalfspacing
+\setstretch{1.55}
+
+\sloppy
+\frenchspacing
+%%% Fancy Header %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fancy Header Style Options
+\pagestyle{fancy}                       % Sets fancy header and footer
+\fancyfoot{}                            % Delete current footer settings
+\renewcommand{\chaptermark}[1]{         % Lower Case Chapter marker style
+\markboth{\chaptername\ \thechapter.\ #1}{}} %
+\renewcommand{\sectionmark}[1]{         % Lower case Section marker style
+\markright{\thesection.\ #1}}         %
+\fancyhead[LE,RO]{\bfseries \thepage}
+					% Page number (boldface) in left on even
+                                        % pages and right on odd pages
+\fancyhead[RE]{\bfseries\leftmark}      % Chapter in the right on even pages
+\fancyhead[LO]{\bfseries\rightmark}     % Section in the left on odd pages
+\renewcommand{\headrulewidth}{0.3pt}    % Width of head rule
+
+\fancypagestyle{plain}
+{
+    \setlength\textheight{3in}
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhead{}
+    \fancyfoot{}
+    %\fancyfoot[C]{\thepage}
+}
+
+\fancypagestyle{bibpage}
+{
+\fancyhead[LE,RO]{\bfseries \thepage}
+\fancyhead[RE]{}
+\fancyhead[LO]{}
+}
+
+%%% Clear Header %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Clear Header Style on the Last Empty Odd pages
+\makeatletter
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else%
+\hbox{}%
+\thispagestyle{empty}%              % Empty header styles
+\newpage%
+\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Set Paper Size to A4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Draft watermark %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{soul}
+\newcommand{\markchange}[1]{\hl {#1}}
+
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+   \DeclareGraphicsExtensions{.jpg, .jpeg, .png, .psd, .pdf, .eps}
+%\usepackage{type1cm}
+\usepackage{eso-pic}
+\usepackage{color}
+\usepackage{datetime}
+\definecolor{MyRed}{rgb}{0.85,0.58,0.58}
+
+\makeatletter
+\AddToShipoutPicture{%
+            \setlength{\@tempdimb}{.5\paperwidth}%
+            \setlength{\@tempdimc}{.95\paperheight}%
+            \setlength{\unitlength}{1pt}%
+            %\put(\strip@pt\@tempdimb,\strip@pt\@tempdimc){%
+        	%\makebox(0,0){\rotatebox{0}{\textcolor{MyRed}%
+        	%{\fontsize{.5cm}{.5cm}\selectfont{\bf {[DRAFT]} \today, \currenttime}}}}%
+            %}%
+}
+\makeatother
+
+
+
+\newcommand{\squishlist}{
+   \begin{list}{$\bullet$}
+    { \setlength{\itemsep}{0pt}      \setlength{\parsep}{3pt}
+      \setlength{\topsep}{3pt}       \setlength{\partopsep}{0pt}
+      \setlength{\leftmargin}{1.5em} \setlength{\labelwidth}{1em}
+      \setlength{\labelsep}{0.5em} } }
+
+\newcommand{\squishlisttwo}{
+   \begin{list}{$\bullet$}
+    { \setlength{\itemsep}{0pt}    \setlength{\parsep}{0pt}
+      \setlength{\topsep}{0pt}     \setlength{\partopsep}{0pt}
+      \setlength{\leftmargin}{2em} \setlength{\labelwidth}{1.5em}
+      \setlength{\labelsep}{0.5em} } }
+
+\newcommand{\squishend}{
+    \end{list}  }
+
+
+\renewcommand\floatpagefraction{.9}
+\renewcommand\topfraction{.9}
+\renewcommand\bottomfraction{.9}
+\renewcommand\textfraction{.1}
+
+
+

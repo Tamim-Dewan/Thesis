@@ -1,0 +1,522 @@
+
+\documentclass[conference]{IEEEtran}
+
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{url}
+
+\title{Problem Formulation for UAV-Assisted Post-Earthquake Response}
+
+\author{\IEEEauthorblockN{Working Thesis Draft}}
+
+\begin{document}
+
+\maketitle
+
+\section{Scenario and System Description}
+
+\subsection{Post-Earthquake Response Setting}
+
+\noindent{\Large\textbf{U}}nmanned aerial vehicles (UAVs) have become important tools in post-disaster response because they can rapidly collect information from hazardous or difficult-to-access areas~\cite{ref_uav_disaster_survey}, \cite{ref_sar_survey}, \cite{ref_pdsr}. Following a major earthquake, emergency operations are typically coordinated by a command center that allocates limited search-and-rescue (SAR), medical, logistics, and other response resources across the affected region.
+
+In this setting, scout UAVs are used primarily for reconnaissance and survivor localization~\cite{ref_pdsr}, \cite{ref_sar_survey}. Equipped with onboard RGB or thermal cameras, they can survey damaged areas and support human detection using computer-vision models such as YOLO and related deep-learning detectors~\cite{ref_thermal_survivor}, \cite{ref_yolo_sar}, \cite{ref_night_human}. UAV-based post-disaster search, real-time human detection from thermal imagery, and UAV-supported SAR applications have been studied in the literature~\cite{ref_pdsr}, \cite{ref_thermal_survivor}, \cite{ref_yolo_sar}, \cite{ref_night_human}.
+
+When a possible survivor is detected, the scout UAV transmits the observed location and supporting imagery to the command center~\cite{ref_yolo_sar}. Ground SAR teams remain responsible for physical rescue; however, damaged infrastructure, blocked access routes, unstable structures, and limited responder availability may delay their arrival at some reported survivor locations~\cite{ref_sar_survey}.
+
+The proposed system uses responder UAVs to reduce the effect of this delay. Responder UAVs deliver lightweight emergency supplies, such as drinking water, food, first-aid kits, oxygen masks, or other critical items, to selected survivor-assistance locations before ground SAR teams arrive~\cite{ref_sar_survey}, \cite{ref_delivery_survey}. These supply drops are intended as temporary assistance and do not replace physical rescue.
+
+\subsection{Scout and Responder UAV Roles}
+
+The model distinguishes between scout UAVs and responder UAVs because reconnaissance and delivery impose different operational requirements. Scout UAVs must cover large areas quickly and maintain sensing continuity~\cite{ref_pdsr}. Assigning relief payloads to these vehicles would increase carried weight and may reduce flight endurance, speed, and search coverage, since payload weight and battery limitations are central constraints in drone-delivery planning~\cite{ref_delivery_survey}, \cite{ref_drone_vrp}. Therefore, scout UAVs are assumed to detect and report potential survivor locations, while responder UAVs are assigned to supply-delivery missions.
+
+Responder UAVs operate only on locations that have been accepted by the command center as assistance tasks. A responder UAV may carry multiple relief parcels in one mission, and the parcels may differ in item type and weight. Multi-package UAV delivery and payload-carrying UAV platforms have been studied previously~\cite{ref_multipackage_uav}, \cite{ref_payload_platform}. In this work, such capability is represented through finite parcel-count, payload-weight, battery-energy, and flight-time limits~\cite{ref_delivery_survey}, \cite{ref_drone_vrp}.
+
+\subsection{Command-Center Task Generation}
+
+The command center converts UAV observations into optimization inputs through a task-generation process. First, the received image and location information are checked by a human operator or an AI-supported decision system. UAV imagery and learning-based disaster-response tools have been studied as mechanisms for situational assessment and rescue support~\cite{ref_uav_disaster_survey}, \cite{ref_pdsr}. This step filters uncertain observations and estimates the urgency of assistance associated with the reported location. In the formulation, this urgency assessment is represented by an operational severity score.
+
+Second, the command center identifies the required relief items for the accepted location. The need may include one or more item types, such as water, food, first-aid material, or oxygen support, and each item type may have a different required quantity. Once accepted, the location becomes a survivor-assistance task with a recorded service location, severity score, required item quantities, and operational state.
+
+The task state is necessary because the command center may receive more task reports than the responder fleet can serve immediately. Some tasks may remain pending, some may already be assigned to an active UAV, and some may be completed after supply delivery. The planning model therefore uses the latest accepted task records rather than treating all detections as immediately serviceable.
+
+\subsection{Joint Planning Need}
+
+A responder UAV may serve more than one survivor-assistance task in a single mission~\cite{ref_multipackage_uav}, \cite{ref_delivery_survey}. Consequently, the command center must decide not only which tasks should be served, but also which UAV should serve each selected task, in what order the selected locations should be visited, and which feasible three-dimensional route should be used. Since these decisions directly affect travel time, completion time, payload consumption, and battery use, task allocation and routing are considered jointly~\cite{ref_drone_vrp}, \cite{ref_delivery_survey}.
+
+The resulting planning problem is resource constrained. The number of available responder UAVs, their payload capacity, battery energy, flight time, and feasible airspace connections are limited, so all assistance tasks may not be served at the same time~\cite{ref_delivery_survey}, \cite{ref_drone_vrp}. Moreover, some survivor locations may require more urgent assistance than others. The purpose of the formulation is therefore to allocate tasks and plan UAV routes so that high-priority assistance can be delivered early while satisfying route, payload, and energy limitations.
+
+The next section formalizes this scenario as a joint task-allocation and three-dimensional routing optimization problem. The model selects task assignments, UAV routes, task completion times, relief-payload usage, and energy-feasible missions while preserving the operational distinction between scout UAV detection, command-center assessment, responder UAV delivery, and ground-team physical rescue.
+
+\section{Problem Formulation}
+
+\begin{center}
+\refstepcounter{table}
+\footnotesize
+\textsc{Table~\thetable}\\
+\textsc{Main Notation}\\[0.4ex]
+\renewcommand{\arraystretch}{1.04}
+\begin{tabular}{p{0.28\columnwidth}p{0.62\columnwidth}}
+\toprule
+\textbf{Symbol} & \textbf{Meaning}\\
+\midrule
+$\mathcal{I}(t)$ & Eligible survivor-assistance tasks at planning time $t$\\
+$\mathcal{U}(t)$ & Available responder UAVs at planning time $t$\\
+$\mathcal{R}$ & Relief-item types\\
+$\mathcal{N}$ & Feasible UAV waypoints in flyable 3D space\\
+$\mathcal{E}$ & Feasible directed flight links between waypoints\\
+$i,u,r$ & Task, UAV, and relief-item indices\\
+$m,n$ & Waypoint indices\\
+$x_{iu}$ & 1 if task $i$ is assigned to UAV $u$; 0 otherwise\\
+$y_{mnu}$ & 1 if UAV $u$ uses flight link $(m,n)$; 0 otherwise\\
+$s_i$ & Operational severity score of task $i$\\
+$t_i$ & Detection time of task $i$\\
+$T_{1/2}$ & Service-value half-life\\
+$v_i(\tau)$ & Time-dependent service value of task $i$ at time $\tau$\\
+$\delta_i$ & Delivery or service duration at task $i$\\
+$b_u^{\mathrm{s}}, b_u^{\mathrm{r}}$ & Logical start and return base nodes of UAV $u$\\
+$m_i$ & UAV-accessible drop-off waypoint for task $i$\\
+$\mathbf{p}_m$ & 3D coordinate of waypoint $m$\\
+$d_{mn}$ & 3D distance of flight link $(m,n)$\\
+$t_{mnu}$ & Travel time of UAV $u$ on link $(m,n)$\\
+$D_u,T_u$ & Total selected travel distance and travel time of UAV $u$\\
+$\tau_{mu},C_i$ & Arrival time at waypoint $m$ and completion time of task $i$\\
+$q_{ir}(t)$ & Remaining quantity of item type $r$ required by task $i$\\
+$w_r$ & Weight of one item of type $r$\\
+$K_u,W_u$ & Parcel-count and payload-weight capacities of UAV $u$\\
+$M_i(t),M_u^0$ & Relief mass of task $i$ and initial payload of UAV $u$\\
+$L_{mnu}$ & Payload mass carried by UAV $u$ on link $(m,n)$\\
+$E_u(t),E_u^{\mathrm{res}}$ & Available and reserve battery energy of UAV $u$\\
+$E_u^{\mathrm{req}}$ & Required mission energy of UAV $u$\\
+$a_{mn}$ & Positive ascent on flight link $(m,n)$\\
+$\alpha_u,\beta_u,\gamma_u$ & Energy coefficients for UAV $u$\\
+$P_u^{\mathrm{srv}}$ & Service or hovering power of UAV $u$\\
+$\mathcal{T}_u^{\mathrm{rem}}(t_r)$ & Uncompleted tasks of UAV $u$ at recourse time $t_r$\\
+$J_{ui}^{\mathrm{old}},J_{ui}^{\mathrm{new}}$ & Remaining mission value before and after replacement\\
+$\Delta J_{ui}$ & Objective gain from replacing task $i$\\
+$\mathcal{S}(t_r),\mathcal{Q}(t_r)$ & Feasible replacements and waiting task queue\\
+\bottomrule
+\end{tabular}
+\end{center}
+\newpage
+
+\subsection{Decision Variables}
+
+At planning time $t$, the command center considers the eligible survivor-assistance task set $\mathcal{I}(t)$ and the available responder-UAV set $\mathcal{U}(t)$. Task assignment is represented by
+\begin{equation}
+x_{iu}
+=
+\begin{cases}
+1, & \text{if task }i\text{ is assigned to UAV }u,\\
+0, & \text{otherwise},
+\end{cases}
+\end{equation}
+
+The feasible flight environment is described through a waypoint set $\mathcal{N}$ and a directed flight-link set $\mathcal{E}$. Waypoints are placed only in flyable parts of the three-dimensional operating space; blocked or unsafe volumes, including buildings, rubble, and no-fly areas, are excluded. Each waypoint $m\in\mathcal{N}$ has coordinate $\mathbf{p}_m=(p_m^x,p_m^y,p_m^z)$ and may denote a UAV base, an intermediate flight point, or an accessible task drop-off location. A link belongs to $\mathcal{E}$ only when the straight-line segment between its endpoints remains within flyable space. Route selection is represented by
+\begin{equation}
+y_{mnu}
+=
+\begin{cases}
+1, & \text{if UAV }u\text{ travels from waypoint }m\text{ to }n,\\
+0, & \text{otherwise}.
+\end{cases}
+\end{equation}
+
+Arrival and completion times are tracked by $\tau_{mu}\geq0$ and $C_i\geq0$, respectively, where $\tau_{mu}$ is the arrival time of UAV $u$ at waypoint $m$ and $C_i$ is the completion time of task $i$. The carried-payload variable
+\[
+L_{mnu}\geq 0
+\]
+denotes the relief-payload mass carried by UAV $u$ while flying from waypoint $m$ to waypoint $n$.
+
+\subsection{Time-Dependent Service Value}
+
+Each accepted task receives an operational severity score from the command center. For task $i$, $s_i\in[0,1]$ denotes this score, with larger values indicating greater urgency, and $t_i$ denotes the detection time measured from the earthquake occurrence. The service value assigned to task $i$ at time $\tau$ is
+\begin{equation}
+v_i(\tau)
+=
+s_i
+e^{-\frac{\ln 2}{T_{1/2}}(\tau-t_i)},
+\qquad
+\tau\geq t_i.
+\end{equation}
+
+At the detection time,
+\begin{equation}
+v_i(t_i)=s_i,
+\end{equation}
+and after one service-value half-life,
+\begin{equation}
+v_i(t_i+T_{1/2})
+=
+\frac{s_i}{2}.
+\end{equation}
+
+After a task is created, its severity score remains fixed, but the benefit of serving it is reduced as completion is delayed. The parameter $T_{1/2}$ is a common half-life for service value: after this delay, the value associated with the task is reduced by one half. This choice reflects the golden-hour idea that earlier assistance is preferable, while avoiding any claim that $v_i(\tau)$ is a survival probability.
+
+\subsection{Joint Task Allocation and Three-Dimensional Routing}
+
+For timing and route accounting, the base of UAV $u$ is written as two logical nodes: a start node $b_u^{\mathrm{s}}$ and a return node $b_u^{\mathrm{r}}$. They refer to the same physical base station:
+\begin{equation}
+\mathbf{p}_{b_u^{\mathrm{s}}}
+=
+\mathbf{p}_{b_u^{\mathrm{r}}},
+\qquad
+\forall u\in\mathcal{U}(t).
+\end{equation}
+
+For task $i$, $m_i\in\mathcal{N}$ is the feasible drop-off waypoint used by the responder UAV. This point need not coincide with the detected survivor coordinate: a survivor may be inside rubble, a damaged structure, or another blocked region. The waypoint $m_i$ is therefore an accessible location from which the required relief parcel can be delivered or released safely. A responder UAV starts from its start-base node, visits the drop-off waypoints of its assigned tasks, and finishes at its return-base node. The visit order determines the service order.
+
+Each task can be assigned to at most one responder UAV:
+\begin{equation}
+\sum_{u\in\mathcal{U}(t)}
+x_{iu}
+\leq 1,
+\qquad
+\forall i\in\mathcal{I}(t).
+\end{equation}
+An unassigned task is not served in the current planning step; it stays pending until a later planning or recourse decision.
+
+If UAV $u$ is assigned at least one task, the selected route must leave its start-base node:
+\begin{equation}
+\sum_{i\in\mathcal{I}(t)}
+x_{iu}
+\leq
+|\mathcal{I}(t)|
+\sum_{n:(b_u^{\mathrm{s}},n)\in\mathcal{E}}
+y_{b_u^{\mathrm{s}},n,u},
+\qquad
+\forall u\in\mathcal{U}(t).
+\end{equation}
+
+Similarly, if UAV $u$ is assigned at least one task, the selected route must enter its return-base node:
+\begin{equation}
+\sum_{i\in\mathcal{I}(t)}
+x_{iu}
+\leq
+|\mathcal{I}(t)|
+\sum_{m:(m,b_u^{\mathrm{r}})\in\mathcal{E}}
+y_{m,b_u^{\mathrm{r}},u},
+\qquad
+\forall u\in\mathcal{U}(t).
+\end{equation}
+
+\subsection{Travel and Task Completion Time}
+
+Using the waypoint coordinates defined above, the 3D travel distance for each feasible flight link $(m,n)\in\mathcal{E}$ is
+\begin{equation}
+d_{mn}
+=
+\sqrt{
+(p_m^x-p_n^x)^2
++
+(p_m^y-p_n^y)^2
++
+(p_m^z-p_n^z)^2
+}.
+\end{equation}
+
+Let $\nu_u$ denote the cruise speed of UAV $u$. The flight-link travel time for UAV $u$ is
+\begin{equation}
+t_{mnu}
+=
+\frac{d_{mn}}{\nu_u}.
+\end{equation}
+
+The totals below are taken over the complete selected mission route, so the outbound leg, movement between selected drop-off waypoints, and return-to-base leg are all included:
+\begin{equation}
+D_u
+=
+\sum_{(m,n)\in\mathcal{E}}
+d_{mn}y_{mnu},
+\end{equation}
+and
+\begin{equation}
+T_u
+=
+\sum_{(m,n)\in\mathcal{E}}
+t_{mnu}y_{mnu}.
+\end{equation}
+
+Along any selected flight link, the next arrival time must include the travel time from the previous waypoint:
+\begin{equation}
+y_{mnu}=1
+\Rightarrow
+\tau_{nu}
+\geq
+\tau_{mu}+t_{mnu}.
+\end{equation}
+
+If $\delta_i$ is the delivery or service duration at task $i$, then an assigned task is completed after the UAV reaches its drop-off waypoint and finishes this service:
+\begin{equation}
+C_i
+=
+\tau_{m_i u}+\delta_i,
+\qquad
+\text{if }x_{iu}=1.
+\end{equation}
+
+\subsection{Relief Capacity and Payload Evolution}
+
+Relief requirements are indexed by the item-type set $\mathcal{R}$. At time $t$, task $i$ requires $q_{ir}(t)$ remaining items of type $r$, and one item of that type weighs $w_r$. UAV $u$ can carry at most $K_u$ parcels and total payload weight $W_u$. The parcel-count capacity is
+\begin{equation}
+\sum_{i\in\mathcal{I}(t)}
+\sum_{r\in\mathcal{R}}
+q_{ir}(t)x_{iu}
+\leq
+K_u.
+\end{equation}
+
+The payload-weight capacity is
+\begin{equation}
+\sum_{i\in\mathcal{I}(t)}
+\sum_{r\in\mathcal{R}}
+w_r q_{ir}(t)x_{iu}
+\leq
+W_u.
+\end{equation}
+
+Define the total relief mass required by task $i$ as
+\begin{equation}
+M_i(t)
+=
+\sum_{r\in\mathcal{R}}
+w_r q_{ir}(t),
+\end{equation}
+and the initial payload assigned to UAV $u$ as
+\begin{equation}
+M_u^0
+=
+\sum_{i\in\mathcal{I}(t)}
+M_i(t)x_{iu}.
+\end{equation}
+
+On a selected flight link, the carried payload variable
+\[
+L_{mnu}\geq 0
+\]
+is the relief-payload mass carried by UAV $u$ while flying from waypoint $m$ to waypoint $n$. It can be positive only on a selected route link:
+\begin{equation}
+L_{mnu}
+\leq
+W_u y_{mnu}.
+\end{equation}
+
+At departure, the UAV carries the full mass assigned to its mission:
+\begin{equation}
+\sum_{n:(b_u^{\mathrm{s}},n)\in\mathcal{E}}
+L_{b_u^{\mathrm{s}},n,u}
+=
+M_u^0.
+\end{equation}
+
+After task $i$ is served, the carried mass is reduced by the relief mass delivered at that drop-off waypoint:
+\begin{equation}
+\sum_{n:(m_i,n)\in\mathcal{E}}
+L_{m_i n u}
+=
+\sum_{m:(m,m_i)\in\mathcal{E}}
+L_{m m_i u}
+-
+M_i(t)x_{iu}.
+\end{equation}
+
+\subsection{Energy and Battery Feasibility}
+
+Battery feasibility is checked against the available energy $E_u(t)$ while keeping reserve energy $E_u^{\mathrm{res}}$ unused for planned service. For each feasible flight link $(m,n)$, the positive ascent is
+\begin{equation}
+a_{mn}
+=
+\max(0,p_n^z-p_m^z).
+\end{equation}
+
+With UAV-specific coefficients $\alpha_u$, $\beta_u$, and $\gamma_u$ for baseline travel, payload-distance travel, and positive ascent, and service or hovering power $P_u^{\mathrm{srv}}$, the required mission energy is
+\begin{equation}
+\begin{aligned}
+E_u^{\mathrm{req}}
+=&
+\sum_{(m,n)\in\mathcal{E}}
+\alpha_u d_{mn}y_{mnu}
++\sum_{(m,n)\in\mathcal{E}}
+\beta_u d_{mn}L_{mnu}\\
+&+\sum_{(m,n)\in\mathcal{E}}
+\gamma_u a_{mn}y_{mnu}
++\sum_{i\in\mathcal{I}(t)}
+P_u^{\mathrm{srv}}\delta_i x_{iu}.
+\end{aligned}
+\end{equation}
+
+The four terms account for baseline flight, the effect of carried payload, positive-ascent energy, and service or hovering energy at assigned tasks. Because the selected route includes the return-to-base leg, this energy calculation also includes the cost of returning to the UAV base.
+
+A mission is feasible only if the required energy stays below the usable battery energy:
+\begin{equation}
+E_u^{\mathrm{req}}
+\leq
+E_u(t)-E_u^{\mathrm{res}}.
+\end{equation}
+
+The reserve term leaves a safety margin for operational uncertainty and safe recovery.
+
+\subsection{Optimization Objective}
+
+The planning objective gives priority to tasks that can be served with high time-dependent value:
+\begin{equation}
+\boxed{
+\max
+\sum_{i\in\mathcal{I}(t)}
+\sum_{u\in\mathcal{U}(t)}
+x_{iu}v_i(C_i)
+}.
+\end{equation}
+
+Using the service-value model,
+\begin{equation}
+v_i(C_i)
+=
+s_i
+e^{-\frac{\ln2}{T_{1/2}}(C_i-t_i)}.
+\end{equation}
+
+The exponential term is kept deliberately because it gives a smooth penalty for delayed assistance. With binary assignment and routing decisions and this nonlinear value function, the formulation is a mixed-integer nonlinear programming problem.
+
+\subsection{Task-Replacement Recourse}
+
+\subsubsection{Recourse Trigger}
+
+If all responder UAVs are already deployed, a newly identified high-priority task cannot be sent to an idle UAV. The recourse rule handles this case by checking whether the new task is important enough to replace one uncompleted task in an active mission.
+
+Let $n$ denote the newly arrived task and let $t_r$ denote the recourse decision time. For each active UAV, the completed part of the mission remains fixed. Only the uncompleted part of the mission may be modified.
+
+For UAV $u$, define
+\[
+\mathcal{T}_u^{\mathrm{rem}}(t_r)
+\]
+as the uncompleted tasks in its current mission. Each candidate recourse action replaces one task $i\in\mathcal{T}_u^{\mathrm{rem}}(t_r)$ with the new task $n$.
+
+\subsubsection{Replacement Evaluation}
+
+Before replacement, the remaining mission value for UAV $u$ is
+\begin{equation}
+J_{ui}^{\mathrm{old}}
+=
+\sum_{j\in\mathcal{T}_u^{\mathrm{rem}}(t_r)}
+v_j(C_j^{\mathrm{old}}).
+\end{equation}
+
+After task $i$ is replaced by task $n$, the remaining route is recalculated. If $C_j^{\mathrm{new}}$ is the completion time of task $j$ in the modified mission, the new remaining value is
+\begin{equation}
+J_{ui}^{\mathrm{new}}
+=
+\sum_{j\in(\mathcal{T}_u^{\mathrm{rem}}(t_r)\setminus\{i\})\cup\{n\}}
+v_j(C_j^{\mathrm{new}}).
+\end{equation}
+
+The gain from the replacement is
+\begin{equation}
+\boxed{
+\Delta J_{ui}
+=
+J_{ui}^{\mathrm{new}}
+-
+J_{ui}^{\mathrm{old}}
+}.
+\end{equation}
+
+This gain includes both the value of adding the new task and the timing changes imposed on the remaining route.
+
+\subsubsection{Replacement Feasibility}
+
+A replacement is allowed only when the active UAV already has the relief items required by the new task. If $I_{ur}(t_r)$ is the onboard quantity of item type $r$ carried by UAV $u$ at time $t_r$, then
+\begin{equation}
+q_{nr}(t_r)
+\leq
+I_{ur}(t_r),
+\qquad
+\forall r\in\mathcal{R}.
+\end{equation}
+
+The modified mission must also remain energy feasible. Let $E_{ui}^{\mathrm{new}}$ be the energy required after replacing task $i$ by task $n$; then
+\begin{equation}
+E_{ui}^{\mathrm{new}}
+\leq
+E_u(t_r)-E_u^{\mathrm{res}},
+\end{equation}
+and its recalculated route must use feasible flight links in $\mathcal{E}$ and return safely to the UAV base.
+
+\subsubsection{Best Replacement and Queue Rule}
+
+Among all feasible one-for-one replacements in $\mathcal{S}(t_r)$, the selected replacement is the one with the largest gain:
+\begin{equation}
+\boxed{
+(u^*,i^*)
+=
+\arg\max_{(u,i)\in\mathcal{S}(t_r)}
+\left\{
+\Delta J_{ui}
+\right\}.
+}
+\end{equation}
+
+If
+\begin{equation}
+\Delta J_{u^*i^*}>0,
+\end{equation}
+the replacement is accepted. The new task $n$ is assigned to UAV $u^*$, and the replaced task $i^*$ is removed from the current mission.
+
+Let
+\[
+\mathcal{Q}(t_r)
+\]
+denote the set of unserved tasks waiting for future assignment. If a beneficial replacement is selected, the replaced task is returned to the waiting queue:
+\begin{equation}
+\mathcal{Q}(t_r^+)
+=
+\mathcal{Q}(t_r)\cup\{i^*\}.
+\end{equation}
+
+If no feasible replacement produces a positive objective gain, the current UAV missions remain unchanged and the newly arrived task is added to the waiting queue:
+\begin{equation}
+\mathcal{Q}(t_r^+)
+=
+\mathcal{Q}(t_r)\cup\{n\}.
+\end{equation}
+
+This recourse rule is intentionally limited: it updates one active mission when doing so improves the objective, rather than re-optimizing the entire responder fleet.
+
+\begin{thebibliography}{1}
+
+\bibitem{ref_uav_disaster_survey}
+C.~T. Recchiuto and A.~Sgorbissa, ``Post-disaster assessment with unmanned aerial vehicles: A survey on practical implementations and research approaches,'' \emph{Journal of Field Robotics}, vol.~35, no.~4, pp. 459--490, 2018, doi: 10.1002/rob.21756.
+
+\bibitem{ref_sar_survey}
+M.~Lyu, Y.~Zhao, C.~Huang, and H.~Huang, ``Unmanned aerial vehicles for search and rescue: A survey,'' \emph{Remote Sensing}, vol.~15, no.~13, Art. no. 3266, 2023, doi: 10.3390/rs15133266.
+
+\bibitem{ref_pdsr}
+A.~A. Abdellatif \emph{et al.}, ``PDSR: Efficient UAV deployment for swift and accurate post-disaster search and rescue,'' \emph{IEEE Internet of Things Magazine}, vol.~8, no.~3, pp. 149--156, May 2025, doi: 10.1109/IOTM.001.2400139.
+
+\bibitem{ref_thermal_survivor}
+S.~Zade, V.~Tidke, S.~Gawande, C.~Dhule, R.~Agrawal, and N.~C. Morris, ``Real-time survivor detection in UAV thermal imagery based on deep learning,'' in \emph{Proc. IEEE International Conference on Blockchain and Distributed Systems Security (ICBDS)}, 2023, pp. 1--6, doi: 10.1109/ICBDS58040.2023.10346254.
+
+\bibitem{ref_yolo_sar}
+Sruthi \emph{et al.}, ``YOLOv5 based open-source UAV for human detection during search and rescue (SAR),'' in \emph{Proc. International Conference on Advances in Computing and Communications (ICACC)}, 2021, doi: 10.1109/ICACC-202152719.2021.9708269.
+
+\bibitem{ref_night_human}
+W.~Angkhem and S.~Tantrairatn, ``Night-time human detection from UAV,'' in \emph{Proc. 7th International Conference on Business and Industrial Research (ICBIR)}, 2022, pp. 551--555, doi: 10.1109/ICBIR54589.2022.9786515.
+
+\bibitem{ref_multipackage_uav}
+D.~Duo, A.~Kong, Q.~Wu, X.~Yuan, and Y.~Li, ``Joint path and pick-up design for connectivity-aware UAV-enabled multi-package delivery,'' \emph{IEEE Transactions on Intelligent Transportation Systems}, vol.~25, no.~12, pp. 20017--20031, Dec. 2024, doi: 10.1109/TITS.2024.3467329.
+
+\bibitem{ref_payload_platform}
+H.~Liu, J.~Xu, X.~Liu, and X.~Li, ``Wind-aware service provision strategy for multi-package drone delivery,'' in \emph{Proc. IEEE International Conference on Web Services (ICWS)}, 2024, pp. 1359--1361, doi: 10.1109/ICWS62655.2024.00169.
+
+\bibitem{ref_delivery_survey}
+G.~Attenni, V.~Arrigoni, N.~Bartolini, and G.~Maselli, ``Drone-based delivery systems: A survey on route planning,'' \emph{IEEE Access}, vol.~11, pp. 123476--123504, 2023, doi: 10.1109/ACCESS.2023.3329195.
+
+\bibitem{ref_drone_vrp}
+K.~Dorling, J.~Heinrichs, G.~G. Messier, and S.~Magierowski, ``Vehicle routing problems for drone delivery,'' \emph{IEEE Transactions on Systems, Man, and Cybernetics: Systems}, vol.~47, no.~1, pp. 70--85, Jan. 2017, doi: 10.1109/TSMC.2016.2582745.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,532 @@
+\chapter{Problem Formulation}
+\label{chap:problem_formulation}
+
+This chapter formulates the responder-UAV planning problem used in the
+Proactive Golden-Hour Bridge Model (PGBM). The formulation focuses on the
+delivery layer after survivor reports have already been accepted by the
+command center. Scout-UAV detection, human or AI-assisted verification, and
+physical rescue by ground SAR teams are treated as external processes.
+
+The responder planner decides which accepted survivor-assistance tasks should
+be served in the current planning step, which UAV should serve each selected
+task, which feasible three-dimensional route should be followed, and whether
+the resulting missions satisfy payload and battery limits. The formulation
+also includes a limited recourse rule for newly arriving tasks
+when all responder UAVs are already committed.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.86\textwidth]{pgbm_system_architecture.png}
+    \caption{Overall PGBM system architecture showing scout-UAV detection,
+    command-center task and UAV-state management, online responder assignment,
+    energy-aware route planning, and mission-state feedback.}
+    \label{fig:pgbm_system_architecture}
+\end{figure}
+
+\clearpage
+\section{Main Notation}
+
+Table~\ref{tab:main_notation} summarizes the main notation used throughout
+the formulation. Key symbols are also briefly reintroduced near the
+corresponding equations where needed for clarity.
+
+\begin{longtable}{p{0.23\textwidth}p{0.67\textwidth}}
+\caption{Main notation used in the PGBM formulation.}
+\label{tab:main_notation}\\
+\hline
+\textbf{Symbol} & \textbf{Meaning}\\
+\hline
+\endfirsthead
+\hline
+\textbf{Symbol} & \textbf{Meaning}\\
+\hline
+\endhead
+$\mathcal{I}(t)$ & Eligible survivor-assistance tasks at planning time $t$\\
+$\mathcal{U}(t)$ & Available responder UAVs at planning time $t$\\
+$\mathcal{R}$ & Relief-item types\\
+$\mathcal{N}$ & Feasible UAV waypoints in the flyable 3D operating space\\
+$\mathcal{E}$ & Feasible directed flight links between waypoints\\
+$i,u,r$ & Task, UAV, and relief-item indices\\
+$m,n$ & Waypoint indices\\
+$x_{iu}$ & Binary task-assignment decision\\
+$y_{mnu}$ & Binary flight-link selection decision\\
+$s_i$ & Operational severity score of task $i$\\
+$t_i$ & Detection time of task $i$\\
+$\lambda$ & Common temporal decay rate of service value\\
+$v_i(\tau)$ & Time-dependent service value of task $i$ at time $\tau$\\
+$\delta_i$ & Delivery or service duration at task $i$\\
+$b_u^{\mathrm{s}}, b_u^{\mathrm{r}}$ & Logical start and return base nodes of UAV $u$\\
+$m_i$ & UAV-accessible drop-off waypoint for task $i$\\
+$\mathbf{p}_m$ & 3D coordinate of waypoint $m$\\
+$d_{mn}$ & 3D distance of flight link $(m,n)$\\
+$t_{mnu}$ & Travel time of UAV $u$ on link $(m,n)$\\
+$D_u,T_u$ & Total selected travel distance and travel time of UAV $u$\\
+$\tau_{mu},C_i$ & Arrival time at waypoint $m$ and completion time of task $i$\\
+$q_{ir}(t)$ & Remaining quantity of item type $r$ required by task $i$\\
+$w_r$ & Weight of one item of type $r$\\
+$K_u,W_u$ & Parcel-count and payload-weight capacities of UAV $u$\\
+$M_i(t),M_u^0$ & Relief mass of task $i$ and initial payload of UAV $u$\\
+$L_{mnu}$ & Payload mass carried by UAV $u$ on link $(m,n)$\\
+$E_u(t),E_u^{\mathrm{res}}$ & Available and reserve battery energy of UAV $u$\\
+$E_u^{\mathrm{req}}$ & Required mission energy of UAV $u$\\
+$a_{mn}$ & Positive ascent on flight link $(m,n)$\\
+$\alpha_u,\beta_u,\gamma_u$ & Energy coefficients for UAV $u$\\
+$P_u^{\mathrm{srv}}$ & Service or hovering power of UAV $u$\\
+$\mathcal{T}_u^{\mathrm{rem}}(t_r)$ & Uncompleted tasks of UAV $u$ at recourse time $t_r$\\
+$J_{ui}^{\mathrm{old}},J_{ui}^{\mathrm{new}}$ & Remaining mission value before and after replacing task $i$\\
+$\Delta J_{ui}$ & Objective gain from replacing task $i$\\
+$\mathcal{S}(t_r),\mathcal{Q}(t_r)$ & Feasible replacement set and waiting task queue\\
+\hline
+\end{longtable}
+
+\clearpage
+\section{Decision Variables}
+
+At planning time $t$, the command center considers a set of eligible tasks
+$\mathcal{I}(t)$ and a set of available responder UAVs $\mathcal{U}(t)$. The
+task-assignment decision is
+\begin{equation}
+x_{iu}
+=
+\begin{cases}
+1, & \text{if task }i\text{ is assigned to UAV }u,\\
+0, & \text{otherwise}.
+\end{cases}
+\end{equation}
+
+The feasible flight environment is represented by a waypoint set
+$\mathcal{N}$ and a directed flight-link set $\mathcal{E}$. A waypoint is a
+candidate UAV position in flyable 3D space, and each waypoint $m$ has
+coordinate $\mathbf{p}_m=(p_m^x,p_m^y,p_m^z)$. Buildings, rubble, unsafe
+structures, and no-fly volumes are excluded when these waypoints and flight
+links are constructed. A flight link $(m,n)$ is included in $\mathcal{E}$ only
+if the straight segment between the two waypoints remains in flyable space.
+The routing decision is
+\begin{equation}
+y_{mnu}
+=
+\begin{cases}
+1, & \text{if UAV }u\text{ travels from waypoint }m\text{ to }n,\\
+0, & \text{otherwise}.
+\end{cases}
+\end{equation}
+
+The continuous variable $\tau_{mu}$ denotes the arrival time of UAV $u$ at
+waypoint $m$, while $C_i$ represents the completion time of task $i$. The
+variable $L_{mnu}$ represents the payload mass carried by UAV $u$ while
+traversing flight link $(m,n)$. These continuous variables satisfy
+\begin{equation}
+\tau_{mu}\geq 0,\qquad C_i\geq 0,\qquad L_{mnu}\geq 0.
+\end{equation}
+
+\section{Time-Dependent Service Value}
+\label{sec:service_value}
+
+Each accepted survivor-assistance task $i$ is assigned an operational severity
+score $s_i\in[0,1]$ by the command center, where a larger value represents
+higher operational priority. PGBM treats this severity score as an input rather
+than estimating it. Let $t_i$ denote the detection time of task $i$, measured
+from the earthquake occurrence. The service value of the task at time $\tau$ is
+defined as
+\begin{equation}
+v_i(\tau)
+=
+s_i e^{-\lambda(\tau-t_i)},
+\qquad
+\tau\geq t_i,\quad \lambda>0.
+\end{equation}
+
+At the detection time,
+\begin{equation}
+v_i(t_i)=s_i,
+\end{equation}
+after which the service value decreases continuously as assistance is delayed.
+
+The parameter $\lambda$ is the common proportional decay rate; when time is
+measured in minutes, its unit is $\mathrm{min}^{-1}$. The same proportional
+decay rate is used for all severity levels, so severity determines the initial
+task value while delay determines how that value decreases over time.
+Consequently, at the same delay, a higher-severity task remains at least as
+valuable as a lower-severity task. Tasks with different delays may nevertheless
+have different current values, allowing the planner to account for both
+severity and waiting time. The service value is an operational priority measure
+and should not be interpreted as a probability of survival. The decay parameter
+is calibrated experimentally in Section~\ref{sec:temporal_decay_experiment}.
+
+\section{Optimization Problem}
+
+The objective of the responder planner is to maximize the total
+time-dependent service value obtained from the tasks served in the current
+planning step:
+\begin{equation}
+\max
+\sum_{i\in\mathcal{I}(t)}
+\sum_{u\in\mathcal{U}(t)}
+x_{iu}v_i(C_i).
+\end{equation}
+
+Using the service-value model defined in Section~\ref{sec:service_value},
+\begin{equation}
+v_i(C_i)
+=
+s_i
+e^{-\lambda(C_i-t_i)}.
+\end{equation}
+
+A task contributes to the objective only when it is assigned to a responder
+UAV. Tasks not selected in the current planning step contribute zero value and
+remain pending for later consideration. Because service value decreases with
+completion delay, the objective encourages the planner to serve valuable tasks
+as early as possible while still respecting routing and resource constraints.
+The exponential term makes the objective nonlinear, while the assignment and
+routing decisions are binary. The resulting formulation is therefore a
+mixed-integer nonlinear optimization problem. The constraints of the model are
+listed in the following subsections as C1, C2, and so on.
+
+\section{Joint Task Allocation and Three-Dimensional Routing}
+
+For route accounting, the base station of UAV $u$ is written as a logical
+start node $b_u^{\mathrm{s}}$ and a logical return node $b_u^{\mathrm{r}}$.
+Both nodes refer to the same physical base location:
+
+\noindent\textbf{C1: Same-base return condition.}
+\begin{equation*}
+\mathbf{p}_{b_u^{\mathrm{s}}}
+=
+\mathbf{p}_{b_u^{\mathrm{r}}},
+\qquad
+\forall u\in\mathcal{U}(t).
+\end{equation*}
+
+For task $i$, $m_i\in\mathcal{N}$ denotes the UAV-accessible drop-off
+waypoint. This point may differ from the detected survivor coordinate. For
+example, if the survivor is inside rubble or a damaged structure, the UAV may
+not be able to reach the exact survivor position. In that case, $m_i$ is a
+nearby feasible waypoint from which the relief parcel can be delivered or
+released safely.
+
+Each task can be assigned to at most one responder UAV:
+
+\noindent\textbf{C2: Single-assignment condition.}
+\begin{equation*}
+\sum_{u\in\mathcal{U}(t)}
+x_{iu}
+\leq 1,
+\qquad
+\forall i\in\mathcal{I}(t).
+\end{equation*}
+If a task is not assigned in the current planning step, it remains pending and
+can be considered again later.
+
+If UAV $u$ is assigned one or more tasks, its selected route must leave its
+own start-base node:
+
+\noindent\textbf{C3: Departure-from-base condition.}
+\begin{equation*}
+\sum_{i\in\mathcal{I}(t)}
+x_{iu}
+\leq
+|\mathcal{I}(t)|
+\sum_{n:(b_u^{\mathrm{s}},n)\in\mathcal{E}}
+y_{b_u^{\mathrm{s}},n,u},
+\qquad
+\forall u\in\mathcal{U}(t).
+\end{equation*}
+
+The same mission must also return to the corresponding return-base node:
+
+\noindent\textbf{C4: Return-to-base condition.}
+\begin{equation*}
+\sum_{i\in\mathcal{I}(t)}
+x_{iu}
+\leq
+|\mathcal{I}(t)|
+\sum_{m:(m,b_u^{\mathrm{r}})\in\mathcal{E}}
+y_{m,b_u^{\mathrm{r}},u},
+\qquad
+\forall u\in\mathcal{U}(t).
+\end{equation*}
+
+\section{Travel and Task Completion Time}
+
+For each feasible flight link $(m,n)\in\mathcal{E}$, the 3D travel distance is
+\begin{equation}
+d_{mn}
+=
+\sqrt{
+(p_m^x-p_n^x)^2
++
+(p_m^y-p_n^y)^2
++
+(p_m^z-p_n^z)^2
+}.
+\end{equation}
+
+Let $\nu_u$ denote the cruise speed of UAV $u$. The corresponding travel time
+on link $(m,n)$ is
+\begin{equation}
+t_{mnu}
+=
+\frac{d_{mn}}{\nu_u}.
+\end{equation}
+
+The total selected travel distance and travel time for UAV $u$ are
+\begin{equation}
+D_u
+=
+\sum_{(m,n)\in\mathcal{E}}
+d_{mn}y_{mnu},
+\end{equation}
+and
+\begin{equation}
+T_u
+=
+\sum_{(m,n)\in\mathcal{E}}
+t_{mnu}y_{mnu}.
+\end{equation}
+These sums include the departure from base, travel between selected drop-off
+waypoints, and the return-to-base link.
+
+Along a selected flight link, arrival time must increase by at least the
+corresponding travel time:
+
+\noindent\textbf{C5: Selected-link timing condition.}
+\begin{equation*}
+y_{mnu}=1
+\Rightarrow
+\tau_{nu}
+\geq
+\tau_{mu}+t_{mnu}.
+\end{equation*}
+
+If task $i$ is assigned to UAV $u$, its completion time is the arrival time at
+the drop-off waypoint plus the service duration:
+
+\noindent\textbf{C6: Task-completion time condition.}
+\begin{equation*}
+C_i
+=
+\tau_{m_i u}+\delta_i,
+\qquad
+\text{if }x_{iu}=1.
+\end{equation*}
+
+\section{Relief Capacity and Payload Evolution}
+
+Let $\mathcal{R}$ be the set of relief-item types. At time $t$, task $i$
+requires $q_{ir}(t)$ remaining items of type $r$, and each item of type $r$
+has weight $w_r$. UAV $u$ can carry at most $K_u$ parcels:
+
+\noindent\textbf{C7: Parcel-count capacity condition.}
+\begin{equation*}
+\sum_{i\in\mathcal{I}(t)}
+\sum_{r\in\mathcal{R}}
+q_{ir}(t)x_{iu}
+\leq
+K_u.
+\end{equation*}
+
+The same selected load must also satisfy the payload-weight capacity:
+
+\noindent\textbf{C8: Payload-weight capacity condition.}
+\begin{equation*}
+\sum_{i\in\mathcal{I}(t)}
+\sum_{r\in\mathcal{R}}
+w_r q_{ir}(t)x_{iu}
+\leq
+W_u.
+\end{equation*}
+
+The relief mass required by task $i$ is
+\begin{equation}
+M_i(t)
+=
+\sum_{r\in\mathcal{R}}
+w_r q_{ir}(t),
+\end{equation}
+and the initial payload assigned to UAV $u$ is
+\begin{equation}
+M_u^0
+=
+\sum_{i\in\mathcal{I}(t)}
+M_i(t)x_{iu}.
+\end{equation}
+
+The payload carried on a flight link can be positive only if that link is
+selected:
+
+\noindent\textbf{C9: Selected-link payload condition.}
+\begin{equation*}
+L_{mnu}
+\leq
+W_u y_{mnu}.
+\end{equation*}
+
+At departure, the UAV carries the complete relief mass assigned to its
+mission:
+
+\noindent\textbf{C10: Initial payload condition.}
+\begin{equation*}
+\sum_{n:(b_u^{\mathrm{s}},n)\in\mathcal{E}}
+L_{b_u^{\mathrm{s}},n,u}
+=
+M_u^0.
+\end{equation*}
+
+After task $i$ is served, the carried payload decreases by the mass delivered
+at that drop-off waypoint:
+
+\noindent\textbf{C11: Payload-reduction condition.}
+\begin{equation*}
+\sum_{n:(m_i,n)\in\mathcal{E}}
+L_{m_i n u}
+=
+\sum_{m:(m,m_i)\in\mathcal{E}}
+L_{m m_i u}
+-
+M_i(t)x_{iu}.
+\end{equation*}
+
+\section{Energy and Battery Feasibility}
+
+Battery feasibility is checked against the available energy $E_u(t)$ while
+keeping reserve energy $E_u^{\mathrm{res}}$ unused for planned service. For
+each feasible flight link $(m,n)$, positive ascent is
+\begin{equation}
+a_{mn}
+=
+\max(0,p_n^z-p_m^z).
+\end{equation}
+
+The required mission energy is modeled as
+\begin{equation}
+\begin{aligned}
+E_u^{\mathrm{req}}
+=&
+\sum_{(m,n)\in\mathcal{E}}
+\alpha_u d_{mn}y_{mnu}
++
+\sum_{(m,n)\in\mathcal{E}}
+\beta_u d_{mn}L_{mnu}
+\\
+&+
+\sum_{(m,n)\in\mathcal{E}}
+\gamma_u a_{mn}y_{mnu}
++
+\sum_{i\in\mathcal{I}(t)}
+P_u^{\mathrm{srv}}\delta_i x_{iu}.
+\end{aligned}
+\end{equation}
+
+The four terms represent baseline travel energy, payload-related travel
+energy, positive-ascent energy, and service or hovering energy. Since the
+selected route includes the return-to-base link, the energy required for safe
+return is included in the same expression.
+
+The mission is feasible only if the required energy is no greater than the
+usable battery energy:
+
+\noindent\textbf{C12: Energy-feasibility condition.}
+\begin{equation*}
+E_u^{\mathrm{req}}
+\leq
+E_u(t)-E_u^{\mathrm{res}}.
+\end{equation*}
+The reserve term leaves a safety margin for operational uncertainty and safe
+recovery.
+
+\section{Task-Replacement Recourse}
+
+New survivor-assistance tasks may arrive while all responder UAVs are already
+deployed. In that case, the planner does not restart the full mission plan.
+Instead, it checks whether the newly arrived task should replace one
+uncompleted task in an active mission.
+
+Let $n$ denote the new task and let $t_r$ denote the recourse decision time.
+For UAV $u$, define
+\[
+\mathcal{T}_u^{\mathrm{rem}}(t_r)
+\]
+as the set of tasks that remain uncompleted at time $t_r$. Each candidate
+recourse action replaces one task
+$i\in\mathcal{T}_u^{\mathrm{rem}}(t_r)$ with the newly arrived task $n$. The
+completed part of the mission remains fixed.
+
+Before replacement, the value of the remaining mission is
+\begin{equation}
+J_{ui}^{\mathrm{old}}
+=
+\sum_{j\in\mathcal{T}_u^{\mathrm{rem}}(t_r)}
+v_j(C_j^{\mathrm{old}}).
+\end{equation}
+
+After task $i$ is replaced by task $n$, the remaining route is recalculated.
+The new remaining value is
+\begin{equation}
+J_{ui}^{\mathrm{new}}
+=
+\sum_{j\in(\mathcal{T}_u^{\mathrm{rem}}(t_r)\setminus\{i\})\cup\{n\}}
+v_j(C_j^{\mathrm{new}}).
+\end{equation}
+
+The gain from this replacement is
+\begin{equation}
+\Delta J_{ui}
+=
+J_{ui}^{\mathrm{new}}
+-
+J_{ui}^{\mathrm{old}}.
+\end{equation}
+
+A replacement is feasible only if UAV $u$ already carries the relief items
+required by the new task:
+\begin{equation}
+q_{nr}(t_r)
+\leq
+I_{ur}(t_r),
+\qquad
+\forall r\in\mathcal{R}.
+\end{equation}
+The modified remaining mission must also satisfy battery feasibility:
+\begin{equation}
+E_{ui}^{\mathrm{new}}
+\leq
+E_u(t_r)-E_u^{\mathrm{res}},
+\end{equation}
+and its recalculated route must use feasible flight links in $\mathcal{E}$ and
+return safely to the UAV base.
+
+Let $\mathcal{S}(t_r)$ be the set of feasible one-for-one replacements at
+time $t_r$. The selected replacement is
+\begin{equation}
+(u^*,i^*)
+=
+\arg\max_{(u,i)\in\mathcal{S}(t_r)}
+\left\{
+\Delta J_{ui}
+\right\}.
+\end{equation}
+
+The replacement is accepted only if it produces a positive gain:
+\begin{equation}
+\Delta J_{u^*i^*}>0.
+\end{equation}
+If accepted, task $n$ is inserted into the remaining mission of UAV $u^*$, and
+the displaced task $i^*$ is returned to the waiting queue:
+\begin{equation}
+\mathcal{Q}(t_r^+)
+=
+\mathcal{Q}(t_r)\cup\{i^*\}.
+\end{equation}
+
+If no feasible replacement produces a positive gain, the active missions
+remain unchanged and the newly arrived task is added to the waiting queue:
+\begin{equation}
+\mathcal{Q}(t_r^+)
+=
+\mathcal{Q}(t_r)\cup\{n\}.
+\end{equation}
+
+This recourse rule is intentionally limited. It updates one active mission
+only when doing so improves the remaining service value, and it does not
+invalidate route segments or deliveries that have already been completed.

@@ -1,0 +1,11 @@
+{
+  "schema_version": "laquila_georeferenced_layout.v1",
+  "source_context": "../../heidata_benchmark/data/sample/osm_context.v1.geojson",
+  "source_manifest": "../../heidata_benchmark/data/sample/manifest.json",
+  "source_scenario": "../../heidata_benchmark/data/sample/scenario.v1.json",
+  "layout_rule": "osm_georeferenced_local_enu.v1",
+  "boundary_margin_m": 18.0,
+  "maximum_airspace_m": 50.0,
+  "active_road_geometry": false,
+  "notes": "The scene preserves the stored OSM source positions. One overlapping OSM building is excluded by scenario.v1. Roads remain in source provenance but are not active UAV obstacles."
+}

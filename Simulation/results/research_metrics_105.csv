@@ -1,0 +1,3 @@
+schema_version,experiment_name,seed,method,scenario_id,status,objective_value,served_tasks,deferred_tasks,average_completion_delay,total_distance,total_travel_time,total_energy,payload_utilization,accepted_replacements,rejected_replacements,safe_return_rate,runtime_seconds
+experiment.v1,pgbm_research_v1,105,pgbm_heuristic_v1,du_outdoor_105,ok,600.8751642725153,7,0,8.270093774729373,901.1348702498601,90.11348702498601,901.1348702498601,0.9166666666666666,1,0,1.0,0.024647624999999992
+experiment.v1,pgbm_research_v1,105,nearest_task_first,du_outdoor_105,ok,509.9249429133477,6,1,4.447677445932929,818.8641553332022,81.88641553332022,818.8641553332022,0.7222222222222222,1,0,1.0,0.023870833000000008

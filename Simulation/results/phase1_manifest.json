@@ -1,0 +1,169 @@
+{
+  "config": {
+    "schema_version": "phase1.v1",
+    "experiment_name": "pgbm_initial_contract",
+    "base_seed": 20260921,
+    "time_unit": "minute",
+    "distance_unit": "meter",
+    "energy_unit": "joule",
+    "payload_unit": "kilogram",
+    "workspace_bounds": [
+      0.0,
+      0.0,
+      0.0,
+      100.0,
+      100.0,
+      60.0
+    ],
+    "planning_time": 0.0,
+    "decay_rate": 0.02,
+    "task_count": 6,
+    "uav_count": 2,
+    "reserve_fraction": 0.2,
+    "metrics_output": "results/phase1_metrics.csv",
+    "manifest_output": "results/phase1_manifest.json",
+    "environment": {
+      "world_bounds": [
+        0.0,
+        0.0,
+        0.0,
+        100.0,
+        100.0,
+        60.0
+      ],
+      "ground_level": 0.0,
+      "distance_unit": "meter",
+      "obstacle_count": [
+        2,
+        5
+      ],
+      "obstacle_profiles": {
+        "building": {
+          "weight": 0.35,
+          "width": [
+            12.0,
+            25.0
+          ],
+          "depth": [
+            12.0,
+            25.0
+          ],
+          "height": [
+            15.0,
+            40.0
+          ],
+          "z_range": [
+            0.0,
+            0.0
+          ]
+        },
+        "road_block": {
+          "weight": 0.15,
+          "width": [
+            10.0,
+            30.0
+          ],
+          "depth": [
+            4.0,
+            10.0
+          ],
+          "height": [
+            1.0,
+            4.0
+          ],
+          "z_range": [
+            0.0,
+            0.0
+          ]
+        },
+        "ground_rubble": {
+          "weight": 0.25,
+          "width": [
+            5.0,
+            20.0
+          ],
+          "depth": [
+            5.0,
+            20.0
+          ],
+          "height": [
+            1.0,
+            8.0
+          ],
+          "z_range": [
+            0.0,
+            0.0
+          ]
+        },
+        "broken_floor": {
+          "weight": 0.15,
+          "width": [
+            8.0,
+            20.0
+          ],
+          "depth": [
+            8.0,
+            20.0
+          ],
+          "height": [
+            1.0,
+            5.0
+          ],
+          "z_range": [
+            0.0,
+            35.0
+          ]
+        },
+        "elevated_debris": {
+          "weight": 0.1,
+          "width": [
+            3.0,
+            12.0
+          ],
+          "depth": [
+            3.0,
+            12.0
+          ],
+          "height": [
+            1.0,
+            8.0
+          ],
+          "z_range": [
+            3.0,
+            35.0
+          ]
+        }
+      },
+      "base_identifier": "base_1",
+      "max_generation_attempts": 1000,
+      "base_seed": 20260921
+    }
+  },
+  "component_seeds": {
+    "environment": 3307188556,
+    "tasks": 956591092,
+    "uavs": 1395685828,
+    "planner": 201032494,
+    "recourse": 3702907025
+  },
+  "metric_fields": [
+    "schema_version",
+    "experiment_name",
+    "seed",
+    "method",
+    "scenario_id",
+    "status",
+    "objective_value",
+    "served_tasks",
+    "deferred_tasks",
+    "average_completion_delay",
+    "total_distance",
+    "total_travel_time",
+    "total_energy",
+    "payload_utilization",
+    "accepted_replacements",
+    "rejected_replacements",
+    "safe_return_rate",
+    "runtime_seconds"
+  ]
+}

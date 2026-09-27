@@ -1,0 +1,86 @@
+{
+  "manifest_version": "heidata.sample.v1",
+  "raw_directory": "raw",
+  "dataset": {
+    "persistent_identifier": "doi:10.11588/DATA/D3WZID",
+    "title": "Classification of structural building damage grades from multi-temporal photogrammetric point clouds using a machine learning model trained on virtual laser scanning data",
+    "license": "CC BY 4.0",
+    "source_code_license": "GPL v3",
+    "publisher": "heiDATA",
+    "publication_date": "2023-07-20"
+  },
+  "damage_grade_mapping": {
+    "no_damage": "building_models_pre_event_generic.zip",
+    "heavy": "building_models_post_event_damage_grade3_generic.zip",
+    "extreme": "building_models_post_event_damage_grade4_generic.zip",
+    "destruction": "building_models_post_event_damage_grade5_generic.zip"
+  },
+  "buildings": [
+    {
+      "scene_id": "intact_b001",
+      "source_id": "b_001",
+      "damage_grade": "no_damage",
+      "pre": "pre_b_001_pre.obj"
+    },
+    {
+      "scene_id": "heavy_b003",
+      "source_id": "b_003",
+      "damage_grade": "heavy",
+      "pre": "pre_b_003_pre.obj",
+      "post": "grade3_b_003_post.obj"
+    },
+    {
+      "scene_id": "extreme_b001",
+      "source_id": "b_001",
+      "damage_grade": "extreme",
+      "pre": "pre_b_001_pre.obj",
+      "post": "grade4_b_001_post.obj"
+    },
+    {
+      "scene_id": "destruction_b002",
+      "source_id": "b_002",
+      "damage_grade": "destruction",
+      "pre": "pre_b_002_pre.obj",
+      "post": "grade5_b_002_post.obj"
+    },
+    {
+      "scene_id": "intact_b004",
+      "source_id": "b_004",
+      "damage_grade": "no_damage",
+      "pre": "pre_b_004_pre.obj"
+    },
+    {
+      "scene_id": "heavy_b005",
+      "source_id": "b_005",
+      "damage_grade": "heavy",
+      "pre": "pre_b_005_pre.obj",
+      "post": "grade3_b_005_post.obj"
+    },
+    {
+      "scene_id": "extreme_b007",
+      "source_id": "b_007",
+      "damage_grade": "extreme",
+      "pre": "pre_b_007_pre.obj",
+      "post": "grade4_b_007_post.obj"
+    },
+    {
+      "scene_id": "destruction_b003",
+      "source_id": "b_003",
+      "damage_grade": "destruction",
+      "pre": "pre_b_003_pre.obj",
+      "post": "grade5_b_003_post.obj"
+    },
+    {
+      "scene_id": "intact_b006",
+      "source_id": "b_006",
+      "damage_grade": "no_damage",
+      "pre": "pre_b_006_pre.obj"
+    },
+    {
+      "scene_id": "intact_b008",
+      "source_id": "b_008",
+      "damage_grade": "no_damage",
+      "pre": "pre_b_008_pre.obj"
+    }
+  ]
+}

@@ -1,0 +1,1740 @@
+{
+  "execution_config": {
+    "return_to_base": true,
+    "service_duration_source": "task.service_duration",
+    "start_time": 0.0
+  },
+  "route_config": {
+    "altitude_margin": 1.0,
+    "cruise_altitude": 12.0,
+    "grid_resolution": 5.0,
+    "max_expanded_nodes": 20000
+  },
+  "scenario_id": "synthetic_moderate_20260925",
+  "scene": {
+    "candidate_sites": [
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_1",
+        "kind": "ground",
+        "position": [
+          5.0,
+          5.0,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_2",
+        "kind": "ground",
+        "position": [
+          22.0,
+          34.0,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_3",
+        "kind": "ground",
+        "position": [
+          39.0,
+          63.0,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_4",
+        "kind": "ground",
+        "position": [
+          56.0,
+          92.0,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_5",
+        "kind": "ground",
+        "position": [
+          80.0,
+          42.0,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_6",
+        "kind": "ground",
+        "position": [
+          90.0,
+          60.0,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_7",
+        "kind": "ground",
+        "position": [
+          17.0,
+          89.0,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_8",
+        "kind": "ground",
+        "position": [
+          34.0,
+          28.0,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_9",
+        "kind": "ground",
+        "position": [
+          51.0,
+          57.0,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_10",
+        "kind": "ground",
+        "position": [
+          75.0,
+          7.0,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_11",
+        "kind": "ground",
+        "position": [
+          85.0,
+          25.0,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_12",
+        "kind": "ground",
+        "position": [
+          12.0,
+          54.0,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_1",
+        "kind": "elevated",
+        "position": [
+          27.58502104241916,
+          70.79610617211483,
+          29.409299472144195
+        ],
+        "surface_ref": "structure_3"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_2",
+        "kind": "elevated",
+        "position": [
+          27.58502104241916,
+          72.05068389161343,
+          29.409299472144195
+        ],
+        "surface_ref": "structure_3"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_3",
+        "kind": "elevated",
+        "position": [
+          27.58502104241916,
+          73.30526161111202,
+          29.409299472144195
+        ],
+        "surface_ref": "structure_3"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_4",
+        "kind": "elevated",
+        "position": [
+          27.58502104241916,
+          74.5598393306106,
+          29.409299472144195
+        ],
+        "surface_ref": "structure_3"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_5",
+        "kind": "elevated",
+        "position": [
+          27.58502104241916,
+          75.8144170501092,
+          29.409299472144195
+        ],
+        "surface_ref": "structure_3"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_6",
+        "kind": "elevated",
+        "position": [
+          27.58502104241916,
+          77.06899476960778,
+          29.409299472144195
+        ],
+        "surface_ref": "structure_3"
+      }
+    ],
+    "environment": {
+      "base": {
+        "identifier": "base_1",
+        "position": [
+          6.0,
+          6.0,
+          0
+        ]
+      },
+      "obstacles": [
+        {
+          "depth": 3.4404432970298515,
+          "footprint": [
+            [
+              32.122402750788424,
+              19.645816756982615
+            ],
+            [
+              30.55289671657549,
+              19.853587879743458
+            ],
+            [
+              30.30522048492923,
+              17.88566124547869
+            ],
+            [
+              31.62400095925686,
+              16.413144582713606
+            ],
+            [
+              32.536018034183336,
+              17.868977318075498
+            ]
+          ],
+          "height": 1.9800600342400636,
+          "identifier": "rubble_structure_1_1",
+          "kind": "ground_rubble",
+          "minimum": [
+            30.30522048492923,
+            16.413144582713606,
+            0.0
+          ],
+          "parent_structure_id": "structure_1",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [
+            0.31156150459917076,
+            1.0,
+            0.7870449802010678,
+            0.22,
+            0.4036199066451561
+          ],
+          "width": 2.230797549254106
+        },
+        {
+          "depth": 2.323173864861346,
+          "footprint": [
+            [
+              35.11881222767814,
+              24.727829261920505
+            ],
+            [
+              33.55427189966646,
+              25.365327053067073
+            ],
+            [
+              32.098204135898776,
+              24.718374785304455
+            ],
+            [
+              32.58282049412207,
+              23.50548235517863
+            ],
+            [
+              33.836236038421454,
+              23.042153188205727
+            ],
+            [
+              34.96213913935186,
+              23.42215948443214
+            ]
+          ],
+          "height": 1.9007041244829248,
+          "identifier": "rubble_structure_1_2",
+          "kind": "ground_rubble",
+          "minimum": [
+            32.098204135898776,
+            23.042153188205727,
+            0.0
+          ],
+          "parent_structure_id": "structure_1",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [
+            1.0,
+            0.22,
+            0.6492933667258006,
+            0.896679635758942,
+            0.399316086793711,
+            0.8391397081385638
+          ],
+          "width": 3.0206080917793656
+        },
+        {
+          "depth": 2.3109701025263156,
+          "footprint": [
+            [
+              38.666207368763395,
+              23.51969965845376
+            ],
+            [
+              39.276846757704035,
+              24.880494179865654
+            ],
+            [
+              37.758454752568475,
+              25.830669760980076
+            ],
+            [
+              36.36519845340219,
+              24.912684099911075
+            ],
+            [
+              37.01550548797547,
+              23.577700414700107
+            ]
+          ],
+          "height": 2.1135468581567127,
+          "identifier": "rubble_structure_1_3",
+          "kind": "ground_rubble",
+          "minimum": [
+            36.36519845340219,
+            23.51969965845376,
+            0.0
+          ],
+          "parent_structure_id": "structure_1",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [
+            0.8562188957570547,
+            0.9040926210463386,
+            1.0,
+            0.22,
+            0.6543287954592462
+          ],
+          "width": 2.911648304301842
+        },
+        {
+          "depth": 3.1795549381970005,
+          "footprint": [
+            [
+              37.74427969279821,
+              19.556475627552945
+            ],
+            [
+              37.18716193000805,
+              18.64384020897428
+            ],
+            [
+              37.66764568660461,
+              17.27354701754266
+            ],
+            [
+              38.96069373103282,
+              16.805205679965002
+            ],
+            [
+              39.606307810273385,
+              18.01684423652936
+            ],
+            [
+              39.74008081684941,
+              19.26575530397806
+            ],
+            [
+              38.84249998948126,
+              19.984760618162003
+            ]
+          ],
+          "height": 2.0129822670252873,
+          "identifier": "rubble_structure_1_4",
+          "kind": "ground_rubble",
+          "minimum": [
+            37.18716193000805,
+            16.805205679965002,
+            0.0
+          ],
+          "parent_structure_id": "structure_1",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [
+            0.8637605859003167,
+            0.22,
+            0.3824066490958636,
+            0.5739787291631905,
+            0.3121822276177765,
+            1.0,
+            0.8472739861966624
+          ],
+          "width": 2.552918886841354
+        },
+        {
+          "depth": 3.1543944457378394,
+          "footprint": [
+            [
+              74.94675877625755,
+              29.429770016025437
+            ],
+            [
+              75.80408044040813,
+              28.2710131574365
+            ],
+            [
+              76.91746257962838,
+              27.74802836309996
+            ],
+            [
+              77.84339132314206,
+              28.209170713174643
+            ],
+            [
+              78.43298897861023,
+              29.780536250156267
+            ],
+            [
+              77.63652661854678,
+              30.779454635595066
+            ],
+            [
+              76.45785741801062,
+              30.902422808837798
+            ],
+            [
+              75.40766822628227,
+              30.46902996332924
+            ]
+          ],
+          "height": 1.6328496847671408,
+          "identifier": "rubble_structure_2_1",
+          "kind": "ground_rubble",
+          "minimum": [
+            74.94675877625755,
+            27.74802836309996,
+            0.0
+          ],
+          "parent_structure_id": "structure_2",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [
+            0.4324760674814374,
+            0.22,
+            0.375734114640969,
+            0.4081883810721013,
+            0.4564226335569149,
+            0.2834712760119515,
+            0.3080552498768055,
+            1.0
+          ],
+          "width": 3.4862302023526723
+        },
+        {
+          "depth": 2.7247199269829103,
+          "footprint": [
+            [
+              82.38416672412433,
+              25.148822006095244
+            ],
+            [
+              83.1652133648059,
+              26.216308501230124
+            ],
+            [
+              83.02021071846654,
+              27.524864077085603
+            ],
+            [
+              82.14404337862734,
+              27.873541933078155
+            ],
+            [
+              81.07611333819085,
+              27.244205079283276
+            ],
+            [
+              81.07686134072091,
+              25.868949571529278
+            ]
+          ],
+          "height": 2.8582351478733306,
+          "identifier": "rubble_structure_2_2",
+          "kind": "ground_rubble",
+          "minimum": [
+            81.07611333819085,
+            25.148822006095244,
+            0.0
+          ],
+          "parent_structure_id": "structure_2",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [
+            0.485392888687732,
+            0.22,
+            0.5673646431811455,
+            1.0,
+            0.5341886334354192,
+            0.5790620829127614
+          ],
+          "width": 2.089100026615043
+        },
+        {
+          "depth": 2.2845128801948817,
+          "footprint": [
+            [
+              81.11146400817837,
+              30.627987512990337
+            ],
+            [
+              81.75147762819518,
+              31.215359769320465
+            ],
+            [
+              81.51999278114494,
+              32.515853392297494
+            ],
+            [
+              80.46482949028238,
+              32.91250039318522
+            ],
+            [
+              79.60569672497591,
+              32.027299980272865
+            ],
+            [
+              80.01280667667199,
+              30.716770633574782
+            ]
+          ],
+          "height": 2.0686435567856694,
+          "identifier": "rubble_structure_2_3",
+          "kind": "ground_rubble",
+          "minimum": [
+            79.60569672497591,
+            30.627987512990337,
+            0.0
+          ],
+          "parent_structure_id": "structure_2",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [
+            0.22,
+            0.25556150656399884,
+            0.7410611936685692,
+            0.5935657196791172,
+            1.0,
+            0.3487350893685779
+          ],
+          "width": 2.1457809032192614
+        },
+        {
+          "depth": 2.1492263630585384,
+          "footprint": [
+            [
+              71.3975704300778,
+              30.806913854847174
+            ],
+            [
+              73.01142391544376,
+              30.948392935709528
+            ],
+            [
+              73.84967005736583,
+              31.56343460365735
+            ],
+            [
+              73.64367165539419,
+              32.54886138624993
+            ],
+            [
+              72.78826184527216,
+              32.95614021790571
+            ],
+            [
+              71.31669271679124,
+              32.923926551653985
+            ],
+            [
+              70.87323497901546,
+              31.707342115305998
+            ]
+          ],
+          "height": 1.7556293880005651,
+          "identifier": "rubble_structure_2_4",
+          "kind": "ground_rubble",
+          "minimum": [
+            70.87323497901546,
+            30.806913854847174,
+            0.0
+          ],
+          "parent_structure_id": "structure_2",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [
+            0.3915556013883139,
+            0.6867959315466095,
+            1.0,
+            0.3171472153310155,
+            0.915698392149829,
+            0.22,
+            0.31602183178098986
+          ],
+          "width": 2.976435078350363
+        },
+        {
+          "depth": 10.036621755988719,
+          "footprint": [
+            [
+              25.75195296363204,
+              69.54152845261625
+            ],
+            [
+              40.416497593929016,
+              69.54152845261625
+            ],
+            [
+              40.416497593929016,
+              79.57815020860497
+            ],
+            [
+              25.75195296363204,
+              79.57815020860497
+            ]
+          ],
+          "height": 29.409299472144195,
+          "identifier": "solid_structure_3",
+          "kind": "building",
+          "minimum": [
+            25.75195296363204,
+            69.54152845261625,
+            0.0
+          ],
+          "parent_structure_id": "structure_3",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [],
+          "width": 14.664544630296977
+        },
+        {
+          "depth": 11.620311314424342,
+          "footprint": [
+            [
+              62.01397950882826,
+              79.67359031768794
+            ],
+            [
+              75.35730353376266,
+              79.67359031768794
+            ],
+            [
+              75.35730353376266,
+              91.29390163211228
+            ],
+            [
+              62.01397950882826,
+              91.29390163211228
+            ]
+          ],
+          "height": 27.909480320063253,
+          "identifier": "solid_structure_4",
+          "kind": "building",
+          "minimum": [
+            62.01397950882826,
+            79.67359031768794,
+            0.0
+          ],
+          "parent_structure_id": "structure_4",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [],
+          "width": 13.343324024934404
+        },
+        {
+          "depth": 14.256160768536729,
+          "footprint": [
+            [
+              9.046127338659419,
+              8.791735751439548
+            ],
+            [
+              22.953885620882083,
+              8.791735751439548
+            ],
+            [
+              22.953885620882083,
+              23.047896519976277
+            ],
+            [
+              9.046127338659419,
+              23.047896519976277
+            ]
+          ],
+          "height": 25.800619317512766,
+          "identifier": "solid_structure_5",
+          "kind": "building",
+          "minimum": [
+            9.046127338659419,
+            8.791735751439548,
+            0.0
+          ],
+          "parent_structure_id": "structure_5",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [],
+          "width": 13.907758282222664
+        },
+        {
+          "depth": 12.105415400967537,
+          "footprint": [
+            [
+              66.66039369095915,
+              8.629457802830288
+            ],
+            [
+              76.9861111256414,
+              8.629457802830288
+            ],
+            [
+              76.9861111256414,
+              20.734873203797825
+            ],
+            [
+              66.66039369095915,
+              20.734873203797825
+            ]
+          ],
+          "height": 18.128397198086887,
+          "identifier": "standing_structure_6",
+          "kind": "building",
+          "minimum": [
+            66.66039369095915,
+            8.629457802830288,
+            0.0
+          ],
+          "parent_structure_id": "structure_6",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [],
+          "width": 10.325717434682247
+        },
+        {
+          "depth": 12.105415400967537,
+          "footprint": [
+            [
+              63.218487879398396,
+              8.629457802830288
+            ],
+            [
+              73.54420531408064,
+              8.629457802830288
+            ],
+            [
+              73.54420531408064,
+              20.734873203797825
+            ],
+            [
+              63.218487879398396,
+              20.734873203797825
+            ]
+          ],
+          "height": 1.5,
+          "identifier": "floor_structure_6",
+          "kind": "broken_floor",
+          "minimum": [
+            63.218487879398396,
+            8.629457802830288,
+            8.157778739139099
+          ],
+          "parent_structure_id": "structure_6",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [],
+          "width": 10.325717434682247
+        },
+        {
+          "depth": 3.8303410787732872,
+          "footprint": [
+            [
+              65.39356499119536,
+              17.497290629979336
+            ],
+            [
+              67.51124880105182,
+              16.7475140968081
+            ],
+            [
+              68.9148356638528,
+              18.125261072237922
+            ],
+            [
+              67.88898368301321,
+              20.577855175581387
+            ],
+            [
+              65.57252599465203,
+              19.585569875929497
+            ]
+          ],
+          "height": 10.0,
+          "identifier": "debris_structure_6_1",
+          "kind": "elevated_debris",
+          "minimum": [
+            65.39356499119536,
+            16.7475140968081,
+            5.042763245664231
+          ],
+          "parent_structure_id": "structure_6",
+          "road_segment_id": null,
+          "rotation_degrees": 13.39136510701114,
+          "source_ref": null,
+          "visual_top_profile": [
+            0.45164491795743744,
+            0.3884094189474079,
+            0.32,
+            0.7431177426499105,
+            1.0
+          ],
+          "width": 3.5212706726574368
+        },
+        {
+          "depth": 4.009291001204362,
+          "footprint": [
+            [
+              66.20545344107302,
+              8.688092984271579
+            ],
+            [
+              69.01969352860628,
+              9.70647505430934
+            ],
+            [
+              69.02189827373539,
+              12.433184542143618
+            ],
+            [
+              66.63036956334354,
+              12.697383985475941
+            ],
+            [
+              64.97444730295925,
+              11.18969305755402
+            ]
+          ],
+          "height": 4.0,
+          "identifier": "debris_structure_6_2",
+          "kind": "elevated_debris",
+          "minimum": [
+            64.97444730295925,
+            8.688092984271579,
+            3.7296893167602687
+          ],
+          "parent_structure_id": "structure_6",
+          "road_segment_id": null,
+          "rotation_degrees": 2.0225556331655206,
+          "source_ref": null,
+          "visual_top_profile": [
+            0.32,
+            0.5163402256740061,
+            1.0,
+            0.5114189797631145,
+            0.7317992618415972
+          ],
+          "width": 4.04745097077614
+        },
+        {
+          "depth": 2.960416568251233,
+          "footprint": [
+            [
+              68.65302606583431,
+              13.785103835740781
+            ],
+            [
+              67.13235956407249,
+              12.46428777034109
+            ],
+            [
+              67.59213328537446,
+              10.923551013697733
+            ],
+            [
+              69.5322185789341,
+              10.824687267489548
+            ],
+            [
+              69.83862739195729,
+              12.564645996762646
+            ]
+          ],
+          "height": 1.6135113526208216,
+          "identifier": "rubble_structure_6_1",
+          "kind": "ground_rubble",
+          "minimum": [
+            67.13235956407249,
+            10.824687267489548,
+            0.0
+          ],
+          "parent_structure_id": "structure_6",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [
+            0.7793464048195708,
+            0.7270754101008364,
+            1.0,
+            0.5936686352420402,
+            0.22
+          ],
+          "width": 2.706267827884801
+        },
+        {
+          "depth": 2.7318198071414397,
+          "footprint": [
+            [
+              71.58808189921234,
+              10.548706583259273
+            ],
+            [
+              72.14660708278949,
+              11.236017034807306
+            ],
+            [
+              71.83083861045097,
+              12.420614657643064
+            ],
+            [
+              71.33191238348718,
+              13.236444238110565
+            ],
+            [
+              70.67336338109558,
+              12.934640670494762
+            ],
+            [
+              70.28648157040651,
+              11.946279382967173
+            ],
+            [
+              70.47612960522925,
+              10.991337127808896
+            ],
+            [
+              71.04601529178946,
+              10.504624430969125
+            ]
+          ],
+          "height": 1.898410227882905,
+          "identifier": "rubble_structure_6_2",
+          "kind": "ground_rubble",
+          "minimum": [
+            70.28648157040651,
+            10.504624430969125,
+            0.0
+          ],
+          "parent_structure_id": "structure_6",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [
+            0.5177532544391068,
+            0.839015457583162,
+            1.0,
+            0.45525069670303664,
+            0.8115894645212588,
+            0.4411871004452306,
+            0.22,
+            0.38153005945048596
+          ],
+          "width": 1.8601255123829787
+        },
+        {
+          "depth": 2.846525399491542,
+          "footprint": [
+            [
+              65.40788344583514,
+              14.775437084316144
+            ],
+            [
+              65.2697529140773,
+              13.584273588316753
+            ],
+            [
+              66.26573970807571,
+              12.910910304756968
+            ],
+            [
+              67.65992423275634,
+              13.034849789738129
+            ],
+            [
+              68.36090067254928,
+              14.4681843720876
+            ],
+            [
+              67.6049571374452,
+              15.299035810258847
+            ],
+            [
+              66.03960010146133,
+              15.75743570424851
+            ]
+          ],
+          "height": 2.7275699884094995,
+          "identifier": "rubble_structure_6_3",
+          "kind": "ground_rubble",
+          "minimum": [
+            65.2697529140773,
+            12.910910304756968,
+            0.0
+          ],
+          "parent_structure_id": "structure_6",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [
+            0.3233069279324643,
+            0.6951859498218721,
+            0.22,
+            0.2943782672625348,
+            0.5289489877507771,
+            1.0,
+            0.5720701417236871
+          ],
+          "width": 3.091147758471976
+        },
+        {
+          "depth": 1.3259020938990922,
+          "footprint": [
+            [
+              68.92133466294243,
+              17.15924283512511
+            ],
+            [
+              70.00191751745093,
+              17.524294877114546
+            ],
+            [
+              69.51622748392647,
+              18.4851449290242
+            ],
+            [
+              68.54787542943725,
+              18.473002475135434
+            ],
+            [
+              68.25492345095329,
+              17.648834466556774
+            ]
+          ],
+          "height": 1.9118734794528234,
+          "identifier": "rubble_structure_6_4",
+          "kind": "ground_rubble",
+          "minimum": [
+            68.25492345095329,
+            17.15924283512511,
+            0.0
+          ],
+          "parent_structure_id": "structure_6",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [
+            0.6339948143188298,
+            0.22,
+            0.7430067494580759,
+            1.0,
+            0.5406939210163517
+          ],
+          "width": 1.746994066497649
+        },
+        {
+          "depth": 13.950683730537527,
+          "footprint": [
+            [
+              14.085208244715302,
+              62.567216107145505
+            ],
+            [
+              24.37026851783633,
+              62.567216107145505
+            ],
+            [
+              24.37026851783633,
+              76.51789983768303
+            ],
+            [
+              14.085208244715302,
+              76.51789983768303
+            ]
+          ],
+          "height": 31.00890168299414,
+          "identifier": "solid_structure_7",
+          "kind": "building",
+          "minimum": [
+            14.085208244715302,
+            62.567216107145505,
+            0.0
+          ],
+          "parent_structure_id": "structure_7",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [],
+          "width": 10.285060273121028
+        },
+        {
+          "depth": 9.984143642576143,
+          "footprint": [
+            [
+              76.34280068590044,
+              73.58744488419288
+            ],
+            [
+              86.94119136042336,
+              73.58744488419288
+            ],
+            [
+              86.94119136042336,
+              83.57158852676902
+            ],
+            [
+              76.34280068590044,
+              83.57158852676902
+            ]
+          ],
+          "height": 31.885987129640178,
+          "identifier": "standing_structure_8",
+          "kind": "building",
+          "minimum": [
+            76.34280068590044,
+            73.58744488419288,
+            0.0
+          ],
+          "parent_structure_id": "structure_8",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": null,
+          "visual_top_profile": [],
+          "width": 10.598390674522918
+        }
+      ],
+      "seed": 20260925,
+      "world": {
+        "distance_unit": "meter",
+        "maximum": [
+          100.0,
+          100.0,
+          60.0
+        ],
+        "minimum": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "generation_metadata": {
+      "imputed_values": [],
+      "mode": "synthetic",
+      "seed": 20260925,
+      "template_version": null
+    },
+    "indoor_connections": [],
+    "indoor_rooms": [],
+    "preset": {
+      "broken_floor_probability": 0.4,
+      "damage_proportions": {
+        "destroyed": 0.15,
+        "intact": 0.25,
+        "major": 0.3,
+        "minor": 0.3
+      },
+      "elevated_debris_probability": 0.35,
+      "identifier": "earthquake.v1",
+      "indoor_probabilities": {
+        "blocked_corridor": 0.25,
+        "blocked_door": 0.2,
+        "damaged_room": 0.3,
+        "damaged_stair": 0.2,
+        "indoor_debris": 0.65
+      },
+      "road_block_probability": 0.3,
+      "rubble_probability": 0.65,
+      "severity": "moderate",
+      "version": "earthquake.v1"
+    },
+    "provenance": [],
+    "roads": [],
+    "structures": [
+      {
+        "damage_state": "destroyed",
+        "depth": 13.141078536735293,
+        "footprint": [
+          [
+            27.58810710780546,
+            13.781825738991841
+          ],
+          [
+            42.120767323102314,
+            13.781825738991841
+          ],
+          [
+            42.120767323102314,
+            26.922904275727134
+          ],
+          [
+            27.58810710780546,
+            26.922904275727134
+          ]
+        ],
+        "height": 12.193630701209312,
+        "height_source": "preset",
+        "identifier": "structure_1",
+        "minimum": [
+          27.58810710780546,
+          13.781825738991841,
+          0
+        ],
+        "scene_role": "target",
+        "source_ref": null,
+        "width": 14.532660215296854
+      },
+      {
+        "damage_state": "destroyed",
+        "depth": 12.746401920139308,
+        "footprint": [
+          [
+            68.21333525161941,
+            23.051188458110758
+          ],
+          [
+            84.9233134750252,
+            23.051188458110758
+          ],
+          [
+            84.9233134750252,
+            35.797590378250064
+          ],
+          [
+            68.21333525161941,
+            35.797590378250064
+          ]
+        ],
+        "height": 17.141578089765893,
+        "height_source": "preset",
+        "identifier": "structure_2",
+        "minimum": [
+          68.21333525161941,
+          23.051188458110758,
+          0
+        ],
+        "scene_role": "target",
+        "source_ref": null,
+        "width": 16.709978223405784
+      },
+      {
+        "damage_state": "minor",
+        "depth": 10.036621755988717,
+        "footprint": [
+          [
+            25.75195296363204,
+            69.54152845261625
+          ],
+          [
+            40.416497593929016,
+            69.54152845261625
+          ],
+          [
+            40.416497593929016,
+            79.57815020860497
+          ],
+          [
+            25.75195296363204,
+            79.57815020860497
+          ]
+        ],
+        "height": 29.409299472144195,
+        "height_source": "preset",
+        "identifier": "structure_3",
+        "minimum": [
+          25.75195296363204,
+          69.54152845261625,
+          0
+        ],
+        "scene_role": "target",
+        "source_ref": null,
+        "width": 14.664544630296975
+      },
+      {
+        "damage_state": "minor",
+        "depth": 11.620311314424338,
+        "footprint": [
+          [
+            62.01397950882826,
+            79.67359031768794
+          ],
+          [
+            75.35730353376266,
+            79.67359031768794
+          ],
+          [
+            75.35730353376266,
+            91.29390163211228
+          ],
+          [
+            62.01397950882826,
+            91.29390163211228
+          ]
+        ],
+        "height": 27.909480320063253,
+        "height_source": "preset",
+        "identifier": "structure_4",
+        "minimum": [
+          62.01397950882826,
+          79.67359031768794,
+          0
+        ],
+        "scene_role": "target",
+        "source_ref": null,
+        "width": 13.343324024934402
+      },
+      {
+        "damage_state": "intact",
+        "depth": 14.25616076853673,
+        "footprint": [
+          [
+            9.046127338659419,
+            8.791735751439548
+          ],
+          [
+            22.953885620882083,
+            8.791735751439548
+          ],
+          [
+            22.953885620882083,
+            23.047896519976277
+          ],
+          [
+            9.046127338659419,
+            23.047896519976277
+          ]
+        ],
+        "height": 25.800619317512766,
+        "height_source": "preset",
+        "identifier": "structure_5",
+        "minimum": [
+          9.046127338659419,
+          8.791735751439548,
+          0
+        ],
+        "scene_role": "target",
+        "source_ref": null,
+        "width": 13.907758282222664
+      },
+      {
+        "damage_state": "major",
+        "depth": 12.105415400967535,
+        "footprint": [
+          [
+            63.218487879398396,
+            8.629457802830288
+          ],
+          [
+            76.9861111256414,
+            8.629457802830288
+          ],
+          [
+            76.9861111256414,
+            20.734873203797825
+          ],
+          [
+            63.218487879398396,
+            20.734873203797825
+          ]
+        ],
+        "height": 18.128397198086887,
+        "height_source": "preset",
+        "identifier": "structure_6",
+        "minimum": [
+          63.218487879398396,
+          8.629457802830288,
+          0
+        ],
+        "scene_role": "target",
+        "source_ref": null,
+        "width": 13.767623246243009
+      },
+      {
+        "damage_state": "intact",
+        "depth": 13.950683730537532,
+        "footprint": [
+          [
+            14.085208244715302,
+            62.567216107145505
+          ],
+          [
+            24.37026851783633,
+            62.567216107145505
+          ],
+          [
+            24.37026851783633,
+            76.51789983768303
+          ],
+          [
+            14.085208244715302,
+            76.51789983768303
+          ]
+        ],
+        "height": 31.00890168299414,
+        "height_source": "preset",
+        "identifier": "structure_7",
+        "minimum": [
+          14.085208244715302,
+          62.567216107145505,
+          0
+        ],
+        "scene_role": "target",
+        "source_ref": null,
+        "width": 10.28506027312103
+      },
+      {
+        "damage_state": "major",
+        "depth": 13.312191523434853,
+        "footprint": [
+          [
+            76.34280068590044,
+            70.25939700333417
+          ],
+          [
+            86.94119136042336,
+            70.25939700333417
+          ],
+          [
+            86.94119136042336,
+            83.57158852676902
+          ],
+          [
+            76.34280068590044,
+            83.57158852676902
+          ]
+        ],
+        "height": 31.885987129640178,
+        "height_source": "preset",
+        "identifier": "structure_8",
+        "minimum": [
+          76.34280068590044,
+          70.25939700333417,
+          0
+        ],
+        "scene_role": "target",
+        "source_ref": null,
+        "width": 10.598390674522918
+      }
+    ],
+    "uav_initial_positions": [
+      [
+        6.0,
+        6.0,
+        0
+      ],
+      [
+        6.0,
+        6.0,
+        0
+      ]
+    ]
+  },
+  "scene_config": {
+    "base_clearance": 12.0,
+    "elevated_candidate_count": 6,
+    "ground_candidate_count": 12,
+    "indoor_candidate_count": 6,
+    "mode": "synthetic",
+    "preset_id": null,
+    "seed": 20260925,
+    "severity": "moderate",
+    "template_path": null,
+    "uav_count": 2,
+    "world_bounds": null
+  },
+  "schema_version": "scenario.v2",
+  "supply_policy": "base_supply_sufficient",
+  "task_config": {
+    "detection_time_range": [
+      0.0,
+      30.0
+    ],
+    "distance_unit": "meter",
+    "energy_unit": "joule",
+    "item_presence_model": "uniform_non_empty_subset",
+    "item_types": [
+      "food",
+      "water",
+      "medical"
+    ],
+    "item_weights": {
+      "food": 0.25,
+      "medical": 0.5,
+      "water": 0.5
+    },
+    "max_task_parcels": 4,
+    "max_task_payload_mass": 2.0,
+    "payload_unit": "kilogram",
+    "seed": 20260926,
+    "service_duration_base": 2.0,
+    "service_duration_per_parcel": 0.5,
+    "service_duration_per_severity": 1.0,
+    "service_value_decay_rate": 0.011997,
+    "service_value_model": "common_exponential",
+    "severity_range": [
+      0.35,
+      1.0
+    ],
+    "survivor_offset_range": [
+      1.0,
+      5.0
+    ],
+    "task_count": 5,
+    "time_unit": "minute"
+  },
+  "task_seed": 20260926,
+  "tasks": [
+    {
+      "demand": {
+        "food": 0,
+        "medical": 1,
+        "water": 1
+      },
+      "detected_at": 25.512219631435055,
+      "dropoff_waypoint": [
+        39.0,
+        63.0,
+        0.0
+      ],
+      "identifier": "task_1",
+      "required_payload_mass": 1.0,
+      "service_duration": 3.89824888534946,
+      "service_value_at_detection": 0.8982488853494599,
+      "severity": 0.8982488853494599,
+      "status": "pending",
+      "survivor_position": [
+        38.209466302859454,
+        63.82764855103813,
+        0.2684152815237626
+      ],
+      "task_type": "supply_delivery"
+    },
+    {
+      "demand": {
+        "food": 0,
+        "medical": 1,
+        "water": 1
+      },
+      "detected_at": 25.612102573893907,
+      "dropoff_waypoint": [
+        22.0,
+        34.0,
+        0.0
+      ],
+      "identifier": "task_2",
+      "required_payload_mass": 1.0,
+      "service_duration": 3.433597990108385,
+      "service_value_at_detection": 0.43359799010838496,
+      "severity": 0.43359799010838496,
+      "status": "pending",
+      "survivor_position": [
+        24.49298427112041,
+        34.854926569692,
+        0.0
+      ],
+      "task_type": "supply_delivery"
+    },
+    {
+      "demand": {
+        "food": 1,
+        "medical": 1,
+        "water": 0
+      },
+      "detected_at": 16.302078726526446,
+      "dropoff_waypoint": [
+        5.0,
+        5.0,
+        0.0
+      ],
+      "identifier": "task_3",
+      "required_payload_mass": 0.75,
+      "service_duration": 3.8997027995490035,
+      "service_value_at_detection": 0.8997027995490035,
+      "severity": 0.8997027995490035,
+      "status": "pending",
+      "survivor_position": [
+        1.7530945878184565,
+        6.02944671497106,
+        0.0
+      ],
+      "task_type": "supply_delivery"
+    },
+    {
+      "demand": {
+        "food": 1,
+        "medical": 0,
+        "water": 1
+      },
+      "detected_at": 26.20295020789633,
+      "dropoff_waypoint": [
+        75.0,
+        7.0,
+        0.0
+      ],
+      "identifier": "task_4",
+      "required_payload_mass": 0.75,
+      "service_duration": 3.431085736980493,
+      "service_value_at_detection": 0.43108573698049296,
+      "severity": 0.43108573698049296,
+      "status": "pending",
+      "survivor_position": [
+        75.16745602470687,
+        9.374010375593906,
+        0.0
+      ],
+      "task_type": "supply_delivery"
+    },
+    {
+      "demand": {
+        "food": 1,
+        "medical": 1,
+        "water": 0
+      },
+      "detected_at": 28.086888242625466,
+      "dropoff_waypoint": [
+        56.0,
+        92.0,
+        0.0
+      ],
+      "identifier": "task_5",
+      "required_payload_mass": 0.75,
+      "service_duration": 3.5823513238462787,
+      "service_value_at_detection": 0.5823513238462789,
+      "severity": 0.5823513238462789,
+      "status": "pending",
+      "survivor_position": [
+        55.83127251753861,
+        90.00434218336865,
+        0.2924279651742826
+      ],
+      "task_type": "supply_delivery"
+    }
+  ],
+  "uav_config": {
+    "count": 2,
+    "distance_unit": "meter",
+    "energy_capacity": 1000.0,
+    "energy_per_meter": 1.0,
+    "energy_unit": "joule",
+    "payload_capacity": 4,
+    "payload_unit": "kilogram",
+    "payload_weight_capacity": 2.0,
+    "reserve_energy": 200.0,
+    "speed": 10.0,
+    "time_unit": "minute"
+  },
+  "uav_initial_states": [
+    {
+      "battery_energy": 1000.0,
+      "onboard_inventory": {},
+      "payload_mass": 0.0,
+      "position": [
+        6.0,
+        6.0,
+        0
+      ],
+      "status": "available",
+      "uav_id": "uav_1"
+    },
+    {
+      "battery_energy": 1000.0,
+      "onboard_inventory": {},
+      "payload_mass": 0.0,
+      "position": [
+        6.0,
+        6.0,
+        0
+      ],
+      "status": "available",
+      "uav_id": "uav_2"
+    }
+  ]
+}

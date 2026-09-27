@@ -1,0 +1,27 @@
+{
+  "schema_version": "initial_snapshot.v1",
+  "description": "Approved t=30 single snapshot run for the first DU and synthetic comparison.",
+  "planning": {
+    "start_time": 30.0,
+    "planner": "initial_snapshot_greedy_v1",
+    "no_recourse": true
+  },
+  "scenario": {
+    "severity": "moderate",
+    "task_count": 6,
+    "uav_count": 3,
+    "task_seed_offset": 1
+  },
+  "runs": [
+    {
+      "mode": "du_outdoor",
+      "seed": 20260924,
+      "report": "results/initial_runs/session_2026-09-27/du_outdoor_initial.json"
+    },
+    {
+      "mode": "synthetic",
+      "seed": 20260924,
+      "report": "results/initial_runs/session_2026-09-27/synthetic_initial.json"
+    }
+  ]
+}

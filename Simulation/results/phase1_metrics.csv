@@ -1,0 +1,1 @@
+schema_version,experiment_name,seed,method,scenario_id,status,objective_value,served_tasks,deferred_tasks,average_completion_delay,total_distance,total_travel_time,total_energy,payload_utilization,accepted_replacements,rejected_replacements,safe_return_rate,runtime_seconds

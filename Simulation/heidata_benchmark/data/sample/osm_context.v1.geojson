@@ -1,0 +1,5128 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3987081,
+            42.3500552
+          ],
+          [
+            13.3986923,
+            42.3500179
+          ],
+          [
+            13.3985807,
+            42.3497545
+          ],
+          [
+            13.3984815,
+            42.3495389
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/28279831",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "name": "Via Patini",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3967075,
+            42.3506616
+          ],
+          [
+            13.3967355,
+            42.3506936
+          ],
+          [
+            13.3969862,
+            42.3509798
+          ],
+          [
+            13.3973896,
+            42.3514405
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/56659341",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "name": "Via Camponeschi",
+          "oneway": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3972229,
+            42.3526416
+          ],
+          [
+            13.3980492,
+            42.3523865
+          ],
+          [
+            13.3988559,
+            42.352133
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/56659342",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "name": "Via dei Lombardi",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3983248,
+            42.3513839
+          ],
+          [
+            13.3983488,
+            42.3514153
+          ],
+          [
+            13.398566,
+            42.3517225
+          ],
+          [
+            13.3986727,
+            42.3518716
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/56659345",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "lane_markings": "no",
+          "name": "Via Paganica",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3968964,
+            42.3493961
+          ],
+          [
+            13.3969703,
+            42.3495038
+          ],
+          [
+            13.3970872,
+            42.349686
+          ],
+          [
+            13.3972768,
+            42.3500128
+          ],
+          [
+            13.3972936,
+            42.3500438
+          ],
+          [
+            13.3973851,
+            42.3502166
+          ],
+          [
+            13.3974745,
+            42.350381
+          ],
+          [
+            13.3974957,
+            42.3504199
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/62326708",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "living_street",
+          "name": "Via degli Scardassieri"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3967277,
+            42.3494456
+          ],
+          [
+            13.3966455,
+            42.3495136
+          ],
+          [
+            13.3964785,
+            42.3496294
+          ],
+          [
+            13.3964153,
+            42.3496688
+          ],
+          [
+            13.3962539,
+            42.3497499
+          ],
+          [
+            13.3960364,
+            42.3498358
+          ],
+          [
+            13.3959068,
+            42.3499061
+          ],
+          [
+            13.395746,
+            42.3500055
+          ],
+          [
+            13.3953331,
+            42.3502558
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/62326709",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "name": "Via Cembalo di Colantoni"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3965827,
+            42.3518216
+          ],
+          [
+            13.3965973,
+            42.3518405
+          ],
+          [
+            13.3967161,
+            42.351999
+          ],
+          [
+            13.3967322,
+            42.3520215
+          ],
+          [
+            13.3967491,
+            42.352046
+          ],
+          [
+            13.3967631,
+            42.3520678
+          ],
+          [
+            13.396779,
+            42.3520961
+          ],
+          [
+            13.3967963,
+            42.3521283
+          ],
+          [
+            13.3964399,
+            42.3518942
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/62329563",
+        "osm_tags": {
+          "access": "no",
+          "highway": "residential",
+          "maxspeed": "50",
+          "name": "Piazza Vincenzo Rivera",
+          "surface": "sett"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3987603,
+            42.3519939
+          ],
+          [
+            13.3995,
+            42.3516532
+          ],
+          [
+            13.4001882,
+            42.3513591
+          ],
+          [
+            13.4002159,
+            42.3513475
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/62329574",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "lit": "yes",
+          "name": "Via Bominaco",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3986727,
+            42.3518716
+          ],
+          [
+            13.3978546,
+            42.3521409
+          ],
+          [
+            13.3970275,
+            42.3523943
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/62329587",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "name": "Via San Benedetto in Perillis",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3978546,
+            42.3521409
+          ],
+          [
+            13.3980492,
+            42.3523865
+          ],
+          [
+            13.3982613,
+            42.3526808
+          ],
+          [
+            13.3984527,
+            42.3529666
+          ],
+          [
+            13.3986354,
+            42.3532262
+          ],
+          [
+            13.3987733,
+            42.3534569
+          ],
+          [
+            13.3987947,
+            42.3534902
+          ],
+          [
+            13.3988393,
+            42.3535596
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/80504151",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "lane_markings": "no",
+          "name": "Via San Martino",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3979102,
+            42.3513451
+          ],
+          [
+            13.3981824,
+            42.3512242
+          ],
+          [
+            13.3981739,
+            42.351213
+          ],
+          [
+            13.3981143,
+            42.3511347
+          ],
+          [
+            13.397841,
+            42.3512588
+          ],
+          [
+            13.3979004,
+            42.3513329
+          ],
+          [
+            13.3979102,
+            42.3513451
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/155197401",
+        "osm_tags": {
+          "area": "yes",
+          "highway": "pedestrian",
+          "surface": "sett"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3978345,
+            42.3534773
+          ],
+          [
+            13.3976378,
+            42.3532131
+          ],
+          [
+            13.3974481,
+            42.3529528
+          ],
+          [
+            13.3974391,
+            42.3529401
+          ],
+          [
+            13.3972995,
+            42.3527441
+          ],
+          [
+            13.3972229,
+            42.3526416
+          ],
+          [
+            13.397071,
+            42.3524472
+          ],
+          [
+            13.3970275,
+            42.3523943
+          ],
+          [
+            13.3968262,
+            42.3521642
+          ],
+          [
+            13.3967963,
+            42.3521283
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/215074375",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "lane_markings": "no",
+          "maxspeed": "50",
+          "name": "Via Cascina",
+          "oneway": "yes",
+          "surface": "asphalt",
+          "width": "6"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3958667,
+            42.3509655
+          ],
+          [
+            13.3958421,
+            42.3509351
+          ],
+          [
+            13.395564,
+            42.3505724
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/215075035",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "maxspeed": "50",
+          "name": "Via Cesura"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3944267,
+            42.3521266
+          ],
+          [
+            13.3947409,
+            42.3519333
+          ],
+          [
+            13.3955497,
+            42.3514303
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/255108474",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "name": "Via del Falco",
+          "oneway": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.394948,
+            42.3521983
+          ],
+          [
+            13.3950143,
+            42.3521637
+          ],
+          [
+            13.3952317,
+            42.3520519
+          ],
+          [
+            13.3954779,
+            42.3519406
+          ],
+          [
+            13.395687,
+            42.3518492
+          ],
+          [
+            13.3957062,
+            42.3518396
+          ],
+          [
+            13.3957256,
+            42.3518273
+          ],
+          [
+            13.3959923,
+            42.3516424
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/255511847",
+        "osm_tags": {
+          "access": "permit",
+          "foot": "yes",
+          "highway": "living_street",
+          "name": "Via Saturnino",
+          "oneway": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.398566,
+            42.3517225
+          ],
+          [
+            13.3993253,
+            42.351376
+          ],
+          [
+            13.3998677,
+            42.3511496
+          ],
+          [
+            13.4000679,
+            42.351072
+          ],
+          [
+            13.4000994,
+            42.3510603
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/303097904",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "lit": "yes",
+          "name": "Via de' Navelli",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3967963,
+            42.3521283
+          ],
+          [
+            13.3968627,
+            42.3520949
+          ],
+          [
+            13.3975474,
+            42.3517505
+          ],
+          [
+            13.3975756,
+            42.3517366
+          ],
+          [
+            13.3976263,
+            42.3517116
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/303097911",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "maxspeed": "50",
+          "name": "Via Andrea Bafile",
+          "oneway": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3951648,
+            42.3500219
+          ],
+          [
+            13.3946338,
+            42.3501634
+          ],
+          [
+            13.3944,
+            42.3502026
+          ],
+          [
+            13.3941533,
+            42.3502494
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/303097990",
+        "osm_tags": {
+          "access": "permit",
+          "foot": "yes",
+          "highway": "living_street",
+          "name": "Vico dei Roiani"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3951657,
+            42.350335
+          ],
+          [
+            13.3951656,
+            42.3503594
+          ],
+          [
+            13.3951562,
+            42.3503862
+          ],
+          [
+            13.3951375,
+            42.3504078
+          ],
+          [
+            13.3949477,
+            42.350557
+          ],
+          [
+            13.3947901,
+            42.3506802
+          ],
+          [
+            13.3947459,
+            42.3507112
+          ],
+          [
+            13.3946981,
+            42.3507412
+          ],
+          [
+            13.3946513,
+            42.3507645
+          ],
+          [
+            13.3946047,
+            42.3507838
+          ],
+          [
+            13.3945595,
+            42.3508002
+          ],
+          [
+            13.3944046,
+            42.3508498
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/303102895",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "name": "Via Sant'Antonio Pinto"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3960442,
+            42.3511586
+          ],
+          [
+            13.3956646,
+            42.3514884
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/303102898",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "name": "Via delle Rose"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3959507,
+            42.3516217
+          ],
+          [
+            13.3962373,
+            42.3513837
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/303102899",
+        "osm_tags": {
+          "access": "no",
+          "highway": "residential",
+          "name": "Via dei Setaioli"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3958421,
+            42.3509351
+          ],
+          [
+            13.3967304,
+            42.3503556
+          ],
+          [
+            13.3970576,
+            42.3501593
+          ],
+          [
+            13.3970655,
+            42.3501537
+          ],
+          [
+            13.3970728,
+            42.3501475
+          ],
+          [
+            13.3971117,
+            42.3501153
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/303102913",
+        "osm_tags": {
+          "access": "no",
+          "highway": "living_street",
+          "name": "Via Gaglioffi"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3947817,
+            42.3522824
+          ],
+          [
+            13.3947923,
+            42.3522074
+          ],
+          [
+            13.3947983,
+            42.3521854
+          ],
+          [
+            13.3948131,
+            42.3521567
+          ],
+          [
+            13.3948322,
+            42.3521333
+          ],
+          [
+            13.394857,
+            42.3521121
+          ],
+          [
+            13.3949126,
+            42.3520784
+          ],
+          [
+            13.3951357,
+            42.3519612
+          ],
+          [
+            13.3952813,
+            42.351879
+          ],
+          [
+            13.395347,
+            42.351838
+          ],
+          [
+            13.3954796,
+            42.3517527
+          ],
+          [
+            13.3956107,
+            42.3516598
+          ],
+          [
+            13.3957714,
+            42.3515404
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/303102927",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "name": "Via Amiternini",
+          "oneway": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.3948762,
+              42.352129
+            ],
+            [
+              13.3950513,
+              42.3520368
+            ],
+            [
+              13.395106,
+              42.3520936
+            ],
+            [
+              13.3949309,
+              42.3521858
+            ],
+            [
+              13.3948762,
+              42.352129
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/496729866",
+        "osm_tags": {
+          "building": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.3951856,
+              42.3520557
+            ],
+            [
+              13.3951262,
+              42.3519942
+            ],
+            [
+              13.3951673,
+              42.3519709
+            ],
+            [
+              13.3952342,
+              42.3520327
+            ],
+            [
+              13.3951856,
+              42.3520557
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/496729871",
+        "osm_tags": {
+          "building": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.3947811,
+              42.3510959
+            ],
+            [
+              13.3948043,
+              42.3510811
+            ],
+            [
+              13.3951562,
+              42.3508544
+            ],
+            [
+              13.3951623,
+              42.3508615
+            ],
+            [
+              13.3952356,
+              42.3509466
+            ],
+            [
+              13.3950874,
+              42.3510315
+            ],
+            [
+              13.3950113,
+              42.3510751
+            ],
+            [
+              13.3948717,
+              42.351155
+            ],
+            [
+              13.3947811,
+              42.3510959
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/500792516",
+        "osm_tags": {
+          "building": "construction"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.3948841,
+              42.3505742
+            ],
+            [
+              13.3948345,
+              42.3504486
+            ],
+            [
+              13.3951043,
+              42.3503627
+            ],
+            [
+              13.3951143,
+              42.3503899
+            ],
+            [
+              13.3948841,
+              42.3505742
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/500798133",
+        "osm_tags": {
+          "building": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.3945584,
+              42.3498209
+            ],
+            [
+              13.3946201,
+              42.3498112
+            ],
+            [
+              13.3949463,
+              42.3497596
+            ],
+            [
+              13.3951409,
+              42.3500177
+            ],
+            [
+              13.3949402,
+              42.3500634
+            ],
+            [
+              13.3948158,
+              42.3498881
+            ],
+            [
+              13.3946703,
+              42.349921
+            ],
+            [
+              13.3946878,
+              42.3499726
+            ],
+            [
+              13.3946041,
+              42.3499866
+            ],
+            [
+              13.3945584,
+              42.3498209
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/501738250",
+        "osm_tags": {
+          "access": "yes",
+          "building": "yes",
+          "castle_type": "stately",
+          "historic": "castle",
+          "name": "Palazzo Persichetti",
+          "wikidata": "Q55165774",
+          "wikipedia": "it:Palazzo Persichetti"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.3955939,
+              42.3505801
+            ],
+            [
+              13.3957743,
+              42.3504814
+            ],
+            [
+              13.3958381,
+              42.3505459
+            ],
+            [
+              13.3957793,
+              42.3505826
+            ],
+            [
+              13.3958707,
+              42.3506936
+            ],
+            [
+              13.3960618,
+              42.3505685
+            ],
+            [
+              13.3960087,
+              42.3505171
+            ],
+            [
+              13.3960531,
+              42.3504921
+            ],
+            [
+              13.3959418,
+              42.3503841
+            ],
+            [
+              13.3960694,
+              42.3503122
+            ],
+            [
+              13.3963493,
+              42.3505795
+            ],
+            [
+              13.3958524,
+              42.3509099
+            ],
+            [
+              13.3955939,
+              42.3505801
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/501745769",
+        "osm_tags": {
+          "building": "yes",
+          "castle_type": "stately",
+          "historic": "castle",
+          "name": "Casa Gaglioffi"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.3971568,
+              42.350071
+            ],
+            [
+              13.3969769,
+              42.3497918
+            ],
+            [
+              13.3970828,
+              42.3497358
+            ],
+            [
+              13.3971987,
+              42.3499225
+            ],
+            [
+              13.3972609,
+              42.3500322
+            ],
+            [
+              13.3971568,
+              42.350071
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/501746087",
+        "osm_tags": {
+          "building": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.3967049,
+              42.3498697
+            ],
+            [
+              13.3966536,
+              42.3498075
+            ],
+            [
+              13.3965982,
+              42.3497403
+            ],
+            [
+              13.3965134,
+              42.3496376
+            ],
+            [
+              13.3965493,
+              42.3496159
+            ],
+            [
+              13.3965831,
+              42.3495739
+            ],
+            [
+              13.3967183,
+              42.3494992
+            ],
+            [
+              13.3967849,
+              42.3495859
+            ],
+            [
+              13.3967988,
+              42.3496051
+            ],
+            [
+              13.3969046,
+              42.3497513
+            ],
+            [
+              13.3967484,
+              42.3498439
+            ],
+            [
+              13.3967049,
+              42.3498697
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/501748940",
+        "osm_tags": {
+          "amenity": "place_of_worship",
+          "basilica": "minor",
+          "building": "basilica",
+          "check_date": "2025-05-10",
+          "denomination": "roman_catholic",
+          "name": "Basilica di San Giuseppe Artigiano",
+          "old_name": "Chiesa di San Biagio d'Amiterno",
+          "religion": "christian",
+          "tourism": "attraction",
+          "wikidata": "Q3669707",
+          "wikipedia": "it:Basilica di San Giuseppe Artigiano"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3952475,
+            42.3500972
+          ],
+          [
+            13.3953013,
+            42.3500744
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/502705348",
+        "osm_tags": {
+          "highway": "steps"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3952475,
+            42.3500972
+          ],
+          [
+            13.3952268,
+            42.3501058
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/502705357",
+        "osm_tags": {
+          "footway": "sidewalk",
+          "highway": "footway"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.3955395,
+              42.3514069
+            ],
+            [
+              13.395631,
+              42.3513234
+            ],
+            [
+              13.3954645,
+              42.3512412
+            ],
+            [
+              13.3955165,
+              42.3512198
+            ],
+            [
+              13.3954774,
+              42.3511689
+            ],
+            [
+              13.3953504,
+              42.351217
+            ],
+            [
+              13.3952428,
+              42.3512578
+            ],
+            [
+              13.3955395,
+              42.3514069
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/503172319",
+        "osm_tags": {
+          "building": "yes",
+          "castle_type": "stately",
+          "historic": "castle",
+          "name": "Palazzo Pietropaoli",
+          "wikidata": "Q65029014"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.3957592,
+              42.3513948
+            ],
+            [
+              13.395631,
+              42.3513234
+            ],
+            [
+              13.3955395,
+              42.3514069
+            ],
+            [
+              13.3956682,
+              42.3514749
+            ],
+            [
+              13.3957592,
+              42.3513948
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/503172320",
+        "osm_tags": {
+          "building": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.396226,
+            42.3513703
+          ],
+          [
+            13.3969862,
+            42.3509798
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/503172327",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "name": "Via Burri"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.3969967,
+              42.3509477
+            ],
+            [
+              13.3967873,
+              42.3506907
+            ],
+            [
+              13.3973118,
+              42.3505306
+            ],
+            [
+              13.3974802,
+              42.3504805
+            ],
+            [
+              13.3975677,
+              42.3506664
+            ],
+            [
+              13.3969967,
+              42.3509477
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/503190642",
+        "osm_tags": {
+          "building": "yes",
+          "check_date": "2024-01-09"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3977164,
+            42.3515297
+          ],
+          [
+            13.3977173,
+            42.3515408
+          ],
+          [
+            13.3977144,
+            42.3515517
+          ],
+          [
+            13.3977078,
+            42.3515616
+          ],
+          [
+            13.397698,
+            42.35157
+          ],
+          [
+            13.3976856,
+            42.3515762
+          ],
+          [
+            13.3976714,
+            42.3515799
+          ],
+          [
+            13.3976564,
+            42.3515807
+          ],
+          [
+            13.3976416,
+            42.3515787
+          ],
+          [
+            13.3976281,
+            42.3515739
+          ],
+          [
+            13.3976166,
+            42.3515667
+          ],
+          [
+            13.3976063,
+            42.3515547
+          ],
+          [
+            13.3976018,
+            42.3515408
+          ],
+          [
+            13.3976038,
+            42.3515266
+          ],
+          [
+            13.3976119,
+            42.3515137
+          ],
+          [
+            13.3976254,
+            42.3515035
+          ],
+          [
+            13.3976426,
+            42.3514971
+          ],
+          [
+            13.3976617,
+            42.3514953
+          ],
+          [
+            13.3976806,
+            42.3514982
+          ],
+          [
+            13.3976971,
+            42.3515055
+          ],
+          [
+            13.3977095,
+            42.3515164
+          ],
+          [
+            13.3977164,
+            42.3515297
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/503192015",
+        "osm_tags": {
+          "footway": "sidewalk",
+          "highway": "footway",
+          "surface": "sett"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3978465,
+            42.3516029
+          ],
+          [
+            13.3978887,
+            42.3515827
+          ],
+          [
+            13.3983248,
+            42.3513839
+          ],
+          [
+            13.398463,
+            42.3513203
+          ],
+          [
+            13.3985242,
+            42.3512928
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/503192018",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "lane_markings": "no",
+          "maxspeed": "50",
+          "name": "Via Andrea Bafile",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.3982124,
+              42.3509366
+            ],
+            [
+              13.3985279,
+              42.350874
+            ],
+            [
+              13.3984207,
+              42.3505037
+            ],
+            [
+              13.3983366,
+              42.3502651
+            ],
+            [
+              13.3979695,
+              42.350371
+            ],
+            [
+              13.3980567,
+              42.3505776
+            ],
+            [
+              13.39815,
+              42.3505529
+            ],
+            [
+              13.3982947,
+              42.3505198
+            ],
+            [
+              13.3983678,
+              42.3507819
+            ],
+            [
+              13.3982615,
+              42.3508025
+            ],
+            [
+              13.3981551,
+              42.3505611
+            ],
+            [
+              13.3980591,
+              42.3505842
+            ],
+            [
+              13.3982124,
+              42.3509366
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/503193496",
+        "osm_tags": {
+          "building": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3985415,
+            42.3511289
+          ],
+          [
+            13.3985522,
+            42.3511383
+          ],
+          [
+            13.3985663,
+            42.3511443
+          ],
+          [
+            13.3985823,
+            42.3511464
+          ],
+          [
+            13.3985983,
+            42.3511443
+          ],
+          [
+            13.3986122,
+            42.3511384
+          ],
+          [
+            13.3986224,
+            42.3511297
+          ],
+          [
+            13.3986286,
+            42.3511173
+          ],
+          [
+            13.3986287,
+            42.3511062
+          ],
+          [
+            13.3986233,
+            42.3510948
+          ],
+          [
+            13.3986128,
+            42.3510853
+          ],
+          [
+            13.3985988,
+            42.3510792
+          ],
+          [
+            13.3985827,
+            42.351077
+          ],
+          [
+            13.3985665,
+            42.351079
+          ],
+          [
+            13.3985521,
+            42.3510851
+          ],
+          [
+            13.3985415,
+            42.3510945
+          ],
+          [
+            13.3985361,
+            42.3511055
+          ],
+          [
+            13.3985359,
+            42.351117
+          ],
+          [
+            13.3985415,
+            42.3511289
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/503322085",
+        "osm_tags": {
+          "area": "yes",
+          "highway": "pedestrian",
+          "surface": "sett"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3982003,
+            42.3509495
+          ],
+          [
+            13.398201,
+            42.3509453
+          ],
+          [
+            13.3982004,
+            42.3509418
+          ],
+          [
+            13.3979489,
+            42.3503475
+          ],
+          [
+            13.3979487,
+            42.3503469
+          ],
+          [
+            13.3979263,
+            42.3503034
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/503574749",
+        "osm_tags": {
+          "access": "permit",
+          "highway": "living_street",
+          "name": "Via Cavour",
+          "old_name": "Via degli Speziali",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3973851,
+            42.3502166
+          ],
+          [
+            13.3978163,
+            42.3500805
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/503974012",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "pedestrian",
+          "name": "Via dell'Oratorio",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.3979337,
+              42.3500483
+            ],
+            [
+              13.3979023,
+              42.3499913
+            ],
+            [
+              13.3979174,
+              42.3499833
+            ],
+            [
+              13.3979291,
+              42.349972
+            ],
+            [
+              13.3979321,
+              42.3499583
+            ],
+            [
+              13.397929,
+              42.3499456
+            ],
+            [
+              13.3979097,
+              42.3499115
+            ],
+            [
+              13.3979,
+              42.3499009
+            ],
+            [
+              13.3978839,
+              42.3498932
+            ],
+            [
+              13.397867,
+              42.3498921
+            ],
+            [
+              13.3978479,
+              42.3498955
+            ],
+            [
+              13.397821,
+              42.3498483
+            ],
+            [
+              13.3977356,
+              42.3498739
+            ],
+            [
+              13.397697,
+              42.3497952
+            ],
+            [
+              13.3979597,
+              42.3497064
+            ],
+            [
+              13.3981304,
+              42.3496691
+            ],
+            [
+              13.3981518,
+              42.3497173
+            ],
+            [
+              13.398024,
+              42.3497515
+            ],
+            [
+              13.3981613,
+              42.349989
+            ],
+            [
+              13.3979337,
+              42.3500483
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/503974017",
+        "osm_tags": {
+          "building": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.3983061,
+              42.350121
+            ],
+            [
+              13.3986518,
+              42.350019
+            ],
+            [
+              13.3985517,
+              42.3497598
+            ],
+            [
+              13.3984681,
+              42.3495573
+            ],
+            [
+              13.3983541,
+              42.3495921
+            ],
+            [
+              13.3983458,
+              42.3496001
+            ],
+            [
+              13.3981643,
+              42.3496552
+            ],
+            [
+              13.398187,
+              42.3497081
+            ],
+            [
+              13.3982337,
+              42.3498217
+            ],
+            [
+              13.3982866,
+              42.3500415
+            ],
+            [
+              13.3983061,
+              42.350121
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/503976723",
+        "osm_tags": {
+          "building": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3983282,
+            42.3510361
+          ],
+          [
+            13.3983909,
+            42.3511183
+          ],
+          [
+            13.3984334,
+            42.3511739
+          ],
+          [
+            13.3984958,
+            42.3512557
+          ],
+          [
+            13.3985023,
+            42.3512642
+          ],
+          [
+            13.3985242,
+            42.3512928
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/503999091",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "pedestrian",
+          "lit": "yes",
+          "name": "Piazza del Palazzo",
+          "surface": "paving_stones"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3968744,
+            42.3498007
+          ],
+          [
+            13.3968991,
+            42.3498334
+          ],
+          [
+            13.3971117,
+            42.3501153
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/545925952",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "living_street",
+          "name": "Piazza San Biagio"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3953331,
+            42.3502558
+          ],
+          [
+            13.3952664,
+            42.3502972
+          ],
+          [
+            13.395226,
+            42.3503153
+          ],
+          [
+            13.3951657,
+            42.350335
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/549699199",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "name": "Via degli Ortolani"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3978465,
+            42.3516029
+          ],
+          [
+            13.3978121,
+            42.3515597
+          ],
+          [
+            13.397701,
+            42.3514204
+          ],
+          [
+            13.3976444,
+            42.3513486
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/590873071",
+        "osm_tags": {
+          "access": "permit",
+          "highway": "living_street",
+          "name": "Piazza Santa Margherita",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3973896,
+            42.3514405
+          ],
+          [
+            13.3974644,
+            42.3515261
+          ],
+          [
+            13.3976263,
+            42.3517116
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/590873072",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "lane_markings": "no",
+          "name": "Piazza Santa Margherita",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3982003,
+            42.3509495
+          ],
+          [
+            13.3982021,
+            42.3509507
+          ],
+          [
+            13.3983282,
+            42.3510361
+          ],
+          [
+            13.3985764,
+            42.3509689
+          ],
+          [
+            13.3986582,
+            42.3509461
+          ],
+          [
+            13.3988321,
+            42.3508979
+          ],
+          [
+            13.3988696,
+            42.3508875
+          ],
+          [
+            13.3989062,
+            42.3508788
+          ],
+          [
+            13.3990113,
+            42.350858
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/607088619",
+        "osm_tags": {
+          "highway": "pedestrian",
+          "lit": "yes",
+          "name": "Piazza del Palazzo",
+          "surface": "paving_stones"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3951657,
+            42.350335
+          ],
+          [
+            13.3951117,
+            42.350349
+          ],
+          [
+            13.3950127,
+            42.3503747
+          ],
+          [
+            13.3947402,
+            42.3504498
+          ],
+          [
+            13.3943772,
+            42.3505429
+          ],
+          [
+            13.3942669,
+            42.3505676
+          ],
+          [
+            13.3942276,
+            42.3505737
+          ],
+          [
+            13.3941606,
+            42.3505804
+          ],
+          [
+            13.3940992,
+            42.3505766
+          ],
+          [
+            13.3940421,
+            42.3505672
+          ],
+          [
+            13.3939938,
+            42.3505542
+          ],
+          [
+            13.3939291,
+            42.3505301
+          ],
+          [
+            13.3938557,
+            42.3504991
+          ],
+          [
+            13.3937835,
+            42.3504626
+          ],
+          [
+            13.3936537,
+            42.3503895
+          ],
+          [
+            13.3936435,
+            42.3503836
+          ],
+          [
+            13.3934844,
+            42.3502914
+          ],
+          [
+            13.3934639,
+            42.3502833
+          ],
+          [
+            13.3934571,
+            42.3502806
+          ],
+          [
+            13.3934417,
+            42.3502768
+          ],
+          [
+            13.3934251,
+            42.3502773
+          ],
+          [
+            13.3934073,
+            42.3502827
+          ],
+          [
+            13.3933911,
+            42.3502918
+          ],
+          [
+            13.3932292,
+            42.3504381
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/607088625",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "name": "Via degli Ortolani"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3976444,
+            42.3513486
+          ],
+          [
+            13.3975971,
+            42.3512813
+          ],
+          [
+            13.3975929,
+            42.3512693
+          ],
+          [
+            13.3975943,
+            42.3512576
+          ],
+          [
+            13.3976027,
+            42.351245
+          ],
+          [
+            13.3976144,
+            42.3512357
+          ],
+          [
+            13.3978366,
+            42.3511239
+          ],
+          [
+            13.3981062,
+            42.3509864
+          ],
+          [
+            13.3981186,
+            42.3509808
+          ],
+          [
+            13.398132,
+            42.3509755
+          ],
+          [
+            13.3981779,
+            42.3509598
+          ],
+          [
+            13.3981896,
+            42.3509558
+          ],
+          [
+            13.3981961,
+            42.3509531
+          ],
+          [
+            13.3981986,
+            42.3509515
+          ],
+          [
+            13.3982003,
+            42.3509495
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/610306177",
+        "osm_tags": {
+          "access": "permit",
+          "highway": "living_street",
+          "name": "Via delle Aquile",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3975462,
+            42.3515013
+          ],
+          [
+            13.3975735,
+            42.351531
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/610314507",
+        "osm_tags": {
+          "footway": "sidewalk",
+          "highway": "footway",
+          "surface": "sett"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3974847,
+            42.3514394
+          ],
+          [
+            13.3975177,
+            42.3514729
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/610314509",
+        "osm_tags": {
+          "footway": "sidewalk",
+          "highway": "footway",
+          "surface": "sett"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3976669,
+            42.3514526
+          ],
+          [
+            13.3976915,
+            42.3514829
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/610314511",
+        "osm_tags": {
+          "footway": "sidewalk",
+          "highway": "footway",
+          "surface": "sett"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3976184,
+            42.3513936
+          ],
+          [
+            13.3976463,
+            42.35143
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/610314513",
+        "osm_tags": {
+          "footway": "sidewalk",
+          "highway": "footway",
+          "surface": "sett"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3948043,
+            42.3510811
+          ],
+          [
+            13.3950082,
+            42.3512171
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/633875236",
+        "osm_tags": {
+          "access": "no",
+          "highway": "steps",
+          "layer": "0",
+          "name": "Via ed Arco Antonelli",
+          "tunnel": "building_passage",
+          "tunnel:name": "Arco Antonelli"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3950082,
+            42.3512171
+          ],
+          [
+            13.3950341,
+            42.3512344
+          ],
+          [
+            13.3950743,
+            42.3512613
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/633875237",
+        "osm_tags": {
+          "highway": "footway",
+          "name": "Via ed Arco Antonelli"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3976263,
+            42.3517116
+          ],
+          [
+            13.3978465,
+            42.3516029
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/637998580",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "lane_markings": "no",
+          "maxspeed": "50",
+          "name": "Via Andrea Bafile",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3981791,
+            42.3497331
+          ],
+          [
+            13.3980708,
+            42.3497625
+          ],
+          [
+            13.398215,
+            42.3500342
+          ],
+          [
+            13.398258,
+            42.3500243
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/680589375",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "lane_markings": "no",
+          "name": "Piazza Machilone",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3975049,
+            42.349463
+          ],
+          [
+            13.3970872,
+            42.349686
+          ],
+          [
+            13.3969591,
+            42.3497553
+          ],
+          [
+            13.3968744,
+            42.3498007
+          ],
+          [
+            13.396772,
+            42.349863
+          ],
+          [
+            13.3964544,
+            42.350056
+          ],
+          [
+            13.3961686,
+            42.3502279
+          ],
+          [
+            13.395564,
+            42.3505724
+          ],
+          [
+            13.3948623,
+            42.3509865
+          ],
+          [
+            13.3947579,
+            42.3510501
+          ],
+          [
+            13.3947255,
+            42.3510698
+          ],
+          [
+            13.3946041,
+            42.3511435
+          ],
+          [
+            13.394556,
+            42.3511727
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/686469626",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "name": "Via Sassa",
+          "oneway": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.394556,
+            42.3511727
+          ],
+          [
+            13.3946139,
+            42.3512208
+          ],
+          [
+            13.3946593,
+            42.3512526
+          ],
+          [
+            13.3947098,
+            42.3512772
+          ],
+          [
+            13.3947654,
+            42.3512966
+          ],
+          [
+            13.394818,
+            42.3513052
+          ],
+          [
+            13.3948738,
+            42.3513067
+          ],
+          [
+            13.3949256,
+            42.3513017
+          ],
+          [
+            13.3949764,
+            42.351291
+          ],
+          [
+            13.3950253,
+            42.3512775
+          ],
+          [
+            13.3950743,
+            42.3512613
+          ],
+          [
+            13.3951142,
+            42.3512481
+          ],
+          [
+            13.3951545,
+            42.3512332
+          ],
+          [
+            13.3958667,
+            42.3509655
+          ],
+          [
+            13.3967075,
+            42.3506616
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/722861783",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "name": "Via Sallustio"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3987081,
+            42.3500552
+          ],
+          [
+            13.3993979,
+            42.3498682
+          ],
+          [
+            13.3994373,
+            42.3498575
+          ],
+          [
+            13.3994422,
+            42.3498562
+          ],
+          [
+            13.3994964,
+            42.3498414
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/741328902",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "pedestrian",
+          "lit": "yes",
+          "name": "Via Sallustio",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3983235,
+            42.3501954
+          ],
+          [
+            13.3983481,
+            42.3502468
+          ],
+          [
+            13.3983508,
+            42.3502528
+          ],
+          [
+            13.3983538,
+            42.3502603
+          ],
+          [
+            13.3983563,
+            42.3502672
+          ],
+          [
+            13.3984359,
+            42.3504994
+          ],
+          [
+            13.3985456,
+            42.3508714
+          ],
+          [
+            13.3985764,
+            42.3509689
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/838701920",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "pedestrian",
+          "lit": "yes",
+          "name": "Via Marrelli",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3987081,
+            42.3500552
+          ],
+          [
+            13.3987406,
+            42.3501479
+          ],
+          [
+            13.3988571,
+            42.3504801
+          ],
+          [
+            13.3990014,
+            42.3508339
+          ],
+          [
+            13.3990113,
+            42.350858
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/838701921",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "pedestrian",
+          "name": "Via Patini",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3978366,
+            42.3511239
+          ],
+          [
+            13.3978156,
+            42.3510988
+          ],
+          [
+            13.397805,
+            42.3510842
+          ],
+          [
+            13.3977965,
+            42.351071
+          ],
+          [
+            13.39779,
+            42.3510586
+          ],
+          [
+            13.3976122,
+            42.3506748
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/838701922",
+        "osm_tags": {
+          "access": "permit",
+          "highway": "pedestrian",
+          "name": "Via degli Scardassieri",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3979263,
+            42.3503034
+          ],
+          [
+            13.3979004,
+            42.350254
+          ],
+          [
+            13.3978163,
+            42.3500805
+          ],
+          [
+            13.3978131,
+            42.3500736
+          ],
+          [
+            13.3977182,
+            42.3498771
+          ],
+          [
+            13.397673,
+            42.349782
+          ],
+          [
+            13.3975049,
+            42.349463
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/838701923",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "lane_markings": "no",
+          "name": "Via Cavour",
+          "old_name": "Via degli Speziali",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3985242,
+            42.3512928
+          ],
+          [
+            13.3988269,
+            42.35116
+          ],
+          [
+            13.3989815,
+            42.3510922
+          ],
+          [
+            13.399106,
+            42.3510375
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/838701924",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "lane_markings": "no",
+          "name": "Piazza del Palazzo",
+          "oneway": "yes",
+          "surface": "paving_stones"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3986727,
+            42.3518716
+          ],
+          [
+            13.3987603,
+            42.3519939
+          ],
+          [
+            13.3988559,
+            42.352133
+          ],
+          [
+            13.3989629,
+            42.3522967
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1015410256",
+        "osm_tags": {
+          "access": "no",
+          "foot": "permissive",
+          "highway": "residential",
+          "motor_vehicle": "no",
+          "name": "Via Paganica"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3959923,
+            42.3516424
+          ],
+          [
+            13.3959507,
+            42.3516217
+          ],
+          [
+            13.3957714,
+            42.3515404
+          ],
+          [
+            13.3956646,
+            42.3514884
+          ],
+          [
+            13.3955497,
+            42.3514303
+          ],
+          [
+            13.3952085,
+            42.3512601
+          ],
+          [
+            13.3951545,
+            42.3512332
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1119382895",
+        "osm_tags": {
+          "highway": "residential",
+          "name": "Via Antonelli",
+          "oneway": "yes",
+          "surface": "sett"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3965827,
+            42.3518216
+          ],
+          [
+            13.3962373,
+            42.3513837
+          ],
+          [
+            13.396226,
+            42.3513703
+          ],
+          [
+            13.3960442,
+            42.3511586
+          ],
+          [
+            13.3958952,
+            42.3509981
+          ],
+          [
+            13.3958667,
+            42.3509655
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1119382896",
+        "osm_tags": {
+          "foot": "yes",
+          "highway": "residential",
+          "maxspeed": "50",
+          "motor_vehicle": "no",
+          "name": "Via dell'Annunziata",
+          "old_name": "Strada dell'Arco di Santa Chiara"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3957244,
+            42.3522011
+          ],
+          [
+            13.3964288,
+            42.3518878
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1119382898",
+        "osm_tags": {
+          "access": "no",
+          "highway": "residential",
+          "name": "Via Forcella",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3971117,
+            42.3501153
+          ],
+          [
+            13.3971204,
+            42.3501092
+          ],
+          [
+            13.3971369,
+            42.3501
+          ],
+          [
+            13.397151,
+            42.3500933
+          ],
+          [
+            13.3971668,
+            42.3500866
+          ],
+          [
+            13.3971854,
+            42.3500794
+          ],
+          [
+            13.3972173,
+            42.3500682
+          ],
+          [
+            13.3972936,
+            42.3500438
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1119382901",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "living_street",
+          "name": "Via Gaglioffi"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3981423,
+            42.3496428
+          ],
+          [
+            13.3981712,
+            42.3497124
+          ],
+          [
+            13.3981791,
+            42.3497331
+          ],
+          [
+            13.3981935,
+            42.3497766
+          ],
+          [
+            13.3982093,
+            42.3498316
+          ],
+          [
+            13.3982257,
+            42.3498946
+          ],
+          [
+            13.398258,
+            42.3500243
+          ],
+          [
+            13.3982647,
+            42.3500468
+          ],
+          [
+            13.3982739,
+            42.3500744
+          ],
+          [
+            13.3982915,
+            42.3501248
+          ],
+          [
+            13.398296,
+            42.3501361
+          ],
+          [
+            13.3983008,
+            42.350147
+          ],
+          [
+            13.3983057,
+            42.3501578
+          ],
+          [
+            13.3983235,
+            42.3501954
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1150372082",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "lit": "yes",
+          "name": "Via Marrelli",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3950743,
+            42.3512613
+          ],
+          [
+            13.3950806,
+            42.351275
+          ],
+          [
+            13.3950831,
+            42.3512869
+          ],
+          [
+            13.3950804,
+            42.3512974
+          ],
+          [
+            13.3950735,
+            42.3513079
+          ],
+          [
+            13.3950612,
+            42.3513196
+          ],
+          [
+            13.395046,
+            42.3513301
+          ],
+          [
+            13.3949565,
+            42.3513883
+          ],
+          [
+            13.3944887,
+            42.3516988
+          ],
+          [
+            13.3942795,
+            42.3518213
+          ],
+          [
+            13.3941935,
+            42.3518728
+          ],
+          [
+            13.3940944,
+            42.3519299
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1228801914",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "name": "Via Angioina",
+          "oneway": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3981739,
+            42.351213
+          ],
+          [
+            13.3981834,
+            42.3512089
+          ],
+          [
+            13.3983263,
+            42.3511462
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1230436745",
+        "osm_tags": {
+          "access": "no",
+          "covered": "yes",
+          "highway": "footway"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.397701,
+            42.3514204
+          ],
+          [
+            13.3977443,
+            42.351401
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1230436746",
+        "osm_tags": {
+          "highway": "footway",
+          "surface": "paving_stones"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3977443,
+            42.351401
+          ],
+          [
+            13.3978895,
+            42.3513377
+          ],
+          [
+            13.3979004,
+            42.3513329
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1230436748",
+        "osm_tags": {
+          "access": "no",
+          "covered": "yes",
+          "highway": "footway"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3983263,
+            42.3511462
+          ],
+          [
+            13.3983909,
+            42.3511183
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1230570760",
+        "osm_tags": {
+          "highway": "footway"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3979058,
+            42.3513581
+          ],
+          [
+            13.3978895,
+            42.3513377
+          ],
+          [
+            13.3978246,
+            42.3512566
+          ],
+          [
+            13.3981179,
+            42.3511235
+          ],
+          [
+            13.3981834,
+            42.3512089
+          ],
+          [
+            13.3981981,
+            42.3512281
+          ],
+          [
+            13.3979058,
+            42.3513581
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1230570761",
+        "osm_tags": {
+          "access": "no",
+          "colonnade": "left",
+          "covered": "colonnade",
+          "highway": "footway"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.3958748,
+              42.3510877
+            ],
+            [
+              13.395753,
+              42.3511354
+            ],
+            [
+              13.3958916,
+              42.3512785
+            ],
+            [
+              13.3959796,
+              42.3512011
+            ],
+            [
+              13.3958748,
+              42.3510877
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/1238268580",
+        "osm_tags": {
+          "building": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.3960186,
+              42.3510785
+            ],
+            [
+              13.3959563,
+              42.3509895
+            ],
+            [
+              13.3963791,
+              42.3508357
+            ],
+            [
+              13.396477,
+              42.3510174
+            ],
+            [
+              13.3963097,
+              42.3510722
+            ],
+            [
+              13.3962625,
+              42.3509956
+            ],
+            [
+              13.3960186,
+              42.3510785
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/1238268585",
+        "osm_tags": {
+          "building": "construction"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.395631,
+              42.3513234
+            ],
+            [
+              13.3957592,
+              42.3513948
+            ],
+            [
+              13.3958916,
+              42.3512785
+            ],
+            [
+              13.395753,
+              42.3511354
+            ],
+            [
+              13.3958748,
+              42.3510877
+            ],
+            [
+              13.3958337,
+              42.3510334
+            ],
+            [
+              13.39555,
+              42.3511417
+            ],
+            [
+              13.3956943,
+              42.351268
+            ],
+            [
+              13.395631,
+              42.3513234
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/1238268586",
+        "osm_tags": {
+          "building": "construction"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.3950348,
+              42.3511963
+            ],
+            [
+              13.3950082,
+              42.3512171
+            ],
+            [
+              13.3949864,
+              42.3512345
+            ],
+            [
+              13.3948717,
+              42.351155
+            ],
+            [
+              13.3950113,
+              42.3510751
+            ],
+            [
+              13.3950985,
+              42.3511525
+            ],
+            [
+              13.3951733,
+              42.3511098
+            ],
+            [
+              13.3950874,
+              42.3510315
+            ],
+            [
+              13.3952356,
+              42.3509466
+            ],
+            [
+              13.3952474,
+              42.3509603
+            ],
+            [
+              13.3953039,
+              42.3510259
+            ],
+            [
+              13.3953764,
+              42.3511134
+            ],
+            [
+              13.3950774,
+              42.3512242
+            ],
+            [
+              13.3950348,
+              42.3511963
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "height_m": null,
+        "height_source": "template_or_default",
+        "kind": "building",
+        "osm_id": "way/1238268588",
+        "osm_tags": {
+          "building": "construction",
+          "construction": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3949466,
+            42.3497382
+          ],
+          [
+            13.3949601,
+            42.3497558
+          ],
+          [
+            13.3951648,
+            42.3500219
+          ],
+          [
+            13.3952268,
+            42.3501058
+          ],
+          [
+            13.3953331,
+            42.3502558
+          ],
+          [
+            13.395564,
+            42.3505724
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1243118426",
+        "osm_tags": {
+          "access": "permit",
+          "foot": "yes",
+          "highway": "living_street",
+          "maxspeed": "50",
+          "name": "Via Cesura",
+          "oneway": "yes"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3957244,
+            42.3522011
+          ],
+          [
+            13.3954779,
+            42.3519406
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1243173643",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "name": "Via del Pavone",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3976122,
+            42.3506748
+          ],
+          [
+            13.3975133,
+            42.3504584
+          ],
+          [
+            13.3974957,
+            42.3504199
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1268405640",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "lane_markings": "no",
+          "name": "Via degli Scardassieri",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3969862,
+            42.3509798
+          ],
+          [
+            13.3976122,
+            42.3506748
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1268405641",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "lane_markings": "no",
+          "name": "Via Burri",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3950341,
+            42.3512344
+          ],
+          [
+            13.3949952,
+            42.351246
+          ],
+          [
+            13.3949435,
+            42.3512582
+          ],
+          [
+            13.3948959,
+            42.3512632
+          ],
+          [
+            13.3948366,
+            42.351263
+          ],
+          [
+            13.3947831,
+            42.3512517
+          ],
+          [
+            13.3947366,
+            42.3512348
+          ],
+          [
+            13.3946941,
+            42.3512123
+          ],
+          [
+            13.3946041,
+            42.3511435
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1366089277",
+        "osm_tags": {
+          "footway": "sidewalk",
+          "highway": "footway"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3924479,
+            42.3502483
+          ],
+          [
+            13.3924687,
+            42.3502367
+          ],
+          [
+            13.3924928,
+            42.3502268
+          ],
+          [
+            13.3925327,
+            42.3502137
+          ],
+          [
+            13.392569,
+            42.3502051
+          ],
+          [
+            13.3926018,
+            42.3501997
+          ],
+          [
+            13.3926603,
+            42.3501955
+          ],
+          [
+            13.3927467,
+            42.3501992
+          ],
+          [
+            13.3928363,
+            42.3502114
+          ],
+          [
+            13.3929131,
+            42.3502431
+          ],
+          [
+            13.393013,
+            42.3503022
+          ],
+          [
+            13.3931375,
+            42.3503987
+          ],
+          [
+            13.3932207,
+            42.3504716
+          ],
+          [
+            13.3935224,
+            42.3507464
+          ],
+          [
+            13.3935486,
+            42.3507687
+          ],
+          [
+            13.3936149,
+            42.3508103
+          ],
+          [
+            13.3936914,
+            42.3508455
+          ],
+          [
+            13.3937686,
+            42.3508755
+          ],
+          [
+            13.3941059,
+            42.3509821
+          ],
+          [
+            13.3942088,
+            42.3510154
+          ],
+          [
+            13.3942688,
+            42.351037
+          ],
+          [
+            13.3943212,
+            42.3510617
+          ],
+          [
+            13.3943684,
+            42.3510873
+          ],
+          [
+            13.3944258,
+            42.3511273
+          ],
+          [
+            13.3945158,
+            42.3511979
+          ],
+          [
+            13.3946113,
+            42.351276
+          ],
+          [
+            13.3946739,
+            42.3513101
+          ],
+          [
+            13.3947355,
+            42.351335
+          ],
+          [
+            13.3948004,
+            42.3513478
+          ],
+          [
+            13.3948587,
+            42.3513507
+          ],
+          [
+            13.3949242,
+            42.3513449
+          ],
+          [
+            13.3949476,
+            42.3513415
+          ],
+          [
+            13.3949643,
+            42.3513383
+          ],
+          [
+            13.3949745,
+            42.3513356
+          ],
+          [
+            13.3949839,
+            42.3513322
+          ],
+          [
+            13.3949927,
+            42.3513279
+          ],
+          [
+            13.3950317,
+            42.3513042
+          ],
+          [
+            13.3950454,
+            42.3512944
+          ],
+          [
+            13.3950565,
+            42.3512844
+          ],
+          [
+            13.3950661,
+            42.3512737
+          ],
+          [
+            13.3950743,
+            42.3512613
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1366089289",
+        "osm_tags": {
+          "footway": "sidewalk",
+          "highway": "footway"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3987406,
+            42.3501479
+          ],
+          [
+            13.3983481,
+            42.3502468
+          ],
+          [
+            13.3979489,
+            42.3503475
+          ],
+          [
+            13.3975133,
+            42.3504584
+          ],
+          [
+            13.3967355,
+            42.3506936
+          ],
+          [
+            13.3958952,
+            42.3509981
+          ],
+          [
+            13.3952085,
+            42.3512601
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1366369496",
+        "osm_tags": {
+          "footway": "sidewalk",
+          "highway": "footway",
+          "surface": "paving_stones"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3986923,
+            42.3500179
+          ],
+          [
+            13.398296,
+            42.3501361
+          ],
+          [
+            13.3979004,
+            42.350254
+          ],
+          [
+            13.3974745,
+            42.350381
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1366369499",
+        "osm_tags": {
+          "footway": "sidewalk",
+          "highway": "footway",
+          "surface": "paving_stones"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3999644,
+            42.3507238
+          ],
+          [
+            13.3999297,
+            42.3507334
+          ],
+          [
+            13.3998942,
+            42.3507461
+          ],
+          [
+            13.3998612,
+            42.3507591
+          ],
+          [
+            13.3992461,
+            42.3510164
+          ],
+          [
+            13.3992034,
+            42.3510342
+          ],
+          [
+            13.3991255,
+            42.3510668
+          ],
+          [
+            13.3984887,
+            42.3513513
+          ],
+          [
+            13.3983488,
+            42.3514153
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1366374946",
+        "osm_tags": {
+          "footway": "sidewalk",
+          "highway": "footway",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3978121,
+            42.3515597
+          ],
+          [
+            13.3978545,
+            42.3515409
+          ],
+          [
+            13.3984325,
+            42.3512838
+          ],
+          [
+            13.3984958,
+            42.3512557
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1366374947",
+        "osm_tags": {
+          "footway": "sidewalk",
+          "highway": "footway",
+          "surface": "paving_stones"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3967075,
+            42.3506616
+          ],
+          [
+            13.3969227,
+            42.3505915
+          ],
+          [
+            13.3971729,
+            42.3505144
+          ],
+          [
+            13.3974957,
+            42.3504199
+          ],
+          [
+            13.3979263,
+            42.3503034
+          ],
+          [
+            13.3983235,
+            42.3501954
+          ],
+          [
+            13.3983709,
+            42.3501803
+          ],
+          [
+            13.3984238,
+            42.3501628
+          ],
+          [
+            13.3984831,
+            42.3501418
+          ],
+          [
+            13.3985691,
+            42.3501078
+          ],
+          [
+            13.3986213,
+            42.3500857
+          ],
+          [
+            13.3986653,
+            42.3500693
+          ],
+          [
+            13.3987081,
+            42.3500552
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1390232956",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "residential",
+          "lane_markings": "no",
+          "name": "Via Sallustio",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3986582,
+            42.3509461
+          ],
+          [
+            13.3986987,
+            42.3509975
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1411123321",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "footway",
+          "surface": "paving_stones"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3987756,
+            42.351095
+          ],
+          [
+            13.3987535,
+            42.3511014
+          ],
+          [
+            13.3987227,
+            42.3511017
+          ],
+          [
+            13.3986955,
+            42.3510935
+          ],
+          [
+            13.3986714,
+            42.3510748
+          ],
+          [
+            13.3986621,
+            42.3510565
+          ],
+          [
+            13.3986618,
+            42.351037
+          ],
+          [
+            13.3986707,
+            42.3510185
+          ],
+          [
+            13.3986876,
+            42.3510032
+          ],
+          [
+            13.3986987,
+            42.3509975
+          ],
+          [
+            13.3987126,
+            42.3509927
+          ],
+          [
+            13.3987393,
+            42.3509898
+          ],
+          [
+            13.3987654,
+            42.3509937
+          ],
+          [
+            13.3987895,
+            42.351005
+          ],
+          [
+            13.3988045,
+            42.3510194
+          ],
+          [
+            13.3988131,
+            42.3510395
+          ],
+          [
+            13.3988114,
+            42.3510597
+          ],
+          [
+            13.3987999,
+            42.3510785
+          ],
+          [
+            13.3987756,
+            42.351095
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1411123324",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "footway",
+          "surface": "paving_stones"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3988045,
+            42.3510194
+          ],
+          [
+            13.3988962,
+            42.3509812
+          ],
+          [
+            13.3989737,
+            42.350949
+          ],
+          [
+            13.3990411,
+            42.3509209
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1411123325",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "footway",
+          "surface": "paving_stones"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3987756,
+            42.351095
+          ],
+          [
+            13.3988269,
+            42.35116
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1411123327",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "footway",
+          "surface": "paving_stones"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3984334,
+            42.3511739
+          ],
+          [
+            13.3985145,
+            42.3511401
+          ],
+          [
+            13.3985212,
+            42.3511373
+          ],
+          [
+            13.3985415,
+            42.3511289
+          ],
+          [
+            13.3986233,
+            42.3510948
+          ],
+          [
+            13.3986442,
+            42.3510861
+          ],
+          [
+            13.3986503,
+            42.3510836
+          ],
+          [
+            13.3986714,
+            42.3510748
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1411123330",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "footway",
+          "surface": "paving_stones"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3989815,
+            42.3510922
+          ],
+          [
+            13.3989467,
+            42.351047
+          ],
+          [
+            13.3988962,
+            42.3509812
+          ],
+          [
+            13.3988468,
+            42.350917
+          ],
+          [
+            13.3988321,
+            42.3508979
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1416495249",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "footway",
+          "surface": "paving_stones"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3986173,
+            42.3511632
+          ],
+          [
+            13.3985913,
+            42.3511689
+          ],
+          [
+            13.3985643,
+            42.3511677
+          ],
+          [
+            13.3985395,
+            42.3511599
+          ],
+          [
+            13.3985145,
+            42.3511401
+          ],
+          [
+            13.3985054,
+            42.3511215
+          ],
+          [
+            13.3985055,
+            42.3511015
+          ],
+          [
+            13.3985148,
+            42.3510828
+          ],
+          [
+            13.3985323,
+            42.3510675
+          ],
+          [
+            13.3985438,
+            42.3510615
+          ],
+          [
+            13.3985694,
+            42.3510548
+          ],
+          [
+            13.3985965,
+            42.351055
+          ],
+          [
+            13.3986219,
+            42.351062
+          ],
+          [
+            13.3986425,
+            42.3510751
+          ],
+          [
+            13.3986503,
+            42.3510836
+          ],
+          [
+            13.3986593,
+            42.3511027
+          ],
+          [
+            13.3986588,
+            42.3511227
+          ],
+          [
+            13.3986491,
+            42.3511414
+          ],
+          [
+            13.3986313,
+            42.3511565
+          ],
+          [
+            13.3986173,
+            42.3511632
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1416495251",
+        "osm_tags": {
+          "access": "yes",
+          "highway": "footway",
+          "surface": "paving_stones"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.397701,
+            42.3514204
+          ],
+          [
+            13.3974644,
+            42.3515261
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1471938728",
+        "osm_tags": {
+          "highway": "footway",
+          "name": "Piazza Santa Margherita"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3975474,
+            42.3517505
+          ],
+          [
+            13.3978546,
+            42.3521409
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1474249773",
+        "osm_tags": {
+          "access": "no",
+          "highway": "residential",
+          "name": "Via San Martino",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3964399,
+            42.3518942
+          ],
+          [
+            13.3964288,
+            42.3518878
+          ],
+          [
+            13.396114,
+            42.3517069
+          ],
+          [
+            13.3959923,
+            42.3516424
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1536980620",
+        "osm_tags": {
+          "access": "no",
+          "highway": "residential",
+          "name": "Via Antonelli",
+          "surface": "sett"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.3941679,
+            42.3533893
+          ],
+          [
+            13.3947646,
+            42.3531018
+          ],
+          [
+            13.3953404,
+            42.3528244
+          ],
+          [
+            13.3953677,
+            42.352811
+          ],
+          [
+            13.3954162,
+            42.3527879
+          ],
+          [
+            13.3955671,
+            42.3527152
+          ],
+          [
+            13.3956547,
+            42.352673
+          ],
+          [
+            13.3956791,
+            42.3526612
+          ],
+          [
+            13.3960075,
+            42.352503
+          ],
+          [
+            13.3960255,
+            42.3524943
+          ],
+          [
+            13.3967617,
+            42.3521455
+          ],
+          [
+            13.3967963,
+            42.3521283
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "way/1554218973",
+        "osm_tags": {
+          "access": "yes",
+          "foot": "yes",
+          "highway": "residential",
+          "maxspeed": "50",
+          "name": "Via Roma",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "provenance": "source"
+      },
+      "type": "Feature"
+    }
+  ],
+  "name": "laquila_osm_context_v1",
+  "properties": {
+    "crs": "EPSG:4326",
+    "license": "ODbL 1.0, OpenStreetMap contributors",
+    "projection": "local_tangent_equirectangular, origin recorded by loader",
+    "query": "[out:json][timeout:30];\n(\n  way[\"building\"](42.3498,13.3950,42.3522,13.3990);\n  way[\"highway\"](42.3498,13.3950,42.3522,13.3990);\n);\nout geom;",
+    "schema_version": "osm_context.v1",
+    "snapshot_at": "2026-09-24T13:03:34Z",
+    "source": "OpenStreetMap via Overpass API"
+  },
+  "type": "FeatureCollection"
+}

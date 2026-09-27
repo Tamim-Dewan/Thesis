@@ -1,0 +1,146 @@
+\chapter{Implementation}
+\label{chapter_implementation}
+
+\section{Implementation Overview}
+
+The proposed work will be implemented as a simulation-based optimization
+study rather than as a physical UAV deployment. The implementation will use a
+Python-based experimental workflow that can be executed locally and later
+shared through a reproducible notebook environment such as Google Colab or
+Jupyter Notebook. This choice keeps the experimental setup transparent while
+allowing the task-allocation, routing, payload, battery, and recourse
+components of the proposed PGBM formulation to be tested under controlled
+post-earthquake response scenarios.
+
+The implementation will focus on generating and solving representative
+responder-UAV planning instances. Each instance will contain an earthquake-
+affected urban workspace, accepted survivor-assistance tasks, available
+responder UAVs, relief-item requirements, feasible three-dimensional flight
+links, and possible newly arriving tasks for recourse evaluation. The purpose
+of this chapter is therefore to describe the planned data and environment
+setup that will be used to evaluate the mathematical formulation presented in
+Chapter~\ref{chapter_proposedMethod}.
+
+\section{Data Sources and Scenario Construction}
+
+Public disaster-response datasets will be used to support the scenario design,
+but they will not be treated as complete optimization datasets. DRespNeT is a
+UAV-based post-earthquake dataset containing high-resolution aerial imagery
+with detailed annotations of damaged structures, debris, access points, rescue
+personnel, vehicles, and visible civilians \cite{sirma2025drespnet}. It
+provides a realistic reference for understanding post-earthquake urban
+environments and UAV-assisted search-and-rescue scenarios.
+
+LADI, the Low Altitude Disaster Imagery dataset, contains aerial images
+collected from real disaster-affected regions and annotated for disaster-
+related visual features \cite{scheele2025ladi}. It will be used as a reference
+for the visual characteristics and spatial complexity of emergency
+environments observed from low-altitude aerial platforms. AIDER, the Aerial
+Image Dataset for Emergency Response, contains aerial images representing
+emergency conditions such as collapsed buildings, rubble, fires, floods,
+traffic incidents, and normal scenes \cite{kyrkou2020emergencynet}. It is
+useful for supporting disaster-scene classification and emergency-response
+scenario design.
+
+These public datasets are used primarily to support the design and realism of
+the disaster scenario. The task, UAV, payload, energy, and dynamic recourse
+data required by the proposed optimization model will be generated
+synthetically, because the available public datasets do not jointly provide
+survivor-assistance demand, responder-UAV battery state, payload state,
+obstacle-aware three-dimensional routing links, and recourse-event records.
+
+\section{Synthetic Survivor-Assistance Task Generation}
+
+The synthetic task generator will create survivor-assistance tasks that match
+the inputs required by the proposed formulation. Each task will include a task
+identifier, detected survivor location, UAV-accessible drop-off waypoint,
+detection time, operational severity score, required relief-item quantities,
+and service duration. The detected survivor location and the drop-off waypoint
+will be stored separately, since a survivor may be located inside rubble or a
+damaged structure while the UAV can only deliver from a nearby feasible
+position in flyable space.
+
+Task arrival times will also be generated so that both initial planning and
+dynamic recourse can be tested. Tasks known at the beginning of a planning
+cycle will form the initial task set, while later arrivals will be used to
+evaluate whether the task-replacement rule can improve the remaining mission
+value without restarting the entire plan.
+
+\section{Three-Dimensional Operating Environment}
+
+The main experimental environment will be a custom synthetic three-dimensional
+urban post-earthquake workspace. The workspace will be represented as a bounded
+3D region containing UAV base locations, building obstacles, rubble-affected
+areas, and no-fly volumes. Feasible UAV waypoints will be sampled only from
+flyable space, and directed flight links will be created only when the
+straight-line segment between two waypoints does not intersect a blocked
+region.
+
+This environment is consistent with simulation-based UAV disaster-response
+studies, where researchers construct 3D disaster rescue scenarios, terrain
+models, threat sources, and mission points to evaluate assignment and path-
+planning methods \cite{xiong2023multidrone,liu2021multiuv}. For the proposed
+PGBM implementation, the environment will be kept simple enough to support
+reproducible experiments, while still preserving the key operational
+constraints: obstacle avoidance, feasible drop-off points, limited battery,
+limited payload, and return to the same physical UAV base.
+
+\section{Responder-UAV and Payload Configuration}
+
+Each responder UAV will be described by its base location, cruise speed,
+available battery energy, reserve energy requirement, maximum payload weight,
+maximum parcel count, and energy-related coefficients. Relief supplies will be
+represented using a finite set of item types, where each item type has a
+specified unit weight. The generated task demand will determine how many items
+of each type must be loaded for a selected task.
+
+The same UAV and payload configuration will be used consistently across the
+assignment, routing, timing, payload, and energy calculations. In particular,
+each planned mission must start from the UAV base, visit the assigned
+drop-off waypoints through feasible flight links, and return to the same
+physical base while preserving the required reserve energy.
+
+\section{Optimization and Recourse Workflow}
+
+The implementation workflow will begin by generating a disaster scenario and
+constructing the corresponding 3D flight-link graph. The planner will then
+create the current set of eligible survivor-assistance tasks and the available
+responder-UAV states. The optimization model will be solved on this generated
+instance to obtain the selected tasks, assigned UAVs, selected flight links,
+completion times, payload usage, and energy-feasible missions.
+
+During simulated mission execution, the state of each UAV and each task will
+be updated. If a new survivor-assistance task arrives while responder UAVs are
+already active, the recourse module will evaluate whether replacing one
+uncompleted task in an active mission improves the remaining service value.
+Accepted replacements will update the remaining mission plan, while rejected
+new tasks or displaced old tasks will remain in the waiting queue for a later
+planning cycle.
+
+\section{Planned Evaluation Metrics}
+
+The planned experiments will evaluate both the initial planning decision and
+the dynamic recourse behavior. The main output measures will include the total
+time-dependent service value, number of served tasks, average completion
+delay, total UAV travel distance, battery-energy usage, payload utilization,
+number of deferred tasks, number of accepted task replacements, and number of
+rejected recourse events. Safe-return feasibility will also be checked for
+each UAV mission.
+
+\begin{table}[htbp]
+\centering
+\caption{Planned implementation data components.}
+\label{tab:implementation_components}
+\begin{tabular}{p{0.28\textwidth}p{0.58\textwidth}}
+\hline
+\textbf{Component} & \textbf{Planned Data}\\
+\hline
+Scenario references & DRespNeT, LADI, and AIDER for disaster-scene context\\
+Task instances & Survivor location, drop-off waypoint, severity, demand, and service time\\
+UAV configuration & Base, speed, payload capacity, parcel capacity, battery, and reserve energy\\
+3D environment & Workspace boundary, obstacles, feasible waypoints, and flight links\\
+Recourse events & Newly arriving tasks during active responder-UAV missions\\
+Evaluation outputs & Service value, delay, distance, energy use, payload use, and replacement decisions\\
+\hline
+\end{tabular}
+\end{table}

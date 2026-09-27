@@ -1,0 +1,690 @@
+{
+  "buildings": [
+    {
+      "scene_id": "intact_b001",
+      "source_id": "b_001",
+      "damage_grade": "no_damage",
+      "parts": [
+        {
+          "vertex_count": 1228,
+          "face_count": 2190,
+          "minimum": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximum": [
+            15.328643999999997,
+            7.9171949999999995,
+            21.14183100000001
+          ],
+          "extent": [
+            15.328643999999997,
+            7.9171949999999995,
+            21.14183100000001
+          ]
+        }
+      ],
+      "metrics": {
+        "pre_height": 21.14183100000001,
+        "post_height": 21.14183100000001,
+        "pre_volume": 957.7914936773973,
+        "post_volume": 957.7914936773973,
+        "pre_footprint_area": 100.82695031857693,
+        "post_footprint_area": 100.82695031857693,
+        "height_ratio": 1.0,
+        "volume_ratio": 1.0,
+        "footprint_ratio": 1.0
+      },
+      "source_files": [
+        "pre_b_001_pre.obj"
+      ],
+      "quality_flags": [],
+      "derived": false
+    },
+    {
+      "scene_id": "heavy_b003",
+      "source_id": "b_003",
+      "damage_grade": "heavy",
+      "parts": [
+        {
+          "vertex_count": 1865,
+          "face_count": 3100,
+          "minimum": [
+            40.0,
+            0.0,
+            0.4832000000000036
+          ],
+          "maximum": [
+            55.05474899999999,
+            10.338563,
+            13.711112999999997
+          ],
+          "extent": [
+            15.054748999999987,
+            10.338563,
+            13.227912999999994
+          ]
+        },
+        {
+          "vertex_count": 8,
+          "face_count": 12,
+          "minimum": [
+            51.14393537796366,
+            5.498922518075042,
+            0.0
+          ],
+          "maximum": [
+            52.20453846188342,
+            6.354564574957895,
+            0.5754474873495468
+          ],
+          "extent": [
+            1.0606030839197658,
+            0.8556420568828536,
+            0.5754474873495468
+          ]
+        },
+        {
+          "vertex_count": 8,
+          "face_count": 12,
+          "minimum": [
+            50.47842447197816,
+            6.323826982098926,
+            0.0
+          ],
+          "maximum": [
+            51.410305316022985,
+            7.358251838594097,
+            0.8489913183026055
+          ],
+          "extent": [
+            0.9318808440448265,
+            1.0344248564951712,
+            0.8489913183026055
+          ]
+        },
+        {
+          "vertex_count": 8,
+          "face_count": 12,
+          "minimum": [
+            52.98322863230187,
+            8.710731464605,
+            0.0
+          ],
+          "maximum": [
+            54.237374067630086,
+            9.846022321697681,
+            0.8328869238830653
+          ],
+          "extent": [
+            1.254145435328212,
+            1.1352908570926807,
+            0.8328869238830653
+          ]
+        },
+        {
+          "vertex_count": 8,
+          "face_count": 12,
+          "minimum": [
+            51.758356999613305,
+            8.738006954536012,
+            0.0
+          ],
+          "maximum": [
+            52.744556222632276,
+            9.584461821033832,
+            1.0238165274981839
+          ],
+          "extent": [
+            0.9861992230189713,
+            0.8464548664978206,
+            1.0238165274981839
+          ]
+        }
+      ],
+      "metrics": {
+        "pre_height": 13.711112999999997,
+        "post_height": 13.227912999999994,
+        "pre_volume": 158.98491179502705,
+        "post_volume": 73.83863139224842,
+        "pre_footprint_area": 126.65467239024693,
+        "post_footprint_area": 120.44487331054987,
+        "height_ratio": 0.9647585137690862,
+        "volume_ratio": 0.46443798067734654,
+        "footprint_ratio": 0.9509706277509961
+      },
+      "source_files": [
+        "pre_b_003_pre.obj"
+      ],
+      "quality_flags": [],
+      "derived": true
+    },
+    {
+      "scene_id": "extreme_b001",
+      "source_id": "b_001",
+      "damage_grade": "extreme",
+      "parts": [
+        {
+          "vertex_count": 14030,
+          "face_count": 13617,
+          "minimum": [
+            80.0,
+            0.0,
+            0.0
+          ],
+          "maximum": [
+            100.909424,
+            8.211138,
+            38.369438
+          ],
+          "extent": [
+            20.909424,
+            8.211138,
+            38.369438
+          ]
+        }
+      ],
+      "metrics": {
+        "pre_height": 21.14183100000001,
+        "post_height": 38.369438,
+        "pre_volume": 957.7914936773973,
+        "post_volume": 497.8194883505526,
+        "pre_footprint_area": 100.82695031857693,
+        "post_footprint_area": 126.05466144647798,
+        "height_ratio": 1.8148587981807245,
+        "volume_ratio": 0.5197576838349202,
+        "footprint_ratio": 1.250208015299387
+      },
+      "source_files": [
+        "pre_b_001_pre.obj",
+        "grade4_b_001_post.obj"
+      ],
+      "quality_flags": [],
+      "derived": false
+    },
+    {
+      "scene_id": "destruction_b002",
+      "source_id": "b_002",
+      "damage_grade": "destruction",
+      "parts": [
+        {
+          "vertex_count": 2304,
+          "face_count": 3419,
+          "minimum": [
+            0.0,
+            40.0,
+            0.0
+          ],
+          "maximum": [
+            14.978439000000009,
+            50.080551,
+            13.270653000000003
+          ],
+          "extent": [
+            14.978439000000009,
+            10.080551,
+            13.270653000000003
+          ]
+        }
+      ],
+      "metrics": {
+        "pre_height": 13.711113000000005,
+        "post_height": 13.270653000000003,
+        "pre_volume": 158.98473736628412,
+        "post_volume": 209.06684756115604,
+        "pre_footprint_area": 126.65468366590514,
+        "post_footprint_area": 121.90801142526863,
+        "height_ratio": 0.9678756932424084,
+        "volume_ratio": 1.315012063576191,
+        "footprint_ratio": 0.9625227263355102
+      },
+      "source_files": [
+        "pre_b_002_pre.obj",
+        "grade5_b_002_post.obj"
+      ],
+      "quality_flags": [
+        "post mesh volume exceeds pre event volume, review debris interpretation"
+      ],
+      "derived": false
+    },
+    {
+      "scene_id": "intact_b004",
+      "source_id": "b_004",
+      "damage_grade": "no_damage",
+      "parts": [
+        {
+          "vertex_count": 3264,
+          "face_count": 5610,
+          "minimum": [
+            40.0,
+            40.0,
+            0.0
+          ],
+          "maximum": [
+            55.353684000000015,
+            50.338565,
+            13.711113000000001
+          ],
+          "extent": [
+            15.353684000000015,
+            10.338565000000003,
+            13.711113000000001
+          ]
+        }
+      ],
+      "metrics": {
+        "pre_height": 13.711113000000001,
+        "post_height": 13.711113000000001,
+        "pre_volume": 158.98494874893933,
+        "post_volume": 158.98494874893933,
+        "pre_footprint_area": 126.65469278654155,
+        "post_footprint_area": 126.65469278654155,
+        "height_ratio": 1.0,
+        "volume_ratio": 1.0,
+        "footprint_ratio": 1.0
+      },
+      "source_files": [
+        "pre_b_004_pre.obj"
+      ],
+      "quality_flags": [],
+      "derived": false
+    },
+    {
+      "scene_id": "heavy_b005",
+      "source_id": "b_005",
+      "damage_grade": "heavy",
+      "parts": [
+        {
+          "vertex_count": 1887,
+          "face_count": 3131,
+          "minimum": [
+            80.0,
+            40.0,
+            0.48320200000000035
+          ],
+          "maximum": [
+            95.05474799999999,
+            50.338564,
+            13.711113000000001
+          ],
+          "extent": [
+            15.05474799999999,
+            10.338563999999998,
+            13.227911
+          ]
+        },
+        {
+          "vertex_count": 8,
+          "face_count": 12,
+          "minimum": [
+            89.07731453962451,
+            47.47348329115046,
+            0.0
+          ],
+          "maximum": [
+            90.66835141118067,
+            48.673004658892275,
+            1.4793639741146818
+          ],
+          "extent": [
+            1.591036871556156,
+            1.1995213677418164,
+            1.4793639741146818
+          ]
+        },
+        {
+          "vertex_count": 8,
+          "face_count": 12,
+          "minimum": [
+            90.46796976189526,
+            44.48199846027359,
+            0.0
+          ],
+          "maximum": [
+            92.11529506783387,
+            45.37313383264467,
+            0.7445665457266778
+          ],
+          "extent": [
+            1.6473253059386082,
+            0.8911353723710818,
+            0.7445665457266778
+          ]
+        },
+        {
+          "vertex_count": 8,
+          "face_count": 12,
+          "minimum": [
+            90.21413105612207,
+            46.53114373529074,
+            0.0
+          ],
+          "maximum": [
+            92.3385416699704,
+            47.30456138359265,
+            0.5137328107404094
+          ],
+          "extent": [
+            2.124410613848326,
+            0.7734176483019084,
+            0.5137328107404094
+          ]
+        },
+        {
+          "vertex_count": 8,
+          "face_count": 12,
+          "minimum": [
+            90.39778082151535,
+            48.91738101345339,
+            0.0
+          ],
+          "maximum": [
+            92.45038533493926,
+            49.99384741737418,
+            0.9251884189653733
+          ],
+          "extent": [
+            2.0526045134239013,
+            1.07646640392079,
+            0.9251884189653733
+          ]
+        }
+      ],
+      "metrics": {
+        "pre_height": 13.711113000000001,
+        "post_height": 13.227911,
+        "pre_volume": 158.98492452156097,
+        "post_volume": 73.37874957714213,
+        "pre_footprint_area": 126.6546865882114,
+        "post_footprint_area": 120.44488590078888,
+        "height_ratio": 0.9647583679020076,
+        "volume_ratio": 0.4615453307787731,
+        "footprint_ratio": 0.9509706205534086
+      },
+      "source_files": [
+        "pre_b_005_pre.obj"
+      ],
+      "quality_flags": [],
+      "derived": true
+    },
+    {
+      "scene_id": "extreme_b007",
+      "source_id": "b_007",
+      "damage_grade": "extreme",
+      "parts": [
+        {
+          "vertex_count": 15572,
+          "face_count": 15748,
+          "minimum": [
+            0.0,
+            80.0,
+            0.0
+          ],
+          "maximum": [
+            26.587249999999983,
+            90.227181,
+            25.947086
+          ],
+          "extent": [
+            26.587249999999983,
+            10.227181000000002,
+            25.947086
+          ]
+        }
+      ],
+      "metrics": {
+        "pre_height": 13.711112999999997,
+        "post_height": 25.947086,
+        "pre_volume": 158.98457917277656,
+        "post_volume": 274.6685422952626,
+        "pre_footprint_area": 126.65465301267449,
+        "post_footprint_area": 162.3184290363345,
+        "height_ratio": 1.8924128187113622,
+        "volume_ratio": 1.727642666505199,
+        "footprint_ratio": 1.2815828331241101
+      },
+      "source_files": [
+        "pre_b_007_pre.obj",
+        "grade4_b_007_post.obj"
+      ],
+      "quality_flags": [
+        "post geometry contains coordinates below the local ground reference",
+        "post mesh volume exceeds pre event volume, review debris interpretation"
+      ],
+      "derived": false
+    },
+    {
+      "scene_id": "destruction_b003",
+      "source_id": "b_003",
+      "damage_grade": "destruction",
+      "parts": [
+        {
+          "vertex_count": 83006,
+          "face_count": 83458,
+          "minimum": [
+            40.0,
+            80.0,
+            0.0
+          ],
+          "maximum": [
+            71.370972,
+            82.521305,
+            29.949194000000002
+          ],
+          "extent": [
+            31.370971999999995,
+            2.521304999999998,
+            29.949194000000002
+          ]
+        }
+      ],
+      "metrics": {
+        "pre_height": 13.711112999999997,
+        "post_height": 29.949194000000002,
+        "pre_volume": 158.98491179502705,
+        "post_volume": 91.61938012044688,
+        "pre_footprint_area": 126.65467239024693,
+        "post_footprint_area": 45.52276128877798,
+        "height_ratio": 2.184300720153062,
+        "volume_ratio": 0.5762772019433399,
+        "footprint_ratio": 0.35942425517878857
+      },
+      "source_files": [
+        "pre_b_003_pre.obj",
+        "grade5_b_003_post.obj"
+      ],
+      "quality_flags": [
+        "post geometry contains coordinates below the local ground reference"
+      ],
+      "derived": false
+    },
+    {
+      "scene_id": "intact_b006",
+      "source_id": "b_006",
+      "damage_grade": "no_damage",
+      "parts": [
+        {
+          "vertex_count": 3264,
+          "face_count": 5610,
+          "minimum": [
+            80.0,
+            80.0,
+            0.0
+          ],
+          "maximum": [
+            93.30653399999997,
+            88.960091,
+            11.882966999999999
+          ],
+          "extent": [
+            13.30653399999997,
+            8.960091000000006,
+            11.882966999999999
+          ]
+        }
+      ],
+      "metrics": {
+        "pre_height": 11.882966999999999,
+        "post_height": 11.882966999999999,
+        "pre_volume": 103.4924713653971,
+        "post_volume": 103.4924713653971,
+        "pre_footprint_area": 95.13167790258488,
+        "post_footprint_area": 95.13167790258488,
+        "height_ratio": 1.0,
+        "volume_ratio": 1.0,
+        "footprint_ratio": 1.0
+      },
+      "source_files": [
+        "pre_b_006_pre.obj"
+      ],
+      "quality_flags": [],
+      "derived": false
+    },
+    {
+      "scene_id": "intact_b008",
+      "source_id": "b_008",
+      "damage_grade": "no_damage",
+      "parts": [
+        {
+          "vertex_count": 3264,
+          "face_count": 5610,
+          "minimum": [
+            0.0,
+            120.0,
+            0.0
+          ],
+          "maximum": [
+            13.30653300000003,
+            128.96008799999998,
+            11.882969000000003
+          ],
+          "extent": [
+            13.30653300000003,
+            8.960087999999985,
+            11.882969000000003
+          ]
+        }
+      ],
+      "metrics": {
+        "pre_height": 11.882969000000003,
+        "post_height": 11.882969000000003,
+        "pre_volume": 103.49247657213755,
+        "post_volume": 103.49247657213755,
+        "pre_footprint_area": 95.13165258042201,
+        "post_footprint_area": 95.13165258042201,
+        "height_ratio": 1.0,
+        "volume_ratio": 1.0,
+        "footprint_ratio": 1.0
+      },
+      "source_files": [
+        "pre_b_008_pre.obj"
+      ],
+      "quality_flags": [],
+      "derived": false
+    }
+  ],
+  "roads": [
+    {
+      "identifier": "east_west",
+      "start": [
+        0.0,
+        35.0
+      ],
+      "end": [
+        120.0,
+        35.0
+      ],
+      "width": 6.0,
+      "status": "blocked"
+    },
+    {
+      "identifier": "north_south",
+      "start": [
+        35.0,
+        0.0
+      ],
+      "end": [
+        35.0,
+        160.0
+      ],
+      "width": 6.0,
+      "status": "clear"
+    }
+  ],
+  "base": [
+    -2.0,
+    -2.0,
+    0.0
+  ],
+  "candidate_sites": [
+    [
+      30.0,
+      30.0,
+      0.0
+    ],
+    [
+      70.0,
+      30.0,
+      0.0
+    ],
+    [
+      110.0,
+      30.0,
+      0.0
+    ],
+    [
+      30.0,
+      70.0,
+      0.0
+    ],
+    [
+      70.0,
+      70.0,
+      0.0
+    ],
+    [
+      110.0,
+      70.0,
+      0.0
+    ],
+    [
+      30.0,
+      110.0,
+      0.0
+    ],
+    [
+      70.0,
+      110.0,
+      0.0
+    ],
+    [
+      110.0,
+      110.0,
+      0.0
+    ]
+  ],
+  "world_minimum": [
+    -5.0,
+    -5.0,
+    0.0
+  ],
+  "world_maximum": [
+    105.909424,
+    133.96008799999998,
+    43.369438
+  ],
+  "seed": 20260924,
+  "source": "doi:10.11588/DATA/D3WZID",
+  "metadata": {
+    "manifest_version": "heidata.sample.v1",
+    "damage_grade_mapping": {
+      "no_damage": "building_models_pre_event_generic.zip",
+      "heavy": "building_models_post_event_damage_grade3_generic.zip",
+      "extreme": "building_models_post_event_damage_grade4_generic.zip",
+      "destruction": "building_models_post_event_damage_grade5_generic.zip"
+    },
+    "include_raw_heavy": false,
+    "quality_flag_count": 4
+  }
+}

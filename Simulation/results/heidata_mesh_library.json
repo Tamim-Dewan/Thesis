@@ -1,0 +1,513 @@
+{
+  "asset_count": 14,
+  "assets": [
+    {
+      "asset_id": "post:grade3_b_003_post.obj",
+      "checksum_sha256": "bb8f3ea6c3dc05e60f8220a284fa1548ae1a94c2640eb6e7406d2ee02c1700df",
+      "damage_grade": "heavy",
+      "event_phase": "post",
+      "path": "heidata_benchmark/data/sample/raw/grade3_b_003_post.obj",
+      "raw_bounds_source_xyz": {
+        "maximum": [
+          150.088623,
+          19.34528,
+          121.982445
+        ],
+        "minimum": [
+          -326.46817,
+          -0.637875,
+          -233.707794
+        ]
+      },
+      "review": {
+        "asset_id": "post:grade3_b_003_post.obj",
+        "checks": [
+          "source mesh parsed",
+          "horizontal extent ratio 31.04 exceeds 4.00"
+        ],
+        "reason": "geometry needs explicit thesis review before scenario use",
+        "review_version": "mesh_review.v1",
+        "status": "inspection_only"
+      },
+      "source_axis_convention": {
+        "horizontal": [
+          "X",
+          "Z"
+        ],
+        "vertical": "Y"
+      },
+      "source_id": "b_003"
+    },
+    {
+      "asset_id": "post:grade3_b_005_post.obj",
+      "checksum_sha256": "430401bfdeb2d0f07f39cce5a9622d6be5d977f63a1984da702f76a989ecbe45",
+      "damage_grade": "heavy",
+      "event_phase": "post",
+      "path": "heidata_benchmark/data/sample/raw/grade3_b_005_post.obj",
+      "raw_bounds_source_xyz": {
+        "maximum": [
+          150.088623,
+          19.34528,
+          121.982445
+        ],
+        "minimum": [
+          -326.46817,
+          -0.637886,
+          -233.707794
+        ]
+      },
+      "review": {
+        "asset_id": "post:grade3_b_005_post.obj",
+        "checks": [
+          "source mesh parsed",
+          "horizontal extent ratio 31.04 exceeds 4.00"
+        ],
+        "reason": "geometry needs explicit thesis review before scenario use",
+        "review_version": "mesh_review.v1",
+        "status": "inspection_only"
+      },
+      "source_axis_convention": {
+        "horizontal": [
+          "X",
+          "Z"
+        ],
+        "vertical": "Y"
+      },
+      "source_id": "b_005"
+    },
+    {
+      "asset_id": "post:grade4_b_001_post.obj",
+      "checksum_sha256": "869dae74f898757a517cd6011ae3b32e14ddb91fcae47aae401fbfee6f05bdca",
+      "damage_grade": "extreme",
+      "event_phase": "post",
+      "path": "heidata_benchmark/data/sample/raw/grade4_b_001_post.obj",
+      "raw_bounds_source_xyz": {
+        "maximum": [
+          -237.769562,
+          7.917178,
+          114.815262
+        ],
+        "minimum": [
+          -258.678986,
+          -0.29396,
+          76.445824
+        ]
+      },
+      "review": {
+        "asset_id": "post:grade4_b_001_post.obj",
+        "checks": [
+          "source mesh parsed"
+        ],
+        "reason": "geometry is within deterministic source review thresholds",
+        "review_version": "mesh_review.v1",
+        "status": "accepted"
+      },
+      "source_axis_convention": {
+        "horizontal": [
+          "X",
+          "Z"
+        ],
+        "vertical": "Y"
+      },
+      "source_id": "b_001"
+    },
+    {
+      "asset_id": "post:grade4_b_007_post.obj",
+      "checksum_sha256": "4eccc0ab6ab71b7448fe9ada3d134e724ab4ef407794e93759f8555294adf24d",
+      "damage_grade": "extreme",
+      "event_phase": "post",
+      "path": "heidata_benchmark/data/sample/raw/grade4_b_007_post.obj",
+      "raw_bounds_source_xyz": {
+        "maximum": [
+          -246.409271,
+          9.589339,
+          -23.229534
+        ],
+        "minimum": [
+          -272.996521,
+          -0.637842,
+          -49.17662
+        ]
+      },
+      "review": {
+        "asset_id": "post:grade4_b_007_post.obj",
+        "checks": [
+          "source mesh parsed"
+        ],
+        "reason": "geometry is within deterministic source review thresholds",
+        "review_version": "mesh_review.v1",
+        "status": "accepted"
+      },
+      "source_axis_convention": {
+        "horizontal": [
+          "X",
+          "Z"
+        ],
+        "vertical": "Y"
+      },
+      "source_id": "b_007"
+    },
+    {
+      "asset_id": "post:grade5_b_002_post.obj",
+      "checksum_sha256": "6c4581872a1433f189b6bfc15f3f0642156d3e1f1c82439ee49c6c5e02117e98",
+      "damage_grade": "destruction",
+      "event_phase": "post",
+      "path": "heidata_benchmark/data/sample/raw/grade5_b_002_post.obj",
+      "raw_bounds_source_xyz": {
+        "maximum": [
+          -245.286911,
+          9.105597,
+          71.016289
+        ],
+        "minimum": [
+          -260.26535,
+          -0.974954,
+          57.745636
+        ]
+      },
+      "review": {
+        "asset_id": "post:grade5_b_002_post.obj",
+        "checks": [
+          "source mesh parsed"
+        ],
+        "reason": "geometry is within deterministic source review thresholds",
+        "review_version": "mesh_review.v1",
+        "status": "accepted"
+      },
+      "source_axis_convention": {
+        "horizontal": [
+          "X",
+          "Z"
+        ],
+        "vertical": "Y"
+      },
+      "source_id": "b_002"
+    },
+    {
+      "asset_id": "post:grade5_b_003_post.obj",
+      "checksum_sha256": "33ed92e6b6d988a4aa0e559741acd0178636cd34f39bd64f54dab5a56c608ba8",
+      "damage_grade": "destruction",
+      "event_phase": "post",
+      "path": "heidata_benchmark/data/sample/raw/grade5_b_003_post.obj",
+      "raw_bounds_source_xyz": {
+        "maximum": [
+          -239.972961,
+          2.223994,
+          57.919823
+        ],
+        "minimum": [
+          -271.343933,
+          -0.297311,
+          27.970629
+        ]
+      },
+      "review": {
+        "asset_id": "post:grade5_b_003_post.obj",
+        "checks": [
+          "source mesh parsed"
+        ],
+        "reason": "geometry is within deterministic source review thresholds",
+        "review_version": "mesh_review.v1",
+        "status": "accepted"
+      },
+      "source_axis_convention": {
+        "horizontal": [
+          "X",
+          "Z"
+        ],
+        "vertical": "Y"
+      },
+      "source_id": "b_003"
+    },
+    {
+      "asset_id": "pre:pre_b_001_pre.obj",
+      "checksum_sha256": "1c1f77ec339b9392e7367ce2a2e08f91d2e97d7755972c5287257431502ae01f",
+      "damage_grade": "no_damage",
+      "event_phase": "pre",
+      "path": "heidata_benchmark/data/sample/raw/pre_b_001_pre.obj",
+      "raw_bounds_source_xyz": {
+        "maximum": [
+          -242.600708,
+          7.917178,
+          97.606812
+        ],
+        "minimum": [
+          -257.929352,
+          -1.7e-05,
+          76.464981
+        ]
+      },
+      "review": {
+        "asset_id": "pre:pre_b_001_pre.obj",
+        "checks": [
+          "source mesh parsed"
+        ],
+        "reason": "pre event source asset",
+        "review_version": "mesh_review.v1",
+        "status": "accepted"
+      },
+      "source_axis_convention": {
+        "horizontal": [
+          "X",
+          "Z"
+        ],
+        "vertical": "Y"
+      },
+      "source_id": "b_001"
+    },
+    {
+      "asset_id": "pre:pre_b_002_pre.obj",
+      "checksum_sha256": "6f649e711ae5188b24790984c8901427e76455f0a329023e67c1e9f4d6aac2bc",
+      "damage_grade": "no_damage",
+      "event_phase": "pre",
+      "path": "heidata_benchmark/data/sample/raw/pre_b_002_pre.obj",
+      "raw_bounds_source_xyz": {
+        "maximum": [
+          -245.200119,
+          9.70069,
+          71.286484
+        ],
+        "minimum": [
+          -260.553802,
+          -0.637874,
+          57.575371
+        ]
+      },
+      "review": {
+        "asset_id": "pre:pre_b_002_pre.obj",
+        "checks": [
+          "source mesh parsed"
+        ],
+        "reason": "pre event source asset",
+        "review_version": "mesh_review.v1",
+        "status": "accepted"
+      },
+      "source_axis_convention": {
+        "horizontal": [
+          "X",
+          "Z"
+        ],
+        "vertical": "Y"
+      },
+      "source_id": "b_002"
+    },
+    {
+      "asset_id": "pre:pre_b_003_pre.obj",
+      "checksum_sha256": "6e3b3a28aac5b607c51f899b90db3e74c57d32ba38a6b126b9dc44ea4becf933",
+      "damage_grade": "no_damage",
+      "event_phase": "pre",
+      "path": "heidata_benchmark/data/sample/raw/pre_b_003_pre.obj",
+      "raw_bounds_source_xyz": {
+        "maximum": [
+          -246.097061,
+          9.700696,
+          51.908272
+        ],
+        "minimum": [
+          -261.450745,
+          -0.637867,
+          38.197159
+        ]
+      },
+      "review": {
+        "asset_id": "pre:pre_b_003_pre.obj",
+        "checks": [
+          "source mesh parsed"
+        ],
+        "reason": "pre event source asset",
+        "review_version": "mesh_review.v1",
+        "status": "accepted"
+      },
+      "source_axis_convention": {
+        "horizontal": [
+          "X",
+          "Z"
+        ],
+        "vertical": "Y"
+      },
+      "source_id": "b_003"
+    },
+    {
+      "asset_id": "pre:pre_b_004_pre.obj",
+      "checksum_sha256": "503a8dc5d263e414911615f3cda14c68ec6cd1b59db33b3a0602722ea6928f0a",
+      "damage_grade": "no_damage",
+      "event_phase": "pre",
+      "path": "heidata_benchmark/data/sample/raw/pre_b_004_pre.obj",
+      "raw_bounds_source_xyz": {
+        "maximum": [
+          -247.505142,
+          9.700704,
+          31.973244
+        ],
+        "minimum": [
+          -262.858826,
+          -0.637861,
+          18.262131
+        ]
+      },
+      "review": {
+        "asset_id": "pre:pre_b_004_pre.obj",
+        "checks": [
+          "source mesh parsed"
+        ],
+        "reason": "pre event source asset",
+        "review_version": "mesh_review.v1",
+        "status": "accepted"
+      },
+      "source_axis_convention": {
+        "horizontal": [
+          "X",
+          "Z"
+        ],
+        "vertical": "Y"
+      },
+      "source_id": "b_004"
+    },
+    {
+      "asset_id": "pre:pre_b_005_pre.obj",
+      "checksum_sha256": "496d0d4b788624c9820137a6bbb54f95bf543431bcabbc3aaac59484cf0ca984",
+      "damage_grade": "no_damage",
+      "event_phase": "pre",
+      "path": "heidata_benchmark/data/sample/raw/pre_b_005_pre.obj",
+      "raw_bounds_source_xyz": {
+        "maximum": [
+          -248.835129,
+          9.700709,
+          11.177441
+        ],
+        "minimum": [
+          -264.188812,
+          -0.637855,
+          -2.533672
+        ]
+      },
+      "review": {
+        "asset_id": "pre:pre_b_005_pre.obj",
+        "checks": [
+          "source mesh parsed"
+        ],
+        "reason": "pre event source asset",
+        "review_version": "mesh_review.v1",
+        "status": "accepted"
+      },
+      "source_axis_convention": {
+        "horizontal": [
+          "X",
+          "Z"
+        ],
+        "vertical": "Y"
+      },
+      "source_id": "b_005"
+    },
+    {
+      "asset_id": "pre:pre_b_006_pre.obj",
+      "checksum_sha256": "93ac4f208b29e3911ced79870974931fa664ac1bb8e73f80f34fd0dd41920f09",
+      "damage_grade": "no_damage",
+      "event_phase": "pre",
+      "path": "heidata_benchmark/data/sample/raw/pre_b_006_pre.obj",
+      "raw_bounds_source_xyz": {
+        "maximum": [
+          -251.559402,
+          8.407289,
+          -8.718727
+        ],
+        "minimum": [
+          -264.865936,
+          -0.552802,
+          -20.601694
+        ]
+      },
+      "review": {
+        "asset_id": "pre:pre_b_006_pre.obj",
+        "checks": [
+          "source mesh parsed"
+        ],
+        "reason": "pre event source asset",
+        "review_version": "mesh_review.v1",
+        "status": "accepted"
+      },
+      "source_axis_convention": {
+        "horizontal": [
+          "X",
+          "Z"
+        ],
+        "vertical": "Y"
+      },
+      "source_id": "b_006"
+    },
+    {
+      "asset_id": "pre:pre_b_007_pre.obj",
+      "checksum_sha256": "e5f08e42f55cf959a06bdecd08d67d233d8a4730d10a3a3c8a8a143eb6a9a058",
+      "damage_grade": "no_damage",
+      "event_phase": "pre",
+      "path": "heidata_benchmark/data/sample/raw/pre_b_007_pre.obj",
+      "raw_bounds_source_xyz": {
+        "maximum": [
+          -251.471268,
+          9.700723,
+          -26.17485
+        ],
+        "minimum": [
+          -266.824951,
+          -0.637842,
+          -39.885963
+        ]
+      },
+      "review": {
+        "asset_id": "pre:pre_b_007_pre.obj",
+        "checks": [
+          "source mesh parsed"
+        ],
+        "reason": "pre event source asset",
+        "review_version": "mesh_review.v1",
+        "status": "accepted"
+      },
+      "source_axis_convention": {
+        "horizontal": [
+          "X",
+          "Z"
+        ],
+        "vertical": "Y"
+      },
+      "source_id": "b_007"
+    },
+    {
+      "asset_id": "pre:pre_b_008_pre.obj",
+      "checksum_sha256": "12603aaf16fdb84b2103c0d134421990152041fbe2704c294d22400423a645a6",
+      "damage_grade": "no_damage",
+      "event_phase": "pre",
+      "path": "heidata_benchmark/data/sample/raw/pre_b_008_pre.obj",
+      "raw_bounds_source_xyz": {
+        "maximum": [
+          -254.020615,
+          8.4073,
+          -46.310421
+        ],
+        "minimum": [
+          -267.327148,
+          -0.552788,
+          -58.19339
+        ]
+      },
+      "review": {
+        "asset_id": "pre:pre_b_008_pre.obj",
+        "checks": [
+          "source mesh parsed"
+        ],
+        "reason": "pre event source asset",
+        "review_version": "mesh_review.v1",
+        "status": "accepted"
+      },
+      "source_axis_convention": {
+        "horizontal": [
+          "X",
+          "Z"
+        ],
+        "vertical": "Y"
+      },
+      "source_id": "b_008"
+    }
+  ],
+  "dataset_identifier": "doi:10.11588/DATA/D3WZID",
+  "manifest_path": "heidata_benchmark/data/sample/manifest.json"
+}

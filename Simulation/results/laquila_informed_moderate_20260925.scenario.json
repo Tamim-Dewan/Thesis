@@ -1,0 +1,5263 @@
+{
+  "execution_config": {
+    "return_to_base": true,
+    "service_duration_source": "task.service_duration",
+    "start_time": 0.0
+  },
+  "route_config": {
+    "altitude_margin": 1.0,
+    "cruise_altitude": 12.0,
+    "grid_resolution": 5.0,
+    "max_expanded_nodes": 20000
+  },
+  "scenario_id": "laquila_informed_moderate_20260925",
+  "scene": {
+    "candidate_sites": [
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_1",
+        "kind": "ground",
+        "position": [
+          -199.94772178701862,
+          -175.331669985557,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_2",
+        "kind": "ground",
+        "position": [
+          -182.94772178701862,
+          -146.331669985557,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_3",
+        "kind": "ground",
+        "position": [
+          -165.94772178701862,
+          -117.331669985557,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_4",
+        "kind": "ground",
+        "position": [
+          -148.94772178701862,
+          -88.331669985557,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_5",
+        "kind": "ground",
+        "position": [
+          -131.94772178701862,
+          -59.331669985557,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_6",
+        "kind": "ground",
+        "position": [
+          -114.94772178701862,
+          -30.331669985557,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_7",
+        "kind": "ground",
+        "position": [
+          -97.94772178701862,
+          -1.3316699855569993,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_8",
+        "kind": "ground",
+        "position": [
+          -73.94772178701862,
+          38.668330014443,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_9",
+        "kind": "ground",
+        "position": [
+          -63.94772178701862,
+          56.668330014443,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_10",
+        "kind": "ground",
+        "position": [
+          -46.94772178701862,
+          85.668330014443,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_11",
+        "kind": "ground",
+        "position": [
+          -29.947721787018622,
+          114.668330014443,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_12",
+        "kind": "ground",
+        "position": [
+          -12.947721787018622,
+          143.668330014443,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_1",
+        "kind": "elevated",
+        "position": [
+          -81.6787591441099,
+          17.154310995402312,
+          7.9129
+        ],
+        "surface_ref": "laquila_source_01"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_2",
+        "kind": "elevated",
+        "position": [
+          -86.33928059361735,
+          19.80928085080245,
+          7.9129
+        ],
+        "surface_ref": "laquila_source_01"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_3",
+        "kind": "elevated",
+        "position": [
+          -86.33928059361735,
+          22.464250706202584,
+          7.9129
+        ],
+        "surface_ref": "laquila_source_01"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_4",
+        "kind": "elevated",
+        "position": [
+          -84.00901986886363,
+          25.119220561602724,
+          7.9129
+        ],
+        "surface_ref": "laquila_source_01"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_5",
+        "kind": "elevated",
+        "position": [
+          -81.6787591441099,
+          27.774190417002863,
+          7.9129
+        ],
+        "surface_ref": "laquila_source_01"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_6",
+        "kind": "elevated",
+        "position": [
+          -79.34849841935619,
+          30.429160272403,
+          7.9129
+        ],
+        "surface_ref": "laquila_source_01"
+      }
+    ],
+    "environment": {
+      "base": {
+        "identifier": "base_1",
+        "position": [
+          -32.57579802926938,
+          -25.80870948599997,
+          0.0
+        ]
+      },
+      "obstacles": [
+        {
+          "damage_template_id": "standing_minor_damage.v1",
+          "depth": 21.239758843201102,
+          "footprint": [
+            [
+              -78.64921453021383,
+              14.499341140002173
+            ],
+            [
+              -88.66954131837107,
+              19.809280850406964
+            ],
+            [
+              -77.26710049039745,
+              35.739099983203275
+            ],
+            [
+              -70.02745552034129,
+              27.122971395568502
+            ]
+          ],
+          "height": 7.9129,
+          "identifier": "solid_laquila_source_01",
+          "kind": "building",
+          "minimum": [
+            -88.66954131837107,
+            14.499341140002173,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_01",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/1238268580 | WGS84 centroid 13.3958748, 42.3511757 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [],
+          "width": 18.642085798029782
+        },
+        {
+          "damage_template_id": "standing_minor_damage.v1",
+          "depth": 27.028372364864964,
+          "footprint": [
+            [
+              -66.81897649957907,
+              13.475201824600452
+            ],
+            [
+              -71.94431606359367,
+              3.5677671437018503
+            ],
+            [
+              -37.16111273006592,
+              -13.553170540264514
+            ],
+            [
+              -29.10700770085835,
+              6.673580937535261
+            ],
+            [
+              -42.87056001335998,
+              12.773889032316944
+            ],
+            [
+              -46.75364231541591,
+              4.246816037566525
+            ]
+          ],
+          "height": 8.325557,
+          "identifier": "solid_laquila_source_02",
+          "kind": "building",
+          "minimum": [
+            -71.94431606359367,
+            -13.553170540264514,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_02",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/1238268585 | WGS84 centroid 13.3962339, 42.3509982 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [],
+          "width": 42.83730836273533
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 20.809787310425328,
+          "footprint": [
+            [
+              -98.70632184499665,
+              40.73734511969927
+            ],
+            [
+              -88.15947542263756,
+              48.685556762678786
+            ],
+            [
+              -77.26710049039745,
+              35.739099983203275
+            ],
+            [
+              -82.89561141964958,
+              27.875769452253458
+            ],
+            [
+              -99.15124451695884,
+              27.875769452253458
+            ],
+            [
+              -93.49871358805582,
+              34.57024532966109
+            ]
+          ],
+          "height": 5.640715,
+          "identifier": "standing_laquila_source_03",
+          "kind": "building",
+          "minimum": [
+            -99.15124451695884,
+            27.875769452253458,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_03",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/1238268586 | WGS84 centroid 13.3957484, 42.3512079 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.62,
+            0.6589856303514536,
+            0.7730551704405269,
+            0.7495027521985869,
+            1.0,
+            0.8589952272103155
+          ],
+          "width": 21.884144026561387
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 6.240048171311045,
+          "footprint": [
+            [
+              -94.5276752699344,
+              21.269690487245494
+            ],
+            [
+              -87.88475196842359,
+              20.984964683640953
+            ],
+            [
+              -85.81207339912424,
+              24.637647278111213
+            ],
+            [
+              -90.29087691984108,
+              27.225012854952
+            ],
+            [
+              -95.26386853382964,
+              25.605473066000364
+            ]
+          ],
+          "height": 1.7795277644106438,
+          "identifier": "rubble_laquila_source_03_1",
+          "kind": "ground_rubble",
+          "minimum": [
+            -95.26386853382964,
+            20.984964683640953,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_03",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/1238268586 | WGS84 centroid 13.3957484, 42.3512079 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.647992163047513,
+            0.41060874133590314,
+            0.5719335870637019,
+            0.28,
+            1.0
+          ],
+          "width": 9.451795134705392
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 5.3087969522113845,
+          "footprint": [
+            [
+              -95.88694848808258,
+              17.688092883066744
+            ],
+            [
+              -94.13731843128636,
+              15.478454053822798
+            ],
+            [
+              -89.46610709908774,
+              14.337342548163459
+            ],
+            [
+              -85.68596196365402,
+              16.291274048622057
+            ],
+            [
+              -85.39473027727217,
+              17.830977777758832
+            ],
+            [
+              -89.11368025376501,
+              19.395358776062004
+            ],
+            [
+              -92.47715342956494,
+              19.646139500374844
+            ]
+          ],
+          "height": 1.1053160436022889,
+          "identifier": "rubble_laquila_source_03_2",
+          "kind": "ground_rubble",
+          "minimum": [
+            -95.88694848808258,
+            14.337342548163459,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_03",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/1238268586 | WGS84 centroid 13.3957484, 42.3512079 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.39963926902342056,
+            0.44512884694574484,
+            0.8154525331633555,
+            1.0,
+            0.28,
+            0.777246199668829,
+            0.8105032157313066
+          ],
+          "width": 10.492218210810407
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 7.281698523036152,
+          "footprint": [
+            [
+              -99.92333864414985,
+              26.249842487265724
+            ],
+            [
+              -101.42457618487522,
+              22.24098589047834
+            ],
+            [
+              -99.37871775054164,
+              20.165343766109512
+            ],
+            [
+              -96.01779831929028,
+              20.491745583466795
+            ],
+            [
+              -95.20221495098468,
+              24.135580462347935
+            ],
+            [
+              -96.96392972263881,
+              27.447042289145664
+            ]
+          ],
+          "height": 1.6326359501030785,
+          "identifier": "rubble_laquila_source_03_3",
+          "kind": "ground_rubble",
+          "minimum": [
+            -101.42457618487522,
+            20.165343766109512,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_03",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/1238268586 | WGS84 centroid 13.3957484, 42.3512079 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.8393702113230386,
+            1.0,
+            0.7030161308435808,
+            0.5998040129049218,
+            0.28,
+            0.35289181086067023
+          ],
+          "width": 6.222361233890538
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 3.683321906377971,
+          "footprint": [
+            [
+              -82.83105959238544,
+              11.397381627102568
+            ],
+            [
+              -81.78880124549877,
+              13.000609922954967
+            ],
+            [
+              -82.5835744885375,
+              14.917742483492445
+            ],
+            [
+              -84.9063831227191,
+              15.011015596002265
+            ],
+            [
+              -86.06526962476396,
+              13.27396706046726
+            ],
+            [
+              -85.25336654359342,
+              11.327693689624294
+            ]
+          ],
+          "height": 1.095077858224416,
+          "identifier": "rubble_laquila_source_03_4",
+          "kind": "ground_rubble",
+          "minimum": [
+            -86.06526962476396,
+            11.327693689624294,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_03",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/1238268586 | WGS84 centroid 13.3957484, 42.3512079 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.8943680863444199,
+            1.0,
+            0.647071455550688,
+            0.28,
+            0.8308731357509495,
+            0.3734303856866161
+          ],
+          "width": 4.276468379265182
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 2.23338670427864,
+          "footprint": [
+            [
+              -96.89458738568565,
+              18.25834596457068
+            ],
+            [
+              -95.92915628325385,
+              18.02274616932312
+            ],
+            [
+              -94.73386722760473,
+              18.53888527967336
+            ],
+            [
+              -94.82275036293659,
+              19.55194104775198
+            ],
+            [
+              -95.83607945671541,
+              20.25613287360176
+            ],
+            [
+              -97.04922959086582,
+              20.12521042130648
+            ],
+            [
+              -97.95445828769705,
+              19.65257846417768
+            ],
+            [
+              -98.09181693698551,
+              18.600440774568487
+            ]
+          ],
+          "height": 1.3445133563767666,
+          "identifier": "rubble_laquila_source_03_5",
+          "kind": "ground_rubble",
+          "minimum": [
+            -98.09181693698551,
+            18.02274616932312,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_03",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/1238268586 | WGS84 centroid 13.3957484, 42.3512079 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.4300458230185,
+            0.28,
+            0.8876280107375644,
+            0.4290344048689325,
+            0.6083464303899953,
+            1.0,
+            0.8009078304807223,
+            0.5158448571373528
+          ],
+          "width": 3.357949709380776
+        },
+        {
+          "damage_template_id": "standing_full_volume.v1",
+          "depth": 32.04888139898882,
+          "footprint": [
+            [
+              -147.7549165172331,
+              26.588637839844292
+            ],
+            [
+              -149.9432637468206,
+              28.904083248509835
+            ],
+            [
+              -151.73672125068362,
+              30.841042388010084
+            ],
+            [
+              -161.17294031970755,
+              21.991142870141456
+            ],
+            [
+              -149.68823079895384,
+              13.09671555622613
+            ],
+            [
+              -142.51440078320942,
+              21.712844143069933
+            ],
+            [
+              -136.3607025586398,
+              16.959501886808184
+            ],
+            [
+              -143.42758327375543,
+              8.243185757079631
+            ],
+            [
+              -131.23536299462518,
+              -1.2078390109787331
+            ],
+            [
+              -130.2645924190016,
+              0.3172380125189448
+            ],
+            [
+              -125.61641127349151,
+              7.619796609262039
+            ],
+            [
+              -119.65193104247685,
+              17.36025205360134
+            ],
+            [
+              -144.250270202141,
+              29.69445163288673
+            ]
+          ],
+          "height": 9.0,
+          "identifier": "solid_laquila_source_04",
+          "kind": "building",
+          "minimum": [
+            -161.17294031970755,
+            -1.2078390109787331,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_04",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/1238268588 | WGS84 centroid 13.3951163, 42.3511109 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [],
+          "width": 41.521009277230704
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 13.057922492248224,
+          "footprint": [
+            [
+              -151.35005839433947,
+              123.681351487859
+            ],
+            [
+              -146.39748308526538,
+              120.15266985186506
+            ],
+            [
+              -141.89738558684718,
+              126.47561692925312
+            ],
+            [
+              -151.35005839433947,
+              133.21059234411328
+            ]
+          ],
+          "height": 9.0,
+          "identifier": "standing_laquila_source_05",
+          "kind": "building",
+          "minimum": [
+            -151.35005839433947,
+            120.15266985186506,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_05",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/496729866 | WGS84 centroid 13.3949911, 42.3521113 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.62,
+            0.8612874633000783,
+            1.0,
+            0.8393923558345158
+          ],
+          "width": 9.452672807492291
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 4.2465072320145225,
+          "footprint": [
+            [
+              -152.06257451372235,
+              129.80400069699076
+            ],
+            [
+              -153.3279677622242,
+              131.07219337043173
+            ],
+            [
+              -154.9482170943378,
+              131.33088423475394
+            ],
+            [
+              -156.22040818090622,
+              129.5848497580824
+            ],
+            [
+              -155.90694037058438,
+              127.36942568667352
+            ],
+            [
+              -153.92722789946234,
+              127.08437700273942
+            ],
+            [
+              -152.58263180940133,
+              127.98646850221337
+            ]
+          ],
+          "height": 1.5673120675314325,
+          "identifier": "rubble_laquila_source_05_1",
+          "kind": "ground_rubble",
+          "minimum": [
+            -156.22040818090622,
+            127.08437700273942,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_05",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/496729866 | WGS84 centroid 13.3949911, 42.3521113 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.6262799016154453,
+            0.5413369371870211,
+            0.7433361366230622,
+            1.0,
+            0.28,
+            0.9181859126031406,
+            0.44139282645083416
+          ],
+          "width": 4.157833667183866
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 3.415303062065618,
+          "footprint": [
+            [
+              -153.19307183629536,
+              134.295206525215
+            ],
+            [
+              -155.37925030310566,
+              135.05430074321788
+            ],
+            [
+              -156.4962057544078,
+              133.30029845004626
+            ],
+            [
+              -155.4106371956526,
+              131.63899768115226
+            ],
+            [
+              -153.13159315288726,
+              132.1481846699572
+            ]
+          ],
+          "height": 2.011021153667816,
+          "identifier": "rubble_laquila_source_05_2",
+          "kind": "ground_rubble",
+          "minimum": [
+            -156.4962057544078,
+            131.63899768115226,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_05",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/496729866 | WGS84 centroid 13.3949911, 42.3521113 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.6632216208732639,
+            0.28,
+            1.0,
+            0.6695998813552341,
+            0.5469199033795757
+          ],
+          "width": 3.364612601520548
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 4.215694474661603,
+          "footprint": [
+            [
+              -158.8534763607672,
+              131.03362607578885
+            ],
+            [
+              -158.08871955387377,
+              128.72578703447675
+            ],
+            [
+              -156.688107576156,
+              129.02248139685116
+            ],
+            [
+              -156.41894492476825,
+              131.76463174195098
+            ],
+            [
+              -157.7587528006537,
+              132.94148150913836
+            ]
+          ],
+          "height": 1.0733675511128304,
+          "identifier": "rubble_laquila_source_05_3",
+          "kind": "ground_rubble",
+          "minimum": [
+            -158.8534763607672,
+            128.72578703447675,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_05",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/496729866 | WGS84 centroid 13.3949911, 42.3521113 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.28,
+            0.4632651396441445,
+            0.33588997618713246,
+            1.0,
+            0.541687177509507
+          ],
+          "width": 2.4345314359989345
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 2.11009263385543,
+          "footprint": [
+            [
+              -151.5371741337597,
+              126.12613362470647
+            ],
+            [
+              -151.73096447259752,
+              126.77064558947495
+            ],
+            [
+              -152.23197053751005,
+              127.24502373824112
+            ],
+            [
+              -153.1251160052047,
+              127.36003752830882
+            ],
+            [
+              -153.34197318107095,
+              126.56531311537584
+            ],
+            [
+              -153.43323417458635,
+              125.76877783620714
+            ],
+            [
+              -152.90126302050984,
+              125.24994489445339
+            ],
+            [
+              -152.09760892754522,
+              125.51986171885045
+            ]
+          ],
+          "height": 1.8998677429951807,
+          "identifier": "rubble_laquila_source_05_4",
+          "kind": "ground_rubble",
+          "minimum": [
+            -153.43323417458635,
+            125.24994489445339,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_05",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/496729866 | WGS84 centroid 13.3949911, 42.3521113 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.6648323442828579,
+            0.5102228521020223,
+            0.91027589705703,
+            0.28,
+            0.8000536450445324,
+            1.0,
+            0.48374230143023667,
+            0.3940861980057506
+          ],
+          "width": 1.8960600408266544
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 2.307706267757851,
+          "footprint": [
+            [
+              -151.85866737779295,
+              131.93356557831913
+            ],
+            [
+              -151.70522696010408,
+              132.72633380681506
+            ],
+            [
+              -151.92472979133112,
+              133.53037532666616
+            ],
+            [
+              -152.30928327242944,
+              133.8411030676959
+            ],
+            [
+              -152.67840659493754,
+              133.27081910069518
+            ],
+            [
+              -152.95320955529854,
+              132.55950506485792
+            ],
+            [
+              -152.64418971336778,
+              131.9422536397711
+            ],
+            [
+              -152.2304987249899,
+              131.53339679993806
+            ]
+          ],
+          "height": 1.6357603386734714,
+          "identifier": "rubble_laquila_source_05_5",
+          "kind": "ground_rubble",
+          "minimum": [
+            -152.95320955529854,
+            131.53339679993806,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_05",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/496729866 | WGS84 centroid 13.3949911, 42.3521113 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.28,
+            0.36468611097515935,
+            0.564333006662293,
+            0.3285106578860307,
+            1.0,
+            0.5999158803605584,
+            0.7886361699450204,
+            0.6730237477516221
+          ],
+          "width": 1.2479825951944576
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 1.4665366333844645,
+          "footprint": [
+            [
+              -156.5094938077545,
+              134.93605423987995
+            ],
+            [
+              -156.98506471022012,
+              134.9104615713012
+            ],
+            [
+              -157.40570864288622,
+              134.56006607406871
+            ],
+            [
+              -157.38118435970182,
+              134.03288975826786
+            ],
+            [
+              -157.0114404897738,
+              133.56488160026552
+            ],
+            [
+              -156.53453525432118,
+              133.4695176064955
+            ],
+            [
+              -156.19945467360148,
+              133.87710539954497
+            ],
+            [
+              -156.0639843634116,
+              134.5199199023754
+            ]
+          ],
+          "height": 1.7336437842078416,
+          "identifier": "rubble_laquila_source_05_6",
+          "kind": "ground_rubble",
+          "minimum": [
+            -157.40570864288622,
+            133.4695176064955,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_05",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/496729866 | WGS84 centroid 13.3949911, 42.3521113 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.7428705830016342,
+            0.5804937832734087,
+            0.895349127468563,
+            0.8771015735440051,
+            0.7734585193239107,
+            0.6643592088634638,
+            1.0,
+            0.28
+          ],
+          "width": 1.3417242794746187
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 1.4549296588618006,
+          "footprint": [
+            [
+              -156.395263654099,
+              134.8634233685456
+            ],
+            [
+              -155.77362676888288,
+              134.82653906934408
+            ],
+            [
+              -155.45362434712115,
+              135.6326118097361
+            ],
+            [
+              -155.9815658389494,
+              136.28146872820588
+            ],
+            [
+              -156.60973770714983,
+              135.6957348025616
+            ]
+          ],
+          "height": 1.956172926636705,
+          "identifier": "rubble_laquila_source_05_7",
+          "kind": "ground_rubble",
+          "minimum": [
+            -156.60973770714983,
+            134.82653906934408,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_05",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/496729866 | WGS84 centroid 13.3949911, 42.3521113 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.29652764297504164,
+            0.4745300947037639,
+            1.0,
+            0.28,
+            0.29896838283618665
+          ],
+          "width": 1.1561133600286837
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 2.6945925564115214,
+          "footprint": [
+            [
+              -135.20982715370639,
+              115.9577763510877
+            ],
+            [
+              -134.13015919323166,
+              117.19661968029632
+            ],
+            [
+              -135.00933556314757,
+              118.65236890749922
+            ],
+            [
+              -136.3238318157527,
+              118.17779453938229
+            ],
+            [
+              -136.38188137132363,
+              116.46082342493874
+            ]
+          ],
+          "height": 3.223851758670952,
+          "identifier": "rubble_laquila_source_06_1",
+          "kind": "ground_rubble",
+          "minimum": [
+            -136.38188137132363,
+            115.9577763510877,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_06",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/496729871 | WGS84 centroid 13.3951783, 42.3520134 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.8925636150919232,
+            0.28,
+            0.8537764494413159,
+            0.4047616305199616,
+            1.0
+          ],
+          "width": 2.251722178091967
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 2.739619552060219,
+          "footprint": [
+            [
+              -133.50119614092563,
+              118.11379962527326
+            ],
+            [
+              -132.26010513149595,
+              119.5038100607921
+            ],
+            [
+              -133.46054023133505,
+              120.85341917733348
+            ],
+            [
+              -134.90304498863924,
+              120.32196189006982
+            ],
+            [
+              -135.40246268900174,
+              118.88058949877278
+            ]
+          ],
+          "height": 2.1064752243630176,
+          "identifier": "rubble_laquila_source_06_2",
+          "kind": "ground_rubble",
+          "minimum": [
+            -135.40246268900174,
+            118.11379962527326,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_06",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/496729871 | WGS84 centroid 13.3951783, 42.3520134 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            1.0,
+            0.4030194634093856,
+            0.6845800783291012,
+            0.8035344796062674,
+            0.28
+          ],
+          "width": 3.1423575575057896
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 4.132351197238961,
+          "footprint": [
+            [
+              -137.9136517969153,
+              118.43675548242575
+            ],
+            [
+              -138.77795570141416,
+              116.62757967460443
+            ],
+            [
+              -138.2826253606091,
+              114.30440428518679
+            ],
+            [
+              -137.01687143669844,
+              114.48864417722594
+            ],
+            [
+              -136.2710477506264,
+              116.03453816419785
+            ],
+            [
+              -136.85079404385496,
+              117.9755965218069
+            ]
+          ],
+          "height": 2.610103047564691,
+          "identifier": "rubble_laquila_source_06_3",
+          "kind": "ground_rubble",
+          "minimum": [
+            -138.77795570141416,
+            114.30440428518679,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_06",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/496729871 | WGS84 centroid 13.3951783, 42.3520134 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.6071836358632792,
+            0.5774239364466032,
+            0.43133060570010584,
+            0.5344175612133235,
+            1.0,
+            0.28
+          ],
+          "width": 2.506907950787763
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 1.7193966803492202,
+          "footprint": [
+            [
+              -134.84647108397564,
+              121.23328095811584
+            ],
+            [
+              -135.5613912980361,
+              121.6994514456973
+            ],
+            [
+              -136.2225506768862,
+              120.98156230429483
+            ],
+            [
+              -135.70880629056396,
+              119.98005476534809
+            ],
+            [
+              -135.0171165652346,
+              120.30692463210815
+            ]
+          ],
+          "height": 1.970680220462346,
+          "identifier": "rubble_laquila_source_06_4",
+          "kind": "ground_rubble",
+          "minimum": [
+            -136.2225506768862,
+            119.98005476534809,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_06",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/496729871 | WGS84 centroid 13.3951783, 42.3520134 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.5723564805146091,
+            0.42531701668343236,
+            0.6948455320235383,
+            0.28,
+            1.0
+          ],
+          "width": 1.3760795929105427
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 0.9866518262392958,
+          "footprint": [
+            [
+              -137.4584761230168,
+              113.66444980623866
+            ],
+            [
+              -137.05077130460967,
+              113.4428941649607
+            ],
+            [
+              -136.46713110637302,
+              113.57123411050253
+            ],
+            [
+              -136.33562031356212,
+              114.04784017898885
+            ],
+            [
+              -136.7558694380398,
+              114.36912999531383
+            ],
+            [
+              -137.2535681800779,
+              114.4295459912
+            ],
+            [
+              -137.56354384142844,
+              114.11684342694443
+            ]
+          ],
+          "height": 1.9216699463497566,
+          "identifier": "rubble_laquila_source_06_5",
+          "kind": "ground_rubble",
+          "minimum": [
+            -137.56354384142844,
+            113.4428941649607,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_06",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/496729871 | WGS84 centroid 13.3951783, 42.3520134 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            1.0,
+            0.5629917971252105,
+            0.6204626245011535,
+            0.3797262356404635,
+            0.28,
+            0.36386767216505933,
+            0.45503293503106174
+          ],
+          "width": 1.2279235278663236
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 1.1148152791063382,
+          "footprint": [
+            [
+              -135.26277809201576,
+              114.81838162275064
+            ],
+            [
+              -135.24054212631452,
+              115.62045816244675
+            ],
+            [
+              -136.0801326293612,
+              115.67766077564596
+            ],
+            [
+              -136.38742687099833,
+              115.11872367019305
+            ],
+            [
+              -135.85309882699218,
+              114.56284549653962
+            ]
+          ],
+          "height": 2.0329587107558695,
+          "identifier": "rubble_laquila_source_06_6",
+          "kind": "ground_rubble",
+          "minimum": [
+            -136.38742687099833,
+            114.56284549653962,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_06",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/496729871 | WGS84 centroid 13.3951783, 42.3520134 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.4915779500074399,
+            0.28,
+            1.0,
+            0.4621511144732358,
+            0.35440290610569564
+          ],
+          "width": 1.1468847446838026
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 1.338865520888774,
+          "footprint": [
+            [
+              -136.21277983338743,
+              120.41006234527192
+            ],
+            [
+              -136.7057955930992,
+              120.22705360792115
+            ],
+            [
+              -136.79549670965224,
+              119.5956779419053
+            ],
+            [
+              -136.5656294583447,
+              119.07119682438315
+            ],
+            [
+              -136.10548942785084,
+              119.15122997372035
+            ],
+            [
+              -135.85272239935634,
+              119.76920468057125
+            ]
+          ],
+          "height": 2.5406798064617786,
+          "identifier": "rubble_laquila_source_06_7",
+          "kind": "ground_rubble",
+          "minimum": [
+            -136.79549670965224,
+            119.07119682438315,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_06",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/496729871 | WGS84 centroid 13.3951783, 42.3520134 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.28,
+            0.32985579586878694,
+            0.49794700043678797,
+            0.46786482824619946,
+            1.0,
+            0.7549729386866495
+          ],
+          "width": 0.9427743102959028
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 10.715003509585582,
+          "footprint": [
+            [
+              -137.16036123571305,
+              2.7261408864782495
+            ],
+            [
+              -141.61504345990386,
+              4.742212930574151
+            ],
+            [
+              -146.64986287040256,
+              0.46032366589893403
+            ],
+            [
+              -144.5259084210121,
+              -4.438804605887796
+            ],
+            [
+              -140.66671119898254,
+              -5.972790579011431
+            ],
+            [
+              -135.80329912937572,
+              -5.1963059566882155
+            ],
+            [
+              -133.69438008503613,
+              -0.4817942285140582
+            ]
+          ],
+          "height": 2.907915231126777,
+          "identifier": "rubble_laquila_source_07_1",
+          "kind": "ground_rubble",
+          "minimum": [
+            -146.64986287040256,
+            -5.972790579011431,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_07",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/500792516 | WGS84 centroid 13.3950137, 42.3510126 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            1.0,
+            0.7085642432958528,
+            0.6585576603782983,
+            0.28,
+            0.45618757472551585,
+            0.5526073412608904,
+            0.8157399130871579
+          ],
+          "width": 12.955482785366428
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 9.77242353322036,
+          "footprint": [
+            [
+              -146.73365638800828,
+              5.921665460403303
+            ],
+            [
+              -149.22053959756036,
+              11.327020760685581
+            ],
+            [
+              -155.45451059429445,
+              12.069955723542371
+            ],
+            [
+              -157.05889757866058,
+              6.63281451549747
+            ],
+            [
+              -152.91755024770933,
+              2.297532190322011
+            ]
+          ],
+          "height": 2.872106503167166,
+          "identifier": "rubble_laquila_source_07_2",
+          "kind": "ground_rubble",
+          "minimum": [
+            -157.05889757866058,
+            2.297532190322011,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_07",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/500792516 | WGS84 centroid 13.3950137, 42.3510126 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.28,
+            0.7037119268929581,
+            1.0,
+            0.3182840795985502,
+            0.6493559151433548
+          ],
+          "width": 10.325241190652292
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 9.498039791074962,
+          "footprint": [
+            [
+              -164.20139402648277,
+              17.44144481723214
+            ],
+            [
+              -165.6276012503785,
+              13.336699057131847
+            ],
+            [
+              -160.4868781448139,
+              9.812278185505104
+            ],
+            [
+              -156.60337061099872,
+              11.716369614404002
+            ],
+            [
+              -155.44824301212896,
+              16.7148197799901
+            ],
+            [
+              -159.06181249847177,
+              19.310317976580066
+            ]
+          ],
+          "height": 1.8657908104524041,
+          "identifier": "rubble_laquila_source_07_3",
+          "kind": "ground_rubble",
+          "minimum": [
+            -165.6276012503785,
+            9.812278185505104,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_07",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/500792516 | WGS84 centroid 13.3950137, 42.3510126 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.802119463668346,
+            1.0,
+            0.7365350850023501,
+            0.652595505370452,
+            0.28,
+            0.8765883201534387
+          ],
+          "width": 10.179358238249534
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 4.304713000307412,
+          "footprint": [
+            [
+              -150.2539345128066,
+              2.511342749259639
+            ],
+            [
+              -149.5750135342484,
+              0.9555501470566687
+            ],
+            [
+              -147.5600373665262,
+              0.2060784085215639
+            ],
+            [
+              -146.44645077994628,
+              1.5767144380815052
+            ],
+            [
+              -146.3248208234258,
+              3.229800720976241
+            ],
+            [
+              -147.9203655345628,
+              4.510791408828976
+            ],
+            [
+              -149.49152620415876,
+              3.8653980257460043
+            ]
+          ],
+          "height": 2.706052075012712,
+          "identifier": "rubble_laquila_source_07_4",
+          "kind": "ground_rubble",
+          "minimum": [
+            -150.2539345128066,
+            0.2060784085215639,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_07",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/500792516 | WGS84 centroid 13.3950137, 42.3510126 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.6165254144766055,
+            1.0,
+            0.7333255561832229,
+            0.8918216117315638,
+            0.28,
+            0.31513561888963504,
+            0.392518369578445
+          ],
+          "width": 3.929113689380813
+        },
+        {
+          "damage_template_id": "standing_full_volume.v1",
+          "depth": 23.544072302657227,
+          "footprint": [
+            [
+              -160.15280852838671,
+              -42.6632173827702
+            ],
+            [
+              -164.2333356933779,
+              -56.644945426065874
+            ],
+            [
+              -142.0372423647049,
+              -66.20728968542743
+            ],
+            [
+              -141.2145554363193,
+              -63.17939953526896
+            ]
+          ],
+          "height": 13.639945774533258,
+          "identifier": "solid_laquila_source_08",
+          "kind": "building",
+          "minimum": [
+            -164.2333356933779,
+            -66.20728968542743,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_08",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/500798133 | WGS84 centroid 13.3949843, 42.3504439 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [],
+          "width": 23.01878025705861
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 33.81886130351171,
+          "footprint": [
+            [
+              -169.04696832120837,
+              -130.34505060327288
+            ],
+            [
+              -155.03569583360624,
+              -133.34407458277295
+            ],
+            [
+              -139.0262082067318,
+              -104.61251400864158
+            ],
+            [
+              -155.53753485995944,
+              -99.52521327926124
+            ],
+            [
+              -165.77176024952033,
+              -119.0395200155681
+            ],
+            [
+              -169.04696832120837,
+              -118.0374261248737
+            ]
+          ],
+          "height": 4.684981,
+          "identifier": "standing_laquila_source_09",
+          "kind": "building",
+          "minimum": [
+            -169.04696832120837,
+            -133.34407458277295,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_09",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501738250 | WGS84 centroid 13.3947760, 42.3499157 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.845334037474828,
+            0.62,
+            0.6559812749485043,
+            0.6895552747489191,
+            0.8010160822810131,
+            1.0
+          ],
+          "width": 30.02076011447656
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 5.630052795754764,
+          "footprint": [
+            [
+              -176.07060985197103,
+              -122.34134418680215
+            ],
+            [
+              -173.79854344160668,
+              -123.67585033423354
+            ],
+            [
+              -171.3511841515662,
+              -122.26726953665802
+            ],
+            [
+              -170.9483278936919,
+              -119.93724399498173
+            ],
+            [
+              -173.7065217045216,
+              -118.04579753847878
+            ],
+            [
+              -175.49138798235353,
+              -119.92706514605622
+            ]
+          ],
+          "height": 1.6943087881965264,
+          "identifier": "rubble_laquila_source_09_1",
+          "kind": "ground_rubble",
+          "minimum": [
+            -176.07060985197103,
+            -123.67585033423354,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_09",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501738250 | WGS84 centroid 13.3947760, 42.3499157 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            1.0,
+            0.8554550237174953,
+            0.4828265770414213,
+            0.644343966130358,
+            0.28,
+            0.6041596900098203
+          ],
+          "width": 5.122281958279132
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 7.583266145413148,
+          "footprint": [
+            [
+              -181.78312447044144,
+              -118.23829546055048
+            ],
+            [
+              -179.25896147767295,
+              -116.39826686484346
+            ],
+            [
+              -179.86673358884556,
+              -110.65502931513733
+            ],
+            [
+              -182.5692662933115,
+              -110.98085010849422
+            ],
+            [
+              -183.61031222620272,
+              -115.45302338384076
+            ]
+          ],
+          "height": 1.4830671873137347,
+          "identifier": "rubble_laquila_source_09_2",
+          "kind": "ground_rubble",
+          "minimum": [
+            -183.61031222620272,
+            -118.23829546055048,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_09",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501738250 | WGS84 centroid 13.3947760, 42.3499157 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.7120075207809549,
+            1.0,
+            0.3700333037895718,
+            0.28,
+            0.5917705769515027
+          ],
+          "width": 4.351350748529768
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 6.9464586863943225,
+          "footprint": [
+            [
+              -184.9380768647714,
+              -121.41581637880097
+            ],
+            [
+              -183.7458924507255,
+              -124.31388974656005
+            ],
+            [
+              -181.58421629751174,
+              -125.54337617393884
+            ],
+            [
+              -178.44330324220326,
+              -124.23704012161872
+            ],
+            [
+              -176.59606630508114,
+              -122.28912142141505
+            ],
+            [
+              -178.07114003404124,
+              -119.3191476240515
+            ],
+            [
+              -180.12179941178573,
+              -118.59691748754452
+            ],
+            [
+              -183.25920356802908,
+              -118.94499820756822
+            ]
+          ],
+          "height": 1.165157502325444,
+          "identifier": "rubble_laquila_source_09_3",
+          "kind": "ground_rubble",
+          "minimum": [
+            -184.9380768647714,
+            -125.54337617393884,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_09",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501738250 | WGS84 centroid 13.3947760, 42.3499157 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.7334955103377532,
+            0.7149707990311678,
+            0.8005066711076897,
+            0.5286114819038276,
+            1.0,
+            0.28,
+            0.6242650317543115,
+            0.8515454381283548
+          ],
+          "width": 8.342010559690266
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 4.490382507174331,
+          "footprint": [
+            [
+              -178.3251728270537,
+              -126.16570127288246
+            ],
+            [
+              -176.6990747350965,
+              -127.94572694771915
+            ],
+            [
+              -175.273581624192,
+              -126.2148333933128
+            ],
+            [
+              -176.01533339755667,
+              -123.55350595044301
+            ],
+            [
+              -177.66500930368932,
+              -123.45534444054482
+            ]
+          ],
+          "height": 1.8062832625608938,
+          "identifier": "rubble_laquila_source_09_4",
+          "kind": "ground_rubble",
+          "minimum": [
+            -178.3251728270537,
+            -127.94572694771915,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_09",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501738250 | WGS84 centroid 13.3947760, 42.3499157 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.28,
+            0.8200967380967591,
+            0.6601304076945278,
+            1.0,
+            0.43118000348147745
+          ],
+          "width": 3.051591202861715
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 3.5874807899359666,
+          "footprint": [
+            [
+              -173.03347072089585,
+              -124.49435964235155
+            ],
+            [
+              -173.6929637226659,
+              -126.4840102803999
+            ],
+            [
+              -172.81027686760837,
+              -128.08184043228752
+            ],
+            [
+              -171.53443957205064,
+              -127.13686796366305
+            ],
+            [
+              -171.82692866224755,
+              -125.09764828393202
+            ]
+          ],
+          "height": 1.5320410004291392,
+          "identifier": "rubble_laquila_source_09_5",
+          "kind": "ground_rubble",
+          "minimum": [
+            -173.6929637226659,
+            -128.08184043228752,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_09",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501738250 | WGS84 centroid 13.3947760, 42.3499157 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.38447016355543984,
+            0.5252987610059306,
+            1.0,
+            0.28,
+            0.697341860163148
+          ],
+          "width": 2.15852415061525
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 2.5083200542986788,
+          "footprint": [
+            [
+              -175.55062812336848,
+              -119.32644933405541
+            ],
+            [
+              -174.8023960832478,
+              -118.10452350889842
+            ],
+            [
+              -175.01152930922115,
+              -116.94515108045663
+            ],
+            [
+              -176.30087697193207,
+              -116.81812927975673
+            ],
+            [
+              -177.16914733488673,
+              -117.62780325787256
+            ],
+            [
+              -176.57319117914926,
+              -119.04018410042495
+            ]
+          ],
+          "height": 1.6675092718465319,
+          "identifier": "rubble_laquila_source_09_6",
+          "kind": "ground_rubble",
+          "minimum": [
+            -177.16914733488673,
+            -119.32644933405541,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_09",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501738250 | WGS84 centroid 13.3947760, 42.3499157 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            1.0,
+            0.28,
+            0.647686102211877,
+            0.653426830559888,
+            0.3351232607670832,
+            0.5576347029998805
+          ],
+          "width": 2.366751251638931
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 4.878652933002016,
+          "footprint": [
+            [
+              -170.37493193255455,
+              -122.25631163712039
+            ],
+            [
+              -171.40974878524202,
+              -122.62008695474596
+            ],
+            [
+              -171.81828130308924,
+              -124.28636995273659
+            ],
+            [
+              -171.37932833866105,
+              -126.1095088438275
+            ],
+            [
+              -170.527815390533,
+              -127.1349645701224
+            ],
+            [
+              -169.71381285373155,
+              -127.02288551930678
+            ],
+            [
+              -169.3339484916321,
+              -125.27027467836966
+            ],
+            [
+              -169.32666738834416,
+              -123.42831104776403
+            ]
+          ],
+          "height": 1.218124952319818,
+          "identifier": "rubble_laquila_source_09_7",
+          "kind": "ground_rubble",
+          "minimum": [
+            -171.81828130308924,
+            -127.1349645701224,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_09",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501738250 | WGS84 centroid 13.3947760, 42.3499157 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.6907245260943138,
+            0.28,
+            0.6707813226525539,
+            0.6287677241468859,
+            0.32180977082995743,
+            1.0,
+            0.8053698286483799,
+            0.3080629152353075
+          ],
+          "width": 2.4916139147450735
+        },
+        {
+          "damage_template_id": "standing_minor_damage.v1",
+          "depth": 66.5356596471558,
+          "footprint": [
+            [
+              -101.75849034943285,
+              -42.00643238653338
+            ],
+            [
+              -86.91721816082503,
+              -52.993666128089814
+            ],
+            [
+              -81.66847555742106,
+              -45.81355897185933
+            ],
+            [
+              -86.50587469663223,
+              -41.72813365946187
+            ],
+            [
+              -78.98651617086068,
+              -29.37167018175764
+            ],
+            [
+              -63.264968968789674,
+              -43.297738479797204
+            ],
+            [
+              -67.63343655873048,
+              -49.01956030699554
+            ],
+            [
+              -63.980706596546504,
+              -51.802547576919764
+            ],
+            [
+              -73.13721210985506,
+              -63.82505258229636
+            ],
+            [
+              -62.63972690319326,
+              -71.82892397053199
+            ],
+            [
+              -39.612719776754325,
+              -42.07322408099891
+            ],
+            [
+              -80.49203324977414,
+              -5.293264323376198
+            ]
+          ],
+          "height": 8.358053,
+          "identifier": "solid_laquila_source_10",
+          "kind": "building",
+          "minimum": [
+            -101.75849034943285,
+            -71.82892397053199,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_10",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501745769 | WGS84 centroid 13.3959327, 42.3505539 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [],
+          "width": 62.14577057267852
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 17.848967153877894,
+          "footprint": [
+            [
+              26.819249692792607,
+              -98.67918514962824
+            ],
+            [
+              18.31977225149933,
+              -116.52815230350613
+            ],
+            [
+              29.661628183499104,
+              -116.52815230350613
+            ],
+            [
+              30.266307922953246,
+              -115.21012953261427
+            ],
+            [
+              35.383420617587554,
+              -102.99838139225956
+            ]
+          ],
+          "height": 8.999999999999998,
+          "identifier": "standing_laquila_source_11",
+          "kind": "building",
+          "minimum": [
+            18.31977225149933,
+            -116.52815230350613,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_11",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501746087 | WGS84 centroid 13.3971352, 42.3499107 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.856796619198948,
+            0.62,
+            0.7749779972677648,
+            1.0,
+            0.852391799036174
+          ],
+          "width": 17.063648366088223
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 9.3995098789255,
+          "footprint": [
+            [
+              22.92745198539313,
+              -122.31670921170594
+            ],
+            [
+              20.153242341645417,
+              -119.92965646023546
+            ],
+            [
+              18.058999419885943,
+              -124.56077438559332
+            ],
+            [
+              20.405470849518913,
+              -129.32916633916096
+            ],
+            [
+              22.7509057015912,
+              -126.74516295391246
+            ]
+          ],
+          "height": 1.1612895768865095,
+          "identifier": "rubble_laquila_source_11_1",
+          "kind": "ground_rubble",
+          "minimum": [
+            18.058999419885943,
+            -129.32916633916096,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_11",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501746087 | WGS84 centroid 13.3971352, 42.3499107 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            1.0,
+            0.28,
+            0.7252660169337262,
+            0.72014614493322,
+            0.5022457812339337
+          ],
+          "width": 4.868452565507187
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 5.777799967095845,
+          "footprint": [
+            [
+              17.114133560404362,
+              -126.25238426538449
+            ],
+            [
+              15.165850562363614,
+              -128.5826889621343
+            ],
+            [
+              14.862939668420093,
+              -130.34355974222706
+            ],
+            [
+              16.696948954904148,
+              -132.03018423248034
+            ],
+            [
+              18.643500365321806,
+              -131.96758340108724
+            ],
+            [
+              20.623674587096197,
+              -130.21479492226774
+            ],
+            [
+              19.072843256507888,
+              -127.00529832961082
+            ]
+          ],
+          "height": 1.3338481183528659,
+          "identifier": "rubble_laquila_source_11_2",
+          "kind": "ground_rubble",
+          "minimum": [
+            14.862939668420093,
+            -132.03018423248034,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_11",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501746087 | WGS84 centroid 13.3971352, 42.3499107 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.6436309101032565,
+            0.33717885443473117,
+            0.4915978800840024,
+            1.0,
+            0.28,
+            0.8227877384167354,
+            0.8808004500017628
+          ],
+          "width": 5.760734918676103
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 4.7672585418627165,
+          "footprint": [
+            [
+              24.517873352839825,
+              -116.99135388466954
+            ],
+            [
+              22.209478935005908,
+              -118.00883443490179
+            ],
+            [
+              22.697963891180777,
+              -120.57779010963338
+            ],
+            [
+              24.572528282717514,
+              -121.75861242653225
+            ],
+            [
+              26.70540714760887,
+              -120.38967603808263
+            ],
+            [
+              26.51538204880669,
+              -117.7629818230834
+            ]
+          ],
+          "height": 1.9854413177655181,
+          "identifier": "rubble_laquila_source_11_3",
+          "kind": "ground_rubble",
+          "minimum": [
+            22.209478935005908,
+            -121.75861242653225,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_11",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501746087 | WGS84 centroid 13.3971352, 42.3499107 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.6451195539192756,
+            0.7589364282173853,
+            1.0,
+            0.28,
+            0.915245324430822,
+            0.7961346651735385
+          ],
+          "width": 4.495928212602962
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 3.283953547692974,
+          "footprint": [
+            [
+              22.180875699254493,
+              -118.5228062562801
+            ],
+            [
+              21.46134684967533,
+              -116.6700848511331
+            ],
+            [
+              20.01304960752523,
+              -117.05896363799003
+            ],
+            [
+              19.771892980534606,
+              -118.87193359740351
+            ],
+            [
+              21.072769719665832,
+              -119.95403839882607
+            ]
+          ],
+          "height": 2.1088953860126494,
+          "identifier": "rubble_laquila_source_11_4",
+          "kind": "ground_rubble",
+          "minimum": [
+            19.771892980534606,
+            -119.95403839882607,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_11",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501746087 | WGS84 centroid 13.3971352, 42.3499107 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.895926601123161,
+            0.9105835626616485,
+            0.28,
+            0.5130769902653538,
+            1.0
+          ],
+          "width": 2.408982718719887
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 2.4609868142163123,
+          "footprint": [
+            [
+              15.250356320695113,
+              -125.29192991453304
+            ],
+            [
+              16.30825430275744,
+              -125.23284123623131
+            ],
+            [
+              16.952332517377847,
+              -124.06616134117763
+            ],
+            [
+              16.502924070375396,
+              -122.83094310031673
+            ],
+            [
+              15.427240800714381,
+              -123.07329164949553
+            ],
+            [
+              14.849122110061383,
+              -124.05745557224493
+            ]
+          ],
+          "height": 1.158751248190501,
+          "identifier": "rubble_laquila_source_11_5",
+          "kind": "ground_rubble",
+          "minimum": [
+            14.849122110061383,
+            -125.29192991453304,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_11",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501746087 | WGS84 centroid 13.3971352, 42.3499107 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.918492099732639,
+            0.6074136480421022,
+            0.28077497301318866,
+            1.0,
+            0.28,
+            0.6015301423204547
+          ],
+          "width": 2.103210407316464
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 2.695450272270122,
+          "footprint": [
+            [
+              15.064617512792527,
+              -128.00844777485824
+            ],
+            [
+              15.825337210738057,
+              -127.47873353919614
+            ],
+            [
+              15.915121637714531,
+              -126.6387645144343
+            ],
+            [
+              15.594514135300763,
+              -125.77302117371447
+            ],
+            [
+              14.886924221931814,
+              -125.31299750258812
+            ],
+            [
+              14.150707458427082,
+              -125.78146601972529
+            ],
+            [
+              13.898956625462617,
+              -126.8621266386384
+            ],
+            [
+              14.269168785704078,
+              -127.4961837264198
+            ]
+          ],
+          "height": 1.908313975043748,
+          "identifier": "rubble_laquila_source_11_6",
+          "kind": "ground_rubble",
+          "minimum": [
+            13.898956625462617,
+            -128.00844777485824,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_11",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501746087 | WGS84 centroid 13.3971352, 42.3499107 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.8815829498794795,
+            0.28,
+            0.7362043643365628,
+            0.7326145115176004,
+            0.7429494667513279,
+            1.0,
+            0.7998396743293951,
+            0.8897856045533455
+          ],
+          "width": 2.016165012251914
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 4.181071125605811,
+          "footprint": [
+            [
+              19.459892927702338,
+              -121.37234412693228
+            ],
+            [
+              18.962372536939135,
+              -118.81870505942642
+            ],
+            [
+              17.599215616737304,
+              -118.25343494378535
+            ],
+            [
+              16.681094722445494,
+              -119.9810484121787
+            ],
+            [
+              16.90380053391053,
+              -122.10323091078493
+            ],
+            [
+              18.17119074579706,
+              -122.43450606939116
+            ]
+          ],
+          "height": 1.5159794707234844,
+          "identifier": "rubble_laquila_source_11_7",
+          "kind": "ground_rubble",
+          "minimum": [
+            16.681094722445494,
+            -122.43450606939116,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_11",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501746087 | WGS84 centroid 13.3971352, 42.3499107 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.5894912016386088,
+            0.39626556655303063,
+            1.0,
+            0.7014914908197742,
+            0.7073104070395724,
+            0.28
+          ],
+          "width": 2.7787982052568445
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 2.267200819322966,
+          "footprint": [
+            [
+              19.561690752595922,
+              -131.7374538477677
+            ],
+            [
+              17.512291169740266,
+              -132.88943018159102
+            ],
+            [
+              18.94579304089041,
+              -134.00465466709068
+            ],
+            [
+              21.422614668288176,
+              -133.8714941606265
+            ],
+            [
+              22.11700981189433,
+              -132.30244392056323
+            ]
+          ],
+          "height": 1.7991258444611093,
+          "identifier": "rubble_laquila_source_11_8",
+          "kind": "ground_rubble",
+          "minimum": [
+            17.512291169740266,
+            -134.00465466709068,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_11",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501746087 | WGS84 centroid 13.3971352, 42.3499107 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.28,
+            0.5391789665520921,
+            0.39813548945157146,
+            1.0,
+            0.34073778035141655
+          ],
+          "width": 4.604718642154065
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 2.902478692725282,
+          "footprint": [
+            [
+              21.235406505370324,
+              -131.78421624085559
+            ],
+            [
+              22.442395936406452,
+              -131.81787642194485
+            ],
+            [
+              23.112091863824286,
+              -129.9888646260205
+            ],
+            [
+              22.14092513976574,
+              -128.91539772921956
+            ],
+            [
+              20.899461663901715,
+              -129.85949733604247
+            ]
+          ],
+          "height": 1.5480719322025827,
+          "identifier": "rubble_laquila_source_11_9",
+          "kind": "ground_rubble",
+          "minimum": [
+            20.899461663901715,
+            -131.81787642194485,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_11",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501746087 | WGS84 centroid 13.3971352, 42.3499107 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            1.0,
+            0.28,
+            0.8688984411882663,
+            0.5281088811157073,
+            0.4301390236738988
+          ],
+          "width": 2.2126301999225717
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 20.608273731818798,
+          "footprint": [
+            [
+              -10.35797260234595,
+              -121.08779864637154
+            ],
+            [
+              -14.57835654504874,
+              -128.01187097394933
+            ],
+            [
+              -19.136042128544524,
+              -135.4925407548792
+            ],
+            [
+              -22.921581739766946,
+              -141.69607237819034
+            ],
+            [
+              2.0984722915174703,
+              -141.69607237819034
+            ],
+            [
+              6.071085358101575,
+              -134.26802635608092
+            ],
+            [
+              -6.7792844637079215,
+              -123.95984150838915
+            ]
+          ],
+          "height": 5.612707,
+          "identifier": "standing_laquila_source_12",
+          "kind": "building",
+          "minimum": [
+            -22.921581739766946,
+            -141.69607237819034,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_12",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501748940 | WGS84 centroid 13.3966870, 42.3496846 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.7714283754932026,
+            0.62,
+            0.7998801095343191,
+            1.0,
+            0.8658970694737284,
+            0.768040744409372,
+            0.7102291146790474
+          ],
+          "width": 28.99266709786852
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 8.941408056915577,
+          "footprint": [
+            [
+              -6.799232145718265,
+              -152.88136833549518
+            ],
+            [
+              -1.9636882162141998,
+              -149.23117890220936
+            ],
+            [
+              -4.018667433724915,
+              -145.30556101533753
+            ],
+            [
+              -8.87977175511072,
+              -143.9399602785796
+            ],
+            [
+              -13.363241323509799,
+              -147.13194527613348
+            ],
+            [
+              -12.437802359337681,
+              -151.52569842267977
+            ]
+          ],
+          "height": 1.4652573423722826,
+          "identifier": "rubble_laquila_source_12_1",
+          "kind": "ground_rubble",
+          "minimum": [
+            -13.363241323509799,
+            -152.88136833549518,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_12",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501748940 | WGS84 centroid 13.3966870, 42.3496846 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.7760771222318354,
+            0.28,
+            1.0,
+            0.3229931465231937,
+            0.364083868885014,
+            0.4170561373179691
+          ],
+          "width": 11.3995531072956
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 6.81509155034351,
+          "footprint": [
+            [
+              -17.780710370153567,
+              -144.96083203055474
+            ],
+            [
+              -20.577913217746534,
+              -143.86247772459
+            ],
+            [
+              -23.77675790402542,
+              -145.4304485410842
+            ],
+            [
+              -23.947738967061362,
+              -148.32817428254418
+            ],
+            [
+              -21.827106397953756,
+              -150.67756927493352
+            ],
+            [
+              -18.290747938648213,
+              -150.13585196872333
+            ],
+            [
+              -16.59844231224111,
+              -147.7354053551176
+            ]
+          ],
+          "height": 1.949807976587258,
+          "identifier": "rubble_laquila_source_12_2",
+          "kind": "ground_rubble",
+          "minimum": [
+            -23.947738967061362,
+            -150.67756927493352,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_12",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501748940 | WGS84 centroid 13.3966870, 42.3496846 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.5189468897587596,
+            0.3858703735369382,
+            0.5731641452472777,
+            1.0,
+            0.8857685736297208,
+            0.28,
+            0.8215099990591749
+          ],
+          "width": 7.34929665482025
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 6.0641642489782726,
+          "footprint": [
+            [
+              -11.852176693836675,
+              -151.96271301540014
+            ],
+            [
+              -16.393921252341578,
+              -150.8973601640561
+            ],
+            [
+              -19.36402891441997,
+              -153.85976092564243
+            ],
+            [
+              -16.335924388156535,
+              -156.96152441303437
+            ],
+            [
+              -11.647826266312872,
+              -155.57415949042823
+            ]
+          ],
+          "height": 1.6961368613896073,
+          "identifier": "rubble_laquila_source_12_3",
+          "kind": "ground_rubble",
+          "minimum": [
+            -19.36402891441997,
+            -156.96152441303437,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_12",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501748940 | WGS84 centroid 13.3966870, 42.3496846 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.5290354091692449,
+            0.28,
+            0.4733990868637651,
+            0.7250986061687665,
+            1.0
+          ],
+          "width": 7.716202648107096
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 4.01027037449208,
+          "footprint": [
+            [
+              -16.84903661684522,
+              -143.40981855808425
+            ],
+            [
+              -15.64758416405309,
+              -145.17549978764586
+            ],
+            [
+              -13.889829114825385,
+              -146.10394831546
+            ],
+            [
+              -11.719074485969756,
+              -144.87585915951217
+            ],
+            [
+              -11.989203687588383,
+              -143.0689178383743
+            ],
+            [
+              -14.30537906697437,
+              -142.09367794096792
+            ]
+          ],
+          "height": 1.5246726138339062,
+          "identifier": "rubble_laquila_source_12_4",
+          "kind": "ground_rubble",
+          "minimum": [
+            -16.84903661684522,
+            -146.10394831546,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_12",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501748940 | WGS84 centroid 13.3966870, 42.3496846 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.42833203500737926,
+            0.8475227551802776,
+            1.0,
+            0.5425529784429242,
+            0.31260128704898216,
+            0.28
+          ],
+          "width": 5.129962130875462
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 4.104864251131772,
+          "footprint": [
+            [
+              -9.477874625121004,
+              -156.86174857375943
+            ],
+            [
+              -10.875572023656593,
+              -156.44981828861745
+            ],
+            [
+              -11.905646079160027,
+              -157.21888658728412
+            ],
+            [
+              -12.604667759641728,
+              -159.29213951453022
+            ],
+            [
+              -11.7337713778108,
+              -160.28762414736073
+            ],
+            [
+              -10.269240006448191,
+              -160.55468253974922
+            ],
+            [
+              -9.287294890167882,
+              -159.91688334564753
+            ],
+            [
+              -8.497018042268145,
+              -158.15222864728818
+            ]
+          ],
+          "height": 1.247147187556718,
+          "identifier": "rubble_laquila_source_12_5",
+          "kind": "ground_rubble",
+          "minimum": [
+            -12.604667759641728,
+            -160.55468253974922,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_12",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501748940 | WGS84 centroid 13.3966870, 42.3496846 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.7949981967260081,
+            0.8622702519264175,
+            0.28,
+            0.6721754773211124,
+            0.6413505640045575,
+            0.6187303214988613,
+            0.295769154328979,
+            1.0
+          ],
+          "width": 4.107649717373583
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 2.7974328024401416,
+          "footprint": [
+            [
+              -7.753773742703033,
+              -153.54651468236088
+            ],
+            [
+              -9.73208340822042,
+              -153.66050569948226
+            ],
+            [
+              -11.204664168816453,
+              -154.89537682574348
+            ],
+            [
+              -10.316813704822506,
+              -156.34345987447267
+            ],
+            [
+              -7.672051778817277,
+              -156.34394748480102
+            ],
+            [
+              -6.360600057912311,
+              -154.96496821720174
+            ]
+          ],
+          "height": 1.7957186912325247,
+          "identifier": "rubble_laquila_source_12_6",
+          "kind": "ground_rubble",
+          "minimum": [
+            -11.204664168816453,
+            -156.34394748480102,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_12",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501748940 | WGS84 centroid 13.3966870, 42.3496846 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.8760639926576024,
+            0.7517645653849236,
+            1.0,
+            0.7891931451524448,
+            0.28,
+            0.600548669623306
+          ],
+          "width": 4.844064110904142
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 2.6122909129348955,
+          "footprint": [
+            [
+              -0.5554436302102395,
+              -142.52927645915554
+            ],
+            [
+              -3.192365847609773,
+              -142.07700151848243
+            ],
+            [
+              -5.648340730716724,
+              -142.77299717924632
+            ],
+            [
+              -5.29213686739757,
+              -143.9779912272136
+            ],
+            [
+              -2.3631809029897557,
+              -144.68929243141733
+            ],
+            [
+              -0.39357408464557775,
+              -143.9369258646075
+            ]
+          ],
+          "height": 1.9907977557820704,
+          "identifier": "rubble_laquila_source_12_7",
+          "kind": "ground_rubble",
+          "minimum": [
+            -5.648340730716724,
+            -144.68929243141733,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_12",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/501748940 | WGS84 centroid 13.3966870, 42.3496846 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [
+            0.8568868179574081,
+            0.6789202120486828,
+            1.0,
+            0.5740238905927599,
+            0.28,
+            0.7524834557012237
+          ],
+          "width": 5.254766646071146
+        },
+        {
+          "damage_template_id": "standing_full_volume.v1",
+          "depth": 26.494038809140754,
+          "footprint": [
+            [
+              -106.2339072400024,
+              50.03252260119872
+            ],
+            [
+              -98.70632184499665,
+              40.73734511969927
+            ],
+            [
+              -112.40405920318653,
+              31.586882976340284
+            ],
+            [
+              -108.12608717540614,
+              29.20464587400019
+            ],
+            [
+              -111.34279306540252,
+              23.538483792057967
+            ],
+            [
+              -121.79091705636705,
+              28.89295129930042
+            ],
+            [
+              -130.64302840611157,
+              33.43478652374715
+            ]
+          ],
+          "height": 9.0,
+          "identifier": "solid_laquila_source_13",
+          "kind": "building",
+          "minimum": [
+            -130.64302840611157,
+            23.538483792057967,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_13",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/503172319 | WGS84 centroid 13.3954603, 42.3512621 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [],
+          "width": 31.936706561114917
+        },
+        {
+          "damage_template_id": "standing_full_volume.v1",
+          "depth": 52.00846609813551,
+          "footprint": [
+            [
+              13.648031968950733,
+              -1.0853875712570977
+            ],
+            [
+              -3.579032312179869,
+              -29.694496704875853
+            ],
+            [
+              39.570897083353664,
+              -47.51674718112572
+            ],
+            [
+              53.424944957869556,
+              -53.09385366939261
+            ],
+            [
+              60.6234555814626,
+              -32.39956033112514
+            ]
+          ],
+          "height": 9.0,
+          "identifier": "solid_laquila_source_14",
+          "kind": "building",
+          "minimum": [
+            -3.579032312179869,
+            -53.09385366939261,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_14",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/503190642 | WGS84 centroid 13.3972287, 42.3506632 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [],
+          "width": 64.20248789364247
+        },
+        {
+          "damage_template_id": "standing_full_volume.v1",
+          "depth": 74.75103806720645,
+          "footprint": [
+            [
+              113.66208185652985,
+              -2.321033919264812
+            ],
+            [
+              139.61785444801563,
+              -9.289634042889304
+            ],
+            [
+              130.79865057550003,
+              -50.51124148365594
+            ],
+            [
+              123.87985350747626,
+              -77.07207198647126
+            ],
+            [
+              93.67901636529295,
+              -65.28333791132852
+            ],
+            [
+              100.85284638103735,
+              -42.2847311136049
+            ],
+            [
+              108.52851542313495,
+              -45.03432253669185
+            ],
+            [
+              120.43279527731562,
+              -48.718997681505186
+            ],
+            [
+              126.44663672417374,
+              -19.54215914453398
+            ],
+            [
+              117.70147467505795,
+              -17.248977634287268
+            ],
+            [
+              108.94808575670804,
+              -44.12150271180235
+            ],
+            [
+              101.0502912438265,
+              -41.550022474484116
+            ]
+          ],
+          "height": 9.0,
+          "identifier": "solid_laquila_source_15",
+          "kind": "building",
+          "minimum": [
+            93.67901636529295,
+            -77.07207198647126,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_15",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/503193496 | WGS84 centroid 13.3982343, 42.3506109 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [],
+          "width": 45.93883808272268
+        },
+        {
+          "damage_template_id": "standing_full_volume.v1",
+          "depth": 42.2123509085401,
+          "footprint": [
+            [
+              90.73379716148551,
+              -101.20613759089979
+            ],
+            [
+              88.15056020631971,
+              -107.55134856591572
+            ],
+            [
+              89.3928174682784,
+              -108.44190449238637
+            ],
+            [
+              90.35536117452168,
+              -109.69981473802196
+            ],
+            [
+              90.60216725300812,
+              -111.22489176231059
+            ],
+            [
+              90.34713430514137,
+              -112.63864929529606
+            ],
+            [
+              88.75934853330168,
+              -116.4346439314126
+            ],
+            [
+              87.96134221276472,
+              -117.61463053337322
+            ],
+            [
+              86.63681625802595,
+              -118.47179061300662
+            ],
+            [
+              85.2464753489754,
+              -118.59424205272825
+            ],
+            [
+              83.67514331575018,
+              -118.21575578356295
+            ],
+            [
+              81.46211547831405,
+              -123.4700357495026
+            ],
+            [
+              74.43636910966153,
+              -120.62025678511284
+            ],
+            [
+              71.26079756598212,
+              -129.38110071009712
+            ],
+            [
+              92.8727831753757,
+              -139.2662714925769
+            ],
+            [
+              106.9160490434466,
+              -143.4184884994399
+            ],
+            [
+              108.67659907037294,
+              -138.052889042988
+            ],
+            [
+              98.16266012509666,
+              -134.24576245766207
+            ],
+            [
+              109.45815165229541,
+              -107.80738339456839
+            ]
+          ],
+          "height": 9.0,
+          "identifier": "solid_laquila_source_16",
+          "kind": "building",
+          "minimum": [
+            71.26079756598212,
+            -143.4184884994399,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_16",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/503974017 | WGS84 centroid 13.3979280, 42.3498812 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [],
+          "width": 38.1973540863133
+        },
+        {
+          "damage_template_id": "standing_full_volume.v1",
+          "depth": 62.75079696024868,
+          "footprint": [
+            [
+              121.37065837571026,
+              -93.11321060977978
+            ],
+            [
+              149.8109454911134,
+              -104.46779867050113
+            ],
+            [
+              141.5758493377311,
+              -133.32181068435412
+            ],
+            [
+              134.69818661617046,
+              -155.86400757002846
+            ],
+            [
+              125.31955563222411,
+              -151.990089290237
+            ],
+            [
+              124.63672548155009,
+              -151.0995333637663
+            ],
+            [
+              109.70495773078184,
+              -144.96582942135637
+            ],
+            [
+              111.57245705833695,
+              -139.07702835838975
+            ],
+            [
+              115.4144050140759,
+              -126.43113420440459
+            ],
+            [
+              119.76641886540223,
+              -101.9631101276484
+            ]
+          ],
+          "height": 9.0,
+          "identifier": "solid_laquila_source_17",
+          "kind": "building",
+          "minimum": [
+            109.70495773078184,
+            -155.86400757002846,
+            0.0
+          ],
+          "parent_structure_id": "laquila_source_17",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "OSM way/503976723 | WGS84 centroid 13.3983549, 42.3497876 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+          "visual_top_profile": [],
+          "width": 40.105987760331544
+        }
+      ],
+      "seed": 20260925,
+      "world": {
+        "distance_unit": "meter",
+        "maximum": [
+          167.8109454911134,
+          154.7392739801072,
+          50.0
+        ],
+        "minimum": [
+          -204.94772178701862,
+          -180.331669985557,
+          0.0
+        ]
+      }
+    },
+    "generation_metadata": {
+      "accepted_post_assets": [
+        "post:grade4_b_001_post.obj",
+        "post:grade4_b_007_post.obj",
+        "post:grade5_b_002_post.obj",
+        "post:grade5_b_003_post.obj"
+      ],
+      "active_building_count": 17,
+      "active_osm_ids": [
+        "way/1238268580",
+        "way/1238268585",
+        "way/1238268586",
+        "way/1238268588",
+        "way/496729866",
+        "way/496729871",
+        "way/500792516",
+        "way/500798133",
+        "way/501738250",
+        "way/501745769",
+        "way/501746087",
+        "way/501748940",
+        "way/503172319",
+        "way/503190642",
+        "way/503193496",
+        "way/503974017",
+        "way/503976723"
+      ],
+      "active_road_count": 0,
+      "active_road_geometry": false,
+      "base_position": [
+        -32.57579802926938,
+        -25.80870948599997,
+        0.0
+      ],
+      "boundary_margin_m": 18.0,
+      "bounds": [
+        -204.94772178701862,
+        -180.331669985557,
+        0.0,
+        167.8109454911134,
+        154.7392739801072,
+        50.0
+      ],
+      "building_count": 17,
+      "damage_mesh_template_version": "synthetic_damage_mesh.v1",
+      "damage_mesh_templates": {
+        "destroyed": {
+          "description": "destroyed footprint with a dense multi-piece irregular rubble cluster",
+          "id": "destroyed_rubble_cluster.v1"
+        },
+        "intact": {
+          "description": "full standing building volume",
+          "id": "standing_full_volume.v1"
+        },
+        "major": {
+          "description": "standing section plus disjoint collapsed section with irregular debris",
+          "id": "major_partial_collapse.v1"
+        },
+        "minor": {
+          "description": "standing building with minor damage state",
+          "id": "standing_minor_damage.v1"
+        }
+      },
+      "damage_provenance": "fixed scenario.v1 state, accepted explicit template bindings, and named OSM derived damage bindings",
+      "derived_damage_bindings": [
+        {
+          "damage_state": "minor",
+          "osm_id": "way/1238268580"
+        },
+        {
+          "damage_state": "minor",
+          "osm_id": "way/1238268585"
+        },
+        {
+          "damage_state": "major",
+          "osm_id": "way/1238268586"
+        },
+        {
+          "damage_state": "major",
+          "osm_id": "way/501738250"
+        },
+        {
+          "damage_state": "minor",
+          "osm_id": "way/501745769"
+        },
+        {
+          "damage_state": "major",
+          "osm_id": "way/501748940"
+        }
+      ],
+      "exactness_policy": "source footprint and relative position are exact for the stored snapshot; missing height or building specific mesh is explicitly derived",
+      "excluded_osm_buildings": [
+        {
+          "osm_id": "way/503172320",
+          "reason": "Overlaps canonical footprint way/503172319 in the frozen OSM snapshot, so it is excluded from the nonredundant scenario."
+        }
+      ],
+      "imputed_values": [],
+      "inspection_only_post_assets": [
+        "post:grade3_b_003_post.obj",
+        "post:grade3_b_005_post.obj"
+      ],
+      "layout_rule": "osm_georeferenced_local_enu.v1",
+      "layout_version": "laquila_georeferenced_layout.v1",
+      "maximum_airspace_m": 50.0,
+      "mode": "laquila_informed",
+      "notes": "The scene preserves the stored OSM source positions. One overlapping OSM building is excluded by scenario.v1. Roads remain in source provenance but are not active UAV obstacles.",
+      "placement_provenance": "original OSM source positions in deterministic local ENU coordinates; no synthetic translation, rotation, grid, or lot scaling",
+      "post_assets_used": [
+        "post:grade4_b_001_post.obj",
+        "post:grade4_b_007_post.obj",
+        "post:grade5_b_002_post.obj",
+        "post:grade5_b_003_post.obj"
+      ],
+      "scenario_seed": 20260924,
+      "schema_version": "laquila_georeferenced_layout.v1",
+      "seed": 20260925,
+      "seed_effect": "source buildings and damage states are seed independent; seed affects only simulator candidate sites and generated tasks",
+      "source_building_count": 18,
+      "source_context": "../../heidata_benchmark/data/sample/osm_context.v1.geojson",
+      "source_context_path": "/Users/_d-one_/Desktop/Thesis/Simulation/heidata_benchmark/data/sample/osm_context.v1.geojson",
+      "source_damage_grade_counts": {
+        "destruction": 2,
+        "extreme": 2,
+        "major": 3,
+        "minor": 3,
+        "no_damage": 1,
+        "osm_footprint_only": 6
+      },
+      "source_manifest": "../../heidata_benchmark/data/sample/manifest.json",
+      "source_manifest_path": "/Users/_d-one_/Desktop/Thesis/Simulation/heidata_benchmark/data/sample/manifest.json",
+      "source_origin_wgs84": [
+        13.39683080418353,
+        42.35095745020244
+      ],
+      "source_road_count": 89,
+      "source_scenario": "../../heidata_benchmark/data/sample/scenario.v1.json",
+      "source_scenario_id": "laquila_osm_heidata_controlled_v1",
+      "source_scenario_path": "/Users/_d-one_/Desktop/Thesis/Simulation/heidata_benchmark/data/sample/scenario.v1.json",
+      "source_scenario_schema": "scenario.v1",
+      "template_bindings": [
+        {
+          "asset_id": "post:grade4_b_001_post.obj",
+          "osm_id": "way/496729866"
+        },
+        {
+          "asset_id": "post:grade5_b_002_post.obj",
+          "osm_id": "way/496729871"
+        },
+        {
+          "asset_id": "post:grade5_b_003_post.obj",
+          "osm_id": "way/500792516"
+        },
+        {
+          "asset_id": "pre:pre_b_004_pre.obj",
+          "osm_id": "way/500798133"
+        },
+        {
+          "asset_id": "post:grade4_b_007_post.obj",
+          "osm_id": "way/501746087"
+        }
+      ],
+      "template_version": null,
+      "visual_mesh_usage": {
+        "derived_partial_mesh": 6,
+        "footprint_extrusion": 6,
+        "rubble_only": 0,
+        "source_post_mesh": 4,
+        "source_pre_mesh": 1
+      }
+    },
+    "indoor_connections": [],
+    "indoor_rooms": [],
+    "preset": {
+      "broken_floor_probability": 0.4,
+      "damage_proportions": {
+        "destroyed": 0.15,
+        "intact": 0.25,
+        "major": 0.3,
+        "minor": 0.3
+      },
+      "elevated_debris_probability": 0.35,
+      "identifier": "earthquake.v1",
+      "indoor_probabilities": {
+        "blocked_corridor": 0.25,
+        "blocked_door": 0.2,
+        "damaged_room": 0.3,
+        "damaged_stair": 0.2,
+        "indoor_debris": 0.65
+      },
+      "road_block_probability": 0.3,
+      "rubble_probability": 0.65,
+      "severity": "moderate",
+      "version": "earthquake.v1"
+    },
+    "provenance": [
+      {
+        "identifier": "laquila_osm_source_context",
+        "licence": "ODbL 1.0",
+        "preprocessing_version": "osm_context.v1",
+        "role": "exact source building identity, WGS 84 footprint, and relative position",
+        "title": "Frozen L'Aquila OpenStreetMap source context",
+        "url_or_doi": "https://www.openstreetmap.org/copyright"
+      },
+      {
+        "identifier": "laquila_source_scenario",
+        "licence": "project source artifact",
+        "preprocessing_version": "scenario.v1",
+        "role": "explicit exclusion, damage states, and template bindings",
+        "title": "L'Aquila source scenario manifest",
+        "url_or_doi": "/Users/_d-one_/Desktop/Thesis/Simulation/heidata_benchmark/data/sample/scenario.v1.json"
+      },
+      {
+        "identifier": "heidata_source_mesh_library",
+        "licence": "CC BY 4.0",
+        "preprocessing_version": "mesh_review.v1",
+        "role": "building specific source mesh templates where explicitly bound",
+        "title": "heiDATA accepted local source meshes",
+        "url_or_doi": "doi:10.11588/DATA/D3WZID"
+      }
+    ],
+    "roads": [],
+    "structures": [
+      {
+        "damage_state": "minor",
+        "depth": 21.239758843201102,
+        "footprint": [
+          [
+            -78.64921453021383,
+            14.499341140002173
+          ],
+          [
+            -88.66954131837107,
+            19.809280850406964
+          ],
+          [
+            -77.26710049039745,
+            35.739099983203275
+          ],
+          [
+            -70.02745552034129,
+            27.122971395568502
+          ]
+        ],
+        "height": 7.9129,
+        "height_source": "scenario:default_building_height_m",
+        "identifier": "laquila_source_01",
+        "minimum": [
+          -88.66954131837107,
+          14.499341140002173,
+          0.0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": "OSM building way/1238268580",
+        "source_ref": "OSM way/1238268580 | WGS84 centroid 13.3958748, 42.3511757 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "derived_damage",
+        "visual_mesh_summary": {
+          "axis_rule": "source_xyz_to_local_xzy.v1",
+          "extent": [
+            18.642085798029782,
+            21.239758843201102,
+            7.9129
+          ],
+          "face_count": 12,
+          "maximum": [
+            -70.02745552034129,
+            35.739099983203275,
+            7.9129
+          ],
+          "minimum": [
+            -88.66954131837107,
+            14.499341140002173,
+            0.0
+          ],
+          "vertex_count": 8
+        },
+        "visual_provenance": "exact OSM footprint with scenario.v1 derived damage profile",
+        "width": 18.642085798029782
+      },
+      {
+        "damage_state": "minor",
+        "depth": 27.028372364864964,
+        "footprint": [
+          [
+            -66.81897649957907,
+            13.475201824600452
+          ],
+          [
+            -71.94431606359367,
+            3.5677671437018503
+          ],
+          [
+            -37.16111273006592,
+            -13.553170540264514
+          ],
+          [
+            -29.10700770085835,
+            6.673580937535261
+          ],
+          [
+            -42.87056001335998,
+            12.773889032316944
+          ],
+          [
+            -46.75364231541591,
+            4.246816037566525
+          ]
+        ],
+        "height": 8.325557,
+        "height_source": "scenario:default_building_height_m",
+        "identifier": "laquila_source_02",
+        "minimum": [
+          -71.94431606359367,
+          -13.553170540264514,
+          0.0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": "OSM building way/1238268585",
+        "source_ref": "OSM way/1238268585 | WGS84 centroid 13.3962339, 42.3509982 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "derived_damage",
+        "visual_mesh_summary": {
+          "axis_rule": "source_xyz_to_local_xzy.v1",
+          "extent": [
+            42.83730836273533,
+            27.028372364864964,
+            8.325557
+          ],
+          "face_count": 20,
+          "maximum": [
+            -29.10700770085835,
+            13.475201824600452,
+            8.325557
+          ],
+          "minimum": [
+            -71.94431606359367,
+            -13.553170540264514,
+            0.0
+          ],
+          "vertex_count": 12
+        },
+        "visual_provenance": "exact OSM footprint with scenario.v1 derived damage profile",
+        "width": 42.83730836273533
+      },
+      {
+        "damage_state": "major",
+        "depth": 40.23086397299316,
+        "footprint": [
+          [
+            -98.70632184499665,
+            40.73734511969927
+          ],
+          [
+            -88.15947542263756,
+            48.685556762678786
+          ],
+          [
+            -77.26710049039745,
+            35.739099983203275
+          ],
+          [
+            -88.66954131837107,
+            19.809280850406964
+          ],
+          [
+            -78.64921453021383,
+            14.499341140002173
+          ],
+          [
+            -82.03045780591656,
+            8.454692789685627
+          ],
+          [
+            -105.37008596515369,
+            20.51059364269047
+          ],
+          [
+            -93.49871358805582,
+            34.57024532966109
+          ]
+        ],
+        "height": 5.640715,
+        "height_source": "scenario:default_building_height_m",
+        "identifier": "laquila_source_03",
+        "minimum": [
+          -105.37008596515369,
+          8.454692789685627,
+          0.0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": "OSM building way/1238268586",
+        "source_ref": "OSM way/1238268586 | WGS84 centroid 13.3957484, 42.3512079 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "derived_damage",
+        "visual_mesh_summary": {
+          "axis_rule": "source_xyz_to_local_xzy.v1",
+          "extent": [
+            28.102985474756238,
+            40.23086397299316,
+            5.640715
+          ],
+          "face_count": 28,
+          "maximum": [
+            -77.26710049039745,
+            48.685556762678786,
+            5.640715
+          ],
+          "minimum": [
+            -105.37008596515369,
+            8.454692789685627,
+            0.0
+          ],
+          "vertex_count": 16
+        },
+        "visual_provenance": "exact OSM footprint with scenario.v1 derived damage profile",
+        "width": 28.102985474756238
+      },
+      {
+        "damage_state": "intact",
+        "depth": 32.04888139898882,
+        "footprint": [
+          [
+            -147.7549165172331,
+            26.588637839844292
+          ],
+          [
+            -149.9432637468206,
+            28.904083248509835
+          ],
+          [
+            -151.73672125068362,
+            30.841042388010084
+          ],
+          [
+            -161.17294031970755,
+            21.991142870141456
+          ],
+          [
+            -149.68823079895384,
+            13.09671555622613
+          ],
+          [
+            -142.51440078320942,
+            21.712844143069933
+          ],
+          [
+            -136.3607025586398,
+            16.959501886808184
+          ],
+          [
+            -143.42758327375543,
+            8.243185757079631
+          ],
+          [
+            -131.23536299462518,
+            -1.2078390109787331
+          ],
+          [
+            -130.2645924190016,
+            0.3172380125189448
+          ],
+          [
+            -125.61641127349151,
+            7.619796609262039
+          ],
+          [
+            -119.65193104247685,
+            17.36025205360134
+          ],
+          [
+            -144.250270202141,
+            29.69445163288673
+          ]
+        ],
+        "height": 9.0,
+        "height_source": "osm height unavailable",
+        "identifier": "laquila_source_04",
+        "minimum": [
+          -161.17294031970755,
+          -1.2078390109787331,
+          0.0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": "OSM building way/1238268588",
+        "source_ref": "OSM way/1238268588 | WGS84 centroid 13.3951163, 42.3511109 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "footprint_extrusion",
+        "visual_mesh_summary": {
+          "axis_rule": "source_xyz_to_local_xzy.v1",
+          "extent": [
+            41.521009277230704,
+            32.04888139898882,
+            9.0
+          ],
+          "face_count": 48,
+          "maximum": [
+            -119.65193104247685,
+            30.841042388010084,
+            9.0
+          ],
+          "minimum": [
+            -161.17294031970755,
+            -1.2078390109787331,
+            0.0
+          ],
+          "vertex_count": 26
+        },
+        "visual_provenance": "exact OSM footprint extrusion; source height and mesh unavailable",
+        "width": 41.521009277230704
+      },
+      {
+        "damage_state": "major",
+        "depth": 16.586604128242158,
+        "footprint": [
+          [
+            -160.80273120183176,
+            130.41632690271913
+          ],
+          [
+            -146.39748308526538,
+            120.15266985186506
+          ],
+          [
+            -141.89738558684718,
+            126.47561692925312
+          ],
+          [
+            -156.30263370341356,
+            136.7392739801072
+          ]
+        ],
+        "height": 9.0,
+        "height_source": "scenario:default_or_template_height",
+        "identifier": "laquila_source_05",
+        "minimum": [
+          -160.80273120183176,
+          120.15266985186506,
+          0.0
+        ],
+        "post_asset_id": "post:grade4_b_001_post.obj",
+        "pre_asset_id": "pre:pre_b_001_pre.obj",
+        "scene_role": "target",
+        "source_id": "b_001",
+        "source_name": "OSM building way/496729866",
+        "source_ref": "OSM way/496729866 | WGS84 centroid 13.3949911, 42.3521113 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+        "visual_mesh_asset": "post:grade4_b_001_post.obj",
+        "visual_mesh_phase": "source_post",
+        "visual_mesh_summary": {
+          "axis_rule": "source_xyz_to_local_xzy.v1",
+          "extent": [
+            7.954205058334651,
+            14.596211632853098,
+            9.0
+          ],
+          "face_count": 13617,
+          "maximum": [
+            -147.3729558651717,
+            135.74407773241234,
+            9.0
+          ],
+          "minimum": [
+            -155.32716092350634,
+            121.14786609955924,
+            0.0
+          ],
+          "vertex_count": 14030
+        },
+        "visual_provenance": "exact source position with accepted heiDATA post template bound by scenario.v1",
+        "width": 18.905345614984583
+      },
+      {
+        "damage_state": "destroyed",
+        "depth": 9.439892819639908,
+        "footprint": [
+          [
+            -135.3487976366992,
+            122.2566082279246
+          ],
+          [
+            -140.23555799146155,
+            115.41045954402175
+          ],
+          [
+            -136.85431471561267,
+            112.8167154082847
+          ],
+          [
+            -131.35053916448808,
+            119.69625993981577
+          ]
+        ],
+        "height": 9.0,
+        "height_source": "scenario:default_or_template_height",
+        "identifier": "laquila_source_06",
+        "minimum": [
+          -140.23555799146155,
+          112.8167154082847,
+          0.0
+        ],
+        "post_asset_id": "post:grade5_b_002_post.obj",
+        "pre_asset_id": "pre:pre_b_002_pre.obj",
+        "scene_role": "target",
+        "source_id": "b_002",
+        "source_name": "OSM building way/496729871",
+        "source_ref": "OSM way/496729871 | WGS84 centroid 13.3951783, 42.3520134 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+        "visual_mesh_asset": "post:grade5_b_002_post.obj",
+        "visual_mesh_phase": "source_post",
+        "visual_mesh_summary": {
+          "axis_rule": "source_xyz_to_local_xzy.v1",
+          "extent": [
+            7.818816567736661,
+            6.927344133863613,
+            9.0
+          ],
+          "face_count": 3419,
+          "maximum": [
+            -131.9788674118325,
+            121.05917420619086,
+            9.0
+          ],
+          "minimum": [
+            -139.79768397956917,
+            114.13183007232725,
+            0.0
+          ],
+          "vertex_count": 2304
+        },
+        "visual_provenance": "exact source position with accepted heiDATA post template bound by scenario.v1",
+        "width": 8.885018826973464
+      },
+      {
+        "damage_state": "destroyed",
+        "depth": 33.46263893197428,
+        "footprint": [
+          [
+            -168.62648389116734,
+            15.412160964100702
+          ],
+          [
+            -166.71785021714913,
+            13.764632500881387
+          ],
+          [
+            -137.76749720615865,
+            -11.471496061832823
+          ],
+          [
+            -137.26565817980546,
+            -10.68112767745593
+          ],
+          [
+            -131.23536299462518,
+            -1.2078390109787331
+          ],
+          [
+            -143.42758327375543,
+            8.243185757079631
+          ],
+          [
+            -149.68823079895384,
+            13.09671555622613
+          ],
+          [
+            -161.17294031970755,
+            21.991142870141456
+          ]
+        ],
+        "height": 9.0,
+        "height_source": "scenario:default_or_template_height",
+        "identifier": "laquila_source_07",
+        "minimum": [
+          -168.62648389116734,
+          -11.471496061832823,
+          0.0
+        ],
+        "post_asset_id": "post:grade5_b_003_post.obj",
+        "pre_asset_id": "pre:pre_b_003_pre.obj",
+        "scene_role": "target",
+        "source_id": "b_003",
+        "source_name": "OSM building way/500792516",
+        "source_ref": "OSM way/500792516 | WGS84 centroid 13.3950137, 42.3510126 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+        "visual_mesh_asset": "post:grade5_b_003_post.obj",
+        "visual_mesh_phase": "source_post",
+        "visual_mesh_summary": {
+          "axis_rule": "source_xyz_to_local_xzy.v1",
+          "extent": [
+            30.845065409885336,
+            29.44712226013737,
+            9.0
+          ],
+          "face_count": 83458,
+          "maximum": [
+            -133.79605677829935,
+            20.420569421796607,
+            9.0
+          ],
+          "minimum": [
+            -164.64112218818468,
+            -9.026552838340763,
+            0.0
+          ],
+          "vertex_count": 83006
+        },
+        "visual_provenance": "exact source position with accepted heiDATA post template bound by scenario.v1",
+        "width": 37.39112089654216
+      },
+      {
+        "damage_state": "intact",
+        "depth": 23.544072302657227,
+        "footprint": [
+          [
+            -160.15280852838671,
+            -42.6632173827702
+          ],
+          [
+            -164.2333356933779,
+            -56.644945426065874
+          ],
+          [
+            -142.0372423647049,
+            -66.20728968542743
+          ],
+          [
+            -141.2145554363193,
+            -63.17939953526896
+          ]
+        ],
+        "height": 13.639945774533258,
+        "height_source": "scenario:default_or_template_height",
+        "identifier": "laquila_source_08",
+        "minimum": [
+          -164.2333356933779,
+          -66.20728968542743,
+          0.0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": "pre:pre_b_004_pre.obj",
+        "scene_role": "target",
+        "source_id": "b_004",
+        "source_name": "OSM building way/500798133",
+        "source_ref": "OSM way/500798133 | WGS84 centroid 13.3949843, 42.3504439 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+        "visual_mesh_asset": "pre:pre_b_004_pre.obj",
+        "visual_mesh_phase": "source_pre",
+        "visual_mesh_summary": {
+          "axis_rule": "source_xyz_to_local_xzy.v1",
+          "extent": [
+            20.25652662621161,
+            18.08943870145402,
+            13.639945774533258
+          ],
+          "face_count": 5610,
+          "maximum": [
+            -144.00172019442448,
+            -46.50876191013034,
+            13.639945774533258
+          ],
+          "minimum": [
+            -164.2582468206361,
+            -64.59820061158436,
+            0.0
+          ],
+          "vertex_count": 3264
+        },
+        "visual_provenance": "exact source position with accepted heiDATA pre template bound by scenario.v1",
+        "width": 23.01878025705861
+      },
+      {
+        "damage_state": "major",
+        "depth": 33.81886130351171,
+        "footprint": [
+          [
+            -186.94772178701862,
+            -126.52018979728892
+          ],
+          [
+            -181.87174343870132,
+            -127.59998885794677
+          ],
+          [
+            -155.03569583360624,
+            -133.34407458277295
+          ],
+          [
+            -139.0262082067318,
+            -104.61251400864158
+          ],
+          [
+            -155.53753485995944,
+            -99.52521327926124
+          ],
+          [
+            -165.77176024952033,
+            -119.0395200155681
+          ],
+          [
+            -177.7418550580128,
+            -115.37710876838261
+          ],
+          [
+            -176.30215293326498,
+            -109.6330230435564
+          ],
+          [
+            -183.18804252405977,
+            -108.07455017243049
+          ]
+        ],
+        "height": 4.684981,
+        "height_source": "scenario:default_building_height_m",
+        "identifier": "laquila_source_09",
+        "minimum": [
+          -186.94772178701862,
+          -133.34407458277295,
+          0.0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": "Palazzo Persichetti",
+        "source_ref": "OSM way/501738250 | WGS84 centroid 13.3947760, 42.3499157 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "derived_damage",
+        "visual_mesh_summary": {
+          "axis_rule": "source_xyz_to_local_xzy.v1",
+          "extent": [
+            47.92151358028681,
+            33.81886130351171,
+            4.684981
+          ],
+          "face_count": 32,
+          "maximum": [
+            -139.0262082067318,
+            -99.52521327926124,
+            4.684981
+          ],
+          "minimum": [
+            -186.94772178701862,
+            -133.34407458277295,
+            0.0
+          ],
+          "vertex_count": 18
+        },
+        "visual_provenance": "exact OSM footprint with scenario.v1 derived damage profile",
+        "width": 47.92151358028681
+      },
+      {
+        "damage_state": "minor",
+        "depth": 66.5356596471558,
+        "footprint": [
+          [
+            -101.75849034943285,
+            -42.00643238653338
+          ],
+          [
+            -86.91721816082503,
+            -52.993666128089814
+          ],
+          [
+            -81.66847555742106,
+            -45.81355897185933
+          ],
+          [
+            -86.50587469663223,
+            -41.72813365946187
+          ],
+          [
+            -78.98651617086068,
+            -29.37167018175764
+          ],
+          [
+            -63.264968968789674,
+            -43.297738479797204
+          ],
+          [
+            -67.63343655873048,
+            -49.01956030699554
+          ],
+          [
+            -63.980706596546504,
+            -51.802547576919764
+          ],
+          [
+            -73.13721210985506,
+            -63.82505258229636
+          ],
+          [
+            -62.63972690319326,
+            -71.82892397053199
+          ],
+          [
+            -39.612719776754325,
+            -42.07322408099891
+          ],
+          [
+            -80.49203324977414,
+            -5.293264323376198
+          ]
+        ],
+        "height": 8.358053,
+        "height_source": "scenario:default_building_height_m",
+        "identifier": "laquila_source_10",
+        "minimum": [
+          -101.75849034943285,
+          -71.82892397053199,
+          0.0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": "Casa Gaglioffi",
+        "source_ref": "OSM way/501745769 | WGS84 centroid 13.3959327, 42.3505539 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "derived_damage",
+        "visual_mesh_summary": {
+          "axis_rule": "source_xyz_to_local_xzy.v1",
+          "extent": [
+            62.14577057267852,
+            66.5356596471558,
+            8.358053
+          ],
+          "face_count": 44,
+          "maximum": [
+            -39.612719776754325,
+            -5.293264323376198,
+            8.358053
+          ],
+          "minimum": [
+            -101.75849034943285,
+            -71.82892397053199,
+            0.0
+          ],
+          "vertex_count": 24
+        },
+        "visual_provenance": "exact OSM footprint with scenario.v1 derived damage profile",
+        "width": 62.14577057267852
+      },
+      {
+        "damage_state": "major",
+        "depth": 37.3142933141379,
+        "footprint": [
+          [
+            26.819249692792607,
+            -98.67918514962824
+          ],
+          [
+            12.019111850647906,
+            -129.75958697926242
+          ],
+          [
+            20.731366422534716,
+            -135.99347846376614
+          ],
+          [
+            30.266307922953246,
+            -115.21012953261427
+          ],
+          [
+            35.383420617587554,
+            -102.99838139225956
+          ]
+        ],
+        "height": 8.999999999999998,
+        "height_source": "scenario:default_or_template_height",
+        "identifier": "laquila_source_11",
+        "minimum": [
+          12.019111850647906,
+          -135.99347846376614,
+          0.0
+        ],
+        "post_asset_id": "post:grade4_b_007_post.obj",
+        "pre_asset_id": "pre:pre_b_007_pre.obj",
+        "scene_role": "target",
+        "source_id": "b_007",
+        "source_name": "OSM building way/501746087",
+        "source_ref": "OSM way/501746087 | WGS84 centroid 13.3971352, 42.3499107 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+        "visual_mesh_asset": "post:grade4_b_007_post.obj",
+        "visual_mesh_phase": "source_post",
+        "visual_mesh_summary": {
+          "axis_rule": "source_xyz_to_local_xzy.v1",
+          "extent": [
+            20.560591714906906,
+            20.06553673048461,
+            8.999999999999998
+          ],
+          "face_count": 15748,
+          "maximum": [
+            34.00862040739571,
+            -107.10576841138771,
+            8.999999999999998
+          ],
+          "minimum": [
+            13.448028692488805,
+            -127.17130514187232,
+            0.0
+          ],
+          "vertex_count": 15572
+        },
+        "visual_provenance": "exact source position with accepted heiDATA post template bound by scenario.v1",
+        "width": 23.364308766939647
+      },
+      {
+        "damage_state": "major",
+        "depth": 41.24387133918546,
+        "footprint": [
+          [
+            -10.35797260234595,
+            -121.08779864637154
+          ],
+          [
+            -14.57835654504874,
+            -128.01187097394933
+          ],
+          [
+            -19.136042128544524,
+            -135.4925407548792
+          ],
+          [
+            -26.112427281499766,
+            -146.9250524592755
+          ],
+          [
+            -23.158981208458158,
+            -149.3406854092438
+          ],
+          [
+            -20.378299390357064,
+            -154.0161040226216
+          ],
+          [
+            -9.25557211824497,
+            -162.331669985557
+          ],
+          [
+            -3.7764771749690267,
+            -152.6802701333111
+          ],
+          [
+            -2.6329423445510654,
+            -150.54293591041426
+          ],
+          [
+            6.071085358101575,
+            -134.26802635608092
+          ],
+          [
+            -6.7792844637079215,
+            -123.95984150838915
+          ]
+        ],
+        "height": 5.612707,
+        "height_source": "scenario:default_building_height_m",
+        "identifier": "laquila_source_12",
+        "minimum": [
+          -26.112427281499766,
+          -162.331669985557,
+          0.0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": "Basilica di San Giuseppe Artigiano",
+        "source_ref": "OSM way/501748940 | WGS84 centroid 13.3966870, 42.3496846 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "derived_damage",
+        "visual_mesh_summary": {
+          "axis_rule": "source_xyz_to_local_xzy.v1",
+          "extent": [
+            32.18351263960134,
+            41.24387133918546,
+            5.612707
+          ],
+          "face_count": 40,
+          "maximum": [
+            6.071085358101575,
+            -121.08779864637154,
+            5.612707
+          ],
+          "minimum": [
+            -26.112427281499766,
+            -162.331669985557,
+            0.0
+          ],
+          "vertex_count": 22
+        },
+        "visual_provenance": "exact OSM footprint with scenario.v1 derived damage profile",
+        "width": 32.18351263960134
+      },
+      {
+        "damage_state": "intact",
+        "depth": 26.494038809140754,
+        "footprint": [
+          [
+            -106.2339072400024,
+            50.03252260119872
+          ],
+          [
+            -98.70632184499665,
+            40.73734511969927
+          ],
+          [
+            -112.40405920318653,
+            31.586882976340284
+          ],
+          [
+            -108.12608717540614,
+            29.20464587400019
+          ],
+          [
+            -111.34279306540252,
+            23.538483792057967
+          ],
+          [
+            -121.79091705636705,
+            28.89295129930042
+          ],
+          [
+            -130.64302840611157,
+            33.43478652374715
+          ]
+        ],
+        "height": 9.0,
+        "height_source": "osm height unavailable",
+        "identifier": "laquila_source_13",
+        "minimum": [
+          -130.64302840611157,
+          23.538483792057967,
+          0.0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": "Palazzo Pietropaoli",
+        "source_ref": "OSM way/503172319 | WGS84 centroid 13.3954603, 42.3512621 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "footprint_extrusion",
+        "visual_mesh_summary": {
+          "axis_rule": "source_xyz_to_local_xzy.v1",
+          "extent": [
+            31.936706561114917,
+            26.494038809140754,
+            9.0
+          ],
+          "face_count": 24,
+          "maximum": [
+            -98.70632184499665,
+            50.03252260119872,
+            9.0
+          ],
+          "minimum": [
+            -130.64302840611157,
+            23.538483792057967,
+            0.0
+          ],
+          "vertex_count": 14
+        },
+        "visual_provenance": "exact OSM footprint extrusion; source height and mesh unavailable",
+        "width": 31.936706561114917
+      },
+      {
+        "damage_state": "intact",
+        "depth": 52.00846609813551,
+        "footprint": [
+          [
+            13.648031968950733,
+            -1.0853875712570977
+          ],
+          [
+            -3.579032312179869,
+            -29.694496704875853
+          ],
+          [
+            39.570897083353664,
+            -47.51674718112572
+          ],
+          [
+            53.424944957869556,
+            -53.09385366939261
+          ],
+          [
+            60.6234555814626,
+            -32.39956033112514
+          ]
+        ],
+        "height": 9.0,
+        "height_source": "osm height unavailable",
+        "identifier": "laquila_source_14",
+        "minimum": [
+          -3.579032312179869,
+          -53.09385366939261,
+          0.0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": "OSM building way/503190642",
+        "source_ref": "OSM way/503190642 | WGS84 centroid 13.3972287, 42.3506632 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "footprint_extrusion",
+        "visual_mesh_summary": {
+          "axis_rule": "source_xyz_to_local_xzy.v1",
+          "extent": [
+            64.20248789364247,
+            52.00846609813551,
+            9.0
+          ],
+          "face_count": 16,
+          "maximum": [
+            60.6234555814626,
+            -1.0853875712570977,
+            9.0
+          ],
+          "minimum": [
+            -3.579032312179869,
+            -53.09385366939261,
+            0.0
+          ],
+          "vertex_count": 10
+        },
+        "visual_provenance": "exact OSM footprint extrusion; source height and mesh unavailable",
+        "width": 64.20248789364247
+      },
+      {
+        "damage_state": "intact",
+        "depth": 74.75103806720645,
+        "footprint": [
+          [
+            113.66208185652985,
+            -2.321033919264812
+          ],
+          [
+            139.61785444801563,
+            -9.289634042889304
+          ],
+          [
+            130.79865057550003,
+            -50.51124148365594
+          ],
+          [
+            123.87985350747626,
+            -77.07207198647126
+          ],
+          [
+            93.67901636529295,
+            -65.28333791132852
+          ],
+          [
+            100.85284638103735,
+            -42.2847311136049
+          ],
+          [
+            108.52851542313495,
+            -45.03432253669185
+          ],
+          [
+            120.43279527731562,
+            -48.718997681505186
+          ],
+          [
+            126.44663672417374,
+            -19.54215914453398
+          ],
+          [
+            117.70147467505795,
+            -17.248977634287268
+          ],
+          [
+            108.94808575670804,
+            -44.12150271180235
+          ],
+          [
+            101.0502912438265,
+            -41.550022474484116
+          ]
+        ],
+        "height": 9.0,
+        "height_source": "osm height unavailable",
+        "identifier": "laquila_source_15",
+        "minimum": [
+          93.67901636529295,
+          -77.07207198647126,
+          0.0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": "OSM building way/503193496",
+        "source_ref": "OSM way/503193496 | WGS84 centroid 13.3982343, 42.3506109 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "footprint_extrusion",
+        "visual_mesh_summary": {
+          "axis_rule": "source_xyz_to_local_xzy.v1",
+          "extent": [
+            45.93883808272268,
+            74.75103806720645,
+            9.0
+          ],
+          "face_count": 44,
+          "maximum": [
+            139.61785444801563,
+            -2.321033919264812,
+            9.0
+          ],
+          "minimum": [
+            93.67901636529295,
+            -77.07207198647126,
+            0.0
+          ],
+          "vertex_count": 24
+        },
+        "visual_provenance": "exact OSM footprint extrusion; source height and mesh unavailable",
+        "width": 45.93883808272268
+      },
+      {
+        "damage_state": "intact",
+        "depth": 42.2123509085401,
+        "footprint": [
+          [
+            90.73379716148551,
+            -101.20613759089979
+          ],
+          [
+            88.15056020631971,
+            -107.55134856591572
+          ],
+          [
+            89.3928174682784,
+            -108.44190449238637
+          ],
+          [
+            90.35536117452168,
+            -109.69981473802196
+          ],
+          [
+            90.60216725300812,
+            -111.22489176231059
+          ],
+          [
+            90.34713430514137,
+            -112.63864929529606
+          ],
+          [
+            88.75934853330168,
+            -116.4346439314126
+          ],
+          [
+            87.96134221276472,
+            -117.61463053337322
+          ],
+          [
+            86.63681625802595,
+            -118.47179061300662
+          ],
+          [
+            85.2464753489754,
+            -118.59424205272825
+          ],
+          [
+            83.67514331575018,
+            -118.21575578356295
+          ],
+          [
+            81.46211547831405,
+            -123.4700357495026
+          ],
+          [
+            74.43636910966153,
+            -120.62025678511284
+          ],
+          [
+            71.26079756598212,
+            -129.38110071009712
+          ],
+          [
+            92.8727831753757,
+            -139.2662714925769
+          ],
+          [
+            106.9160490434466,
+            -143.4184884994399
+          ],
+          [
+            108.67659907037294,
+            -138.052889042988
+          ],
+          [
+            98.16266012509666,
+            -134.24576245766207
+          ],
+          [
+            109.45815165229541,
+            -107.80738339456839
+          ]
+        ],
+        "height": 9.0,
+        "height_source": "osm height unavailable",
+        "identifier": "laquila_source_16",
+        "minimum": [
+          71.26079756598212,
+          -143.4184884994399,
+          0.0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": "OSM building way/503974017",
+        "source_ref": "OSM way/503974017 | WGS84 centroid 13.3979280, 42.3498812 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "footprint_extrusion",
+        "visual_mesh_summary": {
+          "axis_rule": "source_xyz_to_local_xzy.v1",
+          "extent": [
+            38.1973540863133,
+            42.2123509085401,
+            9.0
+          ],
+          "face_count": 72,
+          "maximum": [
+            109.45815165229541,
+            -101.20613759089979,
+            9.0
+          ],
+          "minimum": [
+            71.26079756598212,
+            -143.4184884994399,
+            0.0
+          ],
+          "vertex_count": 38
+        },
+        "visual_provenance": "exact OSM footprint extrusion; source height and mesh unavailable",
+        "width": 38.1973540863133
+      },
+      {
+        "damage_state": "intact",
+        "depth": 62.75079696024868,
+        "footprint": [
+          [
+            121.37065837571026,
+            -93.11321060977978
+          ],
+          [
+            149.8109454911134,
+            -104.46779867050113
+          ],
+          [
+            141.5758493377311,
+            -133.32181068435412
+          ],
+          [
+            134.69818661617046,
+            -155.86400757002846
+          ],
+          [
+            125.31955563222411,
+            -151.990089290237
+          ],
+          [
+            124.63672548155009,
+            -151.0995333637663
+          ],
+          [
+            109.70495773078184,
+            -144.96582942135637
+          ],
+          [
+            111.57245705833695,
+            -139.07702835838975
+          ],
+          [
+            115.4144050140759,
+            -126.43113420440459
+          ],
+          [
+            119.76641886540223,
+            -101.9631101276484
+          ]
+        ],
+        "height": 9.0,
+        "height_source": "osm height unavailable",
+        "identifier": "laquila_source_17",
+        "minimum": [
+          109.70495773078184,
+          -155.86400757002846,
+          0.0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": "OSM building way/503976723",
+        "source_ref": "OSM way/503976723 | WGS84 centroid 13.3983549, 42.3497876 | source scenario laquila_osm_heidata_controlled_v1 | local origin 13.3968308, 42.3509575",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "footprint_extrusion",
+        "visual_mesh_summary": {
+          "axis_rule": "source_xyz_to_local_xzy.v1",
+          "extent": [
+            40.105987760331544,
+            62.75079696024868,
+            9.0
+          ],
+          "face_count": 36,
+          "maximum": [
+            149.8109454911134,
+            -93.11321060977978,
+            9.0
+          ],
+          "minimum": [
+            109.70495773078184,
+            -155.86400757002846,
+            0.0
+          ],
+          "vertex_count": 20
+        },
+        "visual_provenance": "exact OSM footprint extrusion; source height and mesh unavailable",
+        "width": 40.105987760331544
+      }
+    ],
+    "uav_initial_positions": [
+      [
+        -32.57579802926938,
+        -25.80870948599997,
+        0.0
+      ],
+      [
+        -32.57579802926938,
+        -25.80870948599997,
+        0.0
+      ],
+      [
+        -32.57579802926938,
+        -25.80870948599997,
+        0.0
+      ]
+    ]
+  },
+  "scene_config": {
+    "base_clearance": 12.0,
+    "elevated_candidate_count": 6,
+    "ground_candidate_count": 12,
+    "indoor_candidate_count": 6,
+    "mode": "laquila_informed",
+    "preset_id": null,
+    "seed": 20260925,
+    "severity": "moderate",
+    "template_path": null,
+    "uav_count": 3,
+    "world_bounds": null
+  },
+  "schema_version": "scenario.v2",
+  "supply_policy": "base_supply_sufficient",
+  "task_config": {
+    "detection_time_range": [
+      0.0,
+      30.0
+    ],
+    "distance_unit": "meter",
+    "dropoff_height_range": [
+      2.0,
+      4.0
+    ],
+    "energy_unit": "joule",
+    "item_presence_model": "uniform_non_empty_subset",
+    "item_types": [
+      "food",
+      "water",
+      "medical"
+    ],
+    "item_weights": {
+      "food": 0.25,
+      "medical": 0.5,
+      "water": 0.5
+    },
+    "max_task_parcels": 4,
+    "max_task_payload_mass": 2.0,
+    "payload_unit": "kilogram",
+    "seed": 20260926,
+    "service_duration_base": 2.0,
+    "service_duration_per_parcel": 0.5,
+    "service_duration_per_severity": 1.0,
+    "service_value_decay_rate": 0.011997,
+    "service_value_model": "common_exponential",
+    "severity_range": [
+      0.35,
+      1.0
+    ],
+    "survivor_offset_range": [
+      1.0,
+      5.0
+    ],
+    "task_count": 6,
+    "time_unit": "minute"
+  },
+  "task_seed": 20260926,
+  "tasks": [
+    {
+      "demand": {
+        "food": 1,
+        "medical": 1,
+        "water": 1
+      },
+      "detected_at": 1.3913440739693028,
+      "dropoff_waypoint": [
+        -39.027473698322176,
+        9.521944306879515,
+        10.582781584948876
+      ],
+      "identifier": "task_1",
+      "required_payload_mass": 1.25,
+      "service_duration": 4.231087156004258,
+      "service_value_at_detection": 0.7310871560042583,
+      "severity": 0.7310871560042583,
+      "status": "pending",
+      "survivor_position": [
+        -39.027473698322176,
+        9.521944306879515,
+        8.325557
+      ],
+      "task_type": "supply_delivery"
+    },
+    {
+      "demand": {
+        "food": 0,
+        "medical": 1,
+        "water": 1
+      },
+      "detected_at": 21.075370397995247,
+      "dropoff_waypoint": [
+        -159.15009787461636,
+        -107.4420115246362,
+        8.078096567612755
+      ],
+      "identifier": "task_2",
+      "required_payload_mass": 1.0,
+      "service_duration": 3.817895079786922,
+      "service_value_at_detection": 0.817895079786922,
+      "severity": 0.817895079786922,
+      "status": "pending",
+      "survivor_position": [
+        -159.15009787461636,
+        -107.4420115246362,
+        4.684981
+      ],
+      "task_type": "supply_delivery"
+    },
+    {
+      "demand": {
+        "food": 1,
+        "medical": 0,
+        "water": 1
+      },
+      "detected_at": 26.20295020789633,
+      "dropoff_waypoint": [
+        -150.2876451500826,
+        131.42780759442658,
+        12.482849177282588
+      ],
+      "identifier": "task_3",
+      "required_payload_mass": 0.75,
+      "service_duration": 3.431085736980493,
+      "service_value_at_detection": 0.43108573698049296,
+      "severity": 0.43108573698049296,
+      "status": "pending",
+      "survivor_position": [
+        -150.2876451500826,
+        131.42780759442658,
+        9.0
+      ],
+      "task_type": "supply_delivery"
+    },
+    {
+      "demand": {
+        "food": 0,
+        "medical": 0,
+        "water": 1
+      },
+      "detected_at": 12.3860967197748,
+      "dropoff_waypoint": [
+        -94.13568439667166,
+        14.763730770040146,
+        3.4484136227524598
+      ],
+      "identifier": "task_4",
+      "required_payload_mass": 0.5,
+      "service_duration": 2.9198033679828708,
+      "service_value_at_detection": 0.4198033679828708,
+      "severity": 0.4198033679828708,
+      "status": "pending",
+      "survivor_position": [
+        -94.13568439667166,
+        14.763730770040146,
+        0.0
+      ],
+      "task_type": "supply_delivery"
+    },
+    {
+      "demand": {
+        "food": 1,
+        "medical": 0,
+        "water": 0
+      },
+      "detected_at": 2.441414343548579,
+      "dropoff_waypoint": [
+        -156.41150803625487,
+        135.5135722466441,
+        4.55539571230329
+      ],
+      "identifier": "task_5",
+      "required_payload_mass": 0.25,
+      "service_duration": 3.088487185823852,
+      "service_value_at_detection": 0.588487185823852,
+      "severity": 0.588487185823852,
+      "status": "pending",
+      "survivor_position": [
+        -156.41150803625487,
+        135.5135722466441,
+        1.956172926636705
+      ],
+      "task_type": "supply_delivery"
+    },
+    {
+      "demand": {
+        "food": 1,
+        "medical": 0,
+        "water": 1
+      },
+      "detected_at": 20.614739904349356,
+      "dropoff_waypoint": [
+        -77.87480713828249,
+        27.057406985647283,
+        10.355928611000113
+      ],
+      "identifier": "task_6",
+      "required_payload_mass": 0.75,
+      "service_duration": 3.4326505307456183,
+      "service_value_at_detection": 0.4326505307456183,
+      "severity": 0.4326505307456183,
+      "status": "pending",
+      "survivor_position": [
+        -77.87480713828249,
+        27.057406985647283,
+        7.9129
+      ],
+      "task_type": "supply_delivery"
+    }
+  ],
+  "uav_config": {
+    "count": 3,
+    "distance_unit": "meter",
+    "energy_capacity": 1000.0,
+    "energy_per_meter": 1.0,
+    "energy_unit": "joule",
+    "payload_capacity": 4,
+    "payload_unit": "kilogram",
+    "payload_weight_capacity": 2.0,
+    "reserve_energy": 200.0,
+    "speed": 10.0,
+    "time_unit": "minute"
+  },
+  "uav_initial_states": [
+    {
+      "battery_energy": 1000.0,
+      "onboard_inventory": {},
+      "payload_mass": 0.0,
+      "position": [
+        -32.57579802926938,
+        -25.80870948599997,
+        0.0
+      ],
+      "status": "available",
+      "uav_id": "uav_1"
+    },
+    {
+      "battery_energy": 1000.0,
+      "onboard_inventory": {},
+      "payload_mass": 0.0,
+      "position": [
+        -32.57579802926938,
+        -25.80870948599997,
+        0.0
+      ],
+      "status": "available",
+      "uav_id": "uav_2"
+    },
+    {
+      "battery_energy": 1000.0,
+      "onboard_inventory": {},
+      "payload_mass": 0.0,
+      "position": [
+        -32.57579802926938,
+        -25.80870948599997,
+        0.0
+      ],
+      "status": "available",
+      "uav_id": "uav_3"
+    }
+  ]
+}

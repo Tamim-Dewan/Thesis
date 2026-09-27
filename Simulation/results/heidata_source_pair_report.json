@@ -1,0 +1,47 @@
+{
+  "scene_id": "extreme_b001",
+  "source_id": "b_001",
+  "damage_grade": "extreme",
+  "axis_convention": {
+    "source_horizontal_axes": [
+      "X",
+      "Z"
+    ],
+    "source_vertical_axis": "Y",
+    "plot_mapping": "plot_x=source_x, plot_y=source_z, plot_z=source_y",
+    "operation": "axis permutation only, with no translation or scale change"
+  },
+  "pre_file": "pre_b_001_pre.obj",
+  "post_file": "grade4_b_001_post.obj",
+  "pre_bounds_source_xyz": {
+    "minimum": [
+      -257.929352,
+      -1.7e-05,
+      76.464981
+    ],
+    "maximum": [
+      -242.600708,
+      7.917178,
+      97.606812
+    ]
+  },
+  "post_bounds_source_xyz": {
+    "minimum": [
+      -258.678986,
+      -0.29396,
+      76.445824
+    ],
+    "maximum": [
+      -237.769562,
+      7.917178,
+      114.815262
+    ]
+  },
+  "post_minus_pre_minimum_source_xyz": [
+    -0.7496340000000146,
+    -0.293943,
+    -0.019156999999992763
+  ],
+  "artificial_translation_applied": false,
+  "artificial_layout_applied": false
+}

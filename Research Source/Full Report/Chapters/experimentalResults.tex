@@ -1,0 +1,205 @@
+\chapter{Experimental Results}
+\label{chapter_experimentalResults}
+
+\section{Temporal Service-Value Decay Experiment}
+\label{sec:temporal_decay_experiment}
+
+Before running the full responder-UAV planning experiment, an initial
+calibration experiment was performed to examine the time-dependent service
+value function used in the PGBM objective. The purpose of this experiment was
+to identify a simple severity-aware priority function that decreases with
+service delay while preserving the ordering between tasks with different
+operational severity scores.
+
+This experiment was necessary because the service-value function directly
+controls how the optimization model prioritizes tasks. If only the fixed
+severity score is used, the model cannot represent the loss of benefit caused
+by delayed assistance. On the other hand, if the decay function is too
+aggressive for high-severity tasks, the model may unintentionally allow a
+lower-severity task to become more valuable than a higher-severity task after
+some delay. The selected function therefore needs to represent time pressure
+without violating the intended severity ordering.
+
+The experiment considered seven operational severity levels from 0.3 to 0.9
+and evaluated service value over a 120-minute post-detection period. A
+reference policy table was first prepared to represent a plausible operational
+assumption: tasks with higher severity start with higher value, and every task
+loses value as service is delayed. The reference values were not treated as
+measured medical survival probabilities; they were used only as a calibration
+guide for selecting a service-value function.
+
+\begin{table}[htbp]
+\centering
+\caption{Reference policy values used for service-value calibration.}
+\label{tab:reference_policy_values}
+\begin{tabular}{ccccc}
+\hline
+\textbf{Severity} & \textbf{0 min} & \textbf{30 min} & \textbf{60 min} & \textbf{120 min}\\
+\hline
+0.9 & 0.90 & 0.65 & 0.40 & 0.15\\
+0.8 & 0.80 & 0.60 & 0.38 & 0.15\\
+0.7 & 0.70 & 0.53 & 0.35 & 0.14\\
+0.6 & 0.60 & 0.46 & 0.31 & 0.13\\
+0.5 & 0.50 & 0.38 & 0.27 & 0.12\\
+0.4 & 0.40 & 0.31 & 0.23 & 0.11\\
+0.3 & 0.30 & 0.25 & 0.19 & 0.10\\
+\hline
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:reference_policy_values} shows the reduced version of the
+reference policy used in the experiment. The complete notebook also included
+intermediate values at 10 and 90 minutes. The table reflects the intended
+behavior of the service-value model: value decreases with delay, while
+higher-severity tasks remain higher in value than lower-severity tasks at the
+same delay.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.82\textwidth]{reference_policy_service_value.png}
+    \caption{Reference policy curves used to guide service-value calibration.}
+    \label{fig:reference_policy_service_value}
+\end{figure}
+
+Figure~\ref{fig:reference_policy_service_value} visualizes the same reference
+policy values. The graph makes the intended trend clearer than the table alone:
+each severity level starts from its assigned operational severity score, and
+the reference value decreases as service delay increases.
+
+Four candidate functions were compared: a common exponential decay function,
+a severity-dependent exponential decay function, a severity-dependent
+hyperbolic decay function, and a severity-dependent linear decay function.
+For each candidate, the decay parameter was fitted by minimizing the mean
+squared error between the candidate curve and the reference policy values.
+After fitting, each function was checked to ensure that service value never
+increases with delay and that a higher-severity task does not fall below a
+lower-severity task at the same delay.
+
+\begin{table}[htbp]
+\centering
+\caption{Candidate service-value functions evaluated in the experiment.}
+\label{tab:candidate_decay_functions}
+\begin{tabular}{p{0.32\textwidth}p{0.46\textwidth}}
+\hline
+\textbf{Candidate} & \textbf{Function Form}\\
+\hline
+Common exponential & $V(s,t)=s e^{-\lambda t}$\\
+Severity exponential & $V(s,t)=s e^{-\lambda s t}$\\
+Severity hyperbolic & $V(s,t)=\dfrac{s}{1+\lambda s t}$\\
+Severity linear & $V(s,t)=\max(0,s(1-\lambda s t))$\\
+\hline
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:candidate_decay_functions} lists the four candidate forms.
+Here, $s$ denotes the operational severity score and $t$ denotes the delay
+after task detection. The common exponential function applies the same decay
+rate to every task and uses the severity score as the initial value. The
+severity-dependent functions allow the rate of value loss to change with the
+severity level.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.92\textwidth]{candidate_service_value_curves.png}
+    \caption{Fitted service-value curves for the four candidate functions.}
+    \label{fig:candidate_service_value_curves}
+\end{figure}
+
+Figure~\ref{fig:candidate_service_value_curves} shows how the four fitted
+functions behave across the same delay window. The common exponential keeps
+the curves separated, while the severity-dependent exponential and linear
+forms allow curves to move closer or cross over time.
+
+\begin{table}[htbp]
+\centering
+\caption{Comparison of candidate service-value decay functions.}
+\label{tab:service_value_decay_comparison}
+\begin{tabular}{p{0.34\textwidth}ccc}
+\hline
+\textbf{Candidate Function} & \textbf{Fitted $\lambda$} & \textbf{MSE} & \textbf{Ordering}\\
+\hline
+Common exponential & 0.011997 & 0.000892 & Preserved\\
+Severity exponential & 0.017029 & 0.001259 & Not preserved\\
+Severity hyperbolic & 0.026040 & 0.002742 & Preserved\\
+Severity linear & 0.010213 & 0.003129 & Not preserved\\
+\hline
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:service_value_decay_comparison} shows that the common
+exponential function produced the smallest fitting error while also satisfying
+both safety checks. The severity-dependent exponential and linear functions
+were rejected because they could reverse the intended priority ordering: a
+lower-severity task could retain more value than a higher-severity task after
+some delay. The severity-dependent hyperbolic function preserved the ordering,
+but its fitting error was larger than the common exponential alternative.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.82\textwidth]{candidate_function_mse_comparison.png}
+    \caption{Fitting error comparison for the candidate service-value functions.}
+    \label{fig:candidate_function_mse_comparison}
+\end{figure}
+
+Figure~\ref{fig:candidate_function_mse_comparison} summarizes the model
+selection result. The common exponential candidate has the lowest fitting
+error and preserves the severity ordering, which makes it the most suitable
+choice among the tested functions.
+
+The result is important for the proposed PGBM formulation because the selected
+function must be useful inside an optimization objective, not only visually
+reasonable in a plot. The common exponential function is smooth, monotone,
+easy to interpret, and controlled by a single decay parameter. The fitted
+decay rate also gives a direct way to tune how strongly delay reduces the
+operational value of a task. For these reasons, it was selected as the most
+appropriate service-value function for the current model.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.86\textwidth]{service_value_decay_experiment.png}
+    \caption{Fitted common exponential service-value decay curves. Markers
+    indicate the reference policy values used for calibration.}
+    \label{fig:service_value_decay_experiment}
+\end{figure}
+
+Figure~\ref{fig:service_value_decay_experiment} illustrates the selected
+common exponential model. The fitted curves decrease smoothly with delay, and
+the separation between severity levels is preserved throughout the 120-minute
+window. For example, with the fitted decay rate, a task with severity 0.9 has
+service value approximately 0.628 after 30 minutes and 0.438 after 60 minutes,
+whereas a task with severity 0.6 has value approximately 0.419 after 30
+minutes and 0.292 after 60 minutes. Thus, delay reduces the value of all
+tasks, but the relative priority implied by the operational severity score
+remains stable.
+
+\section{Results Analysis}
+\label{result_analysis}
+
+The experiment supports the use of the common exponential service-value model
+already adopted in the proposed formulation:
+\[
+v_i(C_i)=s_i e^{-\lambda(C_i-t_i)}.
+\]
+This function is simple, monotone, and directly interpretable. The severity
+score $s_i$ determines the initial operational priority of the task, while the
+decay parameter $\lambda$ controls how quickly the value decreases with
+completion delay. Since the same decay rate is applied to all tasks, the model
+avoids unintended priority reversals and expresses delay sensitivity through a
+single tunable parameter.
+
+The selected function should still be interpreted as an operational priority
+model, not as a validated medical survival model. For the current stage of the
+thesis, it provides a suitable balance between mathematical simplicity,
+interpretability, and consistency with the golden-hour motivation.
+
+\section{Summary of the Experimental Results}
+\label{experimentsummary}
+
+The temporal service-value experiment indicates that the common exponential
+decay function is the preferred service-value model for PGBM. It achieved the
+lowest mean squared error among the tested candidates and preserved the
+priority ordering between operational severity levels. Therefore, this thesis
+uses the common exponential service-value function in the optimization
+objective. The result justifies the current formulation choice before the full
+task-allocation, 3D routing, payload, energy, and recourse experiments are
+implemented.

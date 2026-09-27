@@ -1,0 +1,288 @@
+\chapter{Introduction}
+\label{chap:introduction}
+
+\section{Background}
+
+After a major earthquake, the first few hours of response are often shaped by
+limited access rather than by lack of need. Survivors may be trapped inside
+damaged buildings, under rubble, or in areas surrounded by unstable structures.
+At the same time, ground search-and-rescue (SAR) teams may have to work through
+blocked roads, collapsed access points, debris, damaged communication
+infrastructure, and uncertain safety conditions. Physical rescue therefore
+remains a ground-team responsibility, but reaching every detected survivor
+immediately is not always possible.
+
+Emergency operations in such conditions are usually coordinated through a
+command center that must distribute limited SAR, medical, logistics, and
+communication resources across the affected region. The command center does
+not only need to know where survivors may be located; it also needs to decide
+which reported locations should receive immediate support when responders,
+supplies, and access routes are limited.
+
+Unmanned aerial vehicles (UAVs) are useful in this setting because they can
+enter hazardous or partially inaccessible areas faster than ground vehicles and
+can provide aerial observations to a command center. Recent work has studied
+UAV-based disaster reconnaissance, survivor detection, localization, aerial
+imagery analysis, and post-earthquake scene understanding
+\cite{zaidalkilani2026aiuav,che2025uav5g,sirma2025drespnet}. In the classical
+workflow, the UAV mainly acts as a reconnaissance platform: it scans the
+affected area, reports possible survivor locations, and helps the command
+center build situational awareness.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.92\textwidth]{baseline_passive_reconnaissance.png}
+    \caption{Baseline passive reconnaissance scenario in which scout UAVs
+    report survivor locations to a command center, after which assistance
+    depends on the availability and accessibility of ground SAR teams.}
+    \label{fig:baseline_passive_reconnaissance}
+\end{figure}
+
+Figure~\ref{fig:baseline_passive_reconnaissance} illustrates this baseline
+passive reconnaissance process. A scout UAV surveys the earthquake-affected
+zone and sends observations to the command center. The observations may include
+the suspected survivor location, aerial imagery, and contextual information
+about the surrounding damage. After the report is accepted, the command center
+depends mainly on ground SAR teams to reach the survivor physically. This
+workflow is valuable because it improves situational awareness, but it leaves a
+waiting period between detection and rescue.
+
+\section{Motivation}
+
+The key motivation of this thesis comes from the limitation of the passive
+workflow. A scan UAV can help identify where a survivor may be located, but it
+does not by itself deliver assistance. If ground SAR teams are delayed, the
+system may know about a survivor while still being unable to provide immediate
+support. This is the operational gap addressed in this work.
+
+The proposed response process therefore separates UAV operations into two
+roles. Scout UAVs remain responsible for reconnaissance, sensing, and reporting.
+Responder UAVs are introduced as a dedicated delivery layer that can carry
+lightweight emergency supplies such as water, food, first-aid materials, or
+oxygen-support items to feasible drop-off locations near detected survivors.
+This separation is important because reconnaissance and delivery create
+different operational requirements. Scout UAVs should preserve flight
+endurance, coverage, and sensing continuity, while responder UAVs can be loaded
+and routed specifically for relief delivery.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.92\textwidth]{proposed_golden_hour_bridge.png}
+    \caption{Proposed golden-hour bridge scenario in which responder UAVs
+    provide temporary relief delivery between survivor detection and physical
+    rescue by ground SAR teams.}
+    \label{fig:proposed_golden_hour_bridge}
+\end{figure}
+
+Figure~\ref{fig:proposed_golden_hour_bridge} shows the proposed golden-hour
+bridge scenario. Compared with the passive reconnaissance baseline, the command
+center now has an additional response option. After a survivor-assistance task
+is accepted, a responder UAV may be dispatched with suitable relief items. The
+responder UAV does not replace the ground SAR team and does not perform
+physical rescue. It provides temporary assistance during the critical period
+between detection and the arrival of ground responders.
+
+The difficulty is that responder UAV support cannot be planned greedily. A UAV
+has limited battery energy, flight time, payload capacity, and onboard relief
+items. It must also fly through a feasible three-dimensional route rather than
+through buildings, rubble, or no-fly regions. If several survivor-assistance
+tasks are waiting at the same time, choosing one task affects whether another
+task can still be served within the available resources. In addition, new
+survivor reports may arrive while a responder UAV is already in flight. These
+conditions motivate a planning model that treats task selection, UAV
+assignment, service order, routing, payload use, and energy feasibility as
+connected decisions rather than as separate steps.
+
+\section{Problem Statement}
+
+This thesis studies the responder-planning stage that begins after the command
+center accepts scout-UAV observations as survivor-assistance tasks. Each task
+represents a detected survivor or survivor group requiring a specified set of
+lightweight relief items. The exact physical rescue operation is still handled
+by ground SAR teams, and the survivor-detection algorithm itself is outside the
+scope of this thesis. The focus here is the decision layer that determines how
+available responder UAVs should deliver temporary assistance before ground
+rescue arrives.
+
+The task-generation process is treated as a command-center decision. A scout
+UAV first reports a possible survivor location with supporting observations.
+The command center then validates the report, estimates the operational
+severity of the case, identifies the required relief items, and records the
+corresponding quantities. Only after this process is completed is the report
+treated as an eligible survivor-assistance task for responder-UAV planning.
+
+Given a set of survivor-assistance tasks, available responder UAVs, relief-item
+requirements, and a feasible 3D flight network, the planning problem is to
+determine:
+
+\begin{itemize}
+    \item which survivor-assistance tasks should be served;
+    \item which responder UAV should serve each selected task;
+    \item the order in which the selected tasks should be completed; and
+    \item the feasible 3D route followed by each responder UAV.
+\end{itemize}
+
+The resulting missions must satisfy:
+
+\begin{itemize}
+    \item relief-item requirements;
+    \item parcel-count and payload-capacity constraints;
+    \item service and travel-time requirements;
+    \item battery and reserve-energy constraints; and
+    \item safe return to the responder base.
+\end{itemize}
+
+Each task is associated with an operational severity and a time-dependent
+service value that decreases as assistance is delayed. Therefore, the planning
+objective is not simply to minimize flight distance or to serve the nearest
+task first. The objective is to maximize the total time-dependent service value
+obtained by the responder fleet while respecting the physical and resource
+limits of each UAV.
+
+The problem also considers survivor-assistance tasks that arrive after
+responder missions have already started. Instead of replanning every active
+mission from the beginning, PGBM uses a controlled one-for-one task-replacement
+rule. A newly arrived task may replace one uncompleted task in an active
+mission only when the replacement is feasible and improves the remaining
+mission value. Actions that have already been executed are kept unchanged.
+
+\section{Objectives}
+
+The main objective of this thesis is to develop a resource-aware responder-UAV
+planning framework for post-earthquake survivor assistance. The framework is
+designed to use limited responder-UAV resources where they are most useful
+during the waiting period between survivor detection and ground rescue.
+
+The specific objectives are:
+
+\begin{itemize}
+    \item To jointly determine which survivor-assistance tasks are served,
+    which responder UAVs serve them, in what order they are served, and which
+    feasible 3D routes are used.
+
+    \item To represent time-critical task priority using operational severity
+    and a time-dependent service value that decreases with service delay.
+
+    \item To incorporate practical responder limitations including relief-item
+    requirements, parcel and payload capacities, route-dependent payload
+    evolution, battery consumption, reserve energy, and safe return to base.
+
+    \item To develop a controlled one-for-one task-replacement mechanism for
+    considering newly arrived survivor-assistance tasks during active missions.
+
+    \item To evaluate the proposed framework through simulation and compare its
+    performance with conventional responder-dispatch strategies.
+\end{itemize}
+
+\section{Research Contributions}
+
+The expected contributions of this thesis are summarized as follows:
+
+\begin{itemize}
+    \item \textbf{Proactive Golden-Hour Bridge Model (PGBM):}
+    A planning framework is introduced for using responder UAVs as a temporary
+    assistance bridge between survivor detection and ground rescue.
+
+    \item \textbf{Separation of scout and responder roles:}
+    Scout UAVs are used for upstream reconnaissance, while a dedicated
+    responder fleet is used for relief delivery. PGBM begins after a survivor
+    report has been accepted as an assistance task by the command center.
+
+    \item \textbf{Joint task allocation and 3D routing:}
+    Task selection, UAV assignment, service order, and feasible 3D route
+    selection are considered together, so the routing and resource effects of
+    each assignment are visible during planning.
+
+    \item \textbf{Time-dependent service-value objective:}
+    PGBM combines operational severity with service delay and maximizes the
+    total value obtained from completed assistance tasks.
+
+    \item \textbf{Resource-aware mission planning:}
+    The framework considers relief quantities, parcel and payload capacities,
+    payload evolution, battery-energy consumption, reserve energy, and safe
+    return to base.
+
+    \item \textbf{Controlled dynamic recourse:}
+    A one-for-one task-replacement mechanism allows one newly arrived task to
+    replace one uncompleted task when the replacement is feasible and improves
+    the remaining mission value.
+\end{itemize}
+
+This scope is intentionally limited. PGBM does not propose a new
+survivor-detection, environmental-mapping, or physical-rescue algorithm.
+Instead, it operates as a downstream decision layer that uses accepted survivor
+information and an externally supplied feasible 3D free-space representation.
+
+\section{Research Challenges}
+
+The main challenges addressed in this research include:
+
+\begin{itemize}
+    \item \textbf{Joint decision making:}
+    Task assignment and routing are strongly coupled because route length,
+    completion time, payload, and battery usage influence which assignments
+    are feasible.
+
+    \item \textbf{Time-sensitive prioritization:}
+    Higher-priority tasks should generally receive earlier assistance, but the
+    planner must consider the effect of each decision on the total mission
+    value.
+
+    \item \textbf{Three-dimensional route feasibility:}
+    A detected survivor may be located inside rubble or a damaged structure,
+    so the responder must use a nearby feasible drop-off waypoint and travel
+    only through permitted 3D free space.
+
+    \item \textbf{Changing payload and energy use:}
+    Relief payload decreases after deliveries, causing the UAV's carried mass
+    and payload-dependent energy consumption to change throughout the route.
+
+    \item \textbf{Dynamic task arrival:}
+    New survivor-assistance tasks may appear after dispatch, requiring mission
+    adaptation without changing already completed actions.
+
+    \item \textbf{Limited onboard supplies:}
+    An active responder can serve a newly arrived task only when its current
+    onboard inventory is sufficient for the modified remaining mission.
+\end{itemize}
+
+\section{Organization of the Thesis}
+
+The remainder of this thesis is organized as follows:
+
+\begin{itemize}
+
+\item \textbf{
+\hyperref[chapter_related_work]
+{Chapter~\ref*{chapter_related_work} -- Related Work:}
+}
+    Reviews existing research on UAV-assisted disaster response,
+    survivor detection and localization, multi-UAV search, 3D coverage,
+    resource-aware mission planning, and adaptive UAV coordination.
+
+    \item \textbf{\hyperref[chapter_proposedMethod]
+    {Chapter~\ref*{chapter_proposedMethod} -- Proposed Methodologies:}}
+    Presents the PGBM system model and mathematical problem formulation,
+    including the time-dependent service-value objective, joint task allocation
+    and 3D routing, payload and battery constraints, and the controlled
+    one-for-one task-replacement mechanism. It also describes the overall
+    operational workflow, responder-mission planning, mission execution,
+    state updates, and dynamic recourse procedure.
+
+    \item \textbf{\hyperref[chapter_implementation]
+    {Chapter~\ref*{chapter_implementation} -- Implementation:}}
+    Describes the simulation environment, system parameters, optimization
+    implementation, and experimental setup used to evaluate PGBM.
+
+    \item \textbf{\hyperref[chapter_experimentalResults]
+    {Chapter~\ref*{chapter_experimentalResults} -- Experimental Results:}}
+    Evaluates PGBM under different task-arrival, responder, environmental,
+    and resource conditions and compares its performance with selected
+    responder-dispatch strategies.
+
+    \item \textbf{\hyperref[chapter_conclusion]
+    {Chapter~\ref*{chapter_conclusion} -- Conclusion:}}
+    Summarizes the main findings, discusses the limitations of the proposed
+    framework, and presents possible directions for future research.
+
+\end{itemize}

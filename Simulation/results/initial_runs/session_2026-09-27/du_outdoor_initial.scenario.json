@@ -1,0 +1,5141 @@
+{
+  "execution_config": {
+    "return_to_base": true,
+    "service_duration_source": "task.service_duration",
+    "start_time": 30.0
+  },
+  "route_config": {
+    "altitude_margin": 1.0,
+    "cruise_altitude": 12.0,
+    "grid_resolution": 5.0,
+    "max_expanded_nodes": 20000
+  },
+  "scenario_id": "du_outdoor_moderate_20260924",
+  "scene": {
+    "candidate_sites": [
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_1",
+        "kind": "ground",
+        "position": [
+          -39,
+          -60,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_2",
+        "kind": "ground",
+        "position": [
+          -15,
+          -20,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_3",
+        "kind": "ground",
+        "position": [
+          -5,
+          -2,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_4",
+        "kind": "ground",
+        "position": [
+          12,
+          27,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_5",
+        "kind": "ground",
+        "position": [
+          29,
+          56,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_6",
+        "kind": "ground",
+        "position": [
+          46,
+          85,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_7",
+        "kind": "ground",
+        "position": [
+          63,
+          114,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_8",
+        "kind": "ground",
+        "position": [
+          94,
+          165,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_9",
+        "kind": "ground",
+        "position": [
+          97,
+          172,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_10",
+        "kind": "ground",
+        "position": [
+          114,
+          201,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_11",
+        "kind": "ground",
+        "position": [
+          138,
+          241,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "ground_12",
+        "kind": "ground",
+        "position": [
+          148,
+          -55,
+          0.0
+        ],
+        "surface_ref": "ground"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_1",
+        "kind": "elevated",
+        "position": [
+          101.34,
+          19.0625,
+          16
+        ],
+        "surface_ref": "af_mujibur_rahman_math"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_2",
+        "kind": "elevated",
+        "position": [
+          101.34,
+          24.314999999999998,
+          16
+        ],
+        "surface_ref": "af_mujibur_rahman_math"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_3",
+        "kind": "elevated",
+        "position": [
+          101.34,
+          29.5675,
+          16
+        ],
+        "surface_ref": "af_mujibur_rahman_math"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_4",
+        "kind": "elevated",
+        "position": [
+          96.765,
+          34.82,
+          16
+        ],
+        "surface_ref": "af_mujibur_rahman_math"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_5",
+        "kind": "elevated",
+        "position": [
+          96.765,
+          40.0725,
+          16
+        ],
+        "surface_ref": "af_mujibur_rahman_math"
+      },
+      {
+        "allowed_use": "task",
+        "clearance_radius": 1.0,
+        "identifier": "elevated_6",
+        "kind": "elevated",
+        "position": [
+          96.765,
+          45.324999999999996,
+          16
+        ],
+        "surface_ref": "af_mujibur_rahman_math"
+      }
+    ],
+    "environment": {
+      "base": {
+        "identifier": "base_1",
+        "position": [
+          6.0,
+          6.0,
+          0.0
+        ]
+      },
+      "obstacles": [
+        {
+          "damage_template_id": "standing_minor_damage.v1",
+          "depth": 42.019999999999996,
+          "footprint": [
+            [
+              118.71,
+              55.83
+            ],
+            [
+              92.19,
+              48.0
+            ],
+            [
+              102.28,
+              13.81
+            ],
+            [
+              128.79,
+              21.64
+            ],
+            [
+              118.71,
+              55.83
+            ]
+          ],
+          "height": 16,
+          "identifier": "solid_af_mujibur_rahman_math",
+          "kind": "building",
+          "minimum": [
+            92.19,
+            13.81,
+            0.0
+          ],
+          "parent_structure_id": "af_mujibur_rahman_math",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-432996247",
+          "visual_top_profile": [],
+          "width": 36.599999999999994
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 9.030913766795976,
+          "footprint": [
+            [
+              177.22508112217866,
+              189.71833721333417
+            ],
+            [
+              177.96006162201033,
+              193.11794797083505
+            ],
+            [
+              171.11543749247684,
+              195.47395186713553
+            ],
+            [
+              162.15307903184208,
+              194.9647121287617
+            ],
+            [
+              158.926813951566,
+              190.52062556627908
+            ],
+            [
+              164.18933450599224,
+              187.5852279169024
+            ],
+            [
+              171.78303577153338,
+              186.44303810033955
+            ]
+          ],
+          "height": 6.274900996564362,
+          "identifier": "rubble_cars_1",
+          "kind": "ground_rubble",
+          "minimum": [
+            158.926813951566,
+            186.44303810033955,
+            0.0
+          ],
+          "parent_structure_id": "cars",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055166",
+          "visual_top_profile": [
+            1.0,
+            0.590998750721481,
+            0.8160231526672069,
+            0.28,
+            0.7343925242003774,
+            0.5125649833719799,
+            0.3986972648762489
+          ],
+          "width": 19.033247670444325
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 7.209493122443973,
+          "footprint": [
+            [
+              152.9371935812458,
+              180.48584298153733
+            ],
+            [
+              167.95753841920603,
+              179.32401739875
+            ],
+            [
+              176.2253171619213,
+              183.8010040385993
+            ],
+            [
+              164.46309787500692,
+              186.53351052119396
+            ],
+            [
+              150.57793297880494,
+              183.75547594995058
+            ]
+          ],
+          "height": 7.5,
+          "identifier": "rubble_cars_2",
+          "kind": "ground_rubble",
+          "minimum": [
+            150.57793297880494,
+            179.32401739875,
+            0.0
+          ],
+          "parent_structure_id": "cars",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055166",
+          "visual_top_profile": [
+            0.28,
+            0.603116084349119,
+            0.8805081901196721,
+            1.0,
+            0.32808156179785125
+          ],
+          "width": 25.647384183116372
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 7.860264651390622,
+          "footprint": [
+            [
+              192.88655692223588,
+              195.17114664278068
+            ],
+            [
+              185.32685808360458,
+              194.84494564556027
+            ],
+            [
+              181.94945140944452,
+              191.9057557196245
+            ],
+            [
+              184.65309773415888,
+              187.31088199139006
+            ],
+            [
+              193.4649072626767,
+              187.71997016996988
+            ],
+            [
+              195.93417534849561,
+              192.10774313070652
+            ]
+          ],
+          "height": 7.5,
+          "identifier": "rubble_cars_3",
+          "kind": "ground_rubble",
+          "minimum": [
+            181.94945140944452,
+            187.31088199139006,
+            0.0
+          ],
+          "parent_structure_id": "cars",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055166",
+          "visual_top_profile": [
+            0.28,
+            0.3243505076115875,
+            1.0,
+            0.9189837167089068,
+            0.7910275415665274,
+            0.400765096607066
+          ],
+          "width": 13.984723939051094
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 2.849622718370881,
+          "footprint": [
+            [
+              177.75307359258778,
+              198.99020384623495
+            ],
+            [
+              175.40291445131908,
+              198.73255919973332
+            ],
+            [
+              173.91317384732025,
+              197.85010817791843
+            ],
+            [
+              174.58595980926594,
+              196.61695760758585
+            ],
+            [
+              177.47711131647975,
+              196.14058112786407
+            ],
+            [
+              179.76258812182465,
+              196.39505216566462
+            ],
+            [
+              180.57844651618245,
+              197.3594608774662
+            ],
+            [
+              180.4618709786113,
+              198.44387724312028
+            ]
+          ],
+          "height": 5.796729963095806,
+          "identifier": "rubble_cars_4",
+          "kind": "ground_rubble",
+          "minimum": [
+            173.91317384732025,
+            196.14058112786407,
+            0.0
+          ],
+          "parent_structure_id": "cars",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055166",
+          "visual_top_profile": [
+            0.7400090563634143,
+            0.6890643375084663,
+            0.403373066782584,
+            0.785360100219812,
+            1.0,
+            0.7434200714838151,
+            0.5587689557091224,
+            0.28
+          ],
+          "width": 6.665272668862201
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 6.548015602427739,
+          "footprint": [
+            [
+              156.70010341413752,
+              186.8069242005224
+            ],
+            [
+              156.32693217882976,
+              190.6528831567262
+            ],
+            [
+              152.6808894643027,
+              192.19607114457443
+            ],
+            [
+              150.9417722785933,
+              187.7657355909028
+            ],
+            [
+              153.92209295009877,
+              185.6480555421467
+            ]
+          ],
+          "height": 5.633874252428488,
+          "identifier": "rubble_cars_5",
+          "kind": "ground_rubble",
+          "minimum": [
+            150.9417722785933,
+            185.6480555421467,
+            0.0
+          ],
+          "parent_structure_id": "cars",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055166",
+          "visual_top_profile": [
+            0.5795505948109448,
+            0.28183567009955407,
+            0.3368070312168003,
+            0.28,
+            1.0
+          ],
+          "width": 5.758331135544211
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 4.187475005833562,
+          "footprint": [
+            [
+              179.22025168637552,
+              199.3568251966515
+            ],
+            [
+              183.57782215092584,
+              197.66204775076255
+            ],
+            [
+              191.40079365471448,
+              198.85732779295316
+            ],
+            [
+              191.35942018370042,
+              201.52489113403266
+            ],
+            [
+              183.20265553513036,
+              201.84952275659612
+            ]
+          ],
+          "height": 4.726086349883128,
+          "identifier": "rubble_cars_6",
+          "kind": "ground_rubble",
+          "minimum": [
+            179.22025168637552,
+            197.66204775076255,
+            0.0
+          ],
+          "parent_structure_id": "cars",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055166",
+          "visual_top_profile": [
+            0.3597106047360812,
+            0.28,
+            0.3422963945431146,
+            0.6955591108993946,
+            1.0
+          ],
+          "width": 12.180541968338957
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 3.075150602288801,
+          "footprint": [
+            [
+              180.74583470011882,
+              188.8971268460484
+            ],
+            [
+              177.66646769547526,
+              188.34622298284143
+            ],
+            [
+              175.81793801163852,
+              186.87357836868998
+            ],
+            [
+              179.39303737486662,
+              185.8219762437596
+            ],
+            [
+              183.30779747598336,
+              186.2085577822678
+            ],
+            [
+              183.85131021827817,
+              187.97146606553486
+            ]
+          ],
+          "height": 6.438480355145298,
+          "identifier": "rubble_cars_7",
+          "kind": "ground_rubble",
+          "minimum": [
+            175.81793801163852,
+            185.8219762437596,
+            0.0
+          ],
+          "parent_structure_id": "cars",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055166",
+          "visual_top_profile": [
+            1.0,
+            0.5935201644610737,
+            0.8645474034205557,
+            0.840834107690087,
+            0.5958562680050358,
+            0.28
+          ],
+          "width": 8.033372206639655
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 2.836631869817438,
+          "footprint": [
+            [
+              152.4276735201529,
+              178.55988178337842
+            ],
+            [
+              154.42482920522312,
+              177.00633409902358
+            ],
+            [
+              159.35098755589624,
+              177.17789086672434
+            ],
+            [
+              160.56615635528067,
+              179.0378945981538
+            ],
+            [
+              155.28094901347808,
+              179.842965968841
+            ]
+          ],
+          "height": 6.602976572142452,
+          "identifier": "rubble_cars_8",
+          "kind": "ground_rubble",
+          "minimum": [
+            152.4276735201529,
+            177.00633409902358,
+            0.0
+          ],
+          "parent_structure_id": "cars",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055166",
+          "visual_top_profile": [
+            0.28,
+            0.597586554026075,
+            1.0,
+            0.5625486334185446,
+            0.5115938171388553
+          ],
+          "width": 8.138482835127775
+        },
+        {
+          "damage_template_id": "standing_minor_damage.v1",
+          "depth": 50.890000000000015,
+          "footprint": [
+            [
+              231.83,
+              165.63
+            ],
+            [
+              229.57,
+              161.7
+            ],
+            [
+              233.67,
+              159.34
+            ],
+            [
+              232.38,
+              157.12
+            ],
+            [
+              235.12,
+              155.55
+            ],
+            [
+              232.83,
+              151.57
+            ],
+            [
+              235.53,
+              150.01
+            ],
+            [
+              228.0,
+              136.95
+            ],
+            [
+              225.9,
+              138.16
+            ],
+            [
+              223.93,
+              134.73
+            ],
+            [
+              222.28,
+              135.68
+            ],
+            [
+              219.71,
+              131.2
+            ],
+            [
+              203.15,
+              140.74
+            ],
+            [
+              206.6,
+              146.74
+            ],
+            [
+              204.7,
+              147.84
+            ],
+            [
+              202.73,
+              144.43
+            ],
+            [
+              200.02,
+              145.99
+            ],
+            [
+              201.33,
+              148.27
+            ],
+            [
+              198.62,
+              149.83
+            ],
+            [
+              201.27,
+              154.42
+            ],
+            [
+              198.45,
+              156.05
+            ],
+            [
+              203.95,
+              165.6
+            ],
+            [
+              198.83,
+              168.55
+            ],
+            [
+              206.62,
+              182.09
+            ],
+            [
+              217.79,
+              175.65
+            ],
+            [
+              214.96,
+              170.72
+            ],
+            [
+              218.76,
+              168.53
+            ],
+            [
+              220.77,
+              172.01
+            ],
+            [
+              231.83,
+              165.63
+            ]
+          ],
+          "height": 35,
+          "identifier": "solid_geb_and_cse_building",
+          "kind": "building",
+          "minimum": [
+            198.45,
+            131.2,
+            0.0
+          ],
+          "parent_structure_id": "geb_and_cse_building",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055158",
+          "visual_top_profile": [],
+          "width": 37.08000000000001
+        },
+        {
+          "damage_template_id": "standing_full_volume.v1",
+          "depth": 22.25999999999999,
+          "footprint": [
+            [
+              113.25,
+              180.75
+            ],
+            [
+              117.3,
+              166.02
+            ],
+            [
+              144.71,
+              173.55
+            ],
+            [
+              140.67,
+              188.28
+            ],
+            [
+              124.27,
+              183.78
+            ],
+            [
+              113.25,
+              180.75
+            ]
+          ],
+          "height": 12,
+          "identifier": "solid_institute_of_information_technology",
+          "kind": "building",
+          "minimum": [
+            113.25,
+            166.02,
+            0.0
+          ],
+          "parent_structure_id": "institute_of_information_technology",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-225233762",
+          "visual_top_profile": [],
+          "width": 31.460000000000008
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 58.164888888888854,
+          "footprint": [
+            [
+              105.20304279544561,
+              101.83511111111115
+            ],
+            [
+              103.89,
+              106.48
+            ],
+            [
+              106.95,
+              107.36
+            ],
+            [
+              105.37,
+              112.9
+            ],
+            [
+              103.0,
+              112.22
+            ],
+            [
+              98.41,
+              128.21
+            ],
+            [
+              102.45,
+              129.36
+            ],
+            [
+              98.42,
+              143.35
+            ],
+            [
+              90.17,
+              140.96
+            ],
+            [
+              89.32,
+              143.93
+            ],
+            [
+              103.13,
+              147.91
+            ],
+            [
+              100.18,
+              158.13
+            ],
+            [
+              92.03,
+              155.78
+            ],
+            [
+              90.81,
+              160.0
+            ],
+            [
+              80.53,
+              157.04
+            ],
+            [
+              81.64,
+              153.21
+            ],
+            [
+              63.6,
+              148.02
+            ],
+            [
+              62.62,
+              151.44
+            ],
+            [
+              53.68,
+              148.87
+            ],
+            [
+              49.86,
+              156.03
+            ],
+            [
+              32.67,
+              151.19
+            ],
+            [
+              13.87,
+              145.36
+            ],
+            [
+              21.58,
+              117.36
+            ],
+            [
+              59.53,
+              128.62
+            ],
+            [
+              58.72,
+              130.9
+            ],
+            [
+              85.97,
+              138.55
+            ],
+            [
+              96.37458111412587,
+              101.83511111111115
+            ]
+          ],
+          "height": 14,
+          "identifier": "standing_kazi_motahar_hossain_building",
+          "kind": "building",
+          "minimum": [
+            13.87,
+            101.83511111111115,
+            0.0
+          ],
+          "parent_structure_id": "kazi_motahar_hossain_building",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-220874007",
+          "visual_top_profile": [
+            0.6861718712338556,
+            0.6621598587025476,
+            0.9135142674634442,
+            0.803937908455097,
+            0.7026250532822471,
+            0.8523321726338701,
+            1.0,
+            0.8850464342575772,
+            0.6823408293709999,
+            0.6706271561197364,
+            0.6246318446736766,
+            0.6916822912445645,
+            0.9150208635894965,
+            0.790823179131112,
+            0.62,
+            0.7020488707827776,
+            0.8815609005958784,
+            0.7503418420112938,
+            0.8905609014312597,
+            0.8431026791802981,
+            0.8234449411908876,
+            0.8180363682460694,
+            0.901993474968588,
+            0.6501167437072801,
+            0.6782537855677563,
+            0.7588992435650292,
+            0.8836714036715176
+          ],
+          "width": 93.08
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 14.03224730670918,
+          "footprint": [
+            [
+              82.56296858469868,
+              57.48891367315876
+            ],
+            [
+              78.68457248641043,
+              55.22851288212125
+            ],
+            [
+              77.15270925940378,
+              48.5200206985048
+            ],
+            [
+              79.84354020776391,
+              43.45666636644958
+            ],
+            [
+              84.09860279510164,
+              44.17372956888321
+            ],
+            [
+              85.04866475686127,
+              51.00068449458809
+            ]
+          ],
+          "height": 2.787858888646391,
+          "identifier": "rubble_kazi_motahar_hossain_building_1",
+          "kind": "ground_rubble",
+          "minimum": [
+            77.15270925940378,
+            43.45666636644958,
+            0.0
+          ],
+          "parent_structure_id": "kazi_motahar_hossain_building",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-220874007",
+          "visual_top_profile": [
+            1.0,
+            0.48293132471029016,
+            0.7708060499130773,
+            0.6839345321515204,
+            0.7636292150151929,
+            0.28
+          ],
+          "width": 7.895955497457493
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 8.53038160771731,
+          "footprint": [
+            [
+              84.41111701375243,
+              56.24003320782638
+            ],
+            [
+              91.02289868531241,
+              55.55819469707193
+            ],
+            [
+              95.33006688236605,
+              58.133352263539464
+            ],
+            [
+              93.7896128145516,
+              63.20515851784251
+            ],
+            [
+              87.73961940480918,
+              64.08857630478924
+            ],
+            [
+              82.15371646336406,
+              60.81693373978689
+            ]
+          ],
+          "height": 1.5833516066585676,
+          "identifier": "rubble_kazi_motahar_hossain_building_2",
+          "kind": "ground_rubble",
+          "minimum": [
+            82.15371646336406,
+            55.55819469707193,
+            0.0
+          ],
+          "parent_structure_id": "kazi_motahar_hossain_building",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-220874007",
+          "visual_top_profile": [
+            0.5887783856047704,
+            0.28,
+            0.8023711703829078,
+            0.412272881446915,
+            1.0,
+            0.4827515977014306
+          ],
+          "width": 13.176350419001992
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 9.292058506687965,
+          "footprint": [
+            [
+              62.83468138126693,
+              34.340768591134484
+            ],
+            [
+              61.09275710574476,
+              40.15640946067744
+            ],
+            [
+              54.88036927229649,
+              38.46000082683055
+            ],
+            [
+              54.829959451165834,
+              33.158951984683426
+            ],
+            [
+              59.62109299075942,
+              30.864350953989472
+            ]
+          ],
+          "height": 1.9202707589553236,
+          "identifier": "rubble_kazi_motahar_hossain_building_3",
+          "kind": "ground_rubble",
+          "minimum": [
+            54.829959451165834,
+            30.864350953989472,
+            0.0
+          ],
+          "parent_structure_id": "kazi_motahar_hossain_building",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-220874007",
+          "visual_top_profile": [
+            0.8240372072881758,
+            0.4641126827717895,
+            1.0,
+            0.2929228325350367,
+            0.28
+          ],
+          "width": 8.004721930101098
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 16.024977597011983,
+          "footprint": [
+            [
+              105.54490096851092,
+              96.2690807396491
+            ],
+            [
+              102.06496114816521,
+              96.23351332411056
+            ],
+            [
+              101.12287678869379,
+              88.45099125756082
+            ],
+            [
+              102.29981646968817,
+              83.10225450205475
+            ],
+            [
+              105.03019383665698,
+              80.24410314263712
+            ],
+            [
+              108.13029039751122,
+              86.0134655511037
+            ],
+            [
+              107.96212681602869,
+              91.41913218845357
+            ]
+          ],
+          "height": 2.4303276592606218,
+          "identifier": "rubble_kazi_motahar_hossain_building_4",
+          "kind": "ground_rubble",
+          "minimum": [
+            101.12287678869379,
+            80.24410314263712,
+            0.0
+          ],
+          "parent_structure_id": "kazi_motahar_hossain_building",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-220874007",
+          "visual_top_profile": [
+            0.29028293148091266,
+            1.0,
+            0.8397374930248432,
+            0.6186832310600885,
+            0.28,
+            0.4533326893554057,
+            0.8500185049463655
+          ],
+          "width": 7.00741360881743
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 12.094379011664202,
+          "footprint": [
+            [
+              75.8939873634329,
+              44.13193042114772
+            ],
+            [
+              70.54492651442816,
+              45.74661113945439
+            ],
+            [
+              66.37948740112697,
+              42.64079487924756
+            ],
+            [
+              65.7539956846087,
+              35.623387256606996
+            ],
+            [
+              71.20045706213824,
+              33.652232127790185
+            ],
+            [
+              76.122057586045,
+              36.644911690710316
+            ]
+          ],
+          "height": 1.654972543459718,
+          "identifier": "rubble_kazi_motahar_hossain_building_5",
+          "kind": "ground_rubble",
+          "minimum": [
+            65.7539956846087,
+            33.652232127790185,
+            0.0
+          ],
+          "parent_structure_id": "kazi_motahar_hossain_building",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-220874007",
+          "visual_top_profile": [
+            0.8412701965683187,
+            0.8901609559592054,
+            0.886459543992202,
+            0.28,
+            1.0,
+            0.6727524836499732
+          ],
+          "width": 10.368061901436306
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 17.412439316135263,
+          "footprint": [
+            [
+              102.82519110640327,
+              64.68007929735425
+            ],
+            [
+              104.87990961087564,
+              60.9535420867346
+            ],
+            [
+              107.52290103416283,
+              61.60403554729519
+            ],
+            [
+              110.22008628292008,
+              65.47535917345033
+            ],
+            [
+              109.16788141354559,
+              73.01913261017773
+            ],
+            [
+              106.60176771569675,
+              78.36598140286986
+            ],
+            [
+              103.97917091206492,
+              75.92453340710415
+            ],
+            [
+              101.97506227498391,
+              70.58672874570834
+            ]
+          ],
+          "height": 2.367450456836708,
+          "identifier": "rubble_kazi_motahar_hossain_building_6",
+          "kind": "ground_rubble",
+          "minimum": [
+            101.97506227498391,
+            60.9535420867346,
+            0.0
+          ],
+          "parent_structure_id": "kazi_motahar_hossain_building",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-220874007",
+          "visual_top_profile": [
+            0.5276400082492387,
+            0.623532829624801,
+            0.6929130807297026,
+            0.6914715376828738,
+            1.0,
+            0.5644955586444484,
+            0.7763806425082609,
+            0.28
+          ],
+          "width": 8.245024007936166
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 46.629999999999995,
+          "footprint": [
+            [
+              169.61076335877863,
+              77.96000000000001
+            ],
+            [
+              164.95,
+              93.32
+            ],
+            [
+              183.23,
+              98.77
+            ],
+            [
+              175.53,
+              124.59
+            ],
+            [
+              117.17,
+              107.18
+            ],
+            [
+              124.87,
+              81.37
+            ],
+            [
+              140.01,
+              85.88
+            ],
+            [
+              142.41536121673002,
+              77.96000000000001
+            ]
+          ],
+          "height": 28,
+          "identifier": "standing_mokarram_hossain_khandakar_bhaban",
+          "kind": "building",
+          "minimum": [
+            117.17,
+            77.96000000000001,
+            0.0
+          ],
+          "parent_structure_id": "mokarram_hossain_khandakar_bhaban",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-432996114",
+          "visual_top_profile": [
+            0.6792556137872391,
+            1.0,
+            0.6552712482025401,
+            0.6575027801664174,
+            0.62,
+            0.6894531632240947,
+            0.7241920281070624,
+            0.7054060601292466
+          ],
+          "width": 66.05999999999999
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 42.85000000000001,
+          "footprint": [
+            [
+              130.59,
+              60.07
+            ],
+            [
+              138.13,
+              35.11
+            ],
+            [
+              195.66,
+              52.49
+            ],
+            [
+              188.12,
+              77.43
+            ],
+            [
+              171.31,
+              72.36
+            ],
+            [
+              169.61076335877863,
+              77.96000000000001
+            ],
+            [
+              142.41536121673002,
+              77.96000000000001
+            ],
+            [
+              146.4,
+              64.84
+            ],
+            [
+              130.59,
+              60.07
+            ]
+          ],
+          "height": 1.5,
+          "identifier": "floor_mokarram_hossain_khandakar_bhaban",
+          "kind": "broken_floor",
+          "minimum": [
+            130.59,
+            35.11,
+            12.6
+          ],
+          "parent_structure_id": "mokarram_hossain_khandakar_bhaban",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-432996114",
+          "visual_top_profile": [],
+          "width": 65.07
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 15.412285784108214,
+          "footprint": [
+            [
+              180.28417798762197,
+              74.13382611529323
+            ],
+            [
+              176.13578931940359,
+              66.00868984154783
+            ],
+            [
+              178.94291036545056,
+              60.48562610598113
+            ],
+            [
+              187.1069662397867,
+              59.19234880725694
+            ],
+            [
+              191.10046691145678,
+              66.04543908723481
+            ],
+            [
+              185.88782680795273,
+              74.60463459136515
+            ]
+          ],
+          "height": 4.0,
+          "identifier": "debris_mokarram_hossain_khandakar_bhaban_1",
+          "kind": "elevated_debris",
+          "minimum": [
+            176.13578931940359,
+            59.19234880725694,
+            9.366442833661853
+          ],
+          "parent_structure_id": "mokarram_hossain_khandakar_bhaban",
+          "road_segment_id": null,
+          "rotation_degrees": -9.900892133373791,
+          "source_ref": "osm-way-432996114",
+          "visual_top_profile": [
+            0.39839122103393015,
+            0.5275517217873309,
+            1.0,
+            0.6409790195559297,
+            0.32,
+            0.8650328511599006
+          ],
+          "width": 14.964677592053192
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 15.86398387900799,
+          "footprint": [
+            [
+              148.49583272513792,
+              50.272305574828295
+            ],
+            [
+              156.3654588660698,
+              50.78428776098983
+            ],
+            [
+              159.07147982146458,
+              58.555527538764565
+            ],
+            [
+              154.57419249393922,
+              66.13628945383628
+            ],
+            [
+              146.00581646742717,
+              63.81403657596041
+            ],
+            [
+              143.60187460551305,
+              56.939259902265924
+            ]
+          ],
+          "height": 7.0,
+          "identifier": "debris_mokarram_hossain_khandakar_bhaban_2",
+          "kind": "elevated_debris",
+          "minimum": [
+            143.60187460551305,
+            50.272305574828295,
+            8.967454268635523
+          ],
+          "parent_structure_id": "mokarram_hossain_khandakar_bhaban",
+          "road_segment_id": null,
+          "rotation_degrees": -18.22243040325152,
+          "source_ref": "osm-way-432996114",
+          "visual_top_profile": [
+            0.4452116686726382,
+            1.0,
+            0.5387731134052685,
+            0.7867583184550189,
+            0.32,
+            0.6169260365969047
+          ],
+          "width": 15.469605215951532
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 15.353144493331953,
+          "footprint": [
+            [
+              136.40625035078364,
+              49.965938176052944
+            ],
+            [
+              141.56826790455077,
+              46.705941161689054
+            ],
+            [
+              148.06009419008544,
+              47.17728180261784
+            ],
+            [
+              152.6947526113509,
+              54.72879877196364
+            ],
+            [
+              147.75336756792964,
+              60.7491602800096
+            ],
+            [
+              140.31134787455034,
+              62.05908565502101
+            ],
+            [
+              136.07342717225538,
+              57.890112277677964
+            ]
+          ],
+          "height": 2.8112448472071367,
+          "identifier": "rubble_mokarram_hossain_khandakar_bhaban_1",
+          "kind": "ground_rubble",
+          "minimum": [
+            136.07342717225538,
+            46.705941161689054,
+            0.0
+          ],
+          "parent_structure_id": "mokarram_hossain_khandakar_bhaban",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-432996114",
+          "visual_top_profile": [
+            0.28,
+            0.5406921205696458,
+            0.5103260538709505,
+            0.5660345725025969,
+            1.0,
+            0.45732791647551846,
+            0.9191706871864247
+          ],
+          "width": 16.62132543909553
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 10.567693137822502,
+          "footprint": [
+            [
+              180.23675340168367,
+              52.95175615891517
+            ],
+            [
+              173.3133585812775,
+              57.21595956986181
+            ],
+            [
+              165.3363656021334,
+              55.40599640009415
+            ],
+            [
+              162.90554268821901,
+              50.29366435243927
+            ],
+            [
+              167.93740861271402,
+              46.64826643203931
+            ],
+            [
+              175.89003655897437,
+              48.76655227636672
+            ]
+          ],
+          "height": 4.856777929798794,
+          "identifier": "rubble_mokarram_hossain_khandakar_bhaban_2",
+          "kind": "ground_rubble",
+          "minimum": [
+            162.90554268821901,
+            46.64826643203931,
+            0.0
+          ],
+          "parent_structure_id": "mokarram_hossain_khandakar_bhaban",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-432996114",
+          "visual_top_profile": [
+            0.844919417352417,
+            0.5300905110428,
+            1.0,
+            0.3423298501972273,
+            0.28,
+            0.7070675009753113
+          ],
+          "width": 17.331210713464657
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 10.085094900215985,
+          "footprint": [
+            [
+              181.3384995112205,
+              72.66662104101812
+            ],
+            [
+              176.30528278864023,
+              73.71343316302791
+            ],
+            [
+              169.12785538129177,
+              71.80171465863168
+            ],
+            [
+              167.36817047007634,
+              68.75118046812477
+            ],
+            [
+              171.28907063939565,
+              64.06631839345226
+            ],
+            [
+              176.72076630957224,
+              63.62833826281193
+            ],
+            [
+              181.26068862352355,
+              64.60326001458223
+            ],
+            [
+              184.28913655793667,
+              68.14931766077966
+            ]
+          ],
+          "height": 3.4796328944265635,
+          "identifier": "rubble_mokarram_hossain_khandakar_bhaban_3",
+          "kind": "ground_rubble",
+          "minimum": [
+            167.36817047007634,
+            63.62833826281193,
+            0.0
+          ],
+          "parent_structure_id": "mokarram_hossain_khandakar_bhaban",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-432996114",
+          "visual_top_profile": [
+            0.28,
+            0.5692318165220243,
+            0.5924296832687758,
+            1.0,
+            0.877806562884125,
+            0.625103485328538,
+            0.734385511007287,
+            0.6524743182528885
+          ],
+          "width": 16.920966087860336
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 6.564029762826053,
+          "footprint": [
+            [
+              160.93077438564578,
+              74.36406361499091
+            ],
+            [
+              161.02602743680063,
+              72.12432612469058
+            ],
+            [
+              163.5720814309076,
+              70.43976058583304
+            ],
+            [
+              167.84604564624584,
+              71.1655272895282
+            ],
+            [
+              169.49499990230515,
+              73.97843232802896
+            ],
+            [
+              168.09458174046884,
+              76.24126150515022
+            ],
+            [
+              163.0257697459931,
+              77.0037903486591
+            ]
+          ],
+          "height": 2.549381519499689,
+          "identifier": "rubble_mokarram_hossain_khandakar_bhaban_4",
+          "kind": "ground_rubble",
+          "minimum": [
+            160.93077438564578,
+            70.43976058583304,
+            0.0
+          ],
+          "parent_structure_id": "mokarram_hossain_khandakar_bhaban",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-432996114",
+          "visual_top_profile": [
+            0.7884162246662665,
+            0.30404388324897497,
+            0.28,
+            0.525795057938947,
+            0.7516618551861662,
+            1.0,
+            0.4958080124851375
+          ],
+          "width": 8.564225516659377
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 9.847207873154403,
+          "footprint": [
+            [
+              146.1343235808003,
+              66.04544031344075
+            ],
+            [
+              146.3214621265109,
+              62.32767126521544
+            ],
+            [
+              153.03294795513338,
+              61.219266048809104
+            ],
+            [
+              158.08752365928405,
+              62.00373440453859
+            ],
+            [
+              161.78680591719976,
+              64.98526194519475
+            ],
+            [
+              158.9979760127022,
+              68.52821583986912
+            ],
+            [
+              154.536919468914,
+              71.0664739219635
+            ],
+            [
+              146.86593682770535,
+              69.38620465935425
+            ]
+          ],
+          "height": 4.893534039445868,
+          "identifier": "rubble_mokarram_hossain_khandakar_bhaban_5",
+          "kind": "ground_rubble",
+          "minimum": [
+            146.1343235808003,
+            61.219266048809104,
+            0.0
+          ],
+          "parent_structure_id": "mokarram_hossain_khandakar_bhaban",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-432996114",
+          "visual_top_profile": [
+            0.5004788376446698,
+            0.28,
+            0.6217992004567439,
+            1.0,
+            0.6670315865723073,
+            0.5638019747271306,
+            0.32986658638947164,
+            0.34758098881636934
+          ],
+          "width": 15.652482336399459
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 4.403985620926335,
+          "footprint": [
+            [
+              182.25228755525862,
+              53.845562648467975
+            ],
+            [
+              185.74796486848157,
+              54.271799484661116
+            ],
+            [
+              187.76456264952728,
+              56.19887496354156
+            ],
+            [
+              184.56334412364808,
+              58.16402230352268
+            ],
+            [
+              181.09310496438877,
+              58.24954826939431
+            ],
+            [
+              179.89723233619512,
+              55.47910349979264
+            ]
+          ],
+          "height": 3.1538723538791364,
+          "identifier": "rubble_mokarram_hossain_khandakar_bhaban_6",
+          "kind": "ground_rubble",
+          "minimum": [
+            179.89723233619512,
+            53.845562648467975,
+            0.0
+          ],
+          "parent_structure_id": "mokarram_hossain_khandakar_bhaban",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-432996114",
+          "visual_top_profile": [
+            0.5885391718180355,
+            0.532737186178579,
+            0.7248456526533837,
+            0.28,
+            0.6923169896129369,
+            1.0
+          ],
+          "width": 7.867330313332161
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 7.605162974059297,
+          "footprint": [
+            [
+              190.20116144415778,
+              60.19514019061045
+            ],
+            [
+              189.05826507561426,
+              64.28149556784686
+            ],
+            [
+              185.07625651221517,
+              65.87232553618036
+            ],
+            [
+              180.51856055756448,
+              63.41552085400144
+            ],
+            [
+              181.09970560648168,
+              59.82795806729815
+            ],
+            [
+              184.90264967953044,
+              58.26716256212106
+            ]
+          ],
+          "height": 4.1992788174479925,
+          "identifier": "rubble_mokarram_hossain_khandakar_bhaban_7",
+          "kind": "ground_rubble",
+          "minimum": [
+            180.51856055756448,
+            58.26716256212106,
+            0.0
+          ],
+          "parent_structure_id": "mokarram_hossain_khandakar_bhaban",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-432996114",
+          "visual_top_profile": [
+            1.0,
+            0.5095790353956671,
+            0.28,
+            0.6108371044457492,
+            0.3355241715571027,
+            0.7911458972381199
+          ],
+          "width": 9.682600886593292
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 8.181462752718872,
+          "footprint": [
+            [
+              139.26046434490337,
+              37.96095422348449
+            ],
+            [
+              143.24752573870128,
+              36.988503322593886
+            ],
+            [
+              146.25505156616973,
+              38.79775277939161
+            ],
+            [
+              147.1421957568478,
+              41.78986078779558
+            ],
+            [
+              145.61919967371045,
+              45.03323986422448
+            ],
+            [
+              141.36918952351212,
+              45.16996607531276
+            ],
+            [
+              138.98778454258573,
+              44.315357290948526
+            ],
+            [
+              137.52905306720933,
+              41.085960842160176
+            ]
+          ],
+          "height": 3.829076715068515,
+          "identifier": "rubble_mokarram_hossain_khandakar_bhaban_8",
+          "kind": "ground_rubble",
+          "minimum": [
+            137.52905306720933,
+            36.988503322593886,
+            0.0
+          ],
+          "parent_structure_id": "mokarram_hossain_khandakar_bhaban",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-432996114",
+          "visual_top_profile": [
+            0.7099769482935543,
+            0.28,
+            0.5430787606480841,
+            0.3741155002848108,
+            0.8124024085151978,
+            0.7736746568341113,
+            0.32514420112209375,
+            1.0
+          ],
+          "width": 9.613142689638465
+        },
+        {
+          "damage_template_id": "major_partial_collapse.v1",
+          "depth": 7.18286208636593,
+          "footprint": [
+            [
+              155.3716622810103,
+              45.54553681936828
+            ],
+            [
+              158.05856957865305,
+              47.237373897820575
+            ],
+            [
+              159.13128411685108,
+              50.52854965025838
+            ],
+            [
+              155.8752965820966,
+              52.72839890573421
+            ],
+            [
+              153.08612347311515,
+              52.332668486179834
+            ],
+            [
+              151.30230347870932,
+              49.5026468004363
+            ],
+            [
+              152.73348311626765,
+              46.13835982328757
+            ]
+          ],
+          "height": 3.312476549508522,
+          "identifier": "rubble_mokarram_hossain_khandakar_bhaban_9",
+          "kind": "ground_rubble",
+          "minimum": [
+            151.30230347870932,
+            45.54553681936828,
+            0.0
+          ],
+          "parent_structure_id": "mokarram_hossain_khandakar_bhaban",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-432996114",
+          "visual_top_profile": [
+            0.6842270613857504,
+            0.6208210051428911,
+            0.41967516183636866,
+            1.0,
+            0.31509688812203324,
+            0.5743050342127998,
+            0.28
+          ],
+          "width": 7.828980638141758
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 13.863263813526729,
+          "footprint": [
+            [
+              231.2259282679108,
+              95.76614724485628
+            ],
+            [
+              241.06531708096998,
+              98.5621695140731
+            ],
+            [
+              247.3356658757352,
+              103.996505147972
+            ],
+            [
+              243.77541419606516,
+              109.44937035960155
+            ],
+            [
+              230.49664698427762,
+              109.62941105838301
+            ],
+            [
+              220.4811858314246,
+              106.7425901700703
+            ],
+            [
+              219.86244506747673,
+              101.08870546604905
+            ]
+          ],
+          "height": 1.7150968816801286,
+          "identifier": "rubble_science_library_1",
+          "kind": "ground_rubble",
+          "minimum": [
+            219.86244506747673,
+            95.76614724485628,
+            0.0
+          ],
+          "parent_structure_id": "science_library",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-1533179899",
+          "visual_top_profile": [
+            1.0,
+            0.5948490346297555,
+            0.8855864730835189,
+            0.4482101559664613,
+            0.28,
+            0.5954426205669205,
+            0.45124762605832536
+          ],
+          "width": 27.473220808258475
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 15.06018328170893,
+          "footprint": [
+            [
+              236.8743505779816,
+              112.9853909560991
+            ],
+            [
+              234.63996721877714,
+              121.44670934396794
+            ],
+            [
+              222.8837068853368,
+              124.68700226483648
+            ],
+            [
+              212.41355615144974,
+              121.33903985574479
+            ],
+            [
+              210.70583929595028,
+              113.40511387190449
+            ],
+            [
+              222.54709194699606,
+              109.62681898312755
+            ]
+          ],
+          "height": 2.014371114009915,
+          "identifier": "rubble_science_library_2",
+          "kind": "ground_rubble",
+          "minimum": [
+            210.70583929595028,
+            109.62681898312755,
+            0.0
+          ],
+          "parent_structure_id": "science_library",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-1533179899",
+          "visual_top_profile": [
+            0.773819704964331,
+            0.7962000556010324,
+            0.28,
+            0.29585629836039296,
+            1.0,
+            0.6892822645349259
+          ],
+          "width": 26.168511282031318
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 16.19760634024793,
+          "footprint": [
+            [
+              219.7433458526213,
+              81.75725858308894
+            ],
+            [
+              225.90812092516208,
+              88.61262530050365
+            ],
+            [
+              223.53059314198987,
+              96.63550398070983
+            ],
+            [
+              216.69481063695795,
+              97.95486492333687
+            ],
+            [
+              211.37744464811036,
+              93.08941138704155
+            ],
+            [
+              213.8119568346204,
+              86.1484685211509
+            ]
+          ],
+          "height": 1.8371057642488757,
+          "identifier": "rubble_science_library_3",
+          "kind": "ground_rubble",
+          "minimum": [
+            211.37744464811036,
+            81.75725858308894,
+            0.0
+          ],
+          "parent_structure_id": "science_library",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-1533179899",
+          "visual_top_profile": [
+            0.4687676450560725,
+            0.28,
+            0.8832682822015856,
+            0.8742822284538383,
+            0.6927641742544066,
+            1.0
+          ],
+          "width": 14.530676277051725
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 12.704428369443832,
+          "footprint": [
+            [
+              218.5505762703945,
+              103.57932308445768
+            ],
+            [
+              217.32532653232923,
+              108.45608191583051
+            ],
+            [
+              214.46505179613786,
+              111.10098329312147
+            ],
+            [
+              211.99136231297237,
+              108.37977816684457
+            ],
+            [
+              211.57655959320095,
+              104.24283451021336
+            ],
+            [
+              213.01506341680357,
+              99.94421653302668
+            ],
+            [
+              215.9262438069416,
+              98.39655492367764
+            ]
+          ],
+          "height": 3.148355493919513,
+          "identifier": "rubble_science_library_4",
+          "kind": "ground_rubble",
+          "minimum": [
+            211.57655959320095,
+            98.39655492367764,
+            0.0
+          ],
+          "parent_structure_id": "science_library",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-1533179899",
+          "visual_top_profile": [
+            0.5384810751881146,
+            0.28,
+            1.0,
+            0.5859749847761524,
+            0.8832924758343287,
+            0.5394822437480619,
+            0.324748271530864
+          ],
+          "width": 6.974016677193532
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 6.790638915569076,
+          "footprint": [
+            [
+              248.44353739188045,
+              91.88049465764395
+            ],
+            [
+              251.86213927877196,
+              91.9487523165778
+            ],
+            [
+              255.127593692014,
+              93.18336958560722
+            ],
+            [
+              255.39220047164142,
+              95.8783510211991
+            ],
+            [
+              251.9797374148117,
+              98.67113357321303
+            ],
+            [
+              248.06768232170896,
+              98.3281511360756
+            ],
+            [
+              244.6638040680717,
+              96.4397434508959
+            ],
+            [
+              244.94855356449926,
+              94.00255226991123
+            ]
+          ],
+          "height": 3.2505371784078174,
+          "identifier": "rubble_science_library_5",
+          "kind": "ground_rubble",
+          "minimum": [
+            244.6638040680717,
+            91.88049465764395,
+            0.0
+          ],
+          "parent_structure_id": "science_library",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-1533179899",
+          "visual_top_profile": [
+            0.7622011856456292,
+            1.0,
+            0.7177884304392782,
+            0.31499032085757783,
+            0.552502608095718,
+            0.28,
+            0.8340530517027099,
+            0.7319643991042835
+          ],
+          "width": 10.728396403569718
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 5.250987788508056,
+          "footprint": [
+            [
+              230.53223516693174,
+              92.3699214329221
+            ],
+            [
+              227.3958229296886,
+              90.91915579346129
+            ],
+            [
+              226.2747282825148,
+              88.31623584126716
+            ],
+            [
+              231.76628284043485,
+              87.11893364441404
+            ],
+            [
+              235.3903409366181,
+              88.45159091311842
+            ],
+            [
+              234.90201132925668,
+              91.32535560164716
+            ]
+          ],
+          "height": 2.8678492693680617,
+          "identifier": "rubble_science_library_6",
+          "kind": "ground_rubble",
+          "minimum": [
+            226.2747282825148,
+            87.11893364441404,
+            0.0
+          ],
+          "parent_structure_id": "science_library",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-1533179899",
+          "visual_top_profile": [
+            0.3694211711479512,
+            0.35679624707249596,
+            0.28,
+            1.0,
+            0.550507738057002,
+            0.627738650778555
+          ],
+          "width": 9.115612654103302
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 6.331614606864534,
+          "footprint": [
+            [
+              246.11574604134452,
+              124.12164374685975
+            ],
+            [
+              240.94207714209466,
+              124.78293350177215
+            ],
+            [
+              237.35625457756902,
+              124.17821581275193
+            ],
+            [
+              236.1590229904516,
+              121.62757511679928
+            ],
+            [
+              236.895024770699,
+              119.35821314238603
+            ],
+            [
+              240.5459464110605,
+              118.45131889490762
+            ],
+            [
+              245.7122677156304,
+              118.93102261012339
+            ],
+            [
+              246.42841919557992,
+              121.07316144431618
+            ]
+          ],
+          "height": 2.1304988147927992,
+          "identifier": "rubble_science_library_7",
+          "kind": "ground_rubble",
+          "minimum": [
+            236.1590229904516,
+            118.45131889490762,
+            0.0
+          ],
+          "parent_structure_id": "science_library",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-1533179899",
+          "visual_top_profile": [
+            0.7184389004704052,
+            0.3839757848925124,
+            0.28,
+            0.5924033429152655,
+            0.29444613662886954,
+            1.0,
+            0.49617118307719676,
+            0.7495305617225365
+          ],
+          "width": 10.269396205128317
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 10.849593768970664,
+          "footprint": [
+            [
+              208.954536803103,
+              120.98389033356827
+            ],
+            [
+              204.6379862239687,
+              118.8767217231186
+            ],
+            [
+              204.47429667476388,
+              113.8137325044378
+            ],
+            [
+              208.74380089234108,
+              110.1342965645976
+            ],
+            [
+              210.76385692801543,
+              115.57179520753037
+            ]
+          ],
+          "height": 2.974930973863509,
+          "identifier": "rubble_science_library_8",
+          "kind": "ground_rubble",
+          "minimum": [
+            204.47429667476388,
+            110.1342965645976,
+            0.0
+          ],
+          "parent_structure_id": "science_library",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-1533179899",
+          "visual_top_profile": [
+            0.4959790948271563,
+            0.8635704717079201,
+            1.0,
+            0.3470603611401899,
+            0.28
+          ],
+          "width": 6.289560253251551
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 7.712852320709942,
+          "footprint": [
+            [
+              238.58931130072682,
+              88.61601801160126
+            ],
+            [
+              242.68363678592712,
+              88.41422365016837
+            ],
+            [
+              245.90186331520655,
+              91.37411784392671
+            ],
+            [
+              243.24629475382966,
+              96.12707597087831
+            ],
+            [
+              238.52237631227663,
+              96.09547932203616
+            ],
+            [
+              236.09591111407508,
+              92.37207144282378
+            ]
+          ],
+          "height": 2.4028899002612003,
+          "identifier": "rubble_science_library_9",
+          "kind": "ground_rubble",
+          "minimum": [
+            236.09591111407508,
+            88.41422365016837,
+            0.0
+          ],
+          "parent_structure_id": "science_library",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-1533179899",
+          "visual_top_profile": [
+            0.7698932029173113,
+            0.7762422762687227,
+            0.842498270724726,
+            0.8559940738890256,
+            1.0,
+            0.28
+          ],
+          "width": 9.805952201131475
+        },
+        {
+          "damage_template_id": "destroyed_rubble_cluster.v1",
+          "depth": 8.078928151957825,
+          "footprint": [
+            [
+              234.12620018150875,
+              124.29465017505268
+            ],
+            [
+              240.7470428398475,
+              125.43375729941164
+            ],
+            [
+              242.23274165877487,
+              129.56758008566578
+            ],
+            [
+              237.57362155706184,
+              132.3735783270105
+            ],
+            [
+              230.7355652963521,
+              130.7408325675458
+            ],
+            [
+              228.63244403043015,
+              126.60894861119151
+            ]
+          ],
+          "height": 2.69109961861309,
+          "identifier": "rubble_science_library_10",
+          "kind": "ground_rubble",
+          "minimum": [
+            228.63244403043015,
+            124.29465017505268,
+            0.0
+          ],
+          "parent_structure_id": "science_library",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-1533179899",
+          "visual_top_profile": [
+            0.34314672436448257,
+            1.0,
+            0.28,
+            0.8232744885088487,
+            0.32783314803791685,
+            0.3248606632687065
+          ],
+          "width": 13.60029762834472
+        },
+        {
+          "damage_template_id": "standing_full_volume.v1",
+          "depth": 27.22,
+          "footprint": [
+            [
+              127.23,
+              138.05
+            ],
+            [
+              155.13,
+              145.65
+            ],
+            [
+              149.78,
+              165.27
+            ],
+            [
+              121.88,
+              157.66
+            ],
+            [
+              127.23,
+              138.05
+            ]
+          ],
+          "height": 14,
+          "identifier": "solid_statistics_research_building",
+          "kind": "building",
+          "minimum": [
+            121.88,
+            138.05,
+            0.0
+          ],
+          "parent_structure_id": "statistics_research_building",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-237067305",
+          "visual_top_profile": [],
+          "width": 33.25
+        },
+        {
+          "damage_template_id": null,
+          "depth": 61.69,
+          "footprint": [
+            [
+              -38.83,
+              -41.27
+            ],
+            [
+              10.11,
+              2.12
+            ],
+            [
+              26.33,
+              -16.19
+            ],
+            [
+              -22.61,
+              -59.57
+            ],
+            [
+              -38.83,
+              -41.27
+            ]
+          ],
+          "height": 10.0,
+          "identifier": "solid_context_3rd_class_workers_associatioon_of_dmc_and_medical_store_220874197",
+          "kind": "building",
+          "minimum": [
+            -38.83,
+            -59.57,
+            0.0
+          ],
+          "parent_structure_id": "context_3rd_class_workers_associatioon_of_dmc_and_medical_store_220874197",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-220874197",
+          "visual_top_profile": [],
+          "width": 65.16
+        },
+        {
+          "damage_template_id": null,
+          "depth": 9.009999999999998,
+          "footprint": [
+            [
+              223.52,
+              54.98
+            ],
+            [
+              233.58,
+              57.66
+            ],
+            [
+              235.26,
+              51.32
+            ],
+            [
+              225.21,
+              48.65
+            ],
+            [
+              223.52,
+              54.98
+            ]
+          ],
+          "height": 3.5,
+          "identifier": "solid_context_atm_booth_432995303",
+          "kind": "building",
+          "minimum": [
+            223.52,
+            48.65,
+            0.0
+          ],
+          "parent_structure_id": "context_atm_booth_432995303",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-432995303",
+          "visual_top_profile": [],
+          "width": 11.73999999999998
+        },
+        {
+          "damage_template_id": null,
+          "depth": 26.5,
+          "footprint": [
+            [
+              -3.84,
+              154.68
+            ],
+            [
+              5.86,
+              154.13
+            ],
+            [
+              4.43,
+              128.18
+            ],
+            [
+              -5.28,
+              128.72
+            ],
+            [
+              -3.84,
+              154.68
+            ]
+          ],
+          "height": 7.0,
+          "identifier": "solid_context_badhon_transfusion_center_665081368",
+          "kind": "building",
+          "minimum": [
+            -5.28,
+            128.18,
+            0.0
+          ],
+          "parent_structure_id": "context_badhon_transfusion_center_665081368",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-665081368",
+          "visual_top_profile": [],
+          "width": 11.14
+        },
+        {
+          "damage_template_id": null,
+          "depth": 7.77000000000001,
+          "footprint": [
+            [
+              -32.02,
+              207.76
+            ],
+            [
+              -32.02,
+              215.53
+            ],
+            [
+              26.6,
+              215.53
+            ],
+            [
+              26.6,
+              207.76
+            ],
+            [
+              -32.02,
+              207.76
+            ]
+          ],
+          "height": 14.0,
+          "identifier": "solid_context_building_381055161",
+          "kind": "building",
+          "minimum": [
+            -32.02,
+            207.76,
+            0.0
+          ],
+          "parent_structure_id": "context_building_381055161",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055161",
+          "visual_top_profile": [],
+          "width": 58.620000000000005
+        },
+        {
+          "damage_template_id": null,
+          "depth": 14.120000000000005,
+          "footprint": [
+            [
+              64.45,
+              164.48
+            ],
+            [
+              62.45,
+              171.98
+            ],
+            [
+              87.43,
+              178.6
+            ],
+            [
+              89.43,
+              171.1
+            ],
+            [
+              64.45,
+              164.48
+            ]
+          ],
+          "height": 3.5,
+          "identifier": "solid_context_building_381055167",
+          "kind": "building",
+          "minimum": [
+            62.45,
+            164.48,
+            0.0
+          ],
+          "parent_structure_id": "context_building_381055167",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055167",
+          "visual_top_profile": [],
+          "width": 26.980000000000004
+        },
+        {
+          "damage_template_id": null,
+          "depth": 18.839999999999996,
+          "footprint": [
+            [
+              261.67,
+              75.23
+            ],
+            [
+              267.83,
+              77.16
+            ],
+            [
+              273.14,
+              60.25
+            ],
+            [
+              266.97,
+              58.32
+            ],
+            [
+              261.67,
+              75.23
+            ]
+          ],
+          "height": 10.0,
+          "identifier": "solid_context_building_507722590",
+          "kind": "building",
+          "minimum": [
+            261.67,
+            58.32,
+            0.0
+          ],
+          "parent_structure_id": "context_building_507722590",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-507722590",
+          "visual_top_profile": [],
+          "width": 11.46999999999997
+        },
+        {
+          "damage_template_id": null,
+          "depth": 43.74000000000001,
+          "footprint": [
+            [
+              118.16,
+              229.71
+            ],
+            [
+              110.86,
+              227.76
+            ],
+            [
+              113.45,
+              218.06
+            ],
+            [
+              120.79,
+              220.04
+            ],
+            [
+              121.66,
+              216.8
+            ],
+            [
+              114.31,
+              214.84
+            ],
+            [
+              119.07,
+              197.01
+            ],
+            [
+              155.91,
+              206.85
+            ],
+            [
+              152.13,
+              221.01
+            ],
+            [
+              138.39,
+              217.34
+            ],
+            [
+              136.14,
+              225.8
+            ],
+            [
+              151.87,
+              230.0
+            ],
+            [
+              148.41,
+              240.75
+            ],
+            [
+              141.12,
+              239.27
+            ],
+            [
+              128.81,
+              235.99
+            ],
+            [
+              130.75,
+              228.74
+            ],
+            [
+              119.24,
+              225.67
+            ],
+            [
+              118.16,
+              229.71
+            ]
+          ],
+          "height": 10.5,
+          "identifier": "solid_context_institute_of_nutrition_and_food_science_432992198",
+          "kind": "building",
+          "minimum": [
+            110.86,
+            197.01,
+            0.0
+          ],
+          "parent_structure_id": "context_institute_of_nutrition_and_food_science_432992198",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-432992198",
+          "visual_top_profile": [],
+          "width": 45.05
+        },
+        {
+          "damage_template_id": null,
+          "depth": 34.94,
+          "footprint": [
+            [
+              15.24,
+              253.94
+            ],
+            [
+              49.19,
+              240.02
+            ],
+            [
+              45.35,
+              230.66
+            ],
+            [
+              46.85,
+              230.03
+            ],
+            [
+              45.01,
+              225.56
+            ],
+            [
+              42.46,
+              226.6
+            ],
+            [
+              39.34,
+              219.0
+            ],
+            [
+              6.44,
+              232.49
+            ],
+            [
+              15.24,
+              253.94
+            ]
+          ],
+          "height": 14.0,
+          "identifier": "solid_context_kabi_jasimuddin_bhaban_381049772",
+          "kind": "building",
+          "minimum": [
+            6.44,
+            219.0,
+            0.0
+          ],
+          "parent_structure_id": "context_kabi_jasimuddin_bhaban_381049772",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381049772",
+          "visual_top_profile": [],
+          "width": 42.75
+        },
+        {
+          "damage_template_id": null,
+          "depth": 9.099999999999994,
+          "footprint": [
+            [
+              27.75,
+              199.37
+            ],
+            [
+              42.83,
+              199.37
+            ],
+            [
+              42.83,
+              190.27
+            ],
+            [
+              27.75,
+              190.27
+            ],
+            [
+              27.75,
+              199.37
+            ]
+          ],
+          "height": 3.5,
+          "identifier": "solid_context_shib_bari_381055170",
+          "kind": "building",
+          "minimum": [
+            27.75,
+            190.27,
+            0.0
+          ],
+          "parent_structure_id": "context_shib_bari_381055170",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055170",
+          "visual_top_profile": [],
+          "width": 15.079999999999998
+        },
+        {
+          "damage_template_id": null,
+          "depth": 58.870000000000005,
+          "footprint": [
+            [
+              73.73,
+              225.14
+            ],
+            [
+              80.24,
+              226.99
+            ],
+            [
+              97.3,
+              170.91
+            ],
+            [
+              90.56,
+              168.12
+            ],
+            [
+              73.73,
+              225.14
+            ]
+          ],
+          "height": 14.0,
+          "identifier": "solid_context_shib_bari_381055171",
+          "kind": "building",
+          "minimum": [
+            73.73,
+            168.12,
+            0.0
+          ],
+          "parent_structure_id": "context_shib_bari_381055171",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055171",
+          "visual_top_profile": [],
+          "width": 23.569999999999993
+        },
+        {
+          "damage_template_id": null,
+          "depth": 31.160000000000025,
+          "footprint": [
+            [
+              72.08,
+              208.36
+            ],
+            [
+              80.41,
+              178.99
+            ],
+            [
+              74.1,
+              177.2
+            ],
+            [
+              65.77,
+              206.57
+            ],
+            [
+              72.08,
+              208.36
+            ]
+          ],
+          "height": 17.5,
+          "identifier": "solid_context_shib_bari_381055172",
+          "kind": "building",
+          "minimum": [
+            65.77,
+            177.2,
+            0.0
+          ],
+          "parent_structure_id": "context_shib_bari_381055172",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055172",
+          "visual_top_profile": [],
+          "width": 14.64
+        },
+        {
+          "damage_template_id": null,
+          "depth": 9.030000000000001,
+          "footprint": [
+            [
+              31.34,
+              207.62
+            ],
+            [
+              31.21,
+              216.11
+            ],
+            [
+              60.04,
+              216.65
+            ],
+            [
+              60.3,
+              208.03
+            ],
+            [
+              31.34,
+              207.62
+            ]
+          ],
+          "height": 14.0,
+          "identifier": "solid_context_shib_bari_381055174",
+          "kind": "building",
+          "minimum": [
+            31.21,
+            207.62,
+            0.0
+          ],
+          "parent_structure_id": "context_shib_bari_381055174",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055174",
+          "visual_top_profile": [],
+          "width": 29.089999999999996
+        },
+        {
+          "damage_template_id": null,
+          "depth": 8.219999999999999,
+          "footprint": [
+            [
+              62.5,
+              182.28
+            ],
+            [
+              64.23,
+              175.64
+            ],
+            [
+              58.18,
+              174.06
+            ],
+            [
+              56.45,
+              180.69
+            ],
+            [
+              62.5,
+              182.28
+            ]
+          ],
+          "height": 17.5,
+          "identifier": "solid_context_shib_bari_83_381055164",
+          "kind": "building",
+          "minimum": [
+            56.45,
+            174.06,
+            0.0
+          ],
+          "parent_structure_id": "context_shib_bari_83_381055164",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055164",
+          "visual_top_profile": [],
+          "width": 7.780000000000001
+        },
+        {
+          "damage_template_id": null,
+          "depth": 13.47999999999999,
+          "footprint": [
+            [
+              59.81,
+              197.28
+            ],
+            [
+              62.58,
+              185.54
+            ],
+            [
+              55.26,
+              183.8
+            ],
+            [
+              52.48,
+              195.54
+            ],
+            [
+              59.81,
+              197.28
+            ]
+          ],
+          "height": 21.0,
+          "identifier": "solid_context_shib_bari_87_381055173",
+          "kind": "building",
+          "minimum": [
+            52.48,
+            183.8,
+            0.0
+          ],
+          "parent_structure_id": "context_shib_bari_87_381055173",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055173",
+          "visual_top_profile": [],
+          "width": 10.100000000000001
+        },
+        {
+          "damage_template_id": null,
+          "depth": 29.400000000000006,
+          "footprint": [
+            [
+              45.86,
+              190.46
+            ],
+            [
+              52.56,
+              162.47
+            ],
+            [
+              46.65,
+              161.06
+            ],
+            [
+              39.95,
+              189.04
+            ],
+            [
+              45.86,
+              190.46
+            ]
+          ],
+          "height": 3.5,
+          "identifier": "solid_context_shib_bari_slum_381055176",
+          "kind": "building",
+          "minimum": [
+            39.95,
+            161.06,
+            0.0
+          ],
+          "parent_structure_id": "context_shib_bari_slum_381055176",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-381055176",
+          "visual_top_profile": [],
+          "width": 12.61
+        },
+        {
+          "damage_template_id": null,
+          "depth": 30.51,
+          "footprint": [
+            [
+              261.83,
+              28.35
+            ],
+            [
+              274.97,
+              28.18
+            ],
+            [
+              275.07,
+              -2.16
+            ],
+            [
+              261.01,
+              -2.08
+            ],
+            [
+              261.83,
+              28.35
+            ]
+          ],
+          "height": 3.5,
+          "identifier": "solid_context_swimming_pool_1036295257",
+          "kind": "building",
+          "minimum": [
+            261.01,
+            -2.16,
+            0.0
+          ],
+          "parent_structure_id": "context_swimming_pool_1036295257",
+          "road_segment_id": null,
+          "rotation_degrees": 0.0,
+          "source_ref": "osm-way-1036295257",
+          "visual_top_profile": [],
+          "width": 14.060000000000002
+        }
+      ],
+      "seed": 20260924,
+      "world": {
+        "distance_unit": "meter",
+        "maximum": [
+          281,
+          259,
+          60
+        ],
+        "minimum": [
+          -44,
+          -65,
+          0
+        ]
+      }
+    },
+    "generation_metadata": {
+      "damage_mesh_template_version": "synthetic_damage_mesh.v1",
+      "damage_mesh_templates": {
+        "destroyed": {
+          "description": "destroyed footprint with a dense multi-piece irregular rubble cluster",
+          "id": "destroyed_rubble_cluster.v1"
+        },
+        "intact": {
+          "description": "full standing building volume",
+          "id": "standing_full_volume.v1"
+        },
+        "major": {
+          "description": "standing section plus disjoint collapsed section with irregular debris",
+          "id": "major_partial_collapse.v1"
+        },
+        "minor": {
+          "description": "standing building with minor damage state",
+          "id": "standing_minor_damage.v1"
+        }
+      },
+      "imputed_values": [],
+      "mode": "du_outdoor",
+      "seed": 20260924,
+      "template_version": "osm-2026-09-24.v4"
+    },
+    "indoor_connections": [],
+    "indoor_rooms": [],
+    "preset": {
+      "broken_floor_probability": 0.4,
+      "damage_proportions": {
+        "destroyed": 0.15,
+        "intact": 0.25,
+        "major": 0.3,
+        "minor": 0.3
+      },
+      "elevated_debris_probability": 0.35,
+      "identifier": "earthquake.v1",
+      "indoor_probabilities": {
+        "blocked_corridor": 0.25,
+        "blocked_door": 0.2,
+        "damaged_room": 0.3,
+        "damaged_stair": 0.2,
+        "indoor_debris": 0.65
+      },
+      "road_block_probability": 0.3,
+      "rubble_probability": 0.65,
+      "severity": "moderate",
+      "version": "earthquake.v1"
+    },
+    "provenance": [
+      {
+        "identifier": "osm-du-crop",
+        "licence": "ODbL 1.0",
+        "preprocessing_version": "local-metric-crop.v4",
+        "role": "complete mapped DU crop with target buildings and static surrounding context",
+        "title": "OpenStreetMap University of Dhaka Science Complex cluster",
+        "url_or_doi": "https://api.openstreetmap.org/api/0.6/map?bbox=90.39700,23.72740,90.39960,23.72940"
+      }
+    ],
+    "roads": [],
+    "structures": [
+      {
+        "damage_state": "minor",
+        "depth": 42,
+        "footprint": [
+          [
+            118.71,
+            55.83
+          ],
+          [
+            92.19,
+            48.0
+          ],
+          [
+            102.28,
+            13.81
+          ],
+          [
+            128.79,
+            21.64
+          ],
+          [
+            118.71,
+            55.83
+          ]
+        ],
+        "height": 16,
+        "height_source": "imputed",
+        "identifier": "af_mujibur_rahman_math",
+        "minimum": [
+          92.2,
+          13.8,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-432996247",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 36.6
+      },
+      {
+        "damage_state": "destroyed",
+        "depth": 30.4,
+        "footprint": [
+          [
+            145.53,
+            193.18
+          ],
+          [
+            194.1,
+            205.12
+          ],
+          [
+            198.63,
+            186.65
+          ],
+          [
+            150.06,
+            174.72
+          ],
+          [
+            145.53,
+            193.18
+          ]
+        ],
+        "height": 35,
+        "height_source": "osm_building_levels",
+        "identifier": "cars",
+        "minimum": [
+          145.5,
+          174.7,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-381055166",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 53.1
+      },
+      {
+        "damage_state": "minor",
+        "depth": 50.9,
+        "footprint": [
+          [
+            231.83,
+            165.63
+          ],
+          [
+            229.57,
+            161.7
+          ],
+          [
+            233.67,
+            159.34
+          ],
+          [
+            232.38,
+            157.12
+          ],
+          [
+            235.12,
+            155.55
+          ],
+          [
+            232.83,
+            151.57
+          ],
+          [
+            235.53,
+            150.01
+          ],
+          [
+            228.0,
+            136.95
+          ],
+          [
+            225.9,
+            138.16
+          ],
+          [
+            223.93,
+            134.73
+          ],
+          [
+            222.28,
+            135.68
+          ],
+          [
+            219.71,
+            131.2
+          ],
+          [
+            203.15,
+            140.74
+          ],
+          [
+            206.6,
+            146.74
+          ],
+          [
+            204.7,
+            147.84
+          ],
+          [
+            202.73,
+            144.43
+          ],
+          [
+            200.02,
+            145.99
+          ],
+          [
+            201.33,
+            148.27
+          ],
+          [
+            198.62,
+            149.83
+          ],
+          [
+            201.27,
+            154.42
+          ],
+          [
+            198.45,
+            156.05
+          ],
+          [
+            203.95,
+            165.6
+          ],
+          [
+            198.83,
+            168.55
+          ],
+          [
+            206.62,
+            182.09
+          ],
+          [
+            217.79,
+            175.65
+          ],
+          [
+            214.96,
+            170.72
+          ],
+          [
+            218.76,
+            168.53
+          ],
+          [
+            220.77,
+            172.01
+          ],
+          [
+            231.83,
+            165.63
+          ]
+        ],
+        "height": 35,
+        "height_source": "osm_building_levels",
+        "identifier": "geb_and_cse_building",
+        "minimum": [
+          198.4,
+          131.2,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-381055158",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 37.1
+      },
+      {
+        "damage_state": "intact",
+        "depth": 22.3,
+        "footprint": [
+          [
+            113.25,
+            180.75
+          ],
+          [
+            117.3,
+            166.02
+          ],
+          [
+            144.71,
+            173.55
+          ],
+          [
+            140.67,
+            188.28
+          ],
+          [
+            124.27,
+            183.78
+          ],
+          [
+            113.25,
+            180.75
+          ]
+        ],
+        "height": 12,
+        "height_source": "imputed",
+        "identifier": "institute_of_information_technology",
+        "minimum": [
+          113.3,
+          166.0,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-225233762",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 31.5
+      },
+      {
+        "damage_state": "major",
+        "depth": 131.9,
+        "footprint": [
+          [
+            52.91,
+            28.14
+          ],
+          [
+            86.61,
+            37.59
+          ],
+          [
+            83.8,
+            47.63
+          ],
+          [
+            86.16,
+            48.29
+          ],
+          [
+            87.91,
+            50.67
+          ],
+          [
+            87.0,
+            54.35
+          ],
+          [
+            114.27,
+            61.99
+          ],
+          [
+            110.27,
+            76.23
+          ],
+          [
+            115.96,
+            77.82
+          ],
+          [
+            113.18,
+            87.71
+          ],
+          [
+            109.49,
+            86.67
+          ],
+          [
+            103.89,
+            106.48
+          ],
+          [
+            106.95,
+            107.36
+          ],
+          [
+            105.37,
+            112.9
+          ],
+          [
+            103.0,
+            112.22
+          ],
+          [
+            98.41,
+            128.21
+          ],
+          [
+            102.45,
+            129.36
+          ],
+          [
+            98.42,
+            143.35
+          ],
+          [
+            90.17,
+            140.96
+          ],
+          [
+            89.32,
+            143.93
+          ],
+          [
+            103.13,
+            147.91
+          ],
+          [
+            100.18,
+            158.13
+          ],
+          [
+            92.03,
+            155.78
+          ],
+          [
+            90.81,
+            160.0
+          ],
+          [
+            80.53,
+            157.04
+          ],
+          [
+            81.64,
+            153.21
+          ],
+          [
+            63.6,
+            148.02
+          ],
+          [
+            62.62,
+            151.44
+          ],
+          [
+            53.68,
+            148.87
+          ],
+          [
+            49.86,
+            156.03
+          ],
+          [
+            32.67,
+            151.19
+          ],
+          [
+            13.87,
+            145.36
+          ],
+          [
+            21.58,
+            117.36
+          ],
+          [
+            59.53,
+            128.62
+          ],
+          [
+            58.72,
+            130.9
+          ],
+          [
+            85.97,
+            138.55
+          ],
+          [
+            104.77,
+            72.21
+          ],
+          [
+            75.01,
+            62.84
+          ],
+          [
+            77.08,
+            55.47
+          ],
+          [
+            72.55,
+            54.18
+          ],
+          [
+            74.59,
+            46.99
+          ],
+          [
+            65.48,
+            44.42
+          ],
+          [
+            64.96,
+            46.25
+          ],
+          [
+            49.08,
+            41.81
+          ],
+          [
+            52.91,
+            28.14
+          ]
+        ],
+        "height": 14,
+        "height_source": "osm_building_levels",
+        "identifier": "kazi_motahar_hossain_building",
+        "minimum": [
+          13.9,
+          28.1,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-220874007",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 102.1
+      },
+      {
+        "damage_state": "major",
+        "depth": 89.5,
+        "footprint": [
+          [
+            130.59,
+            60.07
+          ],
+          [
+            138.13,
+            35.11
+          ],
+          [
+            195.66,
+            52.49
+          ],
+          [
+            188.12,
+            77.43
+          ],
+          [
+            171.31,
+            72.36
+          ],
+          [
+            164.95,
+            93.32
+          ],
+          [
+            183.23,
+            98.77
+          ],
+          [
+            175.53,
+            124.59
+          ],
+          [
+            117.17,
+            107.18
+          ],
+          [
+            124.87,
+            81.37
+          ],
+          [
+            140.01,
+            85.88
+          ],
+          [
+            146.4,
+            64.84
+          ],
+          [
+            130.59,
+            60.07
+          ]
+        ],
+        "height": 28,
+        "height_source": "osm_building_levels",
+        "identifier": "mokarram_hossain_khandakar_bhaban",
+        "minimum": [
+          117.2,
+          35.1,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-432996114",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 78.5
+      },
+      {
+        "damage_state": "destroyed",
+        "depth": 54.9,
+        "footprint": [
+          [
+            200.74,
+            122.49
+          ],
+          [
+            213.2,
+            79.48
+          ],
+          [
+            258.53,
+            89.6
+          ],
+          [
+            242.97,
+            134.34
+          ],
+          [
+            200.74,
+            122.49
+          ]
+        ],
+        "height": 8,
+        "height_source": "osm_building_levels",
+        "identifier": "science_library",
+        "minimum": [
+          200.7,
+          79.5,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-1533179899",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 57.8
+      },
+      {
+        "damage_state": "intact",
+        "depth": 27.2,
+        "footprint": [
+          [
+            127.23,
+            138.05
+          ],
+          [
+            155.13,
+            145.65
+          ],
+          [
+            149.78,
+            165.27
+          ],
+          [
+            121.88,
+            157.66
+          ],
+          [
+            127.23,
+            138.05
+          ]
+        ],
+        "height": 14,
+        "height_source": "osm_building_levels",
+        "identifier": "statistics_research_building",
+        "minimum": [
+          121.9,
+          138.0,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "target",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-237067305",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 33.2
+      },
+      {
+        "damage_state": "intact",
+        "depth": 61.69,
+        "footprint": [
+          [
+            -38.83,
+            -41.27
+          ],
+          [
+            10.11,
+            2.12
+          ],
+          [
+            26.33,
+            -16.19
+          ],
+          [
+            -22.61,
+            -59.57
+          ],
+          [
+            -38.83,
+            -41.27
+          ]
+        ],
+        "height": 10.0,
+        "height_source": "imputed_context_height",
+        "identifier": "context_3rd_class_workers_associatioon_of_dmc_and_medical_store_220874197",
+        "minimum": [
+          -38.83,
+          -59.57,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "context",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-220874197",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 65.16
+      },
+      {
+        "damage_state": "intact",
+        "depth": 9.01,
+        "footprint": [
+          [
+            223.52,
+            54.98
+          ],
+          [
+            233.58,
+            57.66
+          ],
+          [
+            235.26,
+            51.32
+          ],
+          [
+            225.21,
+            48.65
+          ],
+          [
+            223.52,
+            54.98
+          ]
+        ],
+        "height": 3.5,
+        "height_source": "osm_building_levels",
+        "identifier": "context_atm_booth_432995303",
+        "minimum": [
+          223.52,
+          48.65,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "context",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-432995303",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 11.74
+      },
+      {
+        "damage_state": "intact",
+        "depth": 26.5,
+        "footprint": [
+          [
+            -3.84,
+            154.68
+          ],
+          [
+            5.86,
+            154.13
+          ],
+          [
+            4.43,
+            128.18
+          ],
+          [
+            -5.28,
+            128.72
+          ],
+          [
+            -3.84,
+            154.68
+          ]
+        ],
+        "height": 7.0,
+        "height_source": "osm_building_levels",
+        "identifier": "context_badhon_transfusion_center_665081368",
+        "minimum": [
+          -5.28,
+          128.18,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "context",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-665081368",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 11.14
+      },
+      {
+        "damage_state": "intact",
+        "depth": 7.77,
+        "footprint": [
+          [
+            -32.02,
+            207.76
+          ],
+          [
+            -32.02,
+            215.53
+          ],
+          [
+            26.6,
+            215.53
+          ],
+          [
+            26.6,
+            207.76
+          ],
+          [
+            -32.02,
+            207.76
+          ]
+        ],
+        "height": 14.0,
+        "height_source": "osm_building_levels",
+        "identifier": "context_building_381055161",
+        "minimum": [
+          -32.02,
+          207.76,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "context",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-381055161",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 58.62
+      },
+      {
+        "damage_state": "intact",
+        "depth": 14.12,
+        "footprint": [
+          [
+            64.45,
+            164.48
+          ],
+          [
+            62.45,
+            171.98
+          ],
+          [
+            87.43,
+            178.6
+          ],
+          [
+            89.43,
+            171.1
+          ],
+          [
+            64.45,
+            164.48
+          ]
+        ],
+        "height": 3.5,
+        "height_source": "osm_building_levels",
+        "identifier": "context_building_381055167",
+        "minimum": [
+          62.45,
+          164.48,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "context",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-381055167",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 26.98
+      },
+      {
+        "damage_state": "intact",
+        "depth": 18.84,
+        "footprint": [
+          [
+            261.67,
+            75.23
+          ],
+          [
+            267.83,
+            77.16
+          ],
+          [
+            273.14,
+            60.25
+          ],
+          [
+            266.97,
+            58.32
+          ],
+          [
+            261.67,
+            75.23
+          ]
+        ],
+        "height": 10.0,
+        "height_source": "imputed_context_height",
+        "identifier": "context_building_507722590",
+        "minimum": [
+          261.67,
+          58.32,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "context",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-507722590",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 11.47
+      },
+      {
+        "damage_state": "intact",
+        "depth": 43.74,
+        "footprint": [
+          [
+            118.16,
+            229.71
+          ],
+          [
+            110.86,
+            227.76
+          ],
+          [
+            113.45,
+            218.06
+          ],
+          [
+            120.79,
+            220.04
+          ],
+          [
+            121.66,
+            216.8
+          ],
+          [
+            114.31,
+            214.84
+          ],
+          [
+            119.07,
+            197.01
+          ],
+          [
+            155.91,
+            206.85
+          ],
+          [
+            152.13,
+            221.01
+          ],
+          [
+            138.39,
+            217.34
+          ],
+          [
+            136.14,
+            225.8
+          ],
+          [
+            151.87,
+            230.0
+          ],
+          [
+            148.41,
+            240.75
+          ],
+          [
+            141.12,
+            239.27
+          ],
+          [
+            128.81,
+            235.99
+          ],
+          [
+            130.75,
+            228.74
+          ],
+          [
+            119.24,
+            225.67
+          ],
+          [
+            118.16,
+            229.71
+          ]
+        ],
+        "height": 10.5,
+        "height_source": "osm_building_levels",
+        "identifier": "context_institute_of_nutrition_and_food_science_432992198",
+        "minimum": [
+          110.86,
+          197.01,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "context",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-432992198",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 45.05
+      },
+      {
+        "damage_state": "intact",
+        "depth": 34.94,
+        "footprint": [
+          [
+            15.24,
+            253.94
+          ],
+          [
+            49.19,
+            240.02
+          ],
+          [
+            45.35,
+            230.66
+          ],
+          [
+            46.85,
+            230.03
+          ],
+          [
+            45.01,
+            225.56
+          ],
+          [
+            42.46,
+            226.6
+          ],
+          [
+            39.34,
+            219.0
+          ],
+          [
+            6.44,
+            232.49
+          ],
+          [
+            15.24,
+            253.94
+          ]
+        ],
+        "height": 14.0,
+        "height_source": "osm_building_levels",
+        "identifier": "context_kabi_jasimuddin_bhaban_381049772",
+        "minimum": [
+          6.44,
+          219.0,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "context",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-381049772",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 42.75
+      },
+      {
+        "damage_state": "intact",
+        "depth": 9.1,
+        "footprint": [
+          [
+            27.75,
+            199.37
+          ],
+          [
+            42.83,
+            199.37
+          ],
+          [
+            42.83,
+            190.27
+          ],
+          [
+            27.75,
+            190.27
+          ],
+          [
+            27.75,
+            199.37
+          ]
+        ],
+        "height": 3.5,
+        "height_source": "osm_building_levels",
+        "identifier": "context_shib_bari_381055170",
+        "minimum": [
+          27.75,
+          190.27,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "context",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-381055170",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 15.08
+      },
+      {
+        "damage_state": "intact",
+        "depth": 58.87,
+        "footprint": [
+          [
+            73.73,
+            225.14
+          ],
+          [
+            80.24,
+            226.99
+          ],
+          [
+            97.3,
+            170.91
+          ],
+          [
+            90.56,
+            168.12
+          ],
+          [
+            73.73,
+            225.14
+          ]
+        ],
+        "height": 14.0,
+        "height_source": "osm_building_levels",
+        "identifier": "context_shib_bari_381055171",
+        "minimum": [
+          73.73,
+          168.12,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "context",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-381055171",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 23.57
+      },
+      {
+        "damage_state": "intact",
+        "depth": 31.16,
+        "footprint": [
+          [
+            72.08,
+            208.36
+          ],
+          [
+            80.41,
+            178.99
+          ],
+          [
+            74.1,
+            177.2
+          ],
+          [
+            65.77,
+            206.57
+          ],
+          [
+            72.08,
+            208.36
+          ]
+        ],
+        "height": 17.5,
+        "height_source": "osm_building_levels",
+        "identifier": "context_shib_bari_381055172",
+        "minimum": [
+          65.77,
+          177.2,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "context",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-381055172",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 14.64
+      },
+      {
+        "damage_state": "intact",
+        "depth": 9.03,
+        "footprint": [
+          [
+            31.34,
+            207.62
+          ],
+          [
+            31.21,
+            216.11
+          ],
+          [
+            60.04,
+            216.65
+          ],
+          [
+            60.3,
+            208.03
+          ],
+          [
+            31.34,
+            207.62
+          ]
+        ],
+        "height": 14.0,
+        "height_source": "osm_building_levels",
+        "identifier": "context_shib_bari_381055174",
+        "minimum": [
+          31.21,
+          207.62,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "context",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-381055174",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 29.09
+      },
+      {
+        "damage_state": "intact",
+        "depth": 8.22,
+        "footprint": [
+          [
+            62.5,
+            182.28
+          ],
+          [
+            64.23,
+            175.64
+          ],
+          [
+            58.18,
+            174.06
+          ],
+          [
+            56.45,
+            180.69
+          ],
+          [
+            62.5,
+            182.28
+          ]
+        ],
+        "height": 17.5,
+        "height_source": "osm_building_levels",
+        "identifier": "context_shib_bari_83_381055164",
+        "minimum": [
+          56.45,
+          174.06,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "context",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-381055164",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 7.78
+      },
+      {
+        "damage_state": "intact",
+        "depth": 13.48,
+        "footprint": [
+          [
+            59.81,
+            197.28
+          ],
+          [
+            62.58,
+            185.54
+          ],
+          [
+            55.26,
+            183.8
+          ],
+          [
+            52.48,
+            195.54
+          ],
+          [
+            59.81,
+            197.28
+          ]
+        ],
+        "height": 21.0,
+        "height_source": "osm_building_levels",
+        "identifier": "context_shib_bari_87_381055173",
+        "minimum": [
+          52.48,
+          183.8,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "context",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-381055173",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 10.1
+      },
+      {
+        "damage_state": "intact",
+        "depth": 29.4,
+        "footprint": [
+          [
+            45.86,
+            190.46
+          ],
+          [
+            52.56,
+            162.47
+          ],
+          [
+            46.65,
+            161.06
+          ],
+          [
+            39.95,
+            189.04
+          ],
+          [
+            45.86,
+            190.46
+          ]
+        ],
+        "height": 3.5,
+        "height_source": "osm_building_levels",
+        "identifier": "context_shib_bari_slum_381055176",
+        "minimum": [
+          39.95,
+          161.06,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "context",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-381055176",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 12.61
+      },
+      {
+        "damage_state": "intact",
+        "depth": 30.51,
+        "footprint": [
+          [
+            261.83,
+            28.35
+          ],
+          [
+            274.97,
+            28.18
+          ],
+          [
+            275.07,
+            -2.16
+          ],
+          [
+            261.01,
+            -2.08
+          ],
+          [
+            261.83,
+            28.35
+          ]
+        ],
+        "height": 3.5,
+        "height_source": "osm_building_levels",
+        "identifier": "context_swimming_pool_1036295257",
+        "minimum": [
+          261.01,
+          -2.16,
+          0
+        ],
+        "post_asset_id": null,
+        "pre_asset_id": null,
+        "scene_role": "context",
+        "source_id": null,
+        "source_name": null,
+        "source_ref": "osm-way-1036295257",
+        "visual_mesh_asset": null,
+        "visual_mesh_phase": "none",
+        "visual_mesh_summary": null,
+        "visual_provenance": "procedural_scene_geometry",
+        "width": 14.06
+      }
+    ],
+    "uav_initial_positions": [
+      [
+        6.0,
+        6.0,
+        0.0
+      ],
+      [
+        6.0,
+        6.0,
+        0.0
+      ],
+      [
+        6.0,
+        6.0,
+        0.0
+      ]
+    ]
+  },
+  "scene_config": {
+    "base_clearance": 12.0,
+    "elevated_candidate_count": 6,
+    "ground_candidate_count": 12,
+    "indoor_candidate_count": 6,
+    "mode": "du_outdoor",
+    "preset_id": null,
+    "seed": 20260924,
+    "severity": "moderate",
+    "template_path": null,
+    "uav_count": 3,
+    "world_bounds": null
+  },
+  "schema_version": "scenario.v2",
+  "supply_policy": "base_supply_sufficient",
+  "task_config": {
+    "detection_time_range": [
+      0.0,
+      30.0
+    ],
+    "distance_unit": "meter",
+    "dropoff_height_range": [
+      2.0,
+      4.0
+    ],
+    "energy_unit": "joule",
+    "item_presence_model": "uniform_non_empty_subset",
+    "item_types": [
+      "food",
+      "water",
+      "medical"
+    ],
+    "item_weights": {
+      "food": 0.25,
+      "medical": 0.5,
+      "water": 0.5
+    },
+    "max_task_parcels": 4,
+    "max_task_payload_mass": 2.0,
+    "payload_unit": "kilogram",
+    "seed": 20260925,
+    "service_duration_base": 2.0,
+    "service_duration_per_parcel": 0.5,
+    "service_duration_per_severity": 1.0,
+    "service_value_decay_rate": 0.011997,
+    "service_value_model": "common_exponential",
+    "severity_range": [
+      0.35,
+      1.0
+    ],
+    "survivor_offset_range": [
+      1.0,
+      5.0
+    ],
+    "task_count": 6,
+    "time_unit": "minute"
+  },
+  "task_seed": 20260925,
+  "tasks": [
+    {
+      "demand": {
+        "food": 1,
+        "medical": 0,
+        "water": 0
+      },
+      "detected_at": 28.33973164780857,
+      "dropoff_waypoint": [
+        227.98981008319498,
+        162.4162296615454,
+        38.133165053824214
+      ],
+      "identifier": "task_1",
+      "required_payload_mass": 0.25,
+      "service_duration": 3.3492432391764186,
+      "service_value_at_detection": 0.8492432391764189,
+      "severity": 0.8492432391764189,
+      "status": "pending",
+      "survivor_position": [
+        227.98981008319498,
+        162.4162296615454,
+        35.0
+      ],
+      "task_type": "supply_delivery"
+    },
+    {
+      "demand": {
+        "food": 1,
+        "medical": 0,
+        "water": 0
+      },
+      "detected_at": 2.513158758813625,
+      "dropoff_waypoint": [
+        37.56553550710782,
+        138.3268186121676,
+        17.516066648018615
+      ],
+      "identifier": "task_2",
+      "required_payload_mass": 0.25,
+      "service_duration": 3.186299039586851,
+      "service_value_at_detection": 0.6862990395868509,
+      "severity": 0.6862990395868509,
+      "status": "pending",
+      "survivor_position": [
+        37.56553550710782,
+        138.3268186121676,
+        14.0
+      ],
+      "task_type": "supply_delivery"
+    },
+    {
+      "demand": {
+        "food": 1,
+        "medical": 1,
+        "water": 1
+      },
+      "detected_at": 0.8923801205603665,
+      "dropoff_waypoint": [
+        69.45461042615348,
+        136.0169735019858,
+        17.026948833465976
+      ],
+      "identifier": "task_3",
+      "required_payload_mass": 1.25,
+      "service_duration": 4.443213974740464,
+      "service_value_at_detection": 0.9432139747404648,
+      "severity": 0.9432139747404648,
+      "status": "pending",
+      "survivor_position": [
+        69.45461042615348,
+        136.0169735019858,
+        14.0
+      ],
+      "task_type": "supply_delivery"
+    },
+    {
+      "demand": {
+        "food": 0,
+        "medical": 0,
+        "water": 1
+      },
+      "detected_at": 3.655813082179875,
+      "dropoff_waypoint": [
+        144.9173962908242,
+        62.898180525103484,
+        17.51658384263412
+      ],
+      "identifier": "task_4",
+      "required_payload_mass": 0.5,
+      "service_duration": 3.4786589821191676,
+      "service_value_at_detection": 0.9786589821191674,
+      "severity": 0.9786589821191674,
+      "status": "pending",
+      "survivor_position": [
+        144.9173962908242,
+        62.898180525103484,
+        14.1
+      ],
+      "task_type": "supply_delivery"
+    },
+    {
+      "demand": {
+        "food": 1,
+        "medical": 0,
+        "water": 0
+      },
+      "detected_at": 8.642318734422533,
+      "dropoff_waypoint": [
+        253.7848833879059,
+        91.51174960728333,
+        3.259409827063777
+      ],
+      "identifier": "task_5",
+      "required_payload_mass": 0.25,
+      "service_duration": 2.903959142707644,
+      "service_value_at_detection": 0.40395914270764394,
+      "severity": 0.40395914270764394,
+      "status": "pending",
+      "survivor_position": [
+        253.7848833879059,
+        91.51174960728333,
+        0
+      ],
+      "task_type": "supply_delivery"
+    },
+    {
+      "demand": {
+        "food": 1,
+        "medical": 1,
+        "water": 0
+      },
+      "detected_at": 11.334865024096107,
+      "dropoff_waypoint": [
+        100.06495966833836,
+        59.449261704225336,
+        3.8089081275702297
+      ],
+      "identifier": "task_6",
+      "required_payload_mass": 0.75,
+      "service_duration": 3.5552229075624373,
+      "service_value_at_detection": 0.5552229075624374,
+      "severity": 0.5552229075624374,
+      "status": "pending",
+      "survivor_position": [
+        100.06495966833836,
+        59.449261704225336,
+        0
+      ],
+      "task_type": "supply_delivery"
+    }
+  ],
+  "uav_config": {
+    "count": 3,
+    "distance_unit": "meter",
+    "energy_capacity": 1000.0,
+    "energy_per_meter": 1.0,
+    "energy_unit": "joule",
+    "payload_capacity": 4,
+    "payload_unit": "kilogram",
+    "payload_weight_capacity": 2.0,
+    "reserve_energy": 200.0,
+    "speed": 10.0,
+    "time_unit": "minute"
+  },
+  "uav_initial_states": [
+    {
+      "battery_energy": 1000.0,
+      "onboard_inventory": {},
+      "payload_mass": 0.0,
+      "position": [
+        6.0,
+        6.0,
+        0.0
+      ],
+      "status": "available",
+      "uav_id": "uav_1"
+    },
+    {
+      "battery_energy": 1000.0,
+      "onboard_inventory": {},
+      "payload_mass": 0.0,
+      "position": [
+        6.0,
+        6.0,
+        0.0
+      ],
+      "status": "available",
+      "uav_id": "uav_2"
+    },
+    {
+      "battery_energy": 1000.0,
+      "onboard_inventory": {},
+      "payload_mass": 0.0,
+      "position": [
+        6.0,
+        6.0,
+        0.0
+      ],
+      "status": "available",
+      "uav_id": "uav_3"
+    }
+  ]
+}

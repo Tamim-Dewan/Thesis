@@ -1,0 +1,205 @@
+\chapter{Related Work}
+\label{chapter_related_work}
+
+UAV-assisted disaster response has been studied from several directions:
+perception and scene understanding, survivor localization, cooperative search,
+delivery logistics, resource-aware mission planning, and adaptive UAV
+coordination. These works provide many of the upstream capabilities needed in a
+post-earthquake response system. The focus of this thesis is narrower and
+downstream: once survivor information has been accepted by a command center,
+PGBM plans how responder UAVs should deliver temporary assistance before ground
+SAR teams arrive.
+
+\section{UAV-Based Disaster Perception and Search}
+\label{sec_related_detection}
+
+One major stream of research studies how UAVs can observe disaster scenes and
+identify useful response information. Jankovic et al. use an optimized Swin
+Transformer for UAV-assisted disaster-scene classification
+\cite{jankovic2025transformer}. Their work is relevant because it shows how
+aerial images can support emergency assessment, although the main task is scene
+classification rather than survivor-assistance planning.
+
+Several works move closer to survivor localization. ZaidAlkilani et al.
+combine multi-UAV coverage with YOLOv8X-based human detection and geotagged
+survivor reporting \cite{zaidalkilani2026aiuav}. Che et al. study
+UAV-assisted 5G-NR localization using time-of-flight, angle-of-arrival, and
+received-signal-strength measurements in complex disaster scenarios
+\cite{che2025uav5g}. G\"uzey et al. formulate post-disaster victim
+localization as a cooperative multi-agent problem with energy and
+communication constraints \cite{guzey2026fedqmix}. Together, these studies
+show that survivor information can be obtained through visual, radio-based, or
+cooperative sensing pipelines.
+
+Scene understanding is also important because a detected survivor location may
+not be directly reachable by a UAV. Sirma et al. introduce D'RespNeT, a
+post-earthquake UAV dataset and YOLOv8-based instance-segmentation model for
+detecting collapsed structures, debris, civilians, access openings, and safe
+UAV landing locations \cite{sirma2025drespnet}. Such information is useful for
+choosing accessible drop-off points and feasible operating regions. More
+generally, low-altitude disaster imagery datasets such as LADI and AIDER
+support disaster-scene interpretation from aerial images
+\cite{scheele2025ladi,kyrkou2020emergencynet}.
+
+Another related stream focuses on how scout UAVs should search the affected
+environment. Aminzadeh and Khoshnood propose a heterogeneous multi-UAV search
+architecture for post-disaster assessment \cite{aminzadeh2023multiuav}, while
+Kareem et al. use bio-inspired swarm coordination for thermal survivor search
+\cite{kareem2026bioinspired}. Leong et al. consider dynamic decentralized 3D
+urban coverage, where UAVs coordinate over three-dimensional observation
+viewpoints \cite{leong2024urban3d}. These studies are important for the
+upstream scout-UAV layer assumed in this thesis.
+
+Overall, the perception, localization, and search literature mainly addresses
+how survivor or environment information can be obtained. PGBM does not replace
+these methods. Instead, it assumes that the command center has already accepted
+survivor information and then asks a different question: how should responder
+UAVs provide temporary assistance after detection but before physical rescue?
+
+\section{UAV Delivery, Resource-Aware and Adaptive Mission Planning}
+\label{sec_related_resource}
+
+UAV delivery and mission-planning studies show that task decisions cannot be
+separated from vehicle limitations. A delivery UAV has finite battery energy,
+payload capacity, flight time, and route options. These constraints become more
+important in disaster response because the environment may contain damaged
+structures, blocked areas, and uncertain access conditions.
+
+Delivery-oriented studies make this point directly. Dorling et al. include
+payload weight, battery limits, delivery-time constraints, and drone reuse in
+drone-specific routing models \cite{dorling2017dronevrp}. Cheng et al. model
+payload-dependent energy consumption in multi-trip drone routing
+\cite{cheng2020droneenergy}. These works are not written for post-earthquake
+survivor assistance, but they show why delivery feasibility cannot be separated
+from carried load and available energy.
+
+Disaster logistics adds another layer to the routing problem. Tureci-Isik et
+al. study humanitarian aid delivery using parallel truck-drone operations under
+road-network disruption and uncertain travel times
+\cite{tureciisik2026truckdrone}. Liu et al. and Xiong et al. consider UAV
+mission assignment and path planning for disaster rescue, with Xiong et al.
+placing particular emphasis on 3D path planning
+\cite{liu2021multiuv,xiong2023multidrone}. These studies are useful for PGBM
+because the responder UAVs must also plan feasible routes in a damaged
+environment.
+
+Resource-aware emergency-response planning has also been studied beyond
+physical delivery. Akter et al. consider task offloading, trajectory, and
+computational-resource allocation in UAV-aided emergency response
+\cite{akter2024satora,akter2025joint}. Although their tasks are computational
+rather than relief-delivery tasks, the work supports the broader idea that UAV
+task decisions and resource limits should be handled together.
+
+Finally, dynamic disaster settings require some ability to react to new
+information. Sayeed et al. and G\"uzey et al. study adaptive UAV coordination
+under uncertain or changing disaster conditions
+\cite{sayeed2026meanfield,guzey2026fedqmix}. In those works, adaptation is
+mainly tied to tracking or localization. PGBM uses a narrower form of
+adaptation: a controlled task replacement inside an already planned
+relief-delivery mission.
+
+\section{Comparative Analysis and Research Gap}
+\label{sec_related_comparison}
+
+Table~\ref{tab:related_summary} compares the most closely related studies
+against the modeling dimensions used in PGBM. The purpose of the table is not
+to rank the papers, but to show which part of the overall disaster-response
+pipeline each work mainly addresses.
+
+\begin{table}[htbp]
+\centering
+\caption{Comparison of selected UAV disaster-response studies with PGBM.}
+\label{tab:related_summary}
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}p{2.8cm}
+    >{\raggedright\arraybackslash}p{2.5cm}
+    >{\raggedright\arraybackslash}p{2.5cm}
+    >{\raggedright\arraybackslash}p{3.0cm}
+    >{\centering\arraybackslash}X}
+\toprule
+\textbf{Study} &
+\textbf{Main Role} &
+\textbf{Routing / 3D Aspect} &
+\textbf{Resource Awareness} &
+\textbf{Time / Recourse} \\
+\midrule
+ZaidAlkilani et al. \cite{zaidalkilani2026aiuav}
+& Survivor detection and localization
+& Partial
+& Partial energy consideration
+& Not addressed\\
+\midrule
+Sirma et al. \cite{sirma2025drespnet}
+& Disaster-scene understanding
+& Partial 3D scene context
+& Not a planning model
+& Not addressed\\
+\midrule
+Dorling et al. \cite{dorling2017dronevrp}
+& Drone delivery routing
+& Delivery route planning
+& Payload and battery considered
+& Delivery-time limits, no survivor recourse\\
+\midrule
+Xiong et al. \cite{xiong2023multidrone}
+& Mission assignment and 3D path planning
+& Explicit 3D path planning
+& Partial mission constraints
+& Not addressed\\
+\midrule
+Akter et al. \cite{akter2025joint}
+& Trajectory and computation offloading
+& Trajectory optimization
+& Energy and computation resources
+& Latency-aware, not relief recourse\\
+\midrule
+G\"uzey et al. \cite{guzey2026fedqmix}
+& Adaptive victim localization
+& Map feasibility considered
+& Energy and communication constraints
+& Adaptive localization focus\\
+\midrule
+\textbf{PGBM}
+& \textbf{Post-detection relief delivery}
+& \textbf{Feasible 3D responder routes}
+& \textbf{Payload, energy, reserve, safe return}
+& \textbf{Time value and task replacement}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The comparison suggests three connected gaps. First, there is a post-detection
+assistance gap. Detection, localization, and scene-understanding studies
+provide survivor information, but they usually stop before modeling how
+temporary assistance should be delivered while ground rescue is delayed.
+
+Second, there is an integrated resource-aware planning gap. Delivery and
+mission-planning studies consider routing, payload, energy, or disaster
+logistics, but these elements are usually treated in separate settings. The
+reviewed work does not jointly address task selection, 3D responder routing,
+changing payload, battery feasibility, and safe return for post-detection
+relief delivery.
+
+Third, there is a time-critical and dynamic recourse gap. Existing adaptive UAV
+studies mainly focus on changing search, tracking, or localization decisions.
+PGBM instead considers whether a newly arriving survivor-assistance task should
+replace one uncompleted task in an active relief-delivery mission.
+
+PGBM is therefore positioned as a downstream responder-planning layer. It does
+not replace scout-UAV detection, survivor localization, environmental mapping,
+or ground-team physical rescue. It uses accepted survivor-assistance tasks as
+input and plans how limited responder UAVs should deliver temporary relief
+during the critical interval between detection and ground rescue.
+
+\section{Summary}
+\label{sec_related_summary}
+
+The reviewed studies provide the sensing, localization, coverage, and
+resource-aware planning foundations required for UAV-assisted disaster
+response. The remaining need is a compact model for post-detection temporary
+assistance, where responder UAVs must choose which tasks to serve, how to route
+through a feasible 3D environment, how to respect payload and battery limits,
+and how to react when new tasks arrive during an active mission. Chapter~3
+develops the proposed PGBM formulation for this downstream planning problem.
