@@ -1,0 +1,15 @@
+{
+  "active_road_geometry": false,
+  "boundary_margin_m": 16.0,
+  "building_count": 32,
+  "grid_columns": 8,
+  "grid_rows": 4,
+  "layout_rule": "ordered_controlled_grid_4x8.v1",
+  "maximum_airspace_m": 50.0,
+  "notes": "Derived controlled neighbourhood for scale testing. Building footprints are orderly simulation slots; each visible mesh is a distinct accepted heiDATA asset and no slot is presented as a measured real building.",
+  "schema_version": "heidata_neighborhood_layout.v1",
+  "source_context": "/Users/_d-one_/Desktop/Thesis/Simulation/results/heidata_controlled_neighborhood_initial_20260927/heidata_controlled_neighborhood_context.v1.geojson",
+  "source_manifest": "/Users/_d-one_/Datasets/heiDATA_D3WZID/full_manifest.v1.json",
+  "source_scenario": "/Users/_d-one_/Desktop/Thesis/Simulation/results/heidata_controlled_neighborhood_initial_20260927/heidata_controlled_neighborhood_scenario.v1.json",
+  "visual_context_only_osm_ids": []
+}

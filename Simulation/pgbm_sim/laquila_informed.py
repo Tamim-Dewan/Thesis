@@ -14,11 +14,15 @@ from typing import Any
 
 from heidata_benchmark.environment import GeospatialScenario, ScenarioError, build_geospatial_scenario
 from heidata_benchmark.geospatial import GeoContext, GeoContextError, load_osm_context
+from heidata_benchmark.full_dataset import build_full_mesh_library
 from heidata_benchmark.library import MeshAsset, MeshLibraryError, build_mesh_library
 
 
 DEFAULT_LAYOUT_PATH = Path(__file__).parents[1] / "data" / "templates" / "laquila_informed_layout.json"
-ACTIVE_LAYOUT_SCHEMA = "laquila_georeferenced_layout.v1"
+ACTIVE_LAYOUT_SCHEMAS = {
+    "laquila_georeferenced_layout.v1",
+    "heidata_neighborhood_layout.v1",
+}
 SOURCE_SCENARIO_SCHEMA = "scenario.v1"
 
 
@@ -34,8 +38,12 @@ def _read_config(path: str | Path | None) -> tuple[Path, Path, Path, dict[str, A
         raise LaquilaPrototypeError(f"L'Aquila layout configuration is unavailable: {config_path}") from error
     except json.JSONDecodeError as error:
         raise LaquilaPrototypeError(f"L'Aquila layout configuration is invalid: {config_path}") from error
-    if values.get("schema_version") != ACTIVE_LAYOUT_SCHEMA:
-        raise LaquilaPrototypeError(f"supported L'Aquila layout schema is {ACTIVE_LAYOUT_SCHEMA}")
+    if values.get("schema_version") not in ACTIVE_LAYOUT_SCHEMAS:
+        raise LaquilaPrototypeError(
+            "supported geospatial layout schemas are {}".format(
+                ", ".join(sorted(ACTIVE_LAYOUT_SCHEMAS))
+            )
+        )
     required = ("source_context", "source_manifest", "source_scenario")
     if any(not isinstance(values.get(key), str) or not values[key] for key in required):
         raise LaquilaPrototypeError("exact L'Aquila layout needs source_context, source_manifest, and source_scenario")
@@ -54,7 +62,17 @@ def _load_source_scenario(path: str | Path | None) -> tuple[Path, Path, Path, di
     source_context_path, source_manifest_path, source_scenario_path, config = _read_config(path)
     try:
         context = load_osm_context(source_context_path)
-        library = build_mesh_library(source_manifest_path)
+        manifest = json.loads(source_manifest_path.read_text(encoding="utf-8"))
+        if manifest.get("schema_version") == "heidata.full_manifest.v1":
+            scenario_values = json.loads(source_scenario_path.read_text(encoding="utf-8"))
+            required_assets = {
+                str(binding["asset_id"])
+                for binding in scenario_values.get("template_bindings", [])
+                if binding.get("asset_id")
+            }
+            library = build_full_mesh_library(source_manifest_path, required_assets)
+        else:
+            library = build_mesh_library(source_manifest_path)
         scenario = build_geospatial_scenario(source_scenario_path, context, library)
     except (GeoContextError, MeshLibraryError, ScenarioError) as error:
         raise LaquilaPrototypeError(str(error)) from error
@@ -110,7 +128,7 @@ def _materialize_config(config: dict[str, Any], scenario: GeospatialScenario) ->
 
 
 def load_laquila_layout(path: str | Path | None = None) -> tuple[Path, dict[str, Any], tuple[dict[str, Any], ...]]:
-    """Load all nonredundant source buildings in their original local positions."""
+    """Load a local geospatial layout and its building records."""
 
     source_context_path, _, _, config, _, scenario, _ = _load_source_scenario(path)
     materialized = _materialize_config(config, scenario)
@@ -152,11 +170,22 @@ def _asset_maps(assets: tuple[MeshAsset, ...]) -> tuple[dict[str, MeshAsset], di
     return by_id, pre_by_source
 
 
-def _source_ref(context: GeoContext, scenario: GeospatialScenario, osm_id: str, footprint_wgs84: tuple[tuple[float, float], ...]) -> str:
+def _source_ref(
+    context: GeoContext,
+    scenario: GeospatialScenario,
+    building_id: str,
+    footprint_wgs84: tuple[tuple[float, float], ...],
+    layout_schema: str,
+) -> str:
     lon = sum(point[0] for point in footprint_wgs84) / len(footprint_wgs84)
     lat = sum(point[1] for point in footprint_wgs84) / len(footprint_wgs84)
+    if layout_schema == "heidata_neighborhood_layout.v1":
+        return (
+            f"Controlled neighbourhood slot {building_id} | derived local layout position | "
+            f"synthetic WGS84 anchor {lon:.7f}, {lat:.7f} | source scenario {scenario.identifier}"
+        )
     return (
-        f"OSM {osm_id} | WGS84 centroid {lon:.7f}, {lat:.7f} | "
+        f"OSM {building_id} | WGS84 centroid {lon:.7f}, {lat:.7f} | "
         f"source scenario {scenario.identifier} | local origin {context.origin_wgs84[0]:.7f}, {context.origin_wgs84[1]:.7f}"
     )
 
@@ -167,7 +196,7 @@ def build_laquila_structure_specs(
     damage_states: tuple[str, ...] = (),
     seed: int = 0,
 ) -> tuple[tuple[dict[str, Any], ...], tuple[dict[str, str], ...], dict[str, Any]]:
-    """Convert the exact geospatial source scenario into PGBM structures."""
+    """Convert a local geospatial source scenario into PGBM structures."""
 
     source_context_path, source_manifest_path, source_scenario_path, config, context, scenario, assets = _load_source_scenario(path)
     asset_by_id, pre_by_source = _asset_maps(assets)
@@ -183,6 +212,14 @@ def build_laquila_structure_specs(
     derived_bindings: list[dict[str, str]] = []
     template_bindings: list[dict[str, str]] = []
     specs: list[dict[str, Any]] = []
+    context_only_ids = {str(value) for value in config.get("visual_context_only_osm_ids", [])}
+    controlled_layout = config.get("schema_version") == "heidata_neighborhood_layout.v1"
+    known_osm_ids = {building.osm_id for building in context.buildings}
+    unknown_context_ids = context_only_ids.difference(known_osm_ids)
+    if unknown_context_ids:
+        raise LaquilaPrototypeError(
+            "visual context building is unknown: {}".format(sorted(unknown_context_ids)[0])
+        )
 
     for index, source_building in enumerate(scenario.buildings, start=1):
         map_building = map_buildings[source_building.osm_id]
@@ -191,8 +228,10 @@ def build_laquila_structure_specs(
         minimum_y = min(point[1] for point in polygon)
         maximum_x = max(point[0] for point in polygon)
         maximum_y = max(point[1] for point in polygon)
-        state = _state_for_grade(source_building.damage_grade)
-        visual_mesh = source_building.visual_mesh
+        is_context_only = source_building.osm_id in context_only_ids
+        state = "intact" if is_context_only else _state_for_grade(source_building.damage_grade)
+        source_visual_mesh = source_building.visual_mesh
+        visual_mesh = None if is_context_only else source_visual_mesh
         asset = asset_by_id.get(source_building.asset_id) if source_building.asset_id else None
         pre_asset = pre_by_source.get(asset.source_id) if asset else None
         if source_building.asset_id and asset is None:
@@ -200,48 +239,106 @@ def build_laquila_structure_specs(
         if asset and asset.event_phase == "post" and asset.review.status != "accepted":
             raise LaquilaPrototypeError(f"inspection only mesh entered exact scenario: {asset.asset_id}")
 
-        if asset and asset.event_phase == "post":
+        if is_context_only:
+            if asset is not None or source_building.damage_geometry is not None:
+                raise LaquilaPrototypeError(
+                    "visual context building cannot also have a selected damage asset: {}".format(
+                        source_building.osm_id
+                    )
+                )
+            visual_phase = "context_footprint"
+            visual_provenance = (
+                "exact OSM footprint retained as visual context; no generic mesh attached"
+                if not controlled_layout
+                else "derived neighbourhood footprint retained as context; no generic mesh attached"
+            )
+            visual_usage["footprint_extrusion"] += 1
+        elif asset and asset.event_phase == "post":
             visual_phase = "source_post"
-            visual_provenance = "exact source position with accepted heiDATA post template bound by scenario.v1"
+            visual_provenance = (
+                "derived controlled neighbourhood slot with accepted heiDATA post damage template; "
+                "not a measured building specific reconstruction"
+                if controlled_layout
+                else "exact source position with accepted heiDATA post template bound by scenario.v1"
+            )
             visual_usage["source_post_mesh"] += 1
             post_assets_used.append(asset.asset_id)
             template_bindings.append({"osm_id": source_building.osm_id, "asset_id": asset.asset_id})
         elif asset and asset.event_phase == "pre":
             visual_phase = "source_pre"
-            visual_provenance = "exact source position with accepted heiDATA pre template bound by scenario.v1"
+            if source_building.damage_grade == "minor":
+                visual_provenance = (
+                    (
+                        "derived controlled neighbourhood slot with accepted heiDATA pre template and "
+                        "explicit minor-state visualization; minor damage is not observed in the pre mesh"
+                    )
+                    if controlled_layout
+                    else (
+                        "exact source position with accepted heiDATA pre template and explicit "
+                        "scenario minor-state override; minor damage is not observed in the pre mesh"
+                    )
+                )
+            else:
+                visual_provenance = (
+                    "derived controlled neighbourhood slot with accepted heiDATA pre template; "
+                    "not a measured building specific reconstruction"
+                    if controlled_layout
+                    else "exact source position with accepted heiDATA pre template bound by scenario.v1"
+                )
             visual_usage["source_pre_mesh"] += 1
-            template_bindings.append({"osm_id": source_building.osm_id, "asset_id": asset.asset_id})
+            binding_record = {"osm_id": source_building.osm_id, "asset_id": asset.asset_id}
+            if source_building.damage_grade == "minor":
+                binding_record["damage_state_override"] = "minor"
+            template_bindings.append(binding_record)
         elif source_building.damage_geometry is not None:
             visual_phase = "derived_damage"
-            visual_provenance = "exact OSM footprint with scenario.v1 derived damage profile"
+            visual_provenance = (
+                "derived controlled neighbourhood footprint with scenario.v1 derived damage profile"
+                if controlled_layout
+                else "exact OSM footprint with scenario.v1 derived damage profile"
+            )
             visual_usage["derived_partial_mesh"] += 1
             derived_bindings.append({"osm_id": source_building.osm_id, "damage_state": state})
         else:
             visual_phase = "footprint_extrusion"
-            visual_provenance = "exact OSM footprint extrusion; source height and mesh unavailable"
+            visual_provenance = (
+                "derived controlled neighbourhood footprint extrusion; source height and mesh unavailable"
+                if controlled_layout
+                else "exact OSM footprint extrusion; source height and mesh unavailable"
+            )
             visual_usage["footprint_extrusion"] += 1
 
         if source_building.damage_grade == "destruction" and asset is None:
             visual_usage["rubble_only"] += 1
 
-        height_source = "osm height unavailable"
+        height_source = "derived neighbourhood height unavailable" if controlled_layout else "osm height unavailable"
         if source_building.placement is not None:
             height_source = source_building.placement.target_height_source
         elif source_building.damage_geometry is not None:
             height_source = source_building.damage_geometry.target_height_source
-        height = max(float(visual_mesh.extent[2]), 0.1)
-        source_name = str(map_building.tags.get("name") or f"OSM building {source_building.osm_id}")
+        height = max(float(source_visual_mesh.extent[2]), 0.1)
+        source_name = (
+            str(map_building.tags.get("name") or f"Controlled neighbourhood building {index:02d}")
+            if controlled_layout
+            else str(map_building.tags.get("name") or f"OSM building {source_building.osm_id}")
+        )
         specs.append({
-            "identifier": f"laquila_source_{index:02d}",
+            "identifier": f"heidata_neighborhood_{index:02d}" if controlled_layout else f"laquila_source_{index:02d}",
             "minimum": (minimum_x, minimum_y, 0.0),
             "width": max(maximum_x - minimum_x, 0.1),
             "depth": max(maximum_y - minimum_y, 0.1),
             "height": height,
             "damage_state": state,
             "height_source": height_source,
-            "source_ref": _source_ref(context, scenario, source_building.osm_id, map_building.footprint_wgs84),
+            "source_ref": _source_ref(
+                context,
+                scenario,
+                source_building.osm_id,
+                map_building.footprint_wgs84,
+                str(config["schema_version"]),
+            ),
             "footprint": polygon,
-            "scene_role": "target",
+            "scene_role": "context" if is_context_only else "target",
             "source_name": source_name,
             "source_id": asset.source_id if asset else None,
             "pre_asset_id": pre_asset.asset_id if pre_asset else None,
@@ -250,12 +347,13 @@ def build_laquila_structure_specs(
             "visual_mesh_phase": visual_phase,
             "visual_provenance": visual_provenance,
             "visual_mesh": visual_mesh,
+            "visual_face_materials": tuple(visual_mesh.face_materials) if visual_mesh is not None else (),
         })
 
     metadata = _materialize_config(config, scenario)
     metadata.update({
         "layout_version": str(config["schema_version"]),
-        "layout_rule": "osm_georeferenced_local_enu.v1",
+        "layout_rule": str(config.get("layout_rule", "osm_georeferenced_local_enu.v1")),
         "source_context_path": str(source_context_path),
         "source_manifest_path": str(source_manifest_path),
         "source_scenario_path": str(source_scenario_path),
@@ -264,6 +362,7 @@ def build_laquila_structure_specs(
         "source_building_count": len(context.buildings),
         "active_building_count": len(specs),
         "active_osm_ids": [item.osm_id for item in scenario.buildings],
+        "visual_context_only_osm_ids": sorted(context_only_ids),
         "excluded_osm_buildings": [dict(item) for item in scenario.excluded_osm_buildings],
         "source_damage_grade_counts": {
             grade: sum(item.damage_grade == grade for item in scenario.buildings)
@@ -275,38 +374,81 @@ def build_laquila_structure_specs(
         "inspection_only_post_assets": [asset.asset_id for asset in assets if asset.event_phase == "post" and asset.review.status != "accepted"],
         "post_assets_used": sorted(set(post_assets_used)),
         "visual_mesh_usage": visual_usage,
-        "placement_provenance": "original OSM source positions in deterministic local ENU coordinates; no synthetic translation, rotation, grid, or lot scaling",
-        "damage_provenance": "fixed scenario.v1 state, accepted explicit template bindings, and named OSM derived damage bindings",
-        "exactness_policy": "source footprint and relative position are exact for the stored snapshot; missing height or building specific mesh is explicitly derived",
+        "placement_provenance": (
+            "derived ordered controlled neighbourhood positions from a deterministic grid layout; "
+            "each slot and mesh binding is recorded, and no claim of measured L'Aquila position is made"
+            if controlled_layout
+            else "original OSM source positions in deterministic local ENU coordinates; no synthetic translation, rotation, grid, or lot scaling"
+        ),
+        "damage_provenance": (
+            "fixed controlled scenario.v1 damage allocation using accepted heiDATA pre and post templates; "
+            "damage labels are simulation assignments, not measured building damage"
+            if controlled_layout
+            else "fixed scenario.v1 state, accepted explicit template bindings, and named OSM derived damage bindings"
+        ),
+        "exactness_policy": (
+            "building count, ordered slots, and mesh identities are reproducible derived simulation inputs; "
+            "the additional neighbourhood is not an OSM measured reconstruction"
+            if controlled_layout
+            else "source footprint and relative position are exact for the stored snapshot; missing height or building specific mesh is explicitly derived"
+        ),
         "source_road_count": len(context.roads),
         "active_road_count": 0,
         "seed_effect": "source buildings and damage states are seed independent; seed affects only simulator candidate sites and generated tasks",
         "scenario_seed": scenario.seed,
     })
-    provenance = (
-        {
-            "identifier": "laquila_osm_source_context",
-            "title": "Frozen L'Aquila OpenStreetMap source context",
-            "url_or_doi": "https://www.openstreetmap.org/copyright",
-            "licence": "ODbL 1.0",
-            "role": "exact source building identity, WGS 84 footprint, and relative position",
-            "preprocessing_version": "osm_context.v1",
-        },
-        {
-            "identifier": "laquila_source_scenario",
-            "title": "L'Aquila source scenario manifest",
-            "url_or_doi": str(source_scenario_path),
-            "licence": "project source artifact",
-            "role": "explicit exclusion, damage states, and template bindings",
-            "preprocessing_version": SOURCE_SCENARIO_SCHEMA,
-        },
-        {
-            "identifier": "heidata_source_mesh_library",
-            "title": "heiDATA accepted local source meshes",
-            "url_or_doi": "doi:10.11588/DATA/D3WZID",
-            "licence": "CC BY 4.0",
-            "role": "building specific source mesh templates where explicitly bound",
-            "preprocessing_version": "mesh_review.v1",
-        },
-    )
+    if controlled_layout:
+        provenance = (
+            {
+                "identifier": "heidata_controlled_neighborhood_layout",
+                "title": "Derived controlled neighbourhood layout",
+                "url_or_doi": str(source_context_path),
+                "licence": "project source artifact",
+                "role": "ordered building slots, local footprints, and derived street context",
+                "preprocessing_version": "heidata_neighborhood_layout.v1",
+            },
+            {
+                "identifier": "heidata_controlled_neighborhood_scenario",
+                "title": "Controlled neighbourhood scenario manifest",
+                "url_or_doi": str(source_scenario_path),
+                "licence": "project source artifact",
+                "role": "explicit damage allocation and one to one mesh bindings",
+                "preprocessing_version": SOURCE_SCENARIO_SCHEMA,
+            },
+            {
+                "identifier": "heidata_source_mesh_library",
+                "title": "heiDATA accepted local source meshes",
+                "url_or_doi": "doi:10.11588/DATA/D3WZID",
+                "licence": "CC BY 4.0",
+                "role": "unique source mesh templates placed into controlled building slots",
+                "preprocessing_version": "mesh_review.v1",
+            },
+        )
+    else:
+        provenance = (
+            {
+                "identifier": "laquila_osm_source_context",
+                "title": "Frozen L'Aquila OpenStreetMap source context",
+                "url_or_doi": "https://www.openstreetmap.org/copyright",
+                "licence": "ODbL 1.0",
+                "role": "exact source building identity, WGS 84 footprint, and relative position",
+                "preprocessing_version": "osm_context.v1",
+            },
+            {
+                "identifier": "laquila_source_scenario",
+                "title": "L'Aquila source scenario manifest",
+                "url_or_doi": str(source_scenario_path),
+                "licence": "project source artifact",
+                "role": "explicit exclusion, damage states, and template bindings",
+                "preprocessing_version": SOURCE_SCENARIO_SCHEMA,
+            },
+            {
+                "identifier": "heidata_source_mesh_library",
+                "title": "heiDATA accepted local source meshes",
+                "url_or_doi": "doi:10.11588/DATA/D3WZID",
+                "licence": "CC BY 4.0",
+                "role": "building specific source mesh templates where explicitly bound",
+                "preprocessing_version": "mesh_review.v1",
+            },
+        )
     return tuple(specs), provenance, metadata

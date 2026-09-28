@@ -58,6 +58,53 @@ The OSM sample can be refreshed deliberately, then committed as a new dated snap
 PYTHONPATH=. python3 heidata_benchmark/tools/fetch_osm_sample.py
 ```
 
+## Run the full downloaded heiDATA environment
+
+The complete archives are kept outside the repository at
+`/Users/_d-one_/Datasets/heiDATA_D3WZID`. The full manifest indexes all 448 OBJ
+members without extracting the 67 GB uncompressed archive contents. The
+environment loads only the selected assets needed by the frozen L'Aquila
+scenario.
+
+From the thesis root, run:
+
+```bash
+PYTHONPATH=Simulation python3 Simulation/run_heidata_full.py \
+  --dataset-root /Users/_d-one_/Datasets/heiDATA_D3WZID \
+  --output-dir Simulation/results/heidata_full_initial_20260927
+```
+
+The command creates an earthquake environment view, a damage view, a collision
+view, an initial solution report, and a step by step UAV replay. The replay uses
+the existing initial planner and execution model at planning time `t = 30`.
+The visual scenario uses a curated set of 13 unique full-archive focal meshes
+(6 pre-event meshes and 7 post-event meshes). Three minor states use explicit
+pre-event meshes with a declared minor-state override. Four additional intact
+OSM footprints remain map context instead of being filled with unrelated
+generic models. The full archive meshes remain generic damage templates, while
+the frozen L'Aquila OSM snapshot supplies building positions and footprints.
+
+## Run the ordered 32 building neighbourhood
+
+The L'Aquila source mode remains the exact 17 building OSM reconstruction.
+For scale testing, the separate `heidata_neighborhood` mode creates a
+deterministic four by eight neighbourhood with 32 distinct accepted heiDATA
+source meshes. Its footprints and street context are derived simulation
+inputs, not measured L'Aquila or OSM geometry. Damage states are assigned as
+10 intact, 8 minor, 10 major, and 4 destroyed buildings.
+
+From the thesis root, run:
+
+```bash
+PYTHONPATH=Simulation python3 Simulation/run_heidata_neighborhood.py \
+  --dataset-root /Users/_d-one_/Datasets/heiDATA_D3WZID \
+  --output-dir Simulation/results/heidata_controlled_neighborhood_initial_20260927
+```
+
+The command writes the ordered footprint view, full 3D environment, damage and
+collision views, and the initial solution replay. The full dataset remains
+outside Git, and every building slot records its selected source asset.
+
 ## Dataset provenance
 
 The data is from heiDATA, version 1.1, under CC BY 4.0. The source code published with the dataset is under GPL v3. The dataset page and its related publication must be cited in the thesis.

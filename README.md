@@ -28,7 +28,7 @@ python3 Simulation/run_simulation.py \
   --mode du_outdoor --severity moderate --seed 20260924 \
   --task-count 6 --uav-count 3 --start-time 30 \
   --planner initial_snapshot_greedy_v1 --no-recourse \
-  --output Simulation/results/initial_runs/session_2026-09-27/du_outdoor_initial.json
+  --output Simulation/results/pgbm_v1_two_hour_experiments/visualizations/initial_solution_snapshot_2026-09-27/du_outdoor_initial_solution_report.json
 ```
 
 Use `--mode synthetic` for the fully generated environment.
@@ -47,5 +47,6 @@ python3 -m pytest -q Simulation
 ```
 
 The current planner is an initial heuristic baseline. It is not the final
-mathematical PGBM optimizer and does not yet represent dynamic recourse in the
-initial run.
+mathematical PGBM optimizer. Initial Solution V1 is the preserved no-recourse
+reference, while Version 2 adds a separate formulation-aligned one-for-one
+task replacement recourse path under `Simulation/pgbm_sim/v2/`.

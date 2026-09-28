@@ -21,6 +21,8 @@ These are recommendations to keep the work orderly. You can skip a step when the
 | 8 | Simulation execution and event recourse | Later | done |
 | 9 | Baselines and comparative experiments | Later | done |
 | 10 | L’Aquila informed synthetic environment | Slice 1 | done |
+| 11 | PGBM V2 one-for-one task replacement recourse | Later | done |
+| 12 | V3 reserve inventory and active reassignment | Deferred | planned |
 
 ## Existing foundation
 
@@ -141,6 +143,32 @@ Add a transparent reference planner and controlled experiments for comparing PGB
 **Done when:** repeated seeded experiments produce comparable metrics for PGBM and at least one baseline across multiple scenario settings.
 
 - [x] Compare `pgbm_heuristic_v1` against `nearest_task_first` over repeated seeds in `Simulation/pgbm_sim/experiment.py`
+
+### 11. PGBM V2 one-for-one task replacement recourse · done
+
+Add the limited recourse rule from the selected formulation while preserving V1 as a stable reference. A newly detected task may replace one uncompleted task in one active mission only when the revised mission remains feasible and its remaining service value improves.
+
+**Done when:** V1 remains unchanged, V2 records deterministic active mission replacement decisions, completed route prefixes and current onboard inventory are respected, paired V1 and V2 experiments run across the heavy matrix, and the comparative report is compiled and verified.
+
+- [x] Design it (spec): `/architect PGBM V2 one-for-one task replacement recourse`
+- [x] Build it: `/develop PGBM V2 one-for-one task replacement recourse`
+  - [x] Add separate V2 runtime state and event execution beside V1
+  - [x] Add one-for-one replacement, remaining route rebuild, inventory and energy checks
+  - [x] Add deterministic decision traces and focused recourse tests
+  - [x] Run the paired heavy matrix and preserve raw metrics
+  - [x] Generate, compile, and verify the V2 comparative report
+- [x] Verify it: `/check verify PGBM V2 one-for-one task replacement recourse`
+- [x] Test it: `/test PGBM V2 one-for-one task replacement recourse`
+
+Spec [0007](../specs/0007-pgbm-v2-task-replacement-recourse.md) · code in `Simulation/pgbm_sim/v2/`
+
+### 12. V3 reserve inventory and active reassignment · needs a decision
+
+Extend the validated V2 state model so UAVs can carry deliberately uncommitted reserve inventory and use it for later task reassignment without changing the V2 research question.
+
+**Done when:** the V2 evidence is accepted, reserve inventory policy is specified, active inventory allocation remains feasible, and the V3 comparison isolates reserve inventory from one-for-one recourse.
+
+- [ ] Design it (spec): `/architect V3 reserve inventory and active reassignment`
 
 ## Deferred
 

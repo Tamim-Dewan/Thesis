@@ -1,7 +1,8 @@
 # Simulation results
 
-This directory contains generated outputs. Existing files remain in place so
-that documented paths and earlier evidence are not broken.
+This directory contains generated outputs. The canonical PGBM V1 experiment
+artifacts are grouped under `pgbm_v1_two_hour_experiments/` so that each file
+name identifies its experiment content.
 
 ## Artifact groups
 
@@ -12,10 +13,19 @@ that documented paths and earlier evidence are not broken.
 - `laquila_*`: the separate L’Aquila informed source reconstruction outputs.
 - `heidata_*`: source mesh and OSM benchmark outputs.
 - `phase1_*`: the original experiment contract manifest and empty metrics file.
-- `research_metrics*`: repeated planner comparison metrics.
-- `initial_runs/session_2026-09-27/`: the organized folder for this session's
-  no recourse initial solution reports, scenarios, and assignment route views.
-  The approved configuration is `Simulation/configs/initial_snapshot.json`.
+- `research_metrics*`: repeated planner comparison metrics. New initial
+  comparisons use `research_metrics_initial.csv`; the current one replacement
+  fixture is explicitly labelled `research_metrics_recourse.csv`.
+- `pgbm_v1_two_hour_experiments/raw_metrics/`: the complete 240 row matrix,
+  baseline, pilot, and historical sensitivity CSV files.
+- `pgbm_v1_two_hour_experiments/metrics_by_configuration/`: six environment
+  and task load CSV blocks used to inspect the matrix by configuration.
+- `pgbm_v1_two_hour_experiments/manifests/`: the verified experiment coverage
+  manifest.
+- `pgbm_v1_two_hour_experiments/visualizations/`: named JSON reports, scenario
+  inputs, static views, and step by step replays.
+- `Simulation/configs/initial_snapshot.json`: the approved single snapshot
+  configuration used by the visualization artifacts.
 
 ## Visual meanings
 
@@ -25,10 +35,10 @@ that documented paths and earlier evidence are not broken.
 - `*_disaster_preview*` and `*_simulation_preview*` show combined environment
   and task layers. They do not contain planner assignments unless explicitly
   stated in the filename or report.
-- `*_initial_visual.html` shows the approved `t = 30` initial plan, including
+- `*_static_view.html` shows the approved `t = 30` initial plan, including
   task assignment, drop off points, collision aware UAV routes, and execution
   summary.
-- `*_initial_step_by_step.html` replays the assignment decisions first, then
+- `*_step_by_step_replay.html` replays the assignment decisions first, then
   animates UAV movement between arrival, service, and return events. The
   compact view uses a structured status panel, hides trace toggles, and
   distinguishes planned, travelled, and active route segments. Each arrival

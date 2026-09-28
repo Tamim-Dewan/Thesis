@@ -1,0 +1,92 @@
+{
+  "blocked_road_ids": [
+    "way/28279831"
+  ],
+  "boundary_margin_m": 8.0,
+  "collision_margin_m": 1.0,
+  "default_building_height_m": 9.0,
+  "derive_rubble_for_destruction": true,
+  "derive_rubble_for_major_damage": true,
+  "derived_damage_bindings": [],
+  "excluded_osm_buildings": [
+    {
+      "osm_id": "way/503172320",
+      "reason": "Overlaps canonical footprint way/503172319 in the frozen OSM snapshot, so it is excluded from the nonredundant scenario."
+    }
+  ],
+  "maximum_flight_altitude_m": 36.0,
+  "navigation": {
+    "altitude_step_m": 4.0,
+    "cell_size_m": 6.0,
+    "minimum_flight_altitude_m": 3.0
+  },
+  "notes": "Curated full archive visual benchmark: focal damaged and intact buildings use unique selected heiDATA assets, while four intact OSM footprints remain map context. Generic assets remain labelled templates, not surveyed earthquake buildings.",
+  "overlap_tolerance_m": 0.05,
+  "safe_pad_count": 2,
+  "scenario_id": "laquila_osm_heidata_full_visual_v1",
+  "schema_version": "scenario.v1",
+  "seed": 20260924,
+  "template_bindings": [
+    {
+      "asset_id": "post:grade4_b_001_post.obj",
+      "osm_id": "way/496729866"
+    },
+    {
+      "asset_id": "post:grade5_b_002_post.obj",
+      "osm_id": "way/496729871"
+    },
+    {
+      "asset_id": "post:grade5_b_003_post.obj",
+      "osm_id": "way/500792516"
+    },
+    {
+      "asset_id": "pre:pre_b_004_pre.obj",
+      "osm_id": "way/500798133"
+    },
+    {
+      "asset_id": "post:grade4_b_007_post.obj",
+      "osm_id": "way/501746087"
+    },
+    {
+      "asset_id": "pre:pre_b_011_pre.obj",
+      "damage_state_override": "minor",
+      "osm_id": "way/1238268580"
+    },
+    {
+      "asset_id": "pre:pre_b_067_pre.obj",
+      "damage_state_override": "minor",
+      "osm_id": "way/1238268585"
+    },
+    {
+      "asset_id": "post:grade4_b_010_post.obj",
+      "osm_id": "way/1238268586"
+    },
+    {
+      "asset_id": "pre:pre_b_009_pre.obj",
+      "osm_id": "way/1238268588"
+    },
+    {
+      "asset_id": "post:grade4_b_025_post.obj",
+      "osm_id": "way/501738250"
+    },
+    {
+      "asset_id": "pre:pre_b_078_pre.obj",
+      "damage_state_override": "minor",
+      "osm_id": "way/501745769"
+    },
+    {
+      "asset_id": "post:grade4_b_048_post.obj",
+      "osm_id": "way/501748940"
+    },
+    {
+      "asset_id": "pre:pre_b_012_pre.obj",
+      "osm_id": "way/503172319"
+    }
+  ],
+  "visual_context_only_osm_ids": [
+    "way/503190642",
+    "way/503193496",
+    "way/503974017",
+    "way/503976723"
+  ]
+}

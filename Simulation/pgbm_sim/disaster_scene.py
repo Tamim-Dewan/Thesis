@@ -104,6 +104,7 @@ class Structure:
     # Runtime only. The source OBJ is represented in the HTML preview, while
     # the scenario JSON stores its asset id and summary instead of all faces.
     visual_mesh: Any = field(default=None, repr=False, compare=False)
+    visual_face_materials: Tuple[str, ...] = field(default=(), repr=False, compare=False)
 
     def as_dict(self) -> Dict[str, Any]:
         values = {
@@ -126,7 +127,7 @@ class Structure:
             "visual_provenance": self.visual_provenance,
         }
         if self.visual_mesh is not None:
-            values["visual_mesh_summary"] = {
+            mesh_summary = {
                 "vertex_count": int(len(self.visual_mesh.vertices)),
                 "face_count": int(len(self.visual_mesh.faces)),
                 "minimum": self.visual_mesh.minimum.tolist(),
@@ -134,6 +135,11 @@ class Structure:
                 "extent": self.visual_mesh.extent.tolist(),
                 "axis_rule": "source_xyz_to_local_xzy.v1",
             }
+            materials = sorted({material for material in self.visual_face_materials if material})
+            if materials:
+                mesh_summary["material_count"] = len(materials)
+                mesh_summary["materials"] = materials
+            values["visual_mesh_summary"] = mesh_summary
         else:
             values["visual_mesh_summary"] = None
         return values
@@ -198,6 +204,10 @@ PRESETS = {
 }
 
 
+def _is_geospatial_mode(mode: Optional[str]) -> bool:
+    return mode in ("laquila_informed", "heidata_full", "heidata_neighborhood")
+
+
 def load_scene_preset(identifier: str) -> ScenePreset:
     if identifier not in PRESETS: raise SceneConfigurationError("unknown preset: {}".format(identifier))
     mix, road, rubble, floor, debris, indoor = PRESETS[identifier]
@@ -220,7 +230,7 @@ class SceneConfig:
     seed: int = 0
 
     def validate(self) -> None:
-        if self.mode not in ("synthetic", "du_outdoor", "real_building", "laquila_informed"): raise SceneConfigurationError("unsupported mode: {}".format(self.mode))
+        if self.mode not in ("synthetic", "du_outdoor", "real_building", "laquila_informed", "heidata_full", "heidata_neighborhood"): raise SceneConfigurationError("unsupported mode: {}".format(self.mode))
         load_scene_preset(self.preset_id or self.severity)
         if self.base_clearance <= 0 or self.uav_count < 1: raise SceneConfigurationError("base_clearance and uav_count must be positive")
         if min(self.ground_candidate_count, self.elevated_candidate_count, self.indoor_candidate_count) < 0: raise SceneConfigurationError("candidate counts must be non-negative")
@@ -249,7 +259,7 @@ def _template_path(config: SceneConfig) -> Path:
     if config.template_path: return Path(config.template_path)
     if config.mode == "du_outdoor":
         name = "du_science_complex.json"
-    elif config.mode == "laquila_informed":
+    elif config.mode in ("laquila_informed", "heidata_full", "heidata_neighborhood"):
         name = "laquila_informed_layout.json"
     else:
         name = "real_building.json"
@@ -295,13 +305,27 @@ def _overlap(a: Tuple[float, float, float, float], b: Tuple[float, float, float,
 def _synthetic_layout(bounds: Bounds, rng: random.Random, preset: ScenePreset) -> Tuple[Tuple[RoadSegment, ...], Tuple[Structure, ...]]:
     x0,y0,_,x1,y1,_=bounds; cx=(x0+x1)/2; cy=(y0+y1)/2; rw=8.
     roads=(RoadSegment("road_east_west",(x0,cy-rw/2,0),x1-x0,rw,((x0,cy),(x1,cy))),RoadSegment("road_north_south",(cx-rw/2,y0,0),rw,y1-y0,((cx,y0),(cx,y1))))
-    counts=_largest_remainder(preset,8); states=[s for s in STATES for _ in range(counts[s])]; rng.shuffle(states); structures=[]; used=[]
+    counts=_largest_remainder(preset,8); states=[s for s in STATES for _ in range(counts[s])]; rng.shuffle(states); structures=[]
     lots=[(x0+8,y0+8,cx-rw/2-3,cy-rw/2-3),(cx+rw/2+3,y0+8,x1-8,cy-rw/2-3),(x0+8,cy+rw/2+3,cx-rw/2-3,y1-8),(cx+rw/2+3,cy+rw/2+3,x1-8,y1-8)]
     for index,state in enumerate(states):
-        for _ in range(400):
-            lx0,ly0,lx1,ly1=lots[index%4]; w=rng.uniform(10, min(18,lx1-lx0)); d=rng.uniform(10,min(18,ly1-ly0)); x=rng.uniform(lx0,lx1-w); y=rng.uniform(ly0,ly1-d); box=(x,y,x+w,y+d)
-            if not any(_overlap(box,prior) for prior in used): used.append(box); structures.append(Structure("structure_{}".format(index+1),(x,y,0),w,d,rng.uniform(12,35),state,footprint=_rectangle_polygon(x,y,w,d))); break
-        else: raise SceneConfigurationError("world cannot fit requested structured layout")
+        lx0,ly0,lx1,ly1=lots[index%4]
+        # Each lot contains two disjoint slots. The earlier fully random
+        # packing could fail for an otherwise valid seed when the first large
+        # rectangle blocked the remaining lot area.
+        slot=index//4
+        slot_gap=2.0
+        slot_width=(lx1-lx0-slot_gap)/2.0
+        slot_x0=lx0+slot*(slot_width+slot_gap)
+        slot_x1=slot_x0+slot_width
+        max_width=min(18.0,slot_width)
+        max_depth=min(18.0,ly1-ly0)
+        if max_width < 10.0 or max_depth < 10.0:
+            raise SceneConfigurationError("world cannot fit requested structured layout")
+        w=rng.uniform(10.0,max_width)
+        d=rng.uniform(10.0,max_depth)
+        x=rng.uniform(slot_x0,slot_x1-w)
+        y=rng.uniform(ly0,ly1-d)
+        structures.append(Structure("structure_{}".format(index+1),(x,y,0),w,d,rng.uniform(12,35),state,footprint=_rectangle_polygon(x,y,w,d)))
     return roads,tuple(structures)
 
 
@@ -589,7 +613,7 @@ def _candidates(env: Environment, structures: Iterable[Structure], base: Base, g
 def generate_disaster_scene(config: SceneConfig, seed: Optional[int] = None) -> DisasterScene:
     config.validate(); actual_seed=config.seed if seed is None else seed; rng=random.Random(actual_seed); template=None; laquila_metadata={}
     laquila_layout_path = None
-    if config.mode == "laquila_informed":
+    if config.mode in ("laquila_informed", "heidata_full", "heidata_neighborhood"):
         laquila_layout_path = _template_path(config)
         try:
             from .laquila_informed import load_laquila_layout
@@ -606,7 +630,7 @@ def generate_disaster_scene(config: SceneConfig, seed: Optional[int] = None) -> 
     preset=load_scene_preset(config.preset_id or config.severity)
     if config.mode == "synthetic":
         _layout_roads,structures=_synthetic_layout(bounds,rng,preset); provenance=()
-    elif config.mode == "laquila_informed":
+    elif config.mode in ("laquila_informed", "heidata_full", "heidata_neighborhood"):
         from .laquila_informed import build_laquila_structure_specs
 
         specs, provenance_values, laquila_metadata = build_laquila_structure_specs(
@@ -616,7 +640,7 @@ def generate_disaster_scene(config: SceneConfig, seed: Optional[int] = None) -> 
         provenance = tuple(DataSource(**value) for value in provenance_values)
     else:
         _template_roads,structures,provenance=_template_layout(template,preset,rng)
-    obstacles = _damage(structures, rng, preset, source_exact=config.mode == "laquila_informed")
+    obstacles = _damage(structures, rng, preset, source_exact=config.mode in ("laquila_informed", "heidata_full", "heidata_neighborhood"))
     configured_position = None
     if template and template.get("base_position"):
         configured_position = tuple(float(value) for value in template["base_position"])
@@ -687,7 +711,7 @@ def _polygons_intersect(first: Polygon2D, second: Polygon2D) -> bool:
 def validate_scene_geometry(scene: DisasterScene) -> None:
     """Validate persisted scene geometry without changing source-derived shapes."""
     world=scene.environment.world; x0,y0,z0=world.minimum; x1,y1,z1=world.maximum
-    source_exact = scene.generation_metadata.get("mode") == "laquila_informed"
+    source_exact = _is_geospatial_mode(scene.generation_metadata.get("mode"))
     source_overlap_check = None
     if source_exact:
         try:
@@ -785,10 +809,14 @@ def _obstacle_visual_trace(
 
 def _structure_visual_label(structure: Structure) -> str:
     """Return a clear label for a source or derived building mesh."""
+    if structure.visual_mesh_phase == "context_footprint":
+        return "OSM context footprint, no heiDATA mesh"
     if structure.visual_mesh_phase in {"pre", "source_pre"}:
-        return "source pre-earthquake building mesh"
+        if structure.damage_state == "minor":
+            return "source pre-event building mesh — minor state"
+        return "source pre-event building mesh — intact"
     if structure.visual_mesh_phase in {"post", "source_post"}:
-        return "source post-earthquake damage mesh"
+        return "source post-event {} damage mesh".format(structure.damage_state)
     if structure.visual_mesh_phase == "derived_partial":
         return "derived partial-collapse mesh"
     if structure.visual_mesh_phase == "derived_damage":
@@ -800,8 +828,15 @@ def _structure_visual_label(structure: Structure) -> str:
     return "standing building volume"
 
 
-def _source_mesh_color(visual_mesh_phase: str) -> str:
-    """Return a stable, readable color for source or derived building geometry."""
+def _source_mesh_color(visual_mesh_phase: str, damage_state: Optional[str] = None) -> str:
+    """Return a readable state-aware color for source or derived geometry."""
+    if damage_state in {"intact", "minor", "major", "destroyed"}:
+        return {
+            "intact": "#8198ad",
+            "minor": "#c58b35",
+            "major": "#a95735",
+            "destroyed": "#704b43",
+        }[damage_state]
     return {
         "pre": "#416b9a",
         "source_pre": "#416b9a",
@@ -814,9 +849,61 @@ def _source_mesh_color(visual_mesh_phase: str) -> str:
     }.get(visual_mesh_phase, "#8c564b")
 
 
-def _source_mesh_opacity(visual_mesh_phase: str) -> float:
-    """Keep post-earthquake source meshes visually prominent."""
-    return 0.78 if visual_mesh_phase in {"post", "source_post"} else 0.70
+def _source_mesh_opacity(visual_mesh_phase: str, damage_state: Optional[str] = None) -> float:
+    """Keep source meshes solid while leaving collapse debris legible."""
+    if damage_state == "destroyed":
+        return 0.68
+    if damage_state == "major":
+        return 0.76
+    if damage_state == "minor":
+        return 0.84
+    if damage_state == "intact":
+        return 0.86
+    return 0.80 if visual_mesh_phase in {"post", "source_post"} else 0.82
+
+
+def _structure_visual_color(structure: Structure) -> str:
+    return _source_mesh_color(structure.visual_mesh_phase, structure.damage_state)
+
+
+def _material_face_color(material: str, damage_state: str, fallback: str) -> str:
+    """Map the OBJ material names to a restrained architectural palette."""
+    name = str(material).lower()
+    if not name:
+        return fallback
+    if "glass" in name or "window" in name:
+        return "#355d73"
+    if "metal" in name or "steel" in name or "brushed" in name:
+        return "#59636b"
+    if "roof" in name or "tile" in name:
+        return "#7b4b3b"
+    if "plaster" in name or "porcelain" in name or "white" in name:
+        return "#c9bda9"
+    if "concrete" in name:
+        return "#989a98"
+    if "stone" in name or "curb" in name:
+        return "#817b73"
+    if "brick" in name or "foundation" in name:
+        return "#875747"
+    if "wood" in name or "beech" in name:
+        return "#8a6043"
+    if "carbon" in name or "black" in name or "rough" in name:
+        return "#4b4a47"
+    if damage_state == "destroyed":
+        return "#66514a"
+    return fallback
+
+
+def _structure_face_colors(structure: Structure) -> Optional[Tuple[str, ...]]:
+    if structure.visual_mesh is None or not structure.visual_face_materials:
+        return None
+    if not any(structure.visual_face_materials):
+        return None
+    fallback = _structure_visual_color(structure)
+    return tuple(
+        _material_face_color(material, structure.damage_state, fallback)
+        for material in structure.visual_face_materials
+    )
 
 
 def _structure_visual_trace(
@@ -832,7 +919,7 @@ def _structure_visual_trace(
     if mesh is None:
         return None
     label = _structure_visual_label(structure)
-    return go.Mesh3d(
+    trace_values = dict(
         x=mesh.vertices[:, 0],
         y=mesh.vertices[:, 1],
         z=mesh.vertices[:, 2],
@@ -847,6 +934,10 @@ def _structure_visual_trace(
         flatshading=False,
         lighting={"ambient": 0.45, "diffuse": 0.75, "specular": 0.15, "roughness": 0.8},
     )
+    face_colors = _structure_face_colors(structure)
+    if face_colors is not None:
+        trace_values["facecolor"] = face_colors
+    return go.Mesh3d(**trace_values)
 
 
 def _elevation_guide_trace(obstacle: Obstacle):
@@ -1095,14 +1186,14 @@ def plot_disaster_scene(
             _add_3d_legend_proxy(
                 figure,
                 label,
-                _source_mesh_color(structure.visual_mesh_phase),
+                _structure_visual_color(structure),
                 "source-mesh-{}".format(structure.visual_mesh_phase),
             )
             shown_source_mesh_labels.add(label)
         mesh_trace = _structure_visual_trace(
             structure,
-            _source_mesh_color(structure.visual_mesh_phase),
-            _source_mesh_opacity(structure.visual_mesh_phase),
+            _structure_visual_color(structure),
+            _source_mesh_opacity(structure.visual_mesh_phase, structure.damage_state),
             _structure_hover_text(structure),
         )
         if mesh_trace is not None:
@@ -1413,7 +1504,7 @@ def plot_disaster_scene(
     solution_summary = "UAV assignment: not included" if not routes else "UAV routes: {}".format(route_count)
     mesh_usage = scene.generation_metadata.get("visual_mesh_usage", {})
     mesh_summary = (
-        "Geometry provenance: source pre {} | source post {} | derived damage {} | footprint extrusion {} | rubble only {}".format(
+        "Geometry provenance: source pre {} | source post {} | derived damage {} | OSM context footprints {} | rubble only {}".format(
             mesh_usage.get("source_pre_mesh", 0),
             mesh_usage.get("source_post_mesh", 0),
             mesh_usage.get("derived_partial_mesh", 0),
@@ -1422,15 +1513,14 @@ def plot_disaster_scene(
         )
         if mesh_usage else "Source mesh layer: not used"
     )
-    source_header = (
-        "Source scenario: {} | original source positions preserved"
-        if scene.generation_metadata.get("mode") == "laquila_informed"
-        else "Preset: {}"
-    ).format(
-        scene.generation_metadata.get("source_scenario_schema", "scenario.v1")
-        if scene.generation_metadata.get("mode") == "laquila_informed"
-        else scene.preset.severity
-    )
+    if scene.generation_metadata.get("mode") == "heidata_neighborhood":
+        source_header = "Layout: ordered controlled neighbourhood | derived positions, source mesh identities retained"
+    elif _is_geospatial_mode(scene.generation_metadata.get("mode")):
+        source_header = "Source scenario: {} | original source positions preserved".format(
+            scene.generation_metadata.get("source_scenario_schema", "scenario.v1")
+        )
+    else:
+        source_header = "Preset: {}".format(scene.preset.severity)
     title = (
         "{} post-earthquake operational environment<br>"
         "<sup>{} | Target buildings: {} | Visible damage objects: {} | Tasks: {}<br>"
@@ -1460,7 +1550,7 @@ def plot_disaster_scene(
         hoverlabel={"namelength": -1},
     )
     figure.layout.scene.camera = {
-        "eye": {"x": 0.05, "y": -0.05, "z": 1.00} if scene.generation_metadata.get("mode") == "laquila_informed" else {"x": 1.60, "y": -1.90, "z": 3.20},
+        "eye": {"x": 1.55, "y": -1.65, "z": 1.10} if _is_geospatial_mode(scene.generation_metadata.get("mode")) else {"x": 1.60, "y": -1.90, "z": 3.20},
         "center": {"x": 0.0, "y": 0.0, "z": 0.0},
         "projection": {"type": "orthographic"},
         "up": {"x": 0, "y": 0, "z": 1},
@@ -1486,14 +1576,20 @@ def _scene_layout(figure, scene: DisasterScene, title: str) -> None:
     # compact DU/synthetic scenes. Extra 3D viewport padding prevents the
     # diagonal camera projection from clipping source buildings at the frame
     # edges while keeping the other previews focused.
-    padding_fraction = 0.18 if scene.generation_metadata.get("mode") == "laquila_informed" else 0.08
+    padding_fraction = (
+        0.10
+        if scene.generation_metadata.get("mode") == "heidata_neighborhood"
+        else 0.18 if _is_geospatial_mode(scene.generation_metadata.get("mode")) else 0.08
+    )
     x_padding = max(8.0, x_span * padding_fraction)
     y_padding = max(8.0, y_span * padding_fraction)
     figure.update_layout(title=title,template="plotly_white",scene={"xaxis":{"title":"x, metres","range":[world.minimum[0] - x_padding,world.maximum[0] + x_padding]},"yaxis":{"title":"y, metres","range":[world.minimum[1] - y_padding,world.maximum[1] + y_padding]},"zaxis":{"title":"z, metres","range":[world.minimum[2],world.maximum[2]]},"aspectmode":"data","camera":{"eye":{"x":1.45,"y":-1.65,"z":1.2}}},legend={"orientation":"h"})
 
 
 def _mode_label(scene: DisasterScene) -> str:
-    if scene.generation_metadata["mode"] == "laquila_informed":
+    if scene.generation_metadata["mode"] == "heidata_neighborhood":
+        return "HEIDATA CONTROLLED NEIGHBOURHOOD"
+    if _is_geospatial_mode(scene.generation_metadata["mode"]):
         return "L’AQUILA EXACT GEOREFERENCED SOURCE"
     return str(scene.generation_metadata["mode"]).replace("_", " ").upper()
 
@@ -1794,14 +1890,14 @@ def plot_damage_view(scene: DisasterScene, show_elevation_guides: bool = True):
             _add_3d_legend_proxy(
                 figure,
                 label,
-                _source_mesh_color(structure.visual_mesh_phase),
+                _structure_visual_color(structure),
                 "source-mesh-{}".format(structure.visual_mesh_phase),
             )
             shown_source_mesh_labels.add(label)
         mesh_trace = _structure_visual_trace(
             structure,
-            _source_mesh_color(structure.visual_mesh_phase),
-            _source_mesh_opacity(structure.visual_mesh_phase),
+            _structure_visual_color(structure),
+            _source_mesh_opacity(structure.visual_mesh_phase, structure.damage_state),
             _structure_hover_text(structure),
         )
         if mesh_trace is not None:
@@ -1884,7 +1980,7 @@ def plot_damage_view(scene: DisasterScene, show_elevation_guides: bool = True):
     )
     mesh_usage = scene.generation_metadata.get("visual_mesh_usage", {})
     mesh_summary = (
-        "<br>Geometry provenance: source pre {} | source post {} | derived damage {} | footprint extrusion {} | rubble only {}".format(
+        "<br>Geometry provenance: source pre {} | source post {} | derived damage {} | OSM context footprints {} | rubble only {}".format(
             mesh_usage.get("source_pre_mesh", 0),
             mesh_usage.get("source_post_mesh", 0),
             mesh_usage.get("derived_partial_mesh", 0),
@@ -1893,15 +1989,14 @@ def plot_damage_view(scene: DisasterScene, show_elevation_guides: bool = True):
         )
         if mesh_usage else ""
     )
-    source_header = (
-        "Source scenario: {} | original source positions preserved"
-        if scene.generation_metadata.get("mode") == "laquila_informed"
-        else "Preset: {}"
-    ).format(
-        scene.generation_metadata.get("source_scenario_schema", "scenario.v1")
-        if scene.generation_metadata.get("mode") == "laquila_informed"
-        else scene.preset.severity
-    )
+    if scene.generation_metadata.get("mode") == "heidata_neighborhood":
+        source_header = "Layout: ordered controlled neighbourhood | derived positions, source mesh identities retained"
+    elif _is_geospatial_mode(scene.generation_metadata.get("mode")):
+        source_header = "Source scenario: {} | original source positions preserved".format(
+            scene.generation_metadata.get("source_scenario_schema", "scenario.v1")
+        )
+    else:
+        source_header = "Preset: {}".format(scene.preset.severity)
     _scene_layout(
         figure,
         scene,
@@ -1918,7 +2013,7 @@ def plot_damage_view(scene: DisasterScene, show_elevation_guides: bool = True):
         ),
     )
     figure.layout.scene.camera = {
-        "eye": {"x": 0.05, "y": -0.05, "z": 1.00} if scene.generation_metadata.get("mode") == "laquila_informed" else {"x": 1.60, "y": -1.90, "z": 3.20},
+        "eye": {"x": 1.55, "y": -1.65, "z": 1.10} if _is_geospatial_mode(scene.generation_metadata.get("mode")) else {"x": 1.60, "y": -1.90, "z": 3.20},
         "center": {"x": 0.0, "y": 0.0, "z": 0.0},
         "projection": {"type": "orthographic"},
         "up": {"x": 0, "y": 0, "z": 1},
@@ -1943,7 +2038,7 @@ def plot_collision_view(scene: DisasterScene):
             figure.add_trace(_elevation_guide_trace(obstacle))
     _add_base(figure,scene); _scene_layout(figure,scene,"{} collision view: red ground volumes, purple elevated volumes".format(_mode_label(scene)))
     figure.layout.scene.camera = {
-        "eye": {"x": 0.05, "y": -0.05, "z": 1.00} if scene.generation_metadata.get("mode") == "laquila_informed" else {"x": 1.45, "y": -1.65, "z": 1.20},
+        "eye": {"x": 1.40, "y": -1.55, "z": 1.05} if _is_geospatial_mode(scene.generation_metadata.get("mode")) else {"x": 1.45, "y": -1.65, "z": 1.20},
         "center": {"x": 0.0, "y": 0.0, "z": 0.0},
         "projection": {"type": "orthographic"},
         "up": {"x": 0, "y": 0, "z": 1},

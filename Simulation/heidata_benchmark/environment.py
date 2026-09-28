@@ -28,7 +28,7 @@ class ScenarioError(ValueError):
 def _mesh_to_enu(mesh: Mesh) -> Mesh:
     """Convert source X,Y,Z to local East,North,Up as X,Z,Y."""
 
-    return Mesh(mesh.vertices[:, (0, 2, 1)], mesh.faces.copy())
+    return Mesh(mesh.vertices[:, (0, 2, 1)], mesh.faces.copy(), mesh.face_materials)
 
 
 def _extrude_footprint_with_profile(
@@ -151,7 +151,7 @@ def _place_template(asset: MeshAsset, building: MapBuilding, default_height_m: f
         building.osm_id, asset.asset_id, (float(translation_xy[0]), float(translation_xy[1]), float(translation_z)),
         float(horizontal_scale), float(vertical_scale), float(target_height), height_source,
     )
-    return Mesh(scaled + np.asarray(transform.translation_enu_m), source.faces.copy()), transform
+    return Mesh(scaled + np.asarray(transform.translation_enu_m), source.faces.copy(), source.face_materials), transform
 
 
 @dataclass(frozen=True)
@@ -585,6 +585,7 @@ def build_geospatial_scenario(
     bound_osm_ids: set[str] = set()
     bound_source_ids: set[str] = set()
     binding_by_osm: dict[str, MeshAsset] = {}
+    damage_override_by_osm: dict[str, str] = {}
     for binding in bindings:
         if not isinstance(binding, dict):
             raise ScenarioError("template binding must be an object")
@@ -601,6 +602,15 @@ def build_geospatial_scenario(
             raise ScenarioError(f"inspection only mesh cannot enter benchmark: {asset.asset_id}")
         if asset.source_id in bound_source_ids:
             raise ScenarioError(f"duplicate heiDATA source building binding: {asset.source_id}")
+        damage_override = binding.get("damage_state_override")
+        if damage_override is not None:
+            if damage_override not in {"intact", "minor"}:
+                raise ScenarioError(
+                    "damage_state_override is only supported for intact or minor pre-event geometry"
+                )
+            if asset.event_phase != "pre":
+                raise ScenarioError("damage_state_override requires a pre-event heiDATA mesh")
+            damage_override_by_osm[osm_id] = str(damage_override)
         bound_osm_ids.add(osm_id)
         bound_source_ids.add(asset.source_id)
         binding_by_osm[osm_id] = asset
@@ -644,8 +654,9 @@ def build_geospatial_scenario(
                 )
         else:
             visual_mesh, placement = _place_template(asset, map_building, default_height)
+            damage_grade = damage_override_by_osm.get(map_building.osm_id, asset.damage_grade)
             building = ScenarioBuilding(
-                map_building.osm_id, asset.source_id, asset.asset_id, asset.damage_grade,
+                map_building.osm_id, asset.source_id, asset.asset_id, damage_grade,
                 "heidata_damage_template", visual_mesh, placement, None, "template",
             )
         buildings.append(building)

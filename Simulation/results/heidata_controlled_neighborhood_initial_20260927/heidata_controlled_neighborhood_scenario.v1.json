@@ -1,0 +1,160 @@
+{
+  "blocked_road_ids": [],
+  "boundary_margin_m": 16.0,
+  "collision_margin_m": 1.0,
+  "default_building_height_m": 9.0,
+  "derive_rubble_for_destruction": true,
+  "derive_rubble_for_major_damage": false,
+  "derived_damage_bindings": [],
+  "excluded_osm_buildings": [],
+  "maximum_flight_altitude_m": 50.0,
+  "navigation": {
+    "altitude_step_m": 4.0,
+    "cell_size_m": 6.0,
+    "minimum_flight_altitude_m": 3.0
+  },
+  "notes": "Thirty two distinct full heiDATA source buildings are placed in an ordered 4 by 8 derived neighbourhood. The layout is a controlled simulation input, not a measured OSM or L'Aquila reconstruction.",
+  "overlap_tolerance_m": 0.05,
+  "safe_pad_count": 2,
+  "scenario_id": "heidata_controlled_neighborhood_v1",
+  "schema_version": "scenario.v1",
+  "seed": 20260927,
+  "template_bindings": [
+    {
+      "asset_id": "pre:pre_b_001_pre.obj",
+      "osm_id": "nh_b_01"
+    },
+    {
+      "asset_id": "pre:pre_b_002_pre.obj",
+      "damage_state_override": "minor",
+      "osm_id": "nh_b_02"
+    },
+    {
+      "asset_id": "pre:pre_b_013_pre.obj",
+      "osm_id": "nh_b_03"
+    },
+    {
+      "asset_id": "pre:pre_b_024_pre.obj",
+      "osm_id": "nh_b_04"
+    },
+    {
+      "asset_id": "post:grade4_b_003_post.obj",
+      "osm_id": "nh_b_05"
+    },
+    {
+      "asset_id": "pre:pre_b_017_pre.obj",
+      "damage_state_override": "minor",
+      "osm_id": "nh_b_06"
+    },
+    {
+      "asset_id": "post:grade4_b_006_post.obj",
+      "osm_id": "nh_b_07"
+    },
+    {
+      "asset_id": "post:grade5_b_004_post.obj",
+      "osm_id": "nh_b_08"
+    },
+    {
+      "asset_id": "pre:pre_b_039_pre.obj",
+      "osm_id": "nh_b_09"
+    },
+    {
+      "asset_id": "pre:pre_b_030_pre.obj",
+      "damage_state_override": "minor",
+      "osm_id": "nh_b_10"
+    },
+    {
+      "asset_id": "pre:pre_b_055_pre.obj",
+      "osm_id": "nh_b_11"
+    },
+    {
+      "asset_id": "pre:pre_b_069_pre.obj",
+      "osm_id": "nh_b_12"
+    },
+    {
+      "asset_id": "post:grade4_b_009_post.obj",
+      "osm_id": "nh_b_13"
+    },
+    {
+      "asset_id": "pre:pre_b_054_pre.obj",
+      "damage_state_override": "minor",
+      "osm_id": "nh_b_14"
+    },
+    {
+      "asset_id": "post:grade4_b_015_post.obj",
+      "osm_id": "nh_b_15"
+    },
+    {
+      "asset_id": "post:grade5_b_008_post.obj",
+      "osm_id": "nh_b_16"
+    },
+    {
+      "asset_id": "pre:pre_b_079_pre.obj",
+      "osm_id": "nh_b_17"
+    },
+    {
+      "asset_id": "pre:pre_b_070_pre.obj",
+      "damage_state_override": "minor",
+      "osm_id": "nh_b_18"
+    },
+    {
+      "asset_id": "post:grade4_b_019_post.obj",
+      "osm_id": "nh_b_19"
+    },
+    {
+      "asset_id": "pre:pre_b_090_pre.obj",
+      "osm_id": "nh_b_20"
+    },
+    {
+      "asset_id": "post:grade4_b_022_post.obj",
+      "osm_id": "nh_b_21"
+    },
+    {
+      "asset_id": "pre:pre_b_084_pre.obj",
+      "damage_state_override": "minor",
+      "osm_id": "nh_b_22"
+    },
+    {
+      "asset_id": "post:grade4_b_027_post.obj",
+      "osm_id": "nh_b_23"
+    },
+    {
+      "asset_id": "post:grade5_b_012_post.obj",
+      "osm_id": "nh_b_24"
+    },
+    {
+      "asset_id": "pre:pre_b_101_pre.obj",
+      "osm_id": "nh_b_25"
+    },
+    {
+      "asset_id": "pre:pre_b_097_pre.obj",
+      "damage_state_override": "minor",
+      "osm_id": "nh_b_26"
+    },
+    {
+      "asset_id": "post:grade4_b_038_post.obj",
+      "osm_id": "nh_b_27"
+    },
+    {
+      "asset_id": "pre:pre_b_112_pre.obj",
+      "osm_id": "nh_b_28"
+    },
+    {
+      "asset_id": "post:grade4_b_048_post.obj",
+      "osm_id": "nh_b_29"
+    },
+    {
+      "asset_id": "pre:pre_b_111_pre.obj",
+      "damage_state_override": "minor",
+      "osm_id": "nh_b_30"
+    },
+    {
+      "asset_id": "post:grade4_b_052_post.obj",
+      "osm_id": "nh_b_31"
+    },
+    {
+      "asset_id": "post:grade5_b_016_post.obj",
+      "osm_id": "nh_b_32"
+    }
+  ]
+}

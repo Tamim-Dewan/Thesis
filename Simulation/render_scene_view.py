@@ -14,7 +14,7 @@ from pgbm_sim import (
 
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--mode", choices=("du_outdoor", "synthetic", "laquila_informed"), default="du_outdoor")
+parser.add_argument("--mode", choices=("du_outdoor", "synthetic", "laquila_informed", "heidata_neighborhood"), default="du_outdoor")
 parser.add_argument("--severity", choices=("light", "moderate", "severe"), default="moderate")
 parser.add_argument("--seed", type=int, default=20260924)
 parser.add_argument("--view", choices=("map", "layout", "damage", "collision"), required=True)

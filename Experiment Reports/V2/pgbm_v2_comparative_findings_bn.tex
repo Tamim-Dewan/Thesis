@@ -1,0 +1,433 @@
+% Bangla comparative report for PGBM Initial Solution V2.
+\documentclass[10pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{bengali}
+\setotherlanguage{english}
+\setmainfont[Script=Bengali]{Siyam Rupali}
+\setsansfont[Script=Bengali]{Siyam Rupali}
+\newfontfamily\bengalifonttt[Script=Bengali]{Siyam Rupali}
+\usepackage[a4paper,margin=20mm,headheight=24pt]{geometry}
+\usepackage{amsmath,array,booktabs,enumitem,fancyhdr,float,longtable,pdflscape,tabularx,titlesec,xcolor,hyperref}
+\definecolor{navy}{HTML}{17365D}
+\definecolor{bluegray}{HTML}{EAF1F8}
+\definecolor{lightgray}{HTML}{F4F6F8}
+\definecolor{midgray}{HTML}{5B6573}
+\definecolor{rulegray}{HTML}{C9D1D9}
+\hypersetup{colorlinks=true,linkcolor=navy,urlcolor=navy,pdftitle={PGBM Initial Solution V2 Comparative Report},pdfauthor={PGBM Thesis Simulation Work}}
+\setlist[itemize]{label={-},leftmargin=*,itemsep=1pt,topsep=2pt}
+\setlist[enumerate]{leftmargin=*,itemsep=3pt,topsep=2pt}
+\titleformat{\section}{\Large\bfseries}{\thesection}{0.75em}{}
+\titlespacing*{\section}{0pt}{2.5ex plus 0.4ex minus 0.2ex}{1ex plus 0.2ex}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\emergencystretch}{2em}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{midgray}{PGBM Thesis Simulation}}
+\fancyhead[R]{\textcolor{midgray}{Initial Solution V2}}
+\fancyfoot[C]{\textcolor{midgray}{\thepage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{rulegray}\leaders\hrule height \headrulewidth\hfill}}
+\newcommand{\code}[1]{\path{#1}}
+\begin{document}
+\begin{titlepage}
+\thispagestyle{empty}
+\vspace*{18mm}
+{\color{navy}\rule{\textwidth}{1.5pt}}\\[10mm]
+{\color{navy}\sffamily\bfseries\fontsize{25}{32}\selectfont Initial Solution V2\\Comparative Simulation Report\par}
+\vspace{6mm}
+{\color{midgray}\sffamily\Large Task replacement recourse, paired experiment এবং ফলাফল\par}
+\vfill
+\begin{tabular}{@{}ll@{}}
+\textbf{Project:} & PGBM thesis and simulation work\\
+\textbf{সমাধানের ধরন:} & Formulation aligned one-for-one recourse\\
+\textbf{Environment:} & Synthetic এবং DU outdoor\\
+\textbf{মোট configuration:} & ২৪০টি paired configuration, ৪৮০টি row\\
+\textbf{Seed:} & ১০১--১১০\\
+\textbf{Report date:} & ২৮ সেপ্টেম্বর ২০২৬
+\end{tabular}
+\vfill
+\begin{center}
+\colorbox{bluegray}{\begin{minipage}{0.88\textwidth}
+এই report-এ V2-এর core recourse rule, runtime state, paired experiment এবং V1 বনাম V2 ফলাফল একই flow-তে ব্যাখ্যা করা হয়েছে।
+\end{minipage}}
+\end{center}
+\vspace{12mm}
+{\color{navy}\rule{\textwidth}{1.5pt}}
+\end{titlepage}
+\tableofcontents
+\clearpage
+\section{V2-এর core feature}
+V2 হলো formulation-aligned one-for-one active-mission task replacement recourse। নতুন task আসলে সব responder UAV active থাকলে প্রতিটি active mission-এর uncompleted task একবার করে replace করার candidate পরীক্ষা করা হয়। Completed task এবং completed route prefix অপরিবর্তিত থাকে। New task-এর item demand current onboard inventory দিয়ে মেটানো সম্ভব হতে হয়; remaining route existing collision-aware 3D routing layer দিয়ে একই base-এ ফেরত তৈরি হয়; এবং শুধু positive $\Delta J=J_{\mathrm{new}}-J_{\mathrm{old}}$ হলে সর্বোচ্চ gain-এর candidate গ্রহণ করা হয়। Displaced task waiting queue-তে ফিরে যায়।
+\begin{itemize}
+\item One-for-one replacement: একটি active UAV এবং একটি uncompleted task।
+\item Completed prefix protection: completed delivery এবং route segment পরিবর্তন করা হয় না।
+\item Current onboard inventory: reserve inventory বা base reload V2-তে নেই।
+\item Remaining route recourse: current position থেকে task suffix এবং একই base-এ return route নতুন করে তৈরি হয়।
+\item Positive service-value gain: $\Delta J>0$ না হলে active mission অপরিবর্তিত থাকে।
+\item V1 isolation: V1 entry point এবং canonical evidence overwrite করা হয়নি।
+\end{itemize}
+Reserve inventory, base reload, multiple-task replacement এবং full fleet reoptimization Version 3 scope।
+\section{Experiment-এর সংক্ষিপ্ত চিত্র}
+V2 একই ১২০ মিনিটের seeded event-driven protocol ব্যবহার করে: ০--৪০ মিনিট high, ৪০--৮০ মিনিট medium এবং ৮০--১২০ মিনিট low arrival phase। দুইটি environment, ৩০/৬০/৯০ task load, ৩/৫/৮/১০ UAV এবং ১০টি seed (১০১--১১০) ব্যবহার করা হয়েছে। ফলে ২৪০টি configuration-এ V1 এবং V2-এর ৪৮০টি metrics row এবং ২৪০টি V2 decision trace তৈরি হয়েছে।
+V1-এর preserved canonical matrix comparison row হিসেবে রাখা হয়েছে। V2 একই local scene এবং task seed protocol-এ চালানো হয়েছে। In-memory paired validation-এ recourse disabled করলে V2 fixed control-এর objective, served task, distance, energy এবং candidate count V1-এর সঙ্গে মিলে গেছে।
+\section{V2 algorithm কীভাবে assignment এবং recourse ঠিক করে}
+V2-এর initial dispatch V1-এর bounded brute-force assignment এবং task-order rule ব্যবহার করে। নতুন task arrival হলে V2 পুরো fleet replan করে না। Current mission state থেকে প্রতিটি active UAV এবং প্রতিটি uncompleted task-এর জন্য একটি candidate তৈরি হয়।
+\begin{enumerate}
+\item Current time-এ UAV-এর position, completed task, remaining task, onboard item, payload এবং consumed energy project করা হয়।
+\item একটি uncompleted task সরিয়ে নতুন task-টি একই mission position-এ বসানো হয়।
+\item Service চলতে থাকলে তা interrupt করা হয় না; candidate current service শেষ হওয়ার পরের suffix পরিবর্তন করে।
+\item New task এবং revised mission-এর item demand current onboard inventory দিয়ে মেটানো যায় কি না পরীক্ষা করা হয়।
+\item Current position থেকে revised task sequence এবং একই physical base পর্যন্ত collision-aware 3D route তৈরি হয়।
+\item Payload, route, energy reserve এবং ১২০ মিনিটের horizon feasibility পরীক্ষা হয়।
+\item Old remaining value, new remaining value এবং $\Delta J$ হিসাব করা হয়।
+\item সর্বোচ্চ positive $\Delta J$ গ্রহণ করা হয়; positive candidate না থাকলে নতুন task queue-তে থাকে।
+\end{enumerate}
+Final episode objective প্রত্যেক completed task-এর service value একবার গণনা করে; replanning snapshot যোগ করে double counting করা হয় না।
+\section{Simulation environment এবং route flow}
+V2 একই V1 scene, task, parcel, drop-off waypoint, payload, energy এবং route contracts ব্যবহার করে। প্রতিটি task individual delivery request; task-এর food, water এবং medical demand, ২--৪ m vertical drop-off waypoint এবং ০.৫ মিনিট per parcel service duration অপরিবর্তিত আছে।
+একটি active mission-এর route হলো Base $\rightarrow$ task waypoint sequence $\rightarrow$ Base। Recourse trigger হলে completed route অংশকে আবার plan করা হয় না। UAV-এর projected current position থেকে শুধু remaining suffix নতুন করে route করা হয়। প্রতিটি leg existing cruise-altitude check, direct line check, blocked হলে grid A* এবং vertical clearance check অনুসরণ করে।
+\section{Result বোঝার জন্য প্রধান metric}
+Objective completion-time exponential service value; served task এবং dropped parcel আলাদা unit; accepted replacement positive $\Delta J$-এর count; replacement gain event-level evidence; runtime, planner, route এবং recourse সময়ের আলাদা breakdown।
+\section{Environment-level V1 বনাম V2 ফলাফল}
+\begin{table}[htbp]\centering\scriptsize
+\caption{Environment-level V1 এবং V2 aggregate result।}
+\begin{tabular}{@{}llrrrrrrr@{}}\toprule
+Environment & Algorithm & Objective & Served & Task rate & Parcel rate & Deferred & Delay min & Runtime s\\\midrule
+DU outdoor & V1 & 10.43 ± 4.22 & 20.12 ± 7.95 & 33.5\% & 36.6\% & 39.88 ± 24.05 & 31.64 ± 4.05 & 20.225 \\
+
+DU outdoor & V2 & 11.70 ± 4.53 & 19.63 ± 7.63 & 32.7\% & 33.4\% & 40.37 ± 23.82 & 23.21 ± 3.97 & 59.408 \\
+
+Synthetic & V1 & 23.48 ± 9.36 & 40.40 ± 16.73 & 67.3\% & 69.1\% & 19.60 ± 19.34 & 18.30 ± 4.54 & 3.733 \\
+
+Synthetic & V2 & 23.84 ± 9.34 & 39.36 ± 16.19 & 65.6\% & 66.9\% & 20.64 ± 19.75 & 16.08 ± 3.33 & 10.355 \\
+
+\bottomrule\end{tabular}\end{table}
+এই table থেকে কয়েকটি ফলাফল পরিষ্কার। DU outdoor-এ V2 objective 10.43 থেকে 11.70 হয়েছে (প্রায় 12.2\% বৃদ্ধি), যদিও served task 20.12 থেকে 19.63 এবং parcel rate 36.6\% থেকে 33.4\%-এ সামান্য কমেছে। Synthetic-এ objective 23.48 থেকে 23.84 (প্রায় 1.5\%) বেড়েছে, কিন্তু served task এবং parcel rate-ও সামান্য কমেছে। অর্থাৎ V2-এর লাভ raw task count নয়; active mission-এর মধ্যে কোন task আগে complete করলে time-sensitive service value বেশি হবে, সেটি বেছে নেওয়া।
+সবচেয়ে গুরুত্বপূর্ণ পরিবর্তনটি Delay min-এ। DU outdoor-এ average delay 31.64 থেকে 23.21 মিনিটে (8.43 মিনিট বা প্রায় 26.6\%) এবং Synthetic-এ 18.30 থেকে 16.08 মিনিটে (2.22 মিনিট বা প্রায় 12.1\%) কমেছে। Delay min হলো task detect হওয়ার সময় থেকে delivery complete হওয়া পর্যন্ত গড় সময়। নতুন task এলে V2 শুধু সেই replacement নেয় যার revised remaining mission value পুরনো mission-এর চেয়ে বেশি; ফলে অপেক্ষমাণ high-value task অনেক ক্ষেত্রে আগের completion position পায়। তবে এটি সব task-এর delay কমেছে—এমন দাবি নয়; কিছু lower-value displaced task queue-তে ফেরত যায়, তাই served count কমেও average completed-task delay কমতে পারে।
+এর বিপরীতে V2 runtime DU outdoor-এ 20.225 থেকে 59.408 s এবং Synthetic-এ 3.733 থেকে 10.355 s হয়েছে। কারণ প্রতিটি recourse trigger-এ সম্ভাব্য active UAV ও displaced task-এর জন্য feasibility এবং revised route পরীক্ষা করা হয়। তাই V2-এর মূল trade-off হলো—priority-weighted service value এবং completion delay উন্নত করার বিনিময়ে অতিরিক্ত computation।
+\section{Task load এবং UAV sensitivity}
+Task load বাড়লে queue pressure বাড়ে এবং V1 ও V2 দুই version-এর service rate সাধারণত কমে। UAV সংখ্যা বাড়ালে available capacity বাড়ে, কিন্তু নতুন task idle UAV-তে dispatch হয়ে গেলে recourse trigger-এর সুযোগ কমতেও পারে। তাই V2 accepted replacement fleet size-এর সঙ্গে monotonic হওয়া আবশ্যক নয়।
+\begin{landscape}\begin{longtable}{@{}llrrrrrrrrrrrr@{}}
+\caption{সম্পূর্ণ V1 বনাম V2 task load এবং fleet matrix।}\label{tab:v2-full-matrix}\\
+\toprule Environment & Task & UAV & V1 Obj & V2 Obj & $\Delta$Obj & V1 Served & V2 Served & $\Delta$Served & V1 Parcel & V2 Parcel & $\Delta$Parcel & V2 Repl & V2 Runtime\\\midrule
+\endfirsthead\toprule Environment & Task & UAV & V1 Obj & V2 Obj & $\Delta$Obj & V1 Served & V2 Served & $\Delta$Served & V1 Parcel & V2 Parcel & $\Delta$Parcel & V2 Repl & V2 Runtime\\\midrule\endhead
+DU outdoor & 30 & 3 & 5.11 & 5.92 & +0.81 & 10.50 & 10.20 & -0.30 & 30.9\% & 26.9\% & -4.0 pp & 6.10 & 37.612 \\
+
+DU outdoor & 30 & 5 & 7.47 & 8.32 & +0.85 & 15.90 & 15.40 & -0.50 & 48.1\% & 43.7\% & -4.4 pp & 7.00 & 42.588 \\
+
+DU outdoor & 30 & 8 & 9.87 & 10.23 & +0.35 & 20.20 & 19.60 & -0.60 & 63.8\% & 61.4\% & -2.4 pp & 4.70 & 38.111 \\
+
+DU outdoor & 30 & 10 & 10.59 & 10.80 & +0.22 & 21.20 & 20.80 & -0.40 & 67.2\% & 65.2\% & -2.0 pp & 3.20 & 28.559 \\
+
+DU outdoor & 60 & 3 & 5.95 & 7.42 & +1.48 & 10.80 & 11.40 & +0.60 & 16.5\% & 14.4\% & -2.2 pp & 8.00 & 50.711 \\
+
+DU outdoor & 60 & 5 & 9.49 & 10.70 & +1.21 & 17.80 & 17.20 & -0.60 & 27.6\% & 23.4\% & -4.3 pp & 9.10 & 54.161 \\
+
+DU outdoor & 60 & 8 & 13.63 & 14.77 & +1.14 & 26.90 & 25.30 & -1.60 & 42.4\% & 37.8\% & -4.6 pp & 13.00 & 50.260 \\
+
+DU outdoor & 60 & 10 & 16.20 & 17.10 & +0.90 & 32.60 & 30.70 & -1.90 & 52.5\% & 47.4\% & -5.1 pp & 13.00 & 36.383 \\
+
+DU outdoor & 90 & 3 & 6.26 & 7.55 & +1.30 & 11.20 & 10.90 & -0.30 & 11.2\% & 9.4\% & -1.9 pp & 9.70 & 65.505 \\
+
+DU outdoor & 90 & 5 & 9.80 & 11.80 & +1.99 & 17.60 & 17.50 & -0.10 & 18.3\% & 15.9\% & -2.5 pp & 14.00 & 61.833 \\
+
+DU outdoor & 90 & 8 & 14.08 & 16.47 & +2.39 & 25.60 & 25.50 & -0.10 & 27.3\% & 24.6\% & -2.7 pp & 17.40 & 113.128 \\
+
+DU outdoor & 90 & 10 & 16.76 & 19.35 & +2.59 & 31.20 & 31.10 & -0.10 & 33.5\% & 31.2\% & -2.2 pp & 17.10 & 134.039 \\
+
+Synthetic & 30 & 3 & 11.98 & 12.63 & +0.65 & 22.60 & 22.00 & -0.60 & 71.1\% & 67.5\% & -3.7 pp & 6.40 & 4.040 \\
+
+Synthetic & 30 & 5 & 15.30 & 15.32 & +0.01 & 27.20 & 27.00 & -0.20 & 90.1\% & 89.0\% & -1.2 pp & 3.70 & 3.222 \\
+
+Synthetic & 30 & 8 & 16.26 & 16.28 & +0.02 & 27.50 & 27.50 & +0.00 & 90.9\% & 90.9\% & +0.0 pp & 0.80 & 3.355 \\
+
+Synthetic & 30 & 10 & 16.44 & 16.44 & +0.00 & 27.50 & 27.50 & +0.00 & 90.9\% & 90.9\% & +0.0 pp & 0.00 & 3.612 \\
+
+Synthetic & 60 & 3 & 15.65 & 16.40 & +0.76 & 25.40 & 24.70 & -0.70 & 37.3\% & 34.6\% & -2.6 pp & 8.80 & 11.164 \\
+
+Synthetic & 60 & 5 & 22.84 & 23.71 & +0.87 & 39.90 & 38.60 & -1.30 & 60.9\% & 57.8\% & -3.1 pp & 11.00 & 14.512 \\
+
+Synthetic & 60 & 8 & 29.70 & 29.78 & +0.08 & 53.30 & 51.90 & -1.40 & 87.6\% & 84.6\% & -3.0 pp & 9.70 & 17.878 \\
+
+Synthetic & 60 & 10 & 31.86 & 31.77 & -0.09 & 55.30 & 54.50 & -0.80 & 91.6\% & 89.6\% & -2.0 pp & 5.40 & 11.775 \\
+
+Synthetic & 90 & 3 & 17.81 & 18.34 & +0.54 & 27.70 & 26.30 & -1.40 & 25.2\% & 22.8\% & -2.3 pp & 13.30 & 8.992 \\
+
+Synthetic & 90 & 5 & 26.11 & 26.73 & +0.62 & 41.80 & 40.20 & -1.60 & 40.3\% & 38.0\% & -2.3 pp & 15.50 & 11.353 \\
+
+Synthetic & 90 & 8 & 36.28 & 37.00 & +0.72 & 62.30 & 60.50 & -1.80 & 64.2\% & 61.2\% & -3.1 pp & 14.40 & 16.359 \\
+
+Synthetic & 90 & 10 & 41.52 & 41.65 & +0.12 & 74.30 & 71.60 & -2.70 & 79.2\% & 75.6\% & -3.6 pp & 13.80 & 17.993 \\
+
+\bottomrule\end{longtable}\end{landscape}
+এই matrix-এর প্রধান patternগুলো হলো: (১) DU outdoor-এর ১২টি configuration-এর সবকটিতেই V2 objective V1-এর চেয়ে বেশি। বিশেষ করে ৯০ task-এ gain 1.30 থেকে 2.59 পর্যন্ত, অর্থাৎ load বাড়লে recourse-এর priority benefit বেশি দৃশ্যমান হয়। (২) DU outdoor-এ ৬০ task/৩ UAV ছাড়া served task সামান্য কমেছে বা প্রায় অপরিবর্তিত থেকেছে; parcel rate-ও সব cell-এ কমেছে। কারণ V2 কিছু lower-value active task সরিয়ে বেশি time-sensitive task বসায়—এটি throughput-maximization rule নয়। (৩) Synthetic-এ low load এবং বেশি UAV থাকলে V1-এর capacity প্রায় যথেষ্ট; ৩০ task/১০ UAV-এ accepted replacement গড় ০ এবং objective পরিবর্তন ০.০০। তাই সেখানে V2-এর বাড়তি লাভ সীমিত। (৪) Synthetic-এর ৬০ task/১০ UAV cell-এ একমাত্র সামান্য negative objective change (-0.09) দেখা গেছে—এই configuration-এ replacement-এর লাভ computation/queue trade-off পুরোপুরি offset করতে পারেনি। (৫) ৯০ task-এ accepted replacement এবং runtime সাধারণত বাড়ে; DU outdoor-এ ৯০ task/১০ UAV runtime 134.039 s পর্যন্ত উঠেছে।
+সুতরাং matrix দেখায় যে V2-এর value সবচেয়ে বেশি congestion বা active-mission overlap থাকা configuration-এ। UAV বাড়ালে service capacity বাড়ে, কিন্তু নতুন task idle UAV-তে সরাসরি dispatch হলে replacement দরকার কমে; তাই accepted replacement fleet size-এর সঙ্গে সবসময় monotonic হয় না।
+\section{Recourse decision এবং rejection evidence}
+প্রতিটি trigger-এর candidate UAV, displaced task, item feasibility, route feasibility, energy feasibility, old value, new value, gain এবং final decision decision trace-এ রাখা হয়েছে। নিচের table-এ trigger-level rejection reason দেওয়া হলো; candidate-level কারণ সম্পূর্ণ JSON trace-এ দেখা যাবে।
+\begin{table}[htbp]\centering\scriptsize\begin{tabular}{@{}lr@{}}\toprule Trigger-level rejection reason & Evidence count\\\midrule
+no\_positive\_gain & 2113 \\
+
+no\_feasible\_candidate & 1842 \\
+
+no\_uncompleted\_active\_task & 433 \\
+
+\bottomrule\end{tabular}\end{table}
+এই অংশটির সহজ অর্থ হলো: নতুন task আসার সময় যদি UAV-গুলো active থাকে, V2 দেখে কোনো চলমান mission-এর একটি uncompleted task সরিয়ে নতুন task বসালে সত্যিই লাভ হবে কি না। একটি trigger-এ একাধিক candidate পরীক্ষা হতে পারে; তাই table-এর সংখ্যা candidate count নয়, trigger-level final outcome। মোট ৬৬৩৯টি trigger-এর মধ্যে ২২৫১টি replacement গৃহীত এবং ৪৩৮৮টি গৃহীত হয়নি—অর্থাৎ acceptance rate প্রায় 33.9\%।
+$\texttt{no\_positive\_gain}$ (2113) সবচেয়ে বেশি দেখা গেছে। অর্থাৎ candidate route ও item-এর দিক থেকে সম্ভব হলেও পুরনো task সরিয়ে নতুন task বসালে remaining service value বাড়েনি; তাই বর্তমান mission অপরিবর্তিত রাখা হয়েছে। $\texttt{no\_feasible\_candidate}$ (1842) মানে কোনো candidate-ই item/inventory, route, energy reserve, return বা horizon-এর সব শর্ত একসঙ্গে পূরণ করতে পারেনি। $\texttt{no\_uncompleted\_active\_task}$ (433) মানে active mission-এ সরানোর মতো uncompleted task ছিল না। এই rejection-এ নতুন task হারিয়ে যায় না—pending queue-তে থেকে পরবর্তী dispatch-এর জন্য অপেক্ষা করে। Candidate-level কারণগুলো JSON decision trace-এ আলাদা করে রাখা হয়েছে।
+\section{Runtime এবং প্রধান bottleneck}
+এখানে Runtime s বলতে simulation program-এর computation time বোঝায়; এটি UAV-এর real flight time বা task delay নয়। Planner s হলো initial assignment search-এর সময়, Route s হলো collision-aware route তৈরি/মূল্যায়নের সময়, আর Recourse s হলো V2-তে নতুন task replacement candidate পরীক্ষা করার অতিরিক্ত সময়।
+\begin{table}[H]\centering\scriptsize\begin{tabular}{@{}llrrrrrrr@{}}\toprule Environment & Algorithm & Runtime s & Planner s & Route s & Recourse s & Candidate & Truncated & Safe return\\\midrule
+DU outdoor & V1 & 20.225 & 20.223 & 19.566 & 0.000 & 249477 & 4.1 & 100.0\% \\
+
+DU outdoor & V2 & 59.408 & 46.568 & 44.692 & 12.784 & 288639 & 4.8 & 100.0\% \\
+
+Synthetic & V1 & 3.733 & 3.731 & 3.561 & 0.000 & 65211 & 1.0 & 100.0\% \\
+
+Synthetic & V2 & 10.355 & 8.961 & 8.513 & 1.326 & 57343 & 0.8 & 100.0\% \\
+
+\bottomrule\end{tabular}\end{table}
+Table-এর প্রধান bottleneck হলো route evaluation। V1-এ DU outdoor-এর 20.225 s runtime-এর মধ্যে route অংশ 19.566 s (প্রায় 96.7\%); Synthetic-এ 3.561 s (প্রায় 95.4\%)। তবে V2-এর Runtime, Planner, Route এবং Recourse timer-গুলো mutually exclusive নয়। Planner-এর মধ্যে route evaluation থাকতে পারে এবং recourse candidate যাচাইয়ের সময়ও route check চলে; তাই এগুলো সরাসরি যোগ করে total runtime ধরা যাবে না। উদাহরণ হিসেবে DU outdoor V2-তে Route 44.692 s + Recourse 12.784 s = 57.476 s, যেখানে total Runtime 59.408 s; বাকি 1.932 s event handling, dispatch bookkeeping এবং অন্যান্য overhead। Synthetic-এ 8.513 + 1.326 = 9.839 s, total 10.355 s; residual 0.516 s। অর্থাৎ breakdown-টি bottleneck বোঝার diagnostic view, additive accounting নয়। এই ফল দেখায় V2-এর বাড়তি computation-এর বড় অংশ repeated route feasibility পরীক্ষা, আর underlying route search-ই এখনও প্রধান cost centre।
+DU outdoor Synthetic-এর তুলনায় অনেক ধীর, কারণ DU-তে polygon obstacle geometry এবং blocked হলে grid A* path search বেশি কাজ করে। V2 runtime V1-এর তুলনায় DU-তে প্রায় 2.94 গুণ এবং Synthetic-এ প্রায় 2.77 গুণ হয়েছে। Safe return 100\% মানে simulation-এর feasibility filter পেরিয়ে সব executed mission base-এ ফিরেছে; এটি field-flight reliability-এর প্রমাণ নয়। `Search truncated` হলো যেসব dispatch ৫০,০০০ candidate limit-এ পৌঁছেছে তার গড় সংখ্যা, আর Candidate হলো পরীক্ষিত candidate plan-এর গড় count। তাই পরবর্তী efficiency কাজের প্রধান দিক হবে route reuse/cache hit measurement, early feasibility pruning এবং scalable candidate search।
+\section{Energy model এবং energy ফলাফল}
+V1 এবং V2 উভয় version-এ energy একটি configured accounting model দিয়ে গণনা করা হয়েছে। কোনো travel segment-এর জন্য $d$ হলো route distance, $m$ হলো বহন করা payload mass এবং $a^+$ হলো positive ascent distance।
+\[ E_{travel}=d e_{distance}+d m e_{payload}+a^+ e_{ascent}, \qquad E_{service}=\tau e_{service}, \qquad E_{mission}=\sum E_{travel}+\sum E_{service}. \]
+এই run-এ $e_{distance}=1.0$ J/m, $e_{payload}=0.05$ J/(kg m), $e_{ascent}=0.20$ J/m এবং $e_{service}=0.50$ J/min। প্রতিটি initial বা recourse candidate-এর জন্য UAV-এর ইতিমধ্যে ব্যবহৃত energy-এর সঙ্গে revised route-এর additional energy যোগ করে check করা হয়: $E_{consumed}+E_{additional}+E_{reserve}\leq E_{capacity}$। Capacity 1000 J এবং reserve 200 J; তাই projected remaining energy-এর অন্তত reserve অংশ mission শেষে অবশিষ্ট থাকতে হয়।
+$Total\ energy$ পুরো episode-এ সম্পন্ন বা horizon পর্যন্ত চলা সব mission-এর cumulative energy। এটি কোনো একক UAV-এর একবারের battery state নয়। প্রতিটি UAV base-এ ফিরে resupply/turnaround শেষ করলে পরের mission-এ নতুন full capacity থেকে শুরু করে; V1/V2-তে battery degradation বা mission-to-mission persistent battery depletion model করা হয়নি।
+\begin{table}[H]\centering\scriptsize\begin{tabular}{@{}llrrrrr@{}}\toprule Environment & Algorithm & Energy J & Energy/task J & Energy/parcel J & Distance m & Travel min\\\midrule
+DU outdoor & V1 & 6142.4 $\pm$ 2417.8 & 310.2 $\pm$ 62.2 & 199.3 $\pm$ 38.8 & 5928.2 $\pm$ 2335.5 & 592.8 $\pm$ 233.5 \\
+DU outdoor & V2 & 6078.6 $\pm$ 2385.3 & 314.7 $\pm$ 69.0 & 224.5 $\pm$ 61.3 & 5854.1 $\pm$ 2300.6 & 585.4 $\pm$ 230.1 \\
+Synthetic & V1 & 5319.7 $\pm$ 2101.8 & 134.4 $\pm$ 28.4 & 84.3 $\pm$ 17.9 & 5041.4 $\pm$ 1988.8 & 504.1 $\pm$ 198.9 \\
+Synthetic & V2 & 5368.8 $\pm$ 2123.8 & 138.9 $\pm$ 27.6 & 88.5 $\pm$ 17.0 & 5083.6 $\pm$ 2006.9 & 508.4 $\pm$ 200.7 \\
+\bottomrule\end{tabular}\end{table}
+Energy result-এর মূল trade-off হলো: DU outdoor-এ V2 total energy 6142.4 J থেকে 6078.6 J-এ এবং distance 5928.2 m থেকে 5854.1 m-এ কমেছে, কারণ V2 কিছু lower-value task replace বা queue করে এবং infeasible বা energy-expensive candidate গ্রহণ করে না। কিন্তু completed task ও parcel কম হওয়ায় প্রতি served task energy 310.2 থেকে 314.7 J এবং প্রতি dropped parcel 199.3 থেকে 224.5 J হয়েছে। Synthetic-এ V2 total energy 5319.7 J থেকে 5368.8 J এবং distance 5041.4 m থেকে 5083.6 m-এ সামান্য বেড়েছে; accepted recourse-এর revised route এই অতিরিক্ত movement তৈরি করেছে। তাই শুধু total energy দিয়ে efficiency বিচার করা যাবে না; cumulative energy, energy per completed service এবং distance একসঙ্গে দেখতে হবে।
+\section{Expanded V1 বনাম V2 result matrix}
+নিচের দুইটি matrix-এ প্রতিটি cell-এর ১০টি seed-এর mean $\pm$ standard deviation দেওয়া হয়েছে। ফলে objective, served task, parcel volume, queue, energy, recourse এবং runtime-এর seed variability একই সঙ্গে দেখা যায়।
+\begin{landscape}\begin{longtable}{@{}lrrlrrrrrrrr@{}}
+\caption{Service, parcel এবং queue metrics: mean $\pm$ standard deviation।}\label{tab:v2-service-metrics}\\
+\toprule Environment & Task & UAV & Alg & Obj & Served & Task rate & Req. parcel & Drop parcel & Deferred & Delay & Peak queue\\\midrule
+\endfirsthead\toprule Environment & Task & UAV & Alg & Obj & Served & Task rate & Req. parcel & Drop parcel & Deferred & Delay & Peak queue\\\midrule\endhead
+DU outdoor & 30 & 3 & V1 & 5.11 $\pm$ 1.50 & 10.50 $\pm$ 3.10 & 35.0\% $\pm$ 10.3\% & 48.8 $\pm$ 3.9 & 14.9 $\pm$ 2.2 & 19.50 $\pm$ 3.10 & 34.33 $\pm$ 3.96 & 19.5 $\pm$ 3.1 \\
+DU outdoor & 30 & 3 & V2 & 5.92 $\pm$ 1.24 & 10.20 $\pm$ 2.82 & 34.0\% $\pm$ 9.4\% & 48.8 $\pm$ 3.9 & 13.0 $\pm$ 3.8 & 19.80 $\pm$ 2.82 & 24.28 $\pm$ 7.21 & 19.8 $\pm$ 2.8 \\
+DU outdoor & 30 & 5 & V1 & 7.47 $\pm$ 1.42 & 15.90 $\pm$ 3.31 & 53.0\% $\pm$ 11.0\% & 48.8 $\pm$ 3.9 & 23.3 $\pm$ 4.4 & 14.10 $\pm$ 3.31 & 33.31 $\pm$ 5.01 & 14.3 $\pm$ 3.3 \\
+DU outdoor & 30 & 5 & V2 & 8.32 $\pm$ 1.35 & 15.40 $\pm$ 3.13 & 51.3\% $\pm$ 10.4\% & 48.8 $\pm$ 3.9 & 21.1 $\pm$ 4.7 & 14.60 $\pm$ 3.13 & 26.05 $\pm$ 4.38 & 14.8 $\pm$ 3.2 \\
+DU outdoor & 30 & 8 & V1 & 9.87 $\pm$ 1.57 & 20.20 $\pm$ 3.12 & 67.3\% $\pm$ 10.4\% & 48.8 $\pm$ 3.9 & 31.0 $\pm$ 6.1 & 9.80 $\pm$ 3.12 & 28.36 $\pm$ 3.05 & 10.2 $\pm$ 3.0 \\
+DU outdoor & 30 & 8 & V2 & 10.23 $\pm$ 1.68 & 19.60 $\pm$ 3.63 & 65.3\% $\pm$ 12.1\% & 48.8 $\pm$ 3.9 & 29.8 $\pm$ 7.4 & 10.40 $\pm$ 3.63 & 25.66 $\pm$ 2.68 & 10.7 $\pm$ 3.5 \\
+DU outdoor & 30 & 10 & V1 & 10.59 $\pm$ 1.46 & 21.20 $\pm$ 2.74 & 70.7\% $\pm$ 9.1\% & 48.8 $\pm$ 3.9 & 32.8 $\pm$ 6.5 & 8.80 $\pm$ 2.74 & 25.97 $\pm$ 3.18 & 9.2 $\pm$ 2.4 \\
+DU outdoor & 30 & 10 & V2 & 10.80 $\pm$ 1.45 & 20.80 $\pm$ 2.86 & 69.3\% $\pm$ 9.5\% & 48.8 $\pm$ 3.9 & 31.8 $\pm$ 7.1 & 9.20 $\pm$ 2.86 & 24.88 $\pm$ 2.78 & 9.5 $\pm$ 2.6 \\
+DU outdoor & 60 & 3 & V1 & 5.95 $\pm$ 1.27 & 10.80 $\pm$ 1.62 & 18.0\% $\pm$ 2.7\% & 101.3 $\pm$ 5.1 & 16.7 $\pm$ 1.5 & 49.20 $\pm$ 1.62 & 33.64 $\pm$ 3.56 & 49.2 $\pm$ 1.6 \\
+DU outdoor & 60 & 3 & V2 & 7.42 $\pm$ 1.11 & 11.40 $\pm$ 1.71 & 19.0\% $\pm$ 2.9\% & 101.3 $\pm$ 5.1 & 14.5 $\pm$ 2.1 & 48.60 $\pm$ 1.71 & 21.94 $\pm$ 3.70 & 48.6 $\pm$ 1.7 \\
+DU outdoor & 60 & 5 & V1 & 9.49 $\pm$ 1.52 & 17.80 $\pm$ 1.99 & 29.7\% $\pm$ 3.3\% & 101.3 $\pm$ 5.1 & 27.9 $\pm$ 2.1 & 42.20 $\pm$ 1.99 & 33.21 $\pm$ 4.06 & 42.2 $\pm$ 2.0 \\
+DU outdoor & 60 & 5 & V2 & 10.70 $\pm$ 1.55 & 17.20 $\pm$ 2.49 & 28.7\% $\pm$ 4.1\% & 101.3 $\pm$ 5.1 & 23.6 $\pm$ 3.2 & 42.80 $\pm$ 2.49 & 23.16 $\pm$ 1.62 & 42.8 $\pm$ 2.5 \\
+DU outdoor & 60 & 8 & V1 & 13.63 $\pm$ 2.00 & 26.90 $\pm$ 3.03 & 44.8\% $\pm$ 5.1\% & 101.3 $\pm$ 5.1 & 42.9 $\pm$ 3.7 & 33.10 $\pm$ 3.03 & 32.95 $\pm$ 3.25 & 33.1 $\pm$ 3.0 \\
+DU outdoor & 60 & 8 & V2 & 14.77 $\pm$ 2.18 & 25.30 $\pm$ 3.47 & 42.2\% $\pm$ 5.8\% & 101.3 $\pm$ 5.1 & 38.2 $\pm$ 5.5 & 34.70 $\pm$ 3.47 & 23.79 $\pm$ 1.95 & 34.7 $\pm$ 3.5 \\
+DU outdoor & 60 & 10 & V1 & 16.20 $\pm$ 2.62 & 32.60 $\pm$ 4.99 & 54.3\% $\pm$ 8.3\% & 101.3 $\pm$ 5.1 & 53.0 $\pm$ 6.6 & 27.40 $\pm$ 4.99 & 32.62 $\pm$ 2.58 & 27.4 $\pm$ 5.0 \\
+DU outdoor & 60 & 10 & V2 & 17.10 $\pm$ 3.07 & 30.70 $\pm$ 5.25 & 51.2\% $\pm$ 8.8\% & 101.3 $\pm$ 5.1 & 47.8 $\pm$ 7.8 & 29.30 $\pm$ 5.25 & 25.73 $\pm$ 2.90 & 29.3 $\pm$ 5.3 \\
+DU outdoor & 90 & 3 & V1 & 6.26 $\pm$ 1.25 & 11.20 $\pm$ 1.69 & 12.4\% $\pm$ 1.9\% & 151.2 $\pm$ 8.3 & 16.9 $\pm$ 2.3 & 78.80 $\pm$ 1.69 & 33.00 $\pm$ 3.00 & 78.8 $\pm$ 1.7 \\
+DU outdoor & 90 & 3 & V2 & 7.55 $\pm$ 1.47 & 10.90 $\pm$ 1.97 & 12.1\% $\pm$ 2.2\% & 151.2 $\pm$ 8.3 & 14.1 $\pm$ 3.0 & 79.10 $\pm$ 1.97 & 20.23 $\pm$ 2.53 & 79.1 $\pm$ 2.0 \\
+DU outdoor & 90 & 5 & V1 & 9.80 $\pm$ 2.03 & 17.60 $\pm$ 2.88 & 19.6\% $\pm$ 3.2\% & 151.2 $\pm$ 8.3 & 27.6 $\pm$ 4.3 & 72.40 $\pm$ 2.88 & 31.72 $\pm$ 2.92 & 72.4 $\pm$ 2.9 \\
+DU outdoor & 90 & 5 & V2 & 11.80 $\pm$ 2.02 & 17.50 $\pm$ 2.46 & 19.4\% $\pm$ 2.7\% & 151.2 $\pm$ 8.3 & 23.9 $\pm$ 2.8 & 72.50 $\pm$ 2.46 & 19.99 $\pm$ 3.83 & 72.5 $\pm$ 2.5 \\
+DU outdoor & 90 & 8 & V1 & 14.08 $\pm$ 2.42 & 25.60 $\pm$ 3.50 & 28.4\% $\pm$ 3.9\% & 151.2 $\pm$ 8.3 & 41.1 $\pm$ 5.5 & 64.40 $\pm$ 3.50 & 30.10 $\pm$ 2.84 & 64.4 $\pm$ 3.5 \\
+DU outdoor & 90 & 8 & V2 & 16.47 $\pm$ 2.44 & 25.50 $\pm$ 3.14 & 28.3\% $\pm$ 3.5\% & 151.2 $\pm$ 8.3 & 37.1 $\pm$ 4.6 & 64.50 $\pm$ 3.14 & 20.81 $\pm$ 2.48 & 64.5 $\pm$ 3.1 \\
+DU outdoor & 90 & 10 & V1 & 16.76 $\pm$ 2.80 & 31.20 $\pm$ 4.24 & 34.7\% $\pm$ 4.7\% & 151.2 $\pm$ 8.3 & 50.4 $\pm$ 6.7 & 58.80 $\pm$ 4.24 & 30.52 $\pm$ 3.05 & 58.8 $\pm$ 4.2 \\
+DU outdoor & 90 & 10 & V2 & 19.35 $\pm$ 2.56 & 31.10 $\pm$ 3.81 & 34.6\% $\pm$ 4.2\% & 151.2 $\pm$ 8.3 & 47.0 $\pm$ 4.4 & 58.90 $\pm$ 3.81 & 21.94 $\pm$ 2.85 & 58.9 $\pm$ 3.8 \\
+Synthetic & 30 & 3 & V1 & 11.98 $\pm$ 1.48 & 22.60 $\pm$ 1.78 & 75.3\% $\pm$ 5.9\% & 48.6 $\pm$ 3.6 & 34.5 $\pm$ 3.1 & 7.40 $\pm$ 1.78 & 23.66 $\pm$ 2.74 & 9.7 $\pm$ 1.3 \\
+Synthetic & 30 & 3 & V2 & 12.63 $\pm$ 1.29 & 22.00 $\pm$ 1.89 & 73.3\% $\pm$ 6.3\% & 48.6 $\pm$ 3.6 & 32.7 $\pm$ 3.9 & 8.00 $\pm$ 1.89 & 20.22 $\pm$ 3.86 & 10.4 $\pm$ 1.2 \\
+Synthetic & 30 & 5 & V1 & 15.30 $\pm$ 1.10 & 27.20 $\pm$ 1.40 & 90.7\% $\pm$ 4.7\% & 48.6 $\pm$ 3.6 & 43.8 $\pm$ 4.1 & 2.80 $\pm$ 1.40 & 16.15 $\pm$ 1.85 & 5.5 $\pm$ 1.4 \\
+Synthetic & 30 & 5 & V2 & 15.32 $\pm$ 0.99 & 27.00 $\pm$ 1.56 & 90.0\% $\pm$ 5.2\% & 48.6 $\pm$ 3.6 & 43.2 $\pm$ 4.0 & 3.00 $\pm$ 1.56 & 16.66 $\pm$ 2.04 & 5.6 $\pm$ 1.3 \\
+Synthetic & 30 & 8 & V1 & 16.26 $\pm$ 1.14 & 27.50 $\pm$ 1.43 & 91.7\% $\pm$ 4.8\% & 48.6 $\pm$ 3.6 & 44.2 $\pm$ 4.1 & 2.50 $\pm$ 1.43 & 11.41 $\pm$ 1.10 & 3.4 $\pm$ 1.1 \\
+Synthetic & 30 & 8 & V2 & 16.28 $\pm$ 1.11 & 27.50 $\pm$ 1.43 & 91.7\% $\pm$ 4.8\% & 48.6 $\pm$ 3.6 & 44.2 $\pm$ 4.1 & 2.50 $\pm$ 1.43 & 11.38 $\pm$ 1.07 & 3.4 $\pm$ 1.1 \\
+Synthetic & 30 & 10 & V1 & 16.44 $\pm$ 1.12 & 27.50 $\pm$ 1.43 & 91.7\% $\pm$ 4.8\% & 48.6 $\pm$ 3.6 & 44.2 $\pm$ 4.1 & 2.50 $\pm$ 1.43 & 10.37 $\pm$ 0.86 & 2.7 $\pm$ 1.3 \\
+Synthetic & 30 & 10 & V2 & 16.44 $\pm$ 1.12 & 27.50 $\pm$ 1.43 & 91.7\% $\pm$ 4.8\% & 48.6 $\pm$ 3.6 & 44.2 $\pm$ 4.1 & 2.50 $\pm$ 1.43 & 10.37 $\pm$ 0.86 & 2.7 $\pm$ 1.3 \\
+Synthetic & 60 & 3 & V1 & 15.65 $\pm$ 1.86 & 25.40 $\pm$ 2.46 & 42.3\% $\pm$ 4.1\% & 105.1 $\pm$ 6.7 & 39.1 $\pm$ 2.7 & 34.60 $\pm$ 2.46 & 21.60 $\pm$ 2.34 & 35.0 $\pm$ 2.2 \\
+Synthetic & 60 & 3 & V2 & 16.40 $\pm$ 1.62 & 24.70 $\pm$ 2.83 & 41.2\% $\pm$ 4.7\% & 105.1 $\pm$ 6.7 & 36.2 $\pm$ 2.6 & 35.30 $\pm$ 2.83 & 16.31 $\pm$ 1.43 & 35.7 $\pm$ 2.6 \\
+Synthetic & 60 & 5 & V1 & 22.84 $\pm$ 2.17 & 39.90 $\pm$ 3.84 & 66.5\% $\pm$ 6.4\% & 105.1 $\pm$ 6.7 & 63.9 $\pm$ 5.2 & 20.10 $\pm$ 3.84 & 21.64 $\pm$ 2.43 & 22.0 $\pm$ 2.7 \\
+Synthetic & 60 & 5 & V2 & 23.71 $\pm$ 1.69 & 38.60 $\pm$ 3.63 & 64.3\% $\pm$ 6.0\% & 105.1 $\pm$ 6.7 & 60.7 $\pm$ 5.2 & 21.40 $\pm$ 3.63 & 18.03 $\pm$ 2.39 & 23.2 $\pm$ 2.8 \\
+Synthetic & 60 & 8 & V1 & 29.70 $\pm$ 2.66 & 53.30 $\pm$ 3.20 & 88.8\% $\pm$ 5.3\% & 105.1 $\pm$ 6.7 & 92.0 $\pm$ 7.2 & 6.70 $\pm$ 3.20 & 18.93 $\pm$ 3.11 & 11.0 $\pm$ 2.4 \\
+Synthetic & 60 & 8 & V2 & 29.78 $\pm$ 2.25 & 51.90 $\pm$ 3.90 & 86.5\% $\pm$ 6.5\% & 105.1 $\pm$ 6.7 & 88.7 $\pm$ 8.4 & 8.10 $\pm$ 3.90 & 18.63 $\pm$ 1.55 & 11.9 $\pm$ 2.6 \\
+Synthetic & 60 & 10 & V1 & 31.86 $\pm$ 1.72 & 55.30 $\pm$ 1.77 & 92.2\% $\pm$ 2.9\% & 105.1 $\pm$ 6.7 & 96.3 $\pm$ 7.7 & 4.70 $\pm$ 1.77 & 15.01 $\pm$ 2.54 & 8.7 $\pm$ 2.2 \\
+Synthetic & 60 & 10 & V2 & 31.77 $\pm$ 1.88 & 54.50 $\pm$ 2.59 & 90.8\% $\pm$ 4.3\% & 105.1 $\pm$ 6.7 & 94.2 $\pm$ 8.7 & 5.50 $\pm$ 2.59 & 15.17 $\pm$ 1.97 & 8.4 $\pm$ 2.4 \\
+Synthetic & 90 & 3 & V1 & 17.81 $\pm$ 1.59 & 27.70 $\pm$ 2.41 & 30.8\% $\pm$ 2.7\% & 156.4 $\pm$ 5.5 & 39.3 $\pm$ 3.1 & 62.30 $\pm$ 2.41 & 20.89 $\pm$ 2.28 & 62.3 $\pm$ 2.4 \\
+Synthetic & 90 & 3 & V2 & 18.34 $\pm$ 2.04 & 26.30 $\pm$ 3.09 & 29.2\% $\pm$ 3.4\% & 156.4 $\pm$ 5.5 & 35.7 $\pm$ 4.6 & 63.70 $\pm$ 3.09 & 14.87 $\pm$ 0.74 & 63.7 $\pm$ 3.1 \\
+Synthetic & 90 & 5 & V1 & 26.11 $\pm$ 2.29 & 41.80 $\pm$ 3.82 & 46.4\% $\pm$ 4.2\% & 156.4 $\pm$ 5.5 & 63.0 $\pm$ 5.2 & 48.20 $\pm$ 3.82 & 20.04 $\pm$ 2.16 & 48.5 $\pm$ 3.8 \\
+Synthetic & 90 & 5 & V2 & 26.73 $\pm$ 2.88 & 40.20 $\pm$ 4.44 & 44.7\% $\pm$ 4.9\% & 156.4 $\pm$ 5.5 & 59.4 $\pm$ 5.7 & 49.80 $\pm$ 4.44 & 15.95 $\pm$ 2.12 & 50.0 $\pm$ 4.3 \\
+Synthetic & 90 & 8 & V1 & 36.28 $\pm$ 2.87 & 62.30 $\pm$ 5.50 & 69.2\% $\pm$ 6.1\% & 156.4 $\pm$ 5.5 & 100.4 $\pm$ 9.3 & 27.70 $\pm$ 5.50 & 19.91 $\pm$ 1.98 & 29.3 $\pm$ 4.6 \\
+Synthetic & 90 & 8 & V2 & 37.00 $\pm$ 3.19 & 60.50 $\pm$ 5.38 & 67.2\% $\pm$ 6.0\% & 156.4 $\pm$ 5.5 & 95.6 $\pm$ 8.8 & 29.50 $\pm$ 5.38 & 17.08 $\pm$ 1.53 & 30.4 $\pm$ 5.0 \\
+Synthetic & 90 & 10 & V1 & 41.52 $\pm$ 2.75 & 74.30 $\pm$ 4.22 & 82.6\% $\pm$ 4.7\% & 156.4 $\pm$ 5.5 & 123.8 $\pm$ 8.0 & 15.70 $\pm$ 4.22 & 19.96 $\pm$ 2.31 & 19.6 $\pm$ 3.9 \\
+Synthetic & 90 & 10 & V2 & 41.65 $\pm$ 2.94 & 71.60 $\pm$ 5.10 & 79.6\% $\pm$ 5.7\% & 156.4 $\pm$ 5.5 & 118.1 $\pm$ 9.1 & 18.40 $\pm$ 5.10 & 18.33 $\pm$ 1.87 & 21.4 $\pm$ 4.6 \\
+\bottomrule\end{longtable}\end{landscape}
+\begin{landscape}\begin{longtable}{@{}lrrlrrrrrr@{}}
+\caption{Resource metrics: mean $\pm$ standard deviation।}\label{tab:v2-resource-metrics}\\
+\toprule Environment & Task & UAV & Alg & Distance & Travel & Energy & E/task & E/parcel & Safe return\\\midrule
+\endfirsthead\toprule Environment & Task & UAV & Alg & Distance & Travel & Energy & E/task & E/parcel & Safe return\\\midrule\endhead
+DU outdoor & 30 & 3 & V1 & 2832.4 $\pm$ 219.5 & 283.2 $\pm$ 21.9 & 2934.2 $\pm$ 224.0 & 299.0 $\pm$ 81.1 & 201.2 $\pm$ 37.0 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 30 & 3 & V2 & 2787.2 $\pm$ 184.9 & 278.7 $\pm$ 18.5 & 2887.1 $\pm$ 191.5 & 308.9 $\pm$ 113.1 & 254.2 $\pm$ 128.4 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 30 & 5 & V1 & 4602.5 $\pm$ 327.9 & 460.3 $\pm$ 32.8 & 4762.7 $\pm$ 330.5 & 315.1 $\pm$ 87.1 & 213.3 $\pm$ 55.3 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 30 & 5 & V2 & 4542.6 $\pm$ 271.2 & 454.3 $\pm$ 27.1 & 4722.1 $\pm$ 290.6 & 319.9 $\pm$ 77.4 & 239.7 $\pm$ 82.0 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 30 & 8 & V1 & 6495.0 $\pm$ 350.3 & 649.5 $\pm$ 35.0 & 6709.3 $\pm$ 357.3 & 342.0 $\pm$ 73.6 & 225.6 $\pm$ 55.4 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 30 & 8 & V2 & 6516.3 $\pm$ 384.0 & 651.6 $\pm$ 38.4 & 6748.6 $\pm$ 404.1 & 358.3 $\pm$ 85.7 & 245.7 $\pm$ 90.0 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 30 & 10 & V1 & 7404.9 $\pm$ 529.3 & 740.5 $\pm$ 52.9 & 7635.4 $\pm$ 542.9 & 367.6 $\pm$ 70.1 & 241.2 $\pm$ 53.2 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 30 & 10 & V2 & 7380.9 $\pm$ 625.2 & 738.1 $\pm$ 62.5 & 7624.9 $\pm$ 647.6 & 373.6 $\pm$ 65.9 & 251.0 $\pm$ 64.7 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 60 & 3 & V1 & 2942.4 $\pm$ 162.8 & 294.2 $\pm$ 16.3 & 3058.2 $\pm$ 165.8 & 290.4 $\pm$ 54.4 & 184.9 $\pm$ 23.1 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 60 & 3 & V2 & 2929.5 $\pm$ 250.8 & 292.9 $\pm$ 25.1 & 3057.3 $\pm$ 252.9 & 276.1 $\pm$ 62.3 & 216.6 $\pm$ 47.4 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 60 & 5 & V1 & 4751.1 $\pm$ 265.1 & 475.1 $\pm$ 26.5 & 4939.5 $\pm$ 270.9 & 281.6 $\pm$ 43.5 & 178.3 $\pm$ 20.8 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 60 & 5 & V2 & 4782.8 $\pm$ 273.1 & 478.3 $\pm$ 27.3 & 4981.2 $\pm$ 271.4 & 297.6 $\pm$ 63.5 & 215.0 $\pm$ 34.8 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 60 & 8 & V1 & 7604.1 $\pm$ 342.3 & 760.4 $\pm$ 34.2 & 7897.7 $\pm$ 357.3 & 297.5 $\pm$ 40.9 & 185.3 $\pm$ 17.5 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 60 & 8 & V2 & 7373.2 $\pm$ 323.8 & 737.3 $\pm$ 32.4 & 7667.6 $\pm$ 331.0 & 309.0 $\pm$ 49.5 & 204.8 $\pm$ 32.6 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 60 & 10 & V1 & 9321.8 $\pm$ 522.4 & 932.2 $\pm$ 52.2 & 9681.0 $\pm$ 538.8 & 303.4 $\pm$ 49.8 & 184.9 $\pm$ 21.9 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 60 & 10 & V2 & 9162.9 $\pm$ 461.7 & 916.3 $\pm$ 46.2 & 9526.9 $\pm$ 492.9 & 318.7 $\pm$ 55.3 & 204.0 $\pm$ 32.9 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 90 & 3 & V1 & 3038.9 $\pm$ 122.2 & 303.9 $\pm$ 12.2 & 3153.7 $\pm$ 123.5 & 287.2 $\pm$ 43.1 & 189.7 $\pm$ 25.4 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 90 & 3 & V2 & 2883.3 $\pm$ 189.1 & 288.3 $\pm$ 18.9 & 2998.0 $\pm$ 192.0 & 284.4 $\pm$ 61.1 & 221.7 $\pm$ 50.5 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 90 & 5 & V1 & 4960.8 $\pm$ 186.1 & 496.1 $\pm$ 18.6 & 5141.6 $\pm$ 183.6 & 300.1 $\pm$ 55.8 & 190.9 $\pm$ 33.9 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 90 & 5 & V2 & 4918.5 $\pm$ 233.8 & 491.8 $\pm$ 23.4 & 5110.3 $\pm$ 218.9 & 298.0 $\pm$ 49.2 & 216.9 $\pm$ 30.3 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 90 & 8 & V1 & 7667.8 $\pm$ 377.4 & 766.8 $\pm$ 37.7 & 7941.7 $\pm$ 381.3 & 316.3 $\pm$ 51.7 & 196.8 $\pm$ 30.8 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 90 & 8 & V2 & 7709.9 $\pm$ 290.4 & 771.0 $\pm$ 29.0 & 8005.1 $\pm$ 298.4 & 318.2 $\pm$ 39.7 & 218.4 $\pm$ 24.8 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 90 & 10 & V1 & 9516.9 $\pm$ 390.9 & 951.7 $\pm$ 39.1 & 9854.2 $\pm$ 393.7 & 321.9 $\pm$ 50.1 & 198.8 $\pm$ 28.2 & 100.0\% $\pm$ 0.0\% \\
+DU outdoor & 90 & 10 & V2 & 9262.3 $\pm$ 497.4 & 926.2 $\pm$ 49.7 & 9614.5 $\pm$ 492.4 & 313.8 $\pm$ 44.5 & 206.2 $\pm$ 21.1 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 30 & 3 & V1 & 2521.9 $\pm$ 135.6 & 252.2 $\pm$ 13.6 & 2671.2 $\pm$ 135.9 & 118.7 $\pm$ 8.8 & 78.0 $\pm$ 7.9 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 30 & 3 & V2 & 2607.0 $\pm$ 131.7 & 260.7 $\pm$ 13.2 & 2765.2 $\pm$ 132.2 & 126.4 $\pm$ 10.7 & 85.7 $\pm$ 10.9 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 30 & 5 & V1 & 3801.4 $\pm$ 301.6 & 380.1 $\pm$ 30.2 & 4001.2 $\pm$ 310.4 & 147.3 $\pm$ 12.1 & 92.2 $\pm$ 12.0 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 30 & 5 & V2 & 3863.4 $\pm$ 277.9 & 386.3 $\pm$ 27.8 & 4071.7 $\pm$ 286.8 & 151.0 $\pm$ 10.4 & 94.9 $\pm$ 10.5 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 30 & 8 & V1 & 4766.2 $\pm$ 471.5 & 476.6 $\pm$ 47.1 & 4980.5 $\pm$ 484.6 & 181.3 $\pm$ 17.5 & 113.7 $\pm$ 16.2 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 30 & 8 & V2 & 4786.7 $\pm$ 479.4 & 478.7 $\pm$ 47.9 & 5002.2 $\pm$ 492.8 & 182.1 $\pm$ 17.7 & 114.2 $\pm$ 16.3 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 30 & 10 & V1 & 4992.2 $\pm$ 538.4 & 499.2 $\pm$ 53.8 & 5209.9 $\pm$ 552.0 & 189.7 $\pm$ 20.1 & 119.0 $\pm$ 17.8 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 30 & 10 & V2 & 4992.2 $\pm$ 538.4 & 499.2 $\pm$ 53.8 & 5209.9 $\pm$ 552.0 & 189.7 $\pm$ 20.1 & 119.0 $\pm$ 17.8 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 60 & 3 & V1 & 2685.7 $\pm$ 81.4 & 268.6 $\pm$ 8.1 & 2842.1 $\pm$ 83.0 & 112.8 $\pm$ 10.5 & 73.0 $\pm$ 6.2 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 60 & 3 & V2 & 2706.9 $\pm$ 72.6 & 270.7 $\pm$ 7.3 & 2866.8 $\pm$ 78.6 & 117.9 $\pm$ 17.5 & 79.6 $\pm$ 7.1 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 60 & 5 & V1 & 4406.2 $\pm$ 135.9 & 440.6 $\pm$ 13.6 & 4666.6 $\pm$ 140.4 & 118.0 $\pm$ 12.2 & 73.4 $\pm$ 5.7 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 60 & 5 & V2 & 4444.6 $\pm$ 128.9 & 444.5 $\pm$ 12.9 & 4708.6 $\pm$ 140.9 & 123.0 $\pm$ 12.6 & 78.0 $\pm$ 5.3 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 60 & 8 & V1 & 6587.8 $\pm$ 374.3 & 658.8 $\pm$ 37.4 & 6966.9 $\pm$ 394.9 & 131.2 $\pm$ 12.0 & 76.2 $\pm$ 7.5 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 60 & 8 & V2 & 6670.9 $\pm$ 238.7 & 667.1 $\pm$ 23.9 & 7065.6 $\pm$ 255.6 & 137.1 $\pm$ 15.0 & 80.5 $\pm$ 9.8 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 60 & 10 & V1 & 7628.7 $\pm$ 491.4 & 762.9 $\pm$ 49.1 & 8037.7 $\pm$ 523.9 & 145.5 $\pm$ 11.0 & 83.8 $\pm$ 7.3 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 60 & 10 & V2 & 7647.2 $\pm$ 525.5 & 764.7 $\pm$ 52.5 & 8073.4 $\pm$ 561.6 & 148.5 $\pm$ 13.7 & 86.3 $\pm$ 9.1 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 90 & 3 & V1 & 2778.2 $\pm$ 70.1 & 277.8 $\pm$ 7.0 & 2943.9 $\pm$ 67.6 & 107.1 $\pm$ 10.5 & 75.4 $\pm$ 7.0 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 90 & 3 & V2 & 2737.4 $\pm$ 64.2 & 273.7 $\pm$ 6.4 & 2898.1 $\pm$ 66.4 & 111.7 $\pm$ 14.9 & 82.7 $\pm$ 13.5 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 90 & 5 & V1 & 4541.3 $\pm$ 129.3 & 454.1 $\pm$ 12.9 & 4804.2 $\pm$ 130.8 & 115.9 $\pm$ 12.1 & 76.8 $\pm$ 8.0 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 90 & 5 & V2 & 4552.5 $\pm$ 130.1 & 455.2 $\pm$ 13.0 & 4824.7 $\pm$ 144.8 & 121.6 $\pm$ 15.9 & 82.1 $\pm$ 10.0 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 90 & 8 & V1 & 7056.7 $\pm$ 176.0 & 705.7 $\pm$ 17.6 & 7472.0 $\pm$ 182.3 & 120.7 $\pm$ 9.5 & 75.0 $\pm$ 6.6 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 90 & 8 & V2 & 7171.5 $\pm$ 53.5 & 717.1 $\pm$ 5.4 & 7598.7 $\pm$ 57.4 & 126.6 $\pm$ 12.0 & 80.1 $\pm$ 8.1 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 90 & 10 & V1 & 8730.8 $\pm$ 238.3 & 873.1 $\pm$ 23.8 & 9240.4 $\pm$ 251.5 & 124.8 $\pm$ 8.5 & 75.0 $\pm$ 5.9 & 100.0\% $\pm$ 0.0\% \\
+Synthetic & 90 & 10 & V2 & 8823.4 $\pm$ 197.4 & 882.3 $\pm$ 19.7 & 9340.6 $\pm$ 217.6 & 131.0 $\pm$ 9.7 & 79.5 $\pm$ 6.2 & 100.0\% $\pm$ 0.0\% \\
+\bottomrule\end{longtable}\end{landscape}
+\begin{landscape}\begin{longtable}{@{}lrrlrrrrr@{}}
+\caption{Recourse এবং runtime metrics: mean $\pm$ standard deviation।}\label{tab:v2-recourse-metrics}\\
+\toprule Environment & Task & UAV & Alg & Trigger & Accepted & Rejected & Gain & Runtime\\\midrule
+\endfirsthead\toprule Environment & Task & UAV & Alg & Trigger & Accepted & Rejected & Gain & Runtime\\\midrule\endhead
+DU outdoor & 30 & 3 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 11.485 $\pm$ 6.489 \\
+DU outdoor & 30 & 3 & V2 & 20.2 $\pm$ 2.7 & 6.1 $\pm$ 2.4 & 14.1 $\pm$ 1.5 & 1.302 $\pm$ 0.573 & 37.612 $\pm$ 26.444 \\
+DU outdoor & 30 & 5 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 13.509 $\pm$ 7.659 \\
+DU outdoor & 30 & 5 & V2 & 15.2 $\pm$ 2.6 & 7.0 $\pm$ 1.9 & 8.2 $\pm$ 2.8 & 1.409 $\pm$ 0.380 & 42.588 $\pm$ 22.340 \\
+DU outdoor & 30 & 8 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 15.143 $\pm$ 8.093 \\
+DU outdoor & 30 & 8 & V2 & 6.9 $\pm$ 3.1 & 4.7 $\pm$ 1.7 & 2.2 $\pm$ 2.1 & 0.903 $\pm$ 0.461 & 38.111 $\pm$ 19.065 \\
+DU outdoor & 30 & 10 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 14.422 $\pm$ 7.936 \\
+DU outdoor & 30 & 10 & V2 & 5.1 $\pm$ 3.1 & 3.2 $\pm$ 1.3 & 1.9 $\pm$ 2.3 & 0.676 $\pm$ 0.347 & 28.559 $\pm$ 12.537 \\
+DU outdoor & 60 & 3 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 12.684 $\pm$ 6.289 \\
+DU outdoor & 60 & 3 & V2 & 43.8 $\pm$ 4.4 & 8.0 $\pm$ 1.9 & 35.8 $\pm$ 4.8 & 1.350 $\pm$ 0.429 & 50.711 $\pm$ 34.337 \\
+DU outdoor & 60 & 5 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 18.059 $\pm$ 7.983 \\
+DU outdoor & 60 & 5 & V2 & 36.0 $\pm$ 4.9 & 9.1 $\pm$ 1.9 & 26.9 $\pm$ 5.2 & 1.660 $\pm$ 0.435 & 54.161 $\pm$ 25.153 \\
+DU outdoor & 60 & 8 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 23.971 $\pm$ 10.611 \\
+DU outdoor & 60 & 8 & V2 & 30.3 $\pm$ 5.5 & 13.0 $\pm$ 2.3 & 17.3 $\pm$ 4.7 & 2.283 $\pm$ 0.365 & 50.260 $\pm$ 25.969 \\
+DU outdoor & 60 & 10 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 30.386 $\pm$ 14.888 \\
+DU outdoor & 60 & 10 & V2 & 26.8 $\pm$ 4.8 & 13.0 $\pm$ 2.1 & 13.8 $\pm$ 3.9 & 2.599 $\pm$ 0.624 & 36.383 $\pm$ 17.980 \\
+DU outdoor & 90 & 3 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 15.823 $\pm$ 9.331 \\
+DU outdoor & 90 & 3 & V2 & 66.9 $\pm$ 5.1 & 9.7 $\pm$ 3.1 & 57.2 $\pm$ 5.9 & 1.369 $\pm$ 0.524 & 65.505 $\pm$ 38.326 \\
+DU outdoor & 90 & 5 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 20.151 $\pm$ 8.642 \\
+DU outdoor & 90 & 5 & V2 & 59.6 $\pm$ 4.9 & 14.0 $\pm$ 5.1 & 45.6 $\pm$ 8.6 & 2.157 $\pm$ 0.889 & 61.833 $\pm$ 25.722 \\
+DU outdoor & 90 & 8 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 30.704 $\pm$ 12.132 \\
+DU outdoor & 90 & 8 & V2 & 48.8 $\pm$ 3.9 & 17.4 $\pm$ 4.1 & 31.4 $\pm$ 6.0 & 2.923 $\pm$ 0.867 & 113.128 $\pm$ 49.163 \\
+DU outdoor & 90 & 10 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 36.365 $\pm$ 8.356 \\
+DU outdoor & 90 & 10 & V2 & 40.5 $\pm$ 6.3 & 17.1 $\pm$ 2.7 & 23.4 $\pm$ 6.4 & 3.208 $\pm$ 0.810 & 134.039 $\pm$ 47.750 \\
+Synthetic & 30 & 3 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 2.069 $\pm$ 1.400 \\
+Synthetic & 30 & 3 & V2 & 16.9 $\pm$ 2.2 & 6.4 $\pm$ 2.0 & 10.5 $\pm$ 3.0 & 1.627 $\pm$ 0.672 & 4.040 $\pm$ 2.335 \\
+Synthetic & 30 & 5 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 1.118 $\pm$ 0.569 \\
+Synthetic & 30 & 5 & V2 & 8.0 $\pm$ 3.1 & 3.7 $\pm$ 1.3 & 4.3 $\pm$ 2.7 & 0.876 $\pm$ 0.444 & 3.222 $\pm$ 1.809 \\
+Synthetic & 30 & 8 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 1.102 $\pm$ 0.597 \\
+Synthetic & 30 & 8 & V2 & 1.4 $\pm$ 1.0 & 0.8 $\pm$ 1.0 & 0.6 $\pm$ 0.7 & 0.159 $\pm$ 0.281 & 3.355 $\pm$ 1.723 \\
+Synthetic & 30 & 10 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 1.078 $\pm$ 0.540 \\
+Synthetic & 30 & 10 & V2 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 3.612 $\pm$ 1.897 \\
+Synthetic & 60 & 3 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 2.862 $\pm$ 1.195 \\
+Synthetic & 60 & 3 & V2 & 34.3 $\pm$ 4.6 & 8.8 $\pm$ 3.1 & 25.5 $\pm$ 3.6 & 1.532 $\pm$ 0.637 & 11.164 $\pm$ 4.674 \\
+Synthetic & 60 & 5 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 4.039 $\pm$ 1.683 \\
+Synthetic & 60 & 5 & V2 & 25.1 $\pm$ 5.7 & 11.0 $\pm$ 2.9 & 14.1 $\pm$ 3.9 & 2.320 $\pm$ 0.935 & 14.512 $\pm$ 4.221 \\
+Synthetic & 60 & 8 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 4.663 $\pm$ 3.470 \\
+Synthetic & 60 & 8 & V2 & 14.8 $\pm$ 5.7 & 9.7 $\pm$ 3.3 & 5.1 $\pm$ 3.3 & 2.466 $\pm$ 1.039 & 17.878 $\pm$ 7.983 \\
+Synthetic & 60 & 10 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 3.644 $\pm$ 2.618 \\
+Synthetic & 60 & 10 & V2 & 8.5 $\pm$ 4.6 & 5.4 $\pm$ 3.0 & 3.1 $\pm$ 3.0 & 1.472 $\pm$ 0.938 & 11.775 $\pm$ 5.478 \\
+Synthetic & 90 & 3 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 3.246 $\pm$ 1.557 \\
+Synthetic & 90 & 3 & V2 & 57.9 $\pm$ 4.6 & 13.3 $\pm$ 2.4 & 44.6 $\pm$ 4.9 & 1.906 $\pm$ 0.364 & 8.992 $\pm$ 4.750 \\
+Synthetic & 90 & 5 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 5.201 $\pm$ 3.266 \\
+Synthetic & 90 & 5 & V2 & 44.1 $\pm$ 7.1 & 15.5 $\pm$ 4.2 & 28.6 $\pm$ 5.3 & 2.442 $\pm$ 0.854 & 11.353 $\pm$ 5.917 \\
+Synthetic & 90 & 8 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 7.286 $\pm$ 2.764 \\
+Synthetic & 90 & 8 & V2 & 28.7 $\pm$ 6.4 & 14.4 $\pm$ 4.1 & 14.3 $\pm$ 4.1 & 2.787 $\pm$ 1.140 & 16.359 $\pm$ 9.764 \\
+Synthetic & 90 & 10 & V1 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.000 $\pm$ 0.000 & 8.488 $\pm$ 3.596 \\
+Synthetic & 90 & 10 & V2 & 24.1 $\pm$ 10.2 & 13.8 $\pm$ 6.5 & 10.3 $\pm$ 4.7 & 3.236 $\pm$ 1.573 & 17.993 $\pm$ 7.594 \\
+\bottomrule\end{longtable}\end{landscape}
+এই expanded matrix-এ absolute requested/dropped parcel, task rate, deferred task এবং peak queue সরাসরি দেওয়া হয়েছে; parcel rate একা দেখে service volume অনুমান করতে হবে না। Resource table-এ distance এবং energy পাশাপাশি থাকায় route length বাড়ার সঙ্গে payload, ascent এবং service energy কীভাবে বদলেছে সেটিও দেখা যায়। Recourse table-এ trigger, accepted/rejected replacement, gain এবং runtime আলাদা করে দেখানো হয়েছে।
+\section{Recourse evidence: environment, load, fleet এবং phase}
+Trigger-level মোট outcome-এর পাশাপাশি trace থেকে acceptance rate আলাদা করে হিসাব করা হয়েছে। Accepted gain-এর mean $\pm$ standard deviation এখানে accepted event-এর $\Delta J$; episode-level $replacement\_gain$ তার থেকে আলাদা cumulative quantity।
+\begin{table}[H]\centering\scriptsize\begin{tabular}{@{}llrrrrr@{}}\toprule Group type & Group & Trigger & Accepted & Rate & Rejected & Gain mean $\pm$ std\\\midrule
+Environment & DU outdoor & 4001 & 1223 & 30.6\% & 2778 & 0.179 $\pm$ 0.132 \\
+Environment & Synthetic & 2638 & 1028 & 39.0\% & 1610 & 0.203 $\pm$ 0.150 \\
+Task load & 30 & 737 & 319 & 43.3\% & 418 & 0.218 $\pm$ 0.141 \\
+Task load & 60 & 2196 & 780 & 35.5\% & 1416 & 0.201 $\pm$ 0.146 \\
+Task load & 90 & 3706 & 1152 & 31.1\% & 2554 & 0.174 $\pm$ 0.136 \\
+UAV count & 3 & 2400 & 523 & 21.8\% & 1877 & 0.174 $\pm$ 0.134 \\
+UAV count & 5 & 1880 & 603 & 32.1\% & 1277 & 0.180 $\pm$ 0.133 \\
+UAV count & 8 & 1309 & 600 & 45.8\% & 709 & 0.192 $\pm$ 0.139 \\
+UAV count & 10 & 1050 & 525 & 50.0\% & 525 & 0.213 $\pm$ 0.155 \\
+Arrival phase & High & 3728 & 1223 & 32.8\% & 2505 & 0.173 $\pm$ 0.130 \\
+Arrival phase & Medium & 2265 & 886 & 39.1\% & 1379 & 0.201 $\pm$ 0.143 \\
+Arrival phase & Low & 646 & 142 & 22.0\% & 504 & 0.255 $\pm$ 0.191 \\
+\bottomrule\end{tabular}\end{table}
+\subsection{Candidate-level rejection breakdown}
+একটি trigger-এর ভিতরে একাধিক candidate থাকতে পারে। তাই নিচের count candidate-level; আগের rejection table-এর count trigger-level final reason।
+\begin{table}[H]\centering\scriptsize\begin{tabular}{@{}lrr@{}}\toprule Candidate outcome/reason & Count & Share\\\midrule
+Onboard inventory & 21828 & 62.6\% \\
+Payload capacity & 0 & 0.0\% \\
+Route infeasible & 5 & 0.0\% \\
+Energy reserve & 154 & 0.4\% \\
+Horizon & 851 & 2.4\% \\
+Service in progress & 1447 & 4.1\% \\
+Non-positive gain & 6021 & 17.3\% \\
+Feasible positive gain & 4584 & 13.1\% \\
+\bottomrule\end{tabular}\end{table}
+Accepted replacement-এর পরে 2025টি unique displaced-task instance-এর মধ্যে 558টি (27.6\%) horizon-এর মধ্যে পরে complete হয়েছে এবং 1467টি (72.4\%) deferred থেকেছে। মোট accepted event ছিল 2251; এর মধ্যে 226টি repeated displacement event, তাই event count এবং unique task count আলাদা করে report করা হয়েছে।
+Accepted trace example: \texttt{du\_outdoor\_tasks\_30\_uavs\_3\_seed\_101}-এ $t=7.78$ min-এ uav\_1 দ্বারা \texttt{task\_6} task-কে সরিয়ে \texttt{task\_10} task বসানো হয়েছে; old value 0.244, new value 0.633, gain +0.390.
+Rejected trace example: \texttt{du\_outdoor\_tasks\_30\_uavs\_3\_seed\_101}-এ $t=15.10$ min-এ \texttt{task\_9} task-এর জন্য candidate gain -0.076; candidate feasible হলেও gain positive নয়, তাই final reason \texttt{no\_positive\_gain} এবং task queue-তে রাখা হয়েছে.
+\section{Validation evidence}
+একটি sentence-এর বদলে paired matrix এবং ছোট deterministic replay fixture-এর evidence নিচে দেওয়া হলো। Fixed-control fixture-এ V1 এবং V2 recourse-disabled একই scenario-তে চালানো হয়েছে; heavy matrix-এর ২৪০টি pair-এ scenario fingerprint match আলাদা করে যাচাই করা হয়েছে।
+\begin{table}[H]\centering\scriptsize\begin{tabular}{@{}p{0.31\textwidth}p{0.43\textwidth}l@{}}\toprule Validation check & Evidence & Result\\\midrule
+Same scenario fingerprint এবং task realization & 240টি paired cell-এর fingerprint match & PASS\\
+Fixed-control objective & V1 5.453757; V2 fixed 5.453757 & PASS\\
+Fixed-control served task & Same served-task ID set & PASS\\
+Fixed-control distance and energy & Both values match within tolerance & PASS\\
+Fixed-control candidate count & Same candidate count & PASS\\
+Deterministic replay & Repeated V2 run produced identical events and decisions & PASS\\
+Duplicate completion & Completed event IDs are unique & PASS\\
+Objective double-counting & Reported 5.453757; direct final-completion sum 5.453757 & PASS\\
+\bottomrule\end{tabular}\end{table}
+Validation fixture: \texttt{synthetic, seed 5, 12 tasks, 3 UAV}. এটি report-এর reproducibility check; full result matrix-এর performance estimate নয়.
+\section{V2 result-এর অর্থ এবং limitation}
+\begin{enumerate}
+\item V2 active mission-এর uncompleted suffix পরিবর্তন করে নতুন task-এর priority value বিবেচনা করেছে।
+\item Accepted replacement-এ displaced task queue-তে ফিরে যায়; task হারিয়ে যায় না।
+\item Current onboard inventory না মিললে V2 replacement গ্রহণ করে না।
+\item Completed route prefix এবং completed delivery immutable রাখা হয়েছে।
+\item Final objective completed task-এর service value থেকে একবার গণনা করা হয়েছে।
+\item Safe return rate এবং energy value configured simulation model-এর ফল, field flight reliability নয়।
+\item One-for-one V2 full mathematical optimizer বা full fleet rolling-horizon optimizer নয়।
+\item Reserve inventory, base reload, multiple replacement এবং broader reassignment V3 scope।
+\end{enumerate}
+\section{উপসংহার এবং পরবর্তী কাজ}
+V1 একটি fixed active-mission reference হিসেবে অপরিবর্তিত রাখা হয়েছে। V2 formulation-এর সীমিত recourse rule যোগ করেছে: নতুন high-value task এলে feasible হলে একটি active mission-এর একটি uncompleted task replace করা যায়। Paired matrix V1 এবং V2-এর operational outcome এবং recourse overhead একসঙ্গে দেখাবে। পরবর্তী version-এ reserve inventory এবং active inventory-aware reassignment যোগ করার আগে V2-এর decision trace, service-value gain এবং runtime overhead বিশ্লেষণ করা হবে।
+\section{Reproducibility artifacts}
+\begin{itemize}
+\scriptsize\sloppy
+\item \code{Simulation/results/pgbm_v2_recourse_experiments/raw_metrics/pgbm_v2_paired_matrix_metrics_tasks_30_60_90_uavs_3_5_8_10_seeds_101_110.csv}: ৪৮০টি metrics row।
+\item \code{Simulation/results/pgbm_v2_recourse_experiments/decision_traces/pgbm_v2_decision_traces.jsonl}: ২৪০টি V2 decision trace।
+\item \code{Simulation/run_pgbm_v2_experiment_matrix.py}: matrix execution script।
+\item \code{Simulation/pgbm_sim/v2/}: V2 runtime, recourse এবং experiment modules।
+\item \code{docs/specs/0007-pgbm-v2-task-replacement-recourse.md}: accepted design specification।
+\end{itemize}
+\end{document}

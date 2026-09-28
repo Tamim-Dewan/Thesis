@@ -48,6 +48,7 @@ Specifications are stored in `docs/specs/`. The project scope is in `docs/scope/
 ## Context files
 
 - [Simulation/AGENTS.md](Simulation/AGENTS.md): simulator commands, geometry contracts, and provenance rules.
+- [Simulation/pgbm_sim/v2/AGENTS.md](Simulation/pgbm_sim/v2/AGENTS.md): V2 recourse contract, commands, and evidence boundaries.
 - [Simulation/heidata_benchmark/AGENTS.md](Simulation/heidata_benchmark/AGENTS.md): local mesh benchmark conventions.
 - [Research Source/AGENTS.md](Research%20Source/AGENTS.md): thesis source layout and LaTeX gotchas.
 

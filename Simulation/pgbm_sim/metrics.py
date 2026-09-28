@@ -26,6 +26,25 @@ class MetricsRecord:
     rejected_replacements: int
     safe_return_rate: float
     runtime_seconds: float
+    recourse_enabled: bool = False
+    horizon_minutes: float = 0.0
+    arrival_profile: str = ""
+    task_count: int = 0
+    uav_count: int = 0
+    dispatch_count: int = 0
+    peak_queue_size: int = 0
+    candidate_count: int = 0
+    planner_runtime_seconds: float = 0.0
+    route_runtime_seconds: float = 0.0
+    phase_high_tasks: int = 0
+    phase_medium_tasks: int = 0
+    phase_low_tasks: int = 0
+    search_truncated_dispatches: int = 0
+    max_candidate_count: int = 0
+    max_pending_considered: int = 0
+    requested_parcels: int = 0
+    dropped_parcels: int = 0
+    parcel_delivery_rate: float = 0.0
 
 
 METRIC_FIELDS: Tuple[str, ...] = tuple(MetricsRecord.__dataclass_fields__.keys())

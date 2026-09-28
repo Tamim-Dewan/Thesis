@@ -27,6 +27,11 @@ Generate a scene preview with task and vertical drop off layers using
 `render_disaster_preview.py --with-tasks`. Generate the real mesh
 reference with `PYTHONPATH=. python3 -m heidata_benchmark.cli` and its manifest.
 
+Run the formulation aligned V2 paired recourse matrix with
+`PYTHONPATH=. python3 run_pgbm_v2_experiment_matrix.py`; use the task loads,
+fleet sizes, and seeds documented in `pgbm_sim/v2/AGENTS.md` for the canonical
+comparison.
+
 ## Conventions
 
 Scene generation is deterministic from explicit seeds and local templates.
@@ -87,3 +92,4 @@ _Drafted by /sync from the introducing change, worth a quick human pass._
 ## Context files
 
 - [heidata_benchmark/AGENTS.md](heidata_benchmark/AGENTS.md): local conventions for the separate L’Aquila benchmark environment.
+- [pgbm_sim/v2/AGENTS.md](pgbm_sim/v2/AGENTS.md): formulation aligned V2 recourse contract and evidence boundaries.

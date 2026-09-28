@@ -19,7 +19,8 @@ from pgbm_sim import (
 
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--mode", choices=("synthetic", "du_outdoor", "real_building", "laquila_informed"), default="du_outdoor")
+parser.add_argument("--mode", choices=("synthetic", "du_outdoor", "real_building", "laquila_informed", "heidata_full", "heidata_neighborhood"), default="du_outdoor")
+parser.add_argument("--template-path", help="custom scene template or heiDATA full layout configuration")
 parser.add_argument("--severity", choices=("light", "moderate", "severe"), default="severe")
 parser.add_argument("--seed", type=int, default=20260924)
 parser.add_argument("--task-count", type=int, default=6)
@@ -38,7 +39,7 @@ args = parser.parse_args()
 
 uavs = UAVConfig(count=args.uav_count)
 scenario = build_scenario(
-    SceneConfig(mode=args.mode, severity=args.severity, seed=args.seed, uav_count=args.uav_count),
+    SceneConfig(mode=args.mode, severity=args.severity, seed=args.seed, uav_count=args.uav_count, template_path=args.template_path),
     TaskConfig(task_count=args.task_count, seed=args.seed + 1),
     scenario_id="{}_{}_{}".format(args.mode, args.severity, args.seed),
     uav_config=uavs,

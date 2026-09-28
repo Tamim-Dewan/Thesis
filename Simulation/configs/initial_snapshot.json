@@ -16,12 +16,12 @@
     {
       "mode": "du_outdoor",
       "seed": 20260924,
-      "report": "results/initial_runs/session_2026-09-27/du_outdoor_initial.json"
+      "report": "results/pgbm_v1_two_hour_experiments/visualizations/initial_solution_snapshot_2026-09-27/du_outdoor_initial_solution_report.json"
     },
     {
       "mode": "synthetic",
       "seed": 20260924,
-      "report": "results/initial_runs/session_2026-09-27/synthetic_initial.json"
+      "report": "results/pgbm_v1_two_hour_experiments/visualizations/initial_solution_snapshot_2026-09-27/synthetic_initial_solution_report.json"
     }
   ]
 }

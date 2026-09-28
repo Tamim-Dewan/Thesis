@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Sequence
+from typing import Iterable, Sequence, TextIO
 
 import numpy as np
 
@@ -24,6 +24,7 @@ class Mesh:
 
     vertices: np.ndarray
     faces: np.ndarray
+    face_materials: tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
         vertices = np.asarray(self.vertices, dtype=float)
@@ -36,8 +37,14 @@ class Mesh:
             raise MeshFormatError("vertices contain a non finite value")
         if len(faces) and (faces.min() < 0 or faces.max() >= len(vertices)):
             raise MeshFormatError("face index is outside the vertex array")
+        materials = tuple(str(value) for value in self.face_materials)
+        if materials and len(materials) != len(faces):
+            raise MeshFormatError("face_materials must contain one value per face")
+        if not materials:
+            materials = tuple("" for _ in range(len(faces)))
         object.__setattr__(self, "vertices", vertices)
         object.__setattr__(self, "faces", faces)
+        object.__setattr__(self, "face_materials", materials)
 
     @property
     def minimum(self) -> np.ndarray:
@@ -52,26 +59,32 @@ class Mesh:
         return self.maximum - self.minimum
 
     def translated(self, offset: Sequence[float]) -> "Mesh":
-        return Mesh(self.vertices + np.asarray(offset, dtype=float), self.faces.copy())
+        return Mesh(self.vertices + np.asarray(offset, dtype=float), self.faces.copy(), self.face_materials)
 
     def face_centroids(self) -> np.ndarray:
         return self.vertices[self.faces].mean(axis=1)
 
     def keep_faces(self, keep: Iterable[bool]) -> "Mesh":
-        selected = self.faces[np.asarray(list(keep), dtype=bool)]
+        mask = np.asarray(list(keep), dtype=bool)
+        selected = self.faces[mask]
         if len(selected) == 0:
             raise MeshFormatError("face selection removed the whole mesh")
         used, inverse = np.unique(selected.reshape(-1), return_inverse=True)
-        return Mesh(self.vertices[used], inverse.reshape((-1, 3)))
+        return Mesh(self.vertices[used], inverse.reshape((-1, 3)), tuple(material for material, include in zip(self.face_materials, mask) if include))
 
     def summary(self) -> dict:
-        return {
+        values = {
             "vertex_count": int(len(self.vertices)),
             "face_count": int(len(self.faces)),
             "minimum": self.minimum.tolist(),
             "maximum": self.maximum.tolist(),
             "extent": self.extent.tolist(),
         }
+        materials = sorted({material for material in self.face_materials if material})
+        if materials:
+            values["material_count"] = len(materials)
+            values["materials"] = materials
+        return values
 
 
 def _obj_index(token: str, vertex_count: int) -> int:
@@ -81,36 +94,46 @@ def _obj_index(token: str, vertex_count: int) -> int:
     return value - 1 if value > 0 else vertex_count + value
 
 
-def parse_obj(path: str | Path) -> Mesh:
-    """Read vertices and triangulated faces from a Wavefront OBJ file."""
+def parse_obj_stream(handle: TextIO, source_name: str = "OBJ stream") -> Mesh:
+    """Read a Wavefront OBJ mesh from an open text stream."""
 
     vertices: list[list[float]] = []
     faces: list[tuple[int, int, int]] = []
-    source = Path(path)
-    try:
-        handle = source.open("r", encoding="utf-8", errors="replace")
-    except OSError as error:
-        raise MeshFormatError(f"OBJ file is unavailable: {source}") from error
+    face_materials: list[str] = []
+    current_material = ""
 
-    with handle:
-        for line_number, line in enumerate(handle, start=1):
-            parts = line.strip().split()
-            if not parts or parts[0].startswith("#"):
+    for line_number, line in enumerate(handle, start=1):
+        parts = line.strip().split()
+        if not parts or parts[0].startswith("#"):
+            continue
+        if parts[0] == "v":
+            if len(parts) < 4:
+                raise MeshFormatError(f"vertex is incomplete at line {line_number}")
+            vertices.append([float(parts[1]), float(parts[2]), float(parts[3])])
+        elif parts[0] == "usemtl":
+            current_material = parts[1] if len(parts) > 1 else ""
+        elif parts[0] == "f":
+            if len(parts) < 4:
                 continue
-            if parts[0] == "v":
-                if len(parts) < 4:
-                    raise MeshFormatError(f"vertex is incomplete at line {line_number}")
-                vertices.append([float(parts[1]), float(parts[2]), float(parts[3])])
-            elif parts[0] == "f":
-                if len(parts) < 4:
-                    continue
-                indices = [_obj_index(token, len(vertices)) for token in parts[1:]]
-                for index in range(1, len(indices) - 1):
-                    faces.append((indices[0], indices[index], indices[index + 1]))
+            indices = [_obj_index(token, len(vertices)) for token in parts[1:]]
+            for index in range(1, len(indices) - 1):
+                faces.append((indices[0], indices[index], indices[index + 1]))
+                face_materials.append(current_material)
 
     if not vertices or not faces:
-        raise MeshFormatError(f"OBJ file has no usable mesh: {source}")
-    return Mesh(np.asarray(vertices, dtype=float), np.asarray(faces, dtype=int))
+        raise MeshFormatError(f"OBJ file has no usable mesh: {source_name}")
+    return Mesh(np.asarray(vertices, dtype=float), np.asarray(faces, dtype=int), tuple(face_materials))
+
+
+def parse_obj(path: str | Path) -> Mesh:
+    """Read vertices and triangulated faces from a Wavefront OBJ file."""
+
+    source = Path(path)
+    try:
+        with source.open("r", encoding="utf-8", errors="replace") as handle:
+            return parse_obj_stream(handle, str(source))
+    except OSError as error:
+        raise MeshFormatError(f"OBJ file is unavailable: {source}") from error
 
 
 def convex_hull(points: np.ndarray) -> np.ndarray:

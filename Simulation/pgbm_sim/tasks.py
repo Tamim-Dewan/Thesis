@@ -34,10 +34,12 @@ class TaskConfig:
     energy_unit: str = "joule"
     service_value_model: str = "common_exponential"
     service_value_decay_rate: float = 0.011997
-    service_duration_base: float = 2.0
-    service_duration_per_parcel: float = 0.5
-    service_duration_per_severity: float = 1.0
+    drop_time_per_parcel: float = 0.5
     seed: int = 0
+    arrival_profile: str = "uniform"
+    horizon_minutes: float = 120.0
+    phase_boundaries: Tuple[float, ...] = (0.0, 40.0, 80.0, 120.0)
+    phase_weights: Tuple[float, ...] = (3.0, 2.0, 1.0)
 
     @classmethod
     def from_mapping(cls, values: Mapping[str, Any]) -> "TaskConfig":
@@ -58,10 +60,12 @@ class TaskConfig:
             energy_unit=str(values.get("energy_unit", "joule")),
             service_value_model=str(values.get("service_value_model", "common_exponential")),
             service_value_decay_rate=float(values.get("service_value_decay_rate", 0.011997)),
-            service_duration_base=float(values.get("service_duration_base", 2.0)),
-            service_duration_per_parcel=float(values.get("service_duration_per_parcel", 0.5)),
-            service_duration_per_severity=float(values.get("service_duration_per_severity", 1.0)),
+            drop_time_per_parcel=float(values.get("drop_time_per_parcel", 0.5)),
             seed=int(values.get("seed",0)),
+            arrival_profile=str(values.get("arrival_profile", "uniform")),
+            horizon_minutes=float(values.get("horizon_minutes", 120.0)),
+            phase_boundaries=tuple(float(item) for item in values.get("phase_boundaries", (0.0, 40.0, 80.0, 120.0))),
+            phase_weights=tuple(float(item) for item in values.get("phase_weights", (3.0, 2.0, 1.0))),
         )
         config.validate(); return config
 
@@ -78,8 +82,20 @@ class TaskConfig:
         if self.max_task_payload_mass <= 0 or sum(self.item_weights.values()) > self.max_task_payload_mass + 1e-9: raise TaskGenerationError("configured item weights exceed max_task_payload_mass")
         if not all((self.time_unit, self.distance_unit, self.payload_unit, self.energy_unit)): raise TaskGenerationError("data units must not be empty")
         if self.service_value_model != "common_exponential" or self.service_value_decay_rate <= 0: raise TaskGenerationError("unsupported service value configuration")
-        if self.service_duration_base <= 0 or self.service_duration_per_parcel < 0 or self.service_duration_per_severity < 0: raise TaskGenerationError("service duration parameters are invalid")
+        if self.drop_time_per_parcel <= 0: raise TaskGenerationError("drop_time_per_parcel must be positive")
         if self.seed<0: raise TaskGenerationError("seed must be non negative")
+        if self.arrival_profile not in ("uniform", "three_phase"):
+            raise TaskGenerationError("unsupported arrival profile")
+        if self.horizon_minutes <= 0:
+            raise TaskGenerationError("horizon_minutes must be positive")
+        if len(self.phase_boundaries) != 4 or self.phase_boundaries[0] != 0.0:
+            raise TaskGenerationError("phase_boundaries must contain 0 and three phase endpoints")
+        if any(first >= second for first, second in zip(self.phase_boundaries, self.phase_boundaries[1:])):
+            raise TaskGenerationError("phase_boundaries must be strictly increasing")
+        if abs(self.phase_boundaries[-1] - self.horizon_minutes) > 1e-9:
+            raise TaskGenerationError("phase_boundaries must end at horizon_minutes")
+        if len(self.phase_weights) != 3 or any(weight <= 0 for weight in self.phase_weights):
+            raise TaskGenerationError("phase_weights must contain three positive values")
 
     def as_dict(self) -> Dict[str, Any]: return asdict(self)
 
@@ -126,13 +142,9 @@ def service_value(severity: float, detected_at: float, at_time: float, decay_rat
     return severity * math.exp(-decay_rate * (at_time - detected_at))
 
 
-def _service_duration(demand: Mapping[str, int], severity: float, config: TaskConfig) -> float:
-    parcel_count = sum(demand.values())
-    return (
-        config.service_duration_base
-        + config.service_duration_per_parcel * parcel_count
-        + config.service_duration_per_severity * severity
-    )
+def _service_duration(demand: Mapping[str, int], config: TaskConfig) -> float:
+    """Return drop-off operation time using one fixed 30 second parcel slot."""
+    return config.drop_time_per_parcel * sum(demand.values())
 
 
 def _validate_generated_task(task: SurvivorTask, config: TaskConfig) -> None:
@@ -216,15 +228,45 @@ def _vertical_dropoff_waypoint(scene: DisasterScene, task_position: Point, rng: 
     return (task_position[0], task_position[1], z)
 
 
+def _phase_task_counts(task_count: int, weights: Tuple[float, ...]) -> Tuple[int, ...]:
+    """Allocate a fixed task load across phases using deterministic quotas."""
+    total_weight = sum(weights)
+    exact = [task_count * weight / total_weight for weight in weights]
+    counts = [int(math.floor(value)) for value in exact]
+    remainder = task_count - sum(counts)
+    order = sorted(range(len(weights)), key=lambda index: (-(exact[index] - counts[index]), index))
+    for index in order[:remainder]:
+        counts[index] += 1
+    return tuple(counts)
+
+
+def _detection_times(config: TaskConfig, rng: random.Random) -> Tuple[float, ...]:
+    if config.arrival_profile == "uniform":
+        return tuple(rng.uniform(*config.detection_time_range) for _ in range(config.task_count))
+    counts = _phase_task_counts(config.task_count, config.phase_weights)
+    phase_labels = [phase for phase, count in enumerate(counts) for _ in range(count)]
+    rng.shuffle(phase_labels)
+    times = []
+    for phase in phase_labels:
+        lower = config.phase_boundaries[phase]
+        upper = config.phase_boundaries[phase + 1]
+        # Keep a task at an exact boundary in its generated phase.
+        upper = math.nextafter(upper, lower)
+        times.append(rng.uniform(lower, upper))
+    return tuple(times)
+
+
 def generate_tasks(scene: DisasterScene, config: Optional[TaskConfig] = None, seed: Optional[int] = None) -> Tuple[SurvivorTask, ...]:
     config=config or TaskConfig(); config.validate(); actual_seed=config.seed if seed is None else int(seed)
     if actual_seed<0: raise TaskGenerationError("seed must be non negative")
     eligible_structures=[structure for structure in scene.structures if structure.scene_role=="target" and structure.damage_state in TASK_DAMAGE_STATES]
     if not eligible_structures: raise TaskGenerationError("scene has no minor, major, or destroyed damage footprints for tasks")
     rng=random.Random(actual_seed); tasks=[]
+    detection_times = None if config.arrival_profile == "uniform" else _detection_times(config, rng)
     for index in range(1, config.task_count + 1):
         structure=rng.choice(eligible_structures)
-        detected=rng.uniform(*config.detection_time_range); severity=rng.uniform(*config.severity_range)
+        detected = rng.uniform(*config.detection_time_range) if detection_times is None else detection_times[index - 1]
+        severity=rng.uniform(*config.severity_range)
         subset_mask = rng.randrange(1, 1 << len(config.item_types))
         demand = {
             item: 1 if subset_mask & (1 << item_index) else 0
@@ -241,7 +283,7 @@ def generate_tasks(scene: DisasterScene, config: Optional[TaskConfig] = None, se
             severity,
             demand,
             payload_mass,
-            _service_duration(demand, severity, config),
+            _service_duration(demand, config),
             service_value(severity,detected,detected,config.service_value_decay_rate),
         )
         _validate_generated_task(task, config)

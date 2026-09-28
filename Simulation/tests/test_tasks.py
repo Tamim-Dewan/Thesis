@@ -61,7 +61,7 @@ def test_task_payload_contract_uses_small_delivery_units():
     scene=generate_disaster_scene(SceneConfig(mode="synthetic",severity="moderate",seed=13))
     tasks=generate_tasks(scene,TaskConfig(task_count=6,seed=14))
     assert any(sum(task.demand.values())<3 for task in tasks)
-    assert all(task.service_duration==2.0+0.5*sum(task.demand.values())+task.severity for task in tasks)
+    assert all(task.service_duration==0.5*sum(task.demand.values()) for task in tasks)
 
 
 def test_task_generation_can_reuse_damage_footprints_for_many_tasks():

@@ -25,6 +25,14 @@ def test_synthetic_scene_is_complete_reproducible_and_seed_sensitive():
     assert all(is_valid_candidate_site(first, site) for site in first.candidate_sites)
 
 
+@pytest.mark.parametrize("seed", range(101, 111))
+def test_synthetic_heavy_experiment_seed_range_has_valid_layout(seed):
+    scene = generate_disaster_scene(SceneConfig(mode="synthetic", severity="moderate", seed=seed))
+    assert len(scene.structures) == 8
+    assert len(scene.candidate_sites) == 18
+    assert all(is_valid_candidate_site(scene, site) for site in scene.candidate_sites)
+
+
 def test_du_scene_uses_bundled_true_scale_osm_template_with_provenance():
     scene = generate_disaster_scene(SceneConfig(mode="du_outdoor", severity="moderate", seed=11))
     assert scene.environment.world.minimum == (-44, -65, 0)

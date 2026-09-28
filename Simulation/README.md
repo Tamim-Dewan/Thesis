@@ -126,10 +126,11 @@ The default item weights are `0.25 kg` for food and `0.50 kg` for both water
 and medical supplies. `required_payload_mass` is calculated from those values.
 
 The default UAV limits are `4` parcels and `2.0 kg`. Each task also stores its
-own `service_duration`, calculated from the base duration, parcel count, and
-severity. The scenario file stores the scene, tasks, UAV configuration, route
-configuration, execution configuration, and initial UAV states. It does not
-store planner assignments or planner output.
+own `service_duration`, calculated as `0.5` minute per parcel (a fixed 30-second
+drop slot); severity does not change the drop duration. The scenario file
+stores the scene, tasks, UAV configuration, route configuration, execution
+configuration, and initial UAV states. It does not store planner assignments
+or planner output.
 
 To create only a new validated scenario input, without planning or execution,
 run:
@@ -170,12 +171,12 @@ in configs/initial_snapshot.json.
 python3 run_simulation.py --mode du_outdoor --severity moderate \
   --seed 20260924 --task-count 6 --uav-count 3 \
   --start-time 30 --planner initial_snapshot_greedy_v1 --no-recourse \
-  --output results/initial_runs/session_2026-09-27/du_outdoor_initial.json
+  --output results/pgbm_v1_two_hour_experiments/visualizations/initial_solution_snapshot_2026-09-27/du_outdoor_initial_solution_report.json
 
 python3 run_simulation.py --mode synthetic --severity moderate \
   --seed 20260924 --task-count 6 --uav-count 3 \
   --start-time 30 --planner initial_snapshot_greedy_v1 --no-recourse \
-  --output results/initial_runs/session_2026-09-27/synthetic_initial.json
+  --output results/pgbm_v1_two_hour_experiments/visualizations/initial_solution_snapshot_2026-09-27/synthetic_initial_solution_report.json
 ```
 
 The initial run writes a `simulation_run.v2` report with the initial plan and
@@ -191,9 +192,9 @@ After a report is created, render its assignment and routes with:
 
 ~~~bash
 python3 render_initial_solution.py \
-  --report results/initial_runs/session_2026-09-27/du_outdoor_initial.json
+  --report results/pgbm_v1_two_hour_experiments/visualizations/initial_solution_snapshot_2026-09-27/du_outdoor_initial_solution_report.json
 python3 render_initial_solution.py \
-  --report results/initial_runs/session_2026-09-27/synthetic_initial.json
+  --report results/pgbm_v1_two_hour_experiments/visualizations/initial_solution_snapshot_2026-09-27/synthetic_initial_solution_report.json
 ~~~
 
 For a step by step replay of assignment, route, arrival, service, and return.
@@ -206,9 +207,9 @@ task being served:
 
 ~~~bash
 python3 render_step_by_step.py \
-  --report results/initial_runs/session_2026-09-27/du_outdoor_initial.json
+  --report results/pgbm_v1_two_hour_experiments/visualizations/initial_solution_snapshot_2026-09-27/du_outdoor_initial_solution_report.json
 python3 render_step_by_step.py \
-  --report results/initial_runs/session_2026-09-27/synthetic_initial.json
+  --report results/pgbm_v1_two_hour_experiments/visualizations/initial_solution_snapshot_2026-09-27/synthetic_initial_solution_report.json
 ~~~
 
 ## End to end research run
@@ -250,12 +251,61 @@ print(result.as_dict())
 PY
 ```
 
-Run the PGBM heuristic and nearest task baseline over repeated seeds with:
+Run the PGBM heuristic and nearest task baseline over repeated seeds without
+recourse with:
 
 ```bash
 python3 run_experiments.py --mode du_outdoor --severity moderate \
   --seeds 101 102 103 104 105 \
-  --start-time 30 --output results/research_metrics.csv
+  --start-time 30 --output results/research_metrics_initial.csv
+```
+
+## PGBM V1 two hour experiment
+
+PGBM V1 uses a seeded event driven horizon from 0 to 120 minutes. Task
+detection follows high, medium, and low phases with relative weights 3:2:1.
+The completed matrix covers Synthetic and DU outdoor, task loads 30, 60, and
+90, UAV fleets 3, 5, 8, and 10, and seeds 101 through 110.
+
+Run one event episode:
+
+```bash
+python3 run_pgbm_v1_single_simulation.py --mode du_outdoor --severity moderate \
+  --seed 20260924 --task-count 30 --uav-count 3 \
+  --output results/pgbm_v1_two_hour_experiments/visualizations/single_run/pgbm_v1_single_run_report.json
+```
+
+Run the complete matrix with the descriptive default output path:
+
+```bash
+python3 run_pgbm_v1_experiment_matrix.py
+```
+
+The matrix output is
+`results/pgbm_v1_two_hour_experiments/raw_metrics/pgbm_v1_two_hour_matrix_metrics_tasks_30_60_90_uavs_3_5_8_10_seeds_101_110.csv`.
+
+Generate the Markdown findings summary:
+
+```bash
+python3 generate_pgbm_v1_results_report.py
+```
+
+Generate the LaTeX source:
+
+```bash
+python3 generate_pgbm_v1_report_latex.py
+```
+
+The formatted report is stored in `../Experiment Reports/V1/`.
+
+The current replacement fixture is opt in, so it cannot silently change an
+initial planning comparison:
+
+```bash
+python3 run_experiments.py --mode du_outdoor --severity moderate \
+  --seeds 101 102 103 104 105 \
+  --start-time 30 --with-recourse \
+  --output results/research_metrics_recourse.csv
 ```
 
 The current planner is explicitly named `pgbm_heuristic_v1`. It is a working
@@ -263,3 +313,28 @@ assignment and execution baseline with synthetic severity, parcel count,
 distance based energy, return to base, and replacement task handling. The
 formal service value objective and full mathematical optimization formulation
 remain later planner refinements.
+
+## PGBM V2 task replacement recourse
+
+Version 2 keeps the V1 reference path unchanged and adds a separate
+formulation-aligned one-for-one task replacement recourse runner. A new task
+is considered while all responder UAVs are active. One uncompleted task in one
+active mission may be replaced when the current onboard inventory, remaining
+route, energy reserve, and same-base return remain feasible and the remaining
+service value gain is positive.
+
+Run the paired heavy matrix from this directory with:
+
+```bash
+PYTHONPATH=. python3 run_pgbm_v2_experiment_matrix.py
+```
+
+The command reuses the preserved V1 heavy matrix as comparison evidence and
+writes new V2 metrics and decision traces under
+`results/pgbm_v2_recourse_experiments/`. Use `--rerun-v1` only when a direct
+in-memory V1 and V2 rerun is specifically needed. Generate the comparative
+report after the matrix completes from the thesis root with:
+
+```bash
+PYTHONPATH=Simulation python3 Simulation/generate_pgbm_v2_report.py
+```

@@ -1,0 +1,67 @@
+{
+  "accepted_replacements": 2251,
+  "algorithms": [
+    "V1",
+    "V2"
+  ],
+  "configuration_count": 24,
+  "environments": [
+    "du_outdoor",
+    "synthetic"
+  ],
+  "markdown": "Experiment Reports/V2/pgbm_v2_comparative_findings_bn.md",
+  "metrics_row_count": 480,
+  "paired_metrics": "Simulation/results/pgbm_v2_recourse_experiments/raw_metrics/pgbm_v2_paired_matrix_metrics_tasks_30_60_90_uavs_3_5_8_10_seeds_101_110.csv",
+  "rejected_replacements": 4388,
+  "rejection_reasons": {
+    "no_feasible_candidate": 1842,
+    "no_positive_gain": 2113,
+    "no_uncompleted_active_task": 433
+  },
+  "report": "Experiment Reports/V2/pgbm_v2_comparative_findings_bn.tex",
+  "seeds": [
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110
+  ],
+  "task_counts": [
+    30,
+    60,
+    90
+  ],
+  "trace_count": 240,
+  "uav_counts": [
+    3,
+    5,
+    8,
+    10
+  ],
+  "validation": {
+    "deterministic_replay": true,
+    "duplicate_completion_free": true,
+    "fingerprint_match": true,
+    "fixed_all_match": true,
+    "fixed_matches": {
+      "candidate_count": true,
+      "distance": true,
+      "energy": true,
+      "objective": true,
+      "served": true
+    },
+    "fixed_objective": 5.453756644577767,
+    "fixture": "synthetic, seed 5, 12 tasks, 3 UAV",
+    "objective_once": true,
+    "paired_count": 240,
+    "recomputed_objective": 5.453756644577767,
+    "reported_objective": 5.453756644577767,
+    "same_seed_task_realization": true,
+    "v1_objective": 5.453756644577767
+  }
+}

@@ -104,6 +104,21 @@ def test_redundancy_and_unreviewed_meshes_are_rejected():
         build_geospatial_scenario(invalid_derived, context, library)
 
 
+def test_pre_event_mesh_can_carry_an_explicit_minor_visual_state():
+    library, context, config = _inputs()
+    minor_mesh = copy.deepcopy(config)
+    minor_mesh["template_bindings"][0] = {
+        "osm_id": minor_mesh["template_bindings"][0]["osm_id"],
+        "asset_id": "pre:pre_b_001_pre.obj",
+        "damage_state_override": "minor",
+    }
+    scenario = build_geospatial_scenario(minor_mesh, context, library)
+    building = next(item for item in scenario.buildings if item.osm_id == minor_mesh["template_bindings"][0]["osm_id"])
+    assert building.damage_grade == "minor"
+    assert building.asset_id == "pre:pre_b_001_pre.obj"
+    assert building.damage_geometry is None
+
+
 def test_navigation_blocks_collisions_and_keeps_high_airspace_route_free():
     library, context, config = _inputs()
     scenario = build_geospatial_scenario(config, context, library)

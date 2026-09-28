@@ -1,0 +1,52 @@
+{
+  "experiment": "pgbm_v1_two_hour_experiment_matrix",
+  "rows": 240,
+  "environments": [
+    "synthetic",
+    "du_outdoor"
+  ],
+  "task_counts": [
+    30,
+    60,
+    90
+  ],
+  "uav_counts": [
+    3,
+    5,
+    8,
+    10
+  ],
+  "seeds": [
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110
+  ],
+  "horizon_minutes": 120.0,
+  "phase_weights": [
+    3.0,
+    2.0,
+    1.0
+  ],
+  "turnaround_minutes": 5.0,
+  "drop_time_per_parcel_minutes": 0.5,
+  "payload_weight_capacity_kg": 2.0,
+  "max_pending_tasks": 8,
+  "max_candidate_plans": 50000,
+  "recourse_enabled": false,
+  "coverage_verified": true,
+  "source_parts": [
+    "Simulation/results/pgbm_v1_two_hour_experiments/metrics_by_configuration/pgbm_v1_metrics_du_outdoor_tasks_30.csv",
+    "Simulation/results/pgbm_v1_two_hour_experiments/metrics_by_configuration/pgbm_v1_metrics_du_outdoor_tasks_60.csv",
+    "Simulation/results/pgbm_v1_two_hour_experiments/metrics_by_configuration/pgbm_v1_metrics_du_outdoor_tasks_90.csv",
+    "Simulation/results/pgbm_v1_two_hour_experiments/metrics_by_configuration/pgbm_v1_metrics_synthetic_tasks_30.csv",
+    "Simulation/results/pgbm_v1_two_hour_experiments/metrics_by_configuration/pgbm_v1_metrics_synthetic_tasks_60.csv",
+    "Simulation/results/pgbm_v1_two_hour_experiments/metrics_by_configuration/pgbm_v1_metrics_synthetic_tasks_90.csv"
+  ]
+}

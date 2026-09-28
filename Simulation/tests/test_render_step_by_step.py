@@ -150,14 +150,18 @@ def test_service_hold_repeats_only_arrival_frames_and_hides_duplicates_from_slid
 
 @pytest.mark.parametrize(
     "report_name",
-    ["du_outdoor_initial.json", "synthetic_initial.json"],
+    [
+        "du_outdoor_initial_solution_report.json",
+        "synthetic_initial_solution_report.json",
+    ],
 )
 def test_rendered_replay_contains_intermediate_frames_and_compact_ui(tmp_path, report_name):
     results_dir = (
         Path(__file__).parents[1]
         / "results"
-        / "initial_runs"
-        / "session_2026-09-27"
+        / "pgbm_v1_two_hour_experiments"
+        / "visualizations"
+        / "initial_solution_snapshot_2026-09-27"
     )
     report_path = results_dir / report_name
     report = json.loads(report_path.read_text(encoding="utf-8"))

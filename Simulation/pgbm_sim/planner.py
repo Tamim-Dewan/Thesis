@@ -1,10 +1,11 @@
 """Deterministic payload and energy aware task assignment planners."""
 
 import math
-from dataclasses import asdict, dataclass
-from typing import Dict, Iterable, Mapping, Optional, Tuple
+import time
+from dataclasses import asdict, dataclass, replace
+from typing import Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 
-from .routing import RouteConfig, RoutePlanningError, route_task_sequence
+from .routing import RouteConfig, RoutePlanningError, route_between, route_task_sequence
 from .scenario import Scenario
 from .tasks import SurvivorTask, service_value
 
@@ -22,6 +23,9 @@ class UAVConfig:
     distance_unit: str = "meter"
     payload_unit: str = "kilogram"
     energy_unit: str = "joule"
+    payload_energy_per_kg_meter: float = 0.05
+    ascent_energy_per_meter: float = 0.20
+    service_energy_per_minute: float = 0.50
 
     @property
     def parcel_capacity(self) -> int:
@@ -42,12 +46,17 @@ class UAVConfig:
             distance_unit=str(values.get("distance_unit", "meter")),
             payload_unit=str(values.get("payload_unit", "kilogram")),
             energy_unit=str(values.get("energy_unit", "joule")),
+            payload_energy_per_kg_meter=float(values.get("payload_energy_per_kg_meter", 0.05)),
+            ascent_energy_per_meter=float(values.get("ascent_energy_per_meter", 0.20)),
+            service_energy_per_minute=float(values.get("service_energy_per_minute", 0.50)),
         )
         config.validate()
         return config
 
     def validate(self) -> None:
         if min(self.count,self.payload_capacity) < 1 or self.payload_weight_capacity <= 0 or self.energy_capacity <= 0 or self.reserve_energy < 0 or self.reserve_energy >= self.energy_capacity or self.speed <= 0 or self.energy_per_meter <= 0: raise ValueError("UAV configuration values must be positive and reserve must be below energy capacity")
+        if min(self.payload_energy_per_kg_meter, self.ascent_energy_per_meter, self.service_energy_per_minute) < 0:
+            raise ValueError("additional energy coefficients must be non negative")
 
     def as_dict(self): return asdict(self)
 
@@ -146,11 +155,27 @@ def plan_tasks(
     route_config: Optional[RouteConfig] = None,
 ) -> Plan:
     config=uav_config or UAVConfig(count=len(scenario.scene.uav_initial_positions)); config.validate()
-    if method not in ("pgbm_heuristic_v1", "initial_snapshot_greedy_v1", "nearest_task_first"):
+    if method not in ("pgbm_heuristic_v1", "initial_snapshot_greedy_v1", "nearest_task_first", "pgbm_initial_bruteforce_v1"):
         raise ValueError("unknown planner method: {}".format(method))
     route_config=route_config or RouteConfig()
     route_config.validate()
     planning_time = float(scenario.execution_config.start_time)
+    if method == "pgbm_initial_bruteforce_v1":
+        dynamic_plan = plan_dispatch(
+            scenario,
+            tuple(task for task in scenario.tasks if task.is_actionable(planning_time)),
+            tuple("uav_{}".format(index + 1) for index in range(config.count)),
+            planning_time,
+            config,
+            route_config,
+            horizon_minutes=getattr(scenario.task_config, "horizon_minutes", 120.0),
+        )
+        deferred = tuple(task.identifier for task in scenario.tasks if not task.is_actionable(planning_time))
+        return replace(
+            dynamic_plan,
+            unassigned_task_ids=tuple(dict.fromkeys(dynamic_plan.unassigned_task_ids + deferred)),
+            metadata=dict(dynamic_plan.metadata, deferred_task_ids=deferred),
+        )
     eligible_tasks = tuple(task for task in scenario.tasks if task.is_actionable(planning_time))
     base=scenario.scene.environment.base.position
     routes=[[] for _ in range(config.count)]
@@ -273,3 +298,300 @@ def plan_tasks(
         "nearest_task_first": "base_distance",
     }[method]
     return Plan(method,tuple(assignments),tuple(unassigned),objective,{"parcel_capacity":config.parcel_capacity,"payload_weight_capacity":config.payload_weight_capacity,"energy_capacity":config.energy_capacity,"reserve_energy":config.reserve_energy,"planning_time":planning_time,"eligible_task_count":len(eligible_tasks),"priority_rule":priority_rule,"service_value_decay_rate":scenario.task_config.service_value_decay_rate,"ordered_task_ids":tuple(task.identifier for task in ordered_tasks),"decision_trace":tuple(decision_trace),"deferred_task_ids":tuple(task.identifier for task in scenario.tasks if task not in eligible_tasks),"units":{"time":config.time_unit,"distance":config.distance_unit,"payload":config.payload_unit,"energy":config.energy_unit},"task_count":len(scenario.tasks),"routing":"grid_astar_polygon_collision_v1","route_config":route_config.as_dict()})
+
+
+@dataclass(frozen=True)
+class BruteForceConfig:
+    """Search limits for the transparent V1 reference planner."""
+
+    max_pending_tasks: int = 8
+    max_candidate_plans: int = 50000
+
+    def validate(self) -> None:
+        if self.max_pending_tasks < 1 or self.max_candidate_plans < 1:
+            raise ValueError("brute force limits must be positive")
+
+    def as_dict(self) -> Dict[str, int]:
+        return asdict(self)
+
+
+@dataclass(frozen=True)
+class _SequenceEvaluation:
+    route: Tuple[Tuple[float, float, float], ...]
+    distance: float
+    energy: float
+    payload: int
+    payload_weight: float
+    arrival_times: Mapping[str, float]
+    completion_times: Mapping[str, float]
+    return_time: float
+    objective_value: float
+
+
+def _positive_ascent(route: Sequence[Tuple[float, float, float]]) -> float:
+    return sum(max(0.0, second[2] - first[2]) for first, second in zip(route, route[1:]))
+
+
+def _extend_route(target: List[Tuple[float, float, float]], segment: Sequence[Tuple[float, float, float]]) -> None:
+    if not target:
+        target.extend(segment)
+    else:
+        target.extend(segment[1:])
+
+
+def _evaluate_task_sequence(
+    environment,
+    base: Tuple[float, float, float],
+    tasks: Sequence[SurvivorTask],
+    dispatch_time: float,
+    uav_config: UAVConfig,
+    route_config: RouteConfig,
+    decay_rate: float,
+    horizon_minutes: float,
+) -> Optional[_SequenceEvaluation]:
+    payload = sum(_task_payload(task) for task in tasks)
+    payload_weight = sum(_task_payload_weight(task) for task in tasks)
+    if payload > uav_config.payload_capacity or payload_weight > uav_config.payload_weight_capacity + 1e-9:
+        return None
+    if not tasks:
+        return _SequenceEvaluation((base,), 0.0, 0.0, 0, 0.0, {}, {}, dispatch_time, 0.0)
+
+    route: List[Tuple[float, float, float]] = [base]
+    current = base
+    remaining_payload_weight = payload_weight
+    total_distance = 0.0
+    total_energy = 0.0
+    current_time = dispatch_time
+    arrival_times: Dict[str, float] = {}
+    completion_times: Dict[str, float] = {}
+    objective_value = 0.0
+
+    def consume_leg(start, target, carried_mass):
+        nonlocal current_time, total_distance, total_energy
+        leg = route_between(environment, start, target, route_config)
+        _extend_route(route, leg.route)
+        distance = leg.distance
+        total_distance += distance
+        current_time += distance / uav_config.speed
+        total_energy += distance * uav_config.energy_per_meter
+        total_energy += distance * carried_mass * uav_config.payload_energy_per_kg_meter
+        total_energy += _positive_ascent(leg.route) * uav_config.ascent_energy_per_meter
+
+    try:
+        for task in tasks:
+            consume_leg(current, task.dropoff_waypoint, remaining_payload_weight)
+            arrival_times[task.identifier] = current_time
+            current_time += task.service_duration
+            total_energy += task.service_duration * uav_config.service_energy_per_minute
+            completion_times[task.identifier] = current_time
+            objective_value += service_value(task.severity, task.detected_at, current_time, decay_rate)
+            remaining_payload_weight -= task.required_payload_mass
+            current = task.dropoff_waypoint
+        consume_leg(current, base, 0.0)
+    except RoutePlanningError:
+        return None
+
+    if current_time > horizon_minutes + 1e-9:
+        return None
+    if total_energy + uav_config.reserve_energy > uav_config.energy_capacity + 1e-9:
+        return None
+    return _SequenceEvaluation(
+        tuple(route),
+        total_distance,
+        total_energy,
+        payload,
+        payload_weight,
+        arrival_times,
+        completion_times,
+        current_time,
+        objective_value,
+    )
+
+
+def _enumerate_ordered_assignments(
+    tasks: Sequence[SurvivorTask],
+    uav_ids: Sequence[str],
+    uav_config: UAVConfig,
+):
+    """Yield every assignment and within UAV ordering for the selected tasks."""
+    sequences: Dict[str, List[SurvivorTask]] = {uav_id: [] for uav_id in uav_ids}
+
+    def fits(sequence: Sequence[SurvivorTask], task: SurvivorTask) -> bool:
+        return (
+            sum(_task_payload(item) for item in sequence) + _task_payload(task) <= uav_config.payload_capacity
+            and sum(_task_payload_weight(item) for item in sequence) + _task_payload_weight(task)
+            <= uav_config.payload_weight_capacity + 1e-9
+        )
+
+    def visit(index: int):
+        if index == len(tasks):
+            yield tuple((uav_id, tuple(sequences[uav_id])) for uav_id in uav_ids)
+            return
+        task = tasks[index]
+        yield from visit(index + 1)
+        for uav_id in uav_ids:
+            sequence = sequences[uav_id]
+            if not fits(sequence, task):
+                continue
+            for position in range(len(sequence) + 1):
+                sequence.insert(position, task)
+                yield from visit(index + 1)
+                sequence.pop(position)
+
+    yield from visit(0)
+
+
+def plan_dispatch(
+    scenario: Scenario,
+    pending_tasks: Iterable[SurvivorTask],
+    available_uav_ids: Iterable[str],
+    dispatch_time: float,
+    uav_config: Optional[UAVConfig] = None,
+    route_config: Optional[RouteConfig] = None,
+    method: str = "pgbm_initial_bruteforce_v1",
+    horizon_minutes: float = 120.0,
+    search_config: Optional[BruteForceConfig] = None,
+) -> Plan:
+    """Select the best feasible joint assignment for one dispatch opportunity."""
+    if method != "pgbm_initial_bruteforce_v1":
+        raise ValueError("plan_dispatch currently supports only pgbm_initial_bruteforce_v1")
+    config = uav_config or UAVConfig()
+    config.validate()
+    route_config = route_config or RouteConfig()
+    route_config.validate()
+    search = search_config or BruteForceConfig()
+    search.validate()
+    available = tuple(sorted(set(str(item) for item in available_uav_ids)))
+    all_pending = tuple(sorted((task for task in pending_tasks if task.is_actionable(dispatch_time)), key=lambda task: task.identifier))
+    decay_rate = scenario.task_config.service_value_decay_rate
+    base = scenario.scene.environment.base.position
+    ranked = sorted(
+        all_pending,
+        key=lambda task: (
+            -service_value(task.severity, task.detected_at, dispatch_time, decay_rate),
+            -task.severity,
+            task.detected_at,
+            task.identifier,
+        ),
+    )
+    selected_tasks = tuple(ranked[:search.max_pending_tasks])
+    overflow_tasks = tuple(ranked[search.max_pending_tasks:])
+    started = time.perf_counter()
+    candidate_count = 0
+    route_runtime = 0.0
+    search_truncated = False
+    best_key = None
+    best_sequences = None
+    best_evaluations = None
+    for candidate in _enumerate_ordered_assignments(selected_tasks, available, config):
+        if candidate_count >= search.max_candidate_plans:
+            search_truncated = True
+            break
+        candidate_count += 1
+        evaluations = {}
+        feasible = True
+        candidate_route_started = time.perf_counter()
+        for uav_id, tasks in candidate:
+            evaluation = _evaluate_task_sequence(
+                scenario.scene.environment,
+                base,
+                tasks,
+                dispatch_time,
+                config,
+                route_config,
+                decay_rate,
+                horizon_minutes,
+            )
+            if evaluation is None:
+                feasible = False
+                break
+            evaluations[uav_id] = evaluation
+        route_runtime += time.perf_counter() - candidate_route_started
+        if not feasible:
+            continue
+        selected_count = sum(len(tasks) for _, tasks in candidate)
+        total_value = sum(evaluation.objective_value for evaluation in evaluations.values())
+        total_energy = sum(evaluation.energy for evaluation in evaluations.values())
+        total_distance = sum(evaluation.distance for evaluation in evaluations.values())
+        order_key = tuple(task.identifier for _, tasks in candidate for task in tasks)
+        key = (-total_value, -selected_count, total_energy, total_distance, order_key)
+        if best_key is None or key < best_key:
+            best_key = key
+            best_sequences = candidate
+            best_evaluations = evaluations
+
+    if best_sequences is None:
+        best_sequences = tuple((uav_id, tuple()) for uav_id in available)
+        best_evaluations = {
+            uav_id: _SequenceEvaluation((base,), 0.0, 0.0, 0, 0.0, {}, {}, dispatch_time, 0.0)
+            for uav_id in available
+        }
+
+    assignments = []
+    selected_ids = []
+    assignment_timelines = {}
+    for uav_id, tasks in best_sequences:
+        evaluation = best_evaluations[uav_id]
+        task_ids = tuple(task.identifier for task in tasks)
+        selected_ids.extend(task_ids)
+        assignments.append(
+            UAVAssignment(
+                uav_id,
+                task_ids,
+                evaluation.route,
+                evaluation.payload,
+                evaluation.distance,
+                evaluation.energy,
+                True,
+                evaluation.payload_weight,
+            )
+        )
+        assignment_timelines[uav_id] = {
+            "arrival_times": dict(evaluation.arrival_times),
+            "completion_times": dict(evaluation.completion_times),
+            "return_time": evaluation.return_time,
+            "mission_duration": evaluation.return_time - dispatch_time,
+        }
+    selected_set = set(selected_ids)
+    unassigned = tuple(task.identifier for task in all_pending if task.identifier not in selected_set)
+    total_value = sum(evaluation.objective_value for evaluation in best_evaluations.values())
+    runtime = time.perf_counter() - started
+    return Plan(
+        method,
+        tuple(assignments),
+        tuple(dict.fromkeys(unassigned)),
+        total_value,
+        {
+            "planning_time": dispatch_time,
+            "dispatch_time": dispatch_time,
+            "horizon_minutes": horizon_minutes,
+            "eligible_task_count": len(all_pending),
+            "search_task_count": len(selected_tasks),
+            "overflow_task_ids": tuple(task.identifier for task in overflow_tasks),
+            "available_uav_ids": available,
+            "selected_task_ids": tuple(selected_ids),
+            "priority_rule": "joint_completion_value_bruteforce_v1",
+            "objective_formula": "sum(severity * exp(-decay_rate * (completion_time - detection_time)))",
+            "service_value_decay_rate": decay_rate,
+            "candidate_count": candidate_count,
+            "max_candidate_plans": search.max_candidate_plans,
+            "search_truncated": search_truncated,
+            "planner_runtime_seconds": runtime,
+            "route_runtime_seconds": route_runtime,
+            "assignment_timelines": assignment_timelines,
+            "energy_model": {
+                "baseline_travel": config.energy_per_meter,
+                "payload_distance": config.payload_energy_per_kg_meter,
+                "positive_ascent": config.ascent_energy_per_meter,
+                "service": config.service_energy_per_minute,
+            },
+            "units": {
+                "time": config.time_unit,
+                "distance": config.distance_unit,
+                "payload": config.payload_unit,
+                "energy": config.energy_unit,
+            },
+            "routing": "grid_astar_polygon_collision_v1",
+            "route_config": route_config.as_dict(),
+        },
+    )

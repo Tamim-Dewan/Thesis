@@ -1,0 +1,1577 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.398694483259701,
+              42.35066169675114
+            ],
+            [
+              13.398888966519403,
+              42.35066169675114
+            ],
+            [
+              13.398888966519403,
+              42.35076949458523
+            ],
+            [
+              13.398694483259701,
+              42.35076949458523
+            ],
+            [
+              13.398694483259701,
+              42.35066169675114
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_01",
+        "osm_tags": {
+          "layout_column": "1",
+          "layout_row": "1",
+          "name": "Controlled neighbourhood building 01",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.399071294575373,
+              42.35065271359829
+            ],
+            [
+              13.399290088242537,
+              42.35065271359829
+            ],
+            [
+              13.399290088242537,
+              42.350778477738075
+            ],
+            [
+              13.399071294575373,
+              42.350778477738075
+            ],
+            [
+              13.399071294575373,
+              42.35065271359829
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_02",
+        "osm_tags": {
+          "layout_column": "2",
+          "layout_row": "1",
+          "name": "Controlled neighbourhood building 02",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.399448105891045,
+              42.350643730445455
+            ],
+            [
+              13.399691209965672,
+              42.350643730445455
+            ],
+            [
+              13.399691209965672,
+              42.35078746089091
+            ],
+            [
+              13.399448105891045,
+              42.35078746089091
+            ],
+            [
+              13.399448105891045,
+              42.350643730445455
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_03",
+        "osm_tags": {
+          "layout_column": "3",
+          "layout_row": "1",
+          "name": "Controlled neighbourhood building 03",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.399861382817912,
+              42.35066169675114
+            ],
+            [
+              13.400055866077613,
+              42.35066169675114
+            ],
+            [
+              13.400055866077613,
+              42.35076949458523
+            ],
+            [
+              13.399861382817912,
+              42.35076949458523
+            ],
+            [
+              13.399861382817912,
+              42.35066169675114
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_04",
+        "osm_tags": {
+          "layout_column": "4",
+          "layout_row": "1",
+          "name": "Controlled neighbourhood building 04",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.400238194133584,
+              42.35065271359829
+            ],
+            [
+              13.400456987800748,
+              42.35065271359829
+            ],
+            [
+              13.400456987800748,
+              42.350778477738075
+            ],
+            [
+              13.400238194133584,
+              42.350778477738075
+            ],
+            [
+              13.400238194133584,
+              42.35065271359829
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_05",
+        "osm_tags": {
+          "layout_column": "5",
+          "layout_row": "1",
+          "name": "Controlled neighbourhood building 05",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.400615005449255,
+              42.350643730445455
+            ],
+            [
+              13.400858109523881,
+              42.350643730445455
+            ],
+            [
+              13.400858109523881,
+              42.35078746089091
+            ],
+            [
+              13.400615005449255,
+              42.35078746089091
+            ],
+            [
+              13.400615005449255,
+              42.350643730445455
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_06",
+        "osm_tags": {
+          "layout_column": "6",
+          "layout_row": "1",
+          "name": "Controlled neighbourhood building 06",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.40102828237612,
+              42.35066169675114
+            ],
+            [
+              13.401222765635822,
+              42.35066169675114
+            ],
+            [
+              13.401222765635822,
+              42.35076949458523
+            ],
+            [
+              13.40102828237612,
+              42.35076949458523
+            ],
+            [
+              13.40102828237612,
+              42.35066169675114
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_07",
+        "osm_tags": {
+          "layout_column": "7",
+          "layout_row": "1",
+          "name": "Controlled neighbourhood building 07",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.401405093691793,
+              42.35065271359829
+            ],
+            [
+              13.401623887358957,
+              42.35065271359829
+            ],
+            [
+              13.401623887358957,
+              42.350778477738075
+            ],
+            [
+              13.401405093691793,
+              42.350778477738075
+            ],
+            [
+              13.401405093691793,
+              42.35065271359829
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_08",
+        "osm_tags": {
+          "layout_column": "8",
+          "layout_row": "1",
+          "name": "Controlled neighbourhood building 08",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.39868232805597,
+              42.35093119133637
+            ],
+            [
+              13.398901121723135,
+              42.35093119133637
+            ],
+            [
+              13.398901121723135,
+              42.35107492178183
+            ],
+            [
+              13.39868232805597,
+              42.35107492178183
+            ],
+            [
+              13.39868232805597,
+              42.35093119133637
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_09",
+        "osm_tags": {
+          "layout_column": "1",
+          "layout_row": "2",
+          "name": "Controlled neighbourhood building 09",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.399059139371643,
+              42.350949157642056
+            ],
+            [
+              13.39930224344627,
+              42.350949157642056
+            ],
+            [
+              13.39930224344627,
+              42.35105695547615
+            ],
+            [
+              13.399059139371643,
+              42.35105695547615
+            ],
+            [
+              13.399059139371643,
+              42.350949157642056
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_10",
+        "osm_tags": {
+          "layout_column": "2",
+          "layout_row": "2",
+          "name": "Controlled neighbourhood building 10",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.399472416298508,
+              42.35094017448922
+            ],
+            [
+              13.399666899558209,
+              42.35094017448922
+            ],
+            [
+              13.399666899558209,
+              42.35106593862899
+            ],
+            [
+              13.399472416298508,
+              42.35106593862899
+            ],
+            [
+              13.399472416298508,
+              42.35094017448922
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_11",
+        "osm_tags": {
+          "layout_column": "3",
+          "layout_row": "2",
+          "name": "Controlled neighbourhood building 11",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.39984922761418,
+              42.35093119133637
+            ],
+            [
+              13.400068021281344,
+              42.35093119133637
+            ],
+            [
+              13.400068021281344,
+              42.35107492178183
+            ],
+            [
+              13.39984922761418,
+              42.35107492178183
+            ],
+            [
+              13.39984922761418,
+              42.35093119133637
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_12",
+        "osm_tags": {
+          "layout_column": "4",
+          "layout_row": "2",
+          "name": "Controlled neighbourhood building 12",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.400226038929851,
+              42.350949157642056
+            ],
+            [
+              13.400469143004479,
+              42.350949157642056
+            ],
+            [
+              13.400469143004479,
+              42.35105695547615
+            ],
+            [
+              13.400226038929851,
+              42.35105695547615
+            ],
+            [
+              13.400226038929851,
+              42.350949157642056
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_13",
+        "osm_tags": {
+          "layout_column": "5",
+          "layout_row": "2",
+          "name": "Controlled neighbourhood building 13",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.400639315856717,
+              42.35094017448922
+            ],
+            [
+              13.40083379911642,
+              42.35094017448922
+            ],
+            [
+              13.40083379911642,
+              42.35106593862899
+            ],
+            [
+              13.400639315856717,
+              42.35106593862899
+            ],
+            [
+              13.400639315856717,
+              42.35094017448922
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_14",
+        "osm_tags": {
+          "layout_column": "6",
+          "layout_row": "2",
+          "name": "Controlled neighbourhood building 14",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.401016127172388,
+              42.35093119133637
+            ],
+            [
+              13.401234920839553,
+              42.35093119133637
+            ],
+            [
+              13.401234920839553,
+              42.35107492178183
+            ],
+            [
+              13.401016127172388,
+              42.35107492178183
+            ],
+            [
+              13.401016127172388,
+              42.35093119133637
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_15",
+        "osm_tags": {
+          "layout_column": "7",
+          "layout_row": "2",
+          "name": "Controlled neighbourhood building 15",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.40139293848806,
+              42.350949157642056
+            ],
+            [
+              13.401636042562687,
+              42.350949157642056
+            ],
+            [
+              13.401636042562687,
+              42.35105695547615
+            ],
+            [
+              13.40139293848806,
+              42.35105695547615
+            ],
+            [
+              13.40139293848806,
+              42.350949157642056
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_16",
+        "osm_tags": {
+          "layout_column": "8",
+          "layout_row": "2",
+          "name": "Controlled neighbourhood building 16",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.398670172852238,
+              42.351227635380134
+            ],
+            [
+              13.398913276926866,
+              42.351227635380134
+            ],
+            [
+              13.398913276926866,
+              42.35135339951991
+            ],
+            [
+              13.398670172852238,
+              42.35135339951991
+            ],
+            [
+              13.398670172852238,
+              42.351227635380134
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_17",
+        "osm_tags": {
+          "layout_column": "1",
+          "layout_row": "3",
+          "name": "Controlled neighbourhood building 17",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.399083449779106,
+              42.351218652227296
+            ],
+            [
+              13.399277933038807,
+              42.351218652227296
+            ],
+            [
+              13.399277933038807,
+              42.351362382672754
+            ],
+            [
+              13.399083449779106,
+              42.351362382672754
+            ],
+            [
+              13.399083449779106,
+              42.351218652227296
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_18",
+        "osm_tags": {
+          "layout_column": "2",
+          "layout_row": "3",
+          "name": "Controlled neighbourhood building 18",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.399460261094777,
+              42.35123661853297
+            ],
+            [
+              13.399679054761942,
+              42.35123661853297
+            ],
+            [
+              13.399679054761942,
+              42.35134441636707
+            ],
+            [
+              13.399460261094777,
+              42.35134441636707
+            ],
+            [
+              13.399460261094777,
+              42.35123661853297
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_19",
+        "osm_tags": {
+          "layout_column": "3",
+          "layout_row": "3",
+          "name": "Controlled neighbourhood building 19",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.399837072410449,
+              42.351227635380134
+            ],
+            [
+              13.400080176485076,
+              42.351227635380134
+            ],
+            [
+              13.400080176485076,
+              42.35135339951991
+            ],
+            [
+              13.399837072410449,
+              42.35135339951991
+            ],
+            [
+              13.399837072410449,
+              42.351227635380134
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_20",
+        "osm_tags": {
+          "layout_column": "4",
+          "layout_row": "3",
+          "name": "Controlled neighbourhood building 20",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.400250349337314,
+              42.351218652227296
+            ],
+            [
+              13.400444832597016,
+              42.351218652227296
+            ],
+            [
+              13.400444832597016,
+              42.351362382672754
+            ],
+            [
+              13.400250349337314,
+              42.351362382672754
+            ],
+            [
+              13.400250349337314,
+              42.351218652227296
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_21",
+        "osm_tags": {
+          "layout_column": "5",
+          "layout_row": "3",
+          "name": "Controlled neighbourhood building 21",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.400627160652986,
+              42.35123661853297
+            ],
+            [
+              13.40084595432015,
+              42.35123661853297
+            ],
+            [
+              13.40084595432015,
+              42.35134441636707
+            ],
+            [
+              13.400627160652986,
+              42.35134441636707
+            ],
+            [
+              13.400627160652986,
+              42.35123661853297
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_22",
+        "osm_tags": {
+          "layout_column": "6",
+          "layout_row": "3",
+          "name": "Controlled neighbourhood building 22",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.401003971968658,
+              42.351227635380134
+            ],
+            [
+              13.401247076043285,
+              42.351227635380134
+            ],
+            [
+              13.401247076043285,
+              42.35135339951991
+            ],
+            [
+              13.401003971968658,
+              42.35135339951991
+            ],
+            [
+              13.401003971968658,
+              42.351227635380134
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_23",
+        "osm_tags": {
+          "layout_column": "7",
+          "layout_row": "3",
+          "name": "Controlled neighbourhood building 23",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.401417248895523,
+              42.351218652227296
+            ],
+            [
+              13.401611732155224,
+              42.351218652227296
+            ],
+            [
+              13.401611732155224,
+              42.351362382672754
+            ],
+            [
+              13.401417248895523,
+              42.351362382672754
+            ],
+            [
+              13.401417248895523,
+              42.351218652227296
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_24",
+        "osm_tags": {
+          "layout_column": "8",
+          "layout_row": "3",
+          "name": "Controlled neighbourhood building 24",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.398694483259701,
+              42.351524079423896
+            ],
+            [
+              13.398888966519403,
+              42.351524079423896
+            ],
+            [
+              13.398888966519403,
+              42.35163187725799
+            ],
+            [
+              13.398694483259701,
+              42.35163187725799
+            ],
+            [
+              13.398694483259701,
+              42.351524079423896
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_25",
+        "osm_tags": {
+          "layout_column": "1",
+          "layout_row": "4",
+          "name": "Controlled neighbourhood building 25",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.399071294575373,
+              42.35151509627105
+            ],
+            [
+              13.399290088242537,
+              42.35151509627105
+            ],
+            [
+              13.399290088242537,
+              42.351640860410825
+            ],
+            [
+              13.399071294575373,
+              42.351640860410825
+            ],
+            [
+              13.399071294575373,
+              42.35151509627105
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_26",
+        "osm_tags": {
+          "layout_column": "2",
+          "layout_row": "4",
+          "name": "Controlled neighbourhood building 26",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.399448105891045,
+              42.35150611311821
+            ],
+            [
+              13.399691209965672,
+              42.35150611311821
+            ],
+            [
+              13.399691209965672,
+              42.35164984356367
+            ],
+            [
+              13.399448105891045,
+              42.35164984356367
+            ],
+            [
+              13.399448105891045,
+              42.35150611311821
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_27",
+        "osm_tags": {
+          "layout_column": "3",
+          "layout_row": "4",
+          "name": "Controlled neighbourhood building 27",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.399861382817912,
+              42.351524079423896
+            ],
+            [
+              13.400055866077613,
+              42.351524079423896
+            ],
+            [
+              13.400055866077613,
+              42.35163187725799
+            ],
+            [
+              13.399861382817912,
+              42.35163187725799
+            ],
+            [
+              13.399861382817912,
+              42.351524079423896
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_28",
+        "osm_tags": {
+          "layout_column": "4",
+          "layout_row": "4",
+          "name": "Controlled neighbourhood building 28",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.400238194133584,
+              42.35151509627105
+            ],
+            [
+              13.400456987800748,
+              42.35151509627105
+            ],
+            [
+              13.400456987800748,
+              42.351640860410825
+            ],
+            [
+              13.400238194133584,
+              42.351640860410825
+            ],
+            [
+              13.400238194133584,
+              42.35151509627105
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_29",
+        "osm_tags": {
+          "layout_column": "5",
+          "layout_row": "4",
+          "name": "Controlled neighbourhood building 29",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.400615005449255,
+              42.35150611311821
+            ],
+            [
+              13.400858109523881,
+              42.35150611311821
+            ],
+            [
+              13.400858109523881,
+              42.35164984356367
+            ],
+            [
+              13.400615005449255,
+              42.35164984356367
+            ],
+            [
+              13.400615005449255,
+              42.35150611311821
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_30",
+        "osm_tags": {
+          "layout_column": "6",
+          "layout_row": "4",
+          "name": "Controlled neighbourhood building 30",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.40102828237612,
+              42.351524079423896
+            ],
+            [
+              13.401222765635822,
+              42.351524079423896
+            ],
+            [
+              13.401222765635822,
+              42.35163187725799
+            ],
+            [
+              13.40102828237612,
+              42.35163187725799
+            ],
+            [
+              13.40102828237612,
+              42.351524079423896
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_31",
+        "osm_tags": {
+          "layout_column": "7",
+          "layout_row": "4",
+          "name": "Controlled neighbourhood building 31",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.401405093691793,
+              42.35151509627105
+            ],
+            [
+              13.401623887358957,
+              42.35151509627105
+            ],
+            [
+              13.401623887358957,
+              42.351640860410825
+            ],
+            [
+              13.401405093691793,
+              42.351640860410825
+            ],
+            [
+              13.401405093691793,
+              42.35151509627105
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "kind": "building",
+        "osm_id": "nh_b_32",
+        "osm_tags": {
+          "layout_column": "8",
+          "layout_row": "4",
+          "name": "Controlled neighbourhood building 32",
+          "source_type": "derived_controlled_layout"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.398548620814926,
+            42.35085932611364
+          ],
+          [
+            13.401757594600001,
+            42.35085932611364
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "nh_road_h_01",
+        "osm_tags": {
+          "highway": "residential",
+          "name": "Controlled east west street 01"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.398548620814926,
+            42.35114678700456
+          ],
+          [
+            13.401757594600001,
+            42.35114678700456
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "nh_road_h_02",
+        "osm_tags": {
+          "highway": "residential",
+          "name": "Controlled east west street 02"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.398548620814926,
+            42.35143424789548
+          ],
+          [
+            13.401757594600001,
+            42.35143424789548
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "nh_road_h_03",
+        "osm_tags": {
+          "highway": "residential",
+          "name": "Controlled east west street 03"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.398986208149255,
+            42.350535932611365
+          ],
+          [
+            13.398986208149255,
+            42.35175764139776
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "nh_road_v_01",
+        "osm_tags": {
+          "highway": "residential",
+          "name": "Controlled north south street 01"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.399375174668657,
+            42.350535932611365
+          ],
+          [
+            13.399375174668657,
+            42.35175764139776
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "nh_road_v_02",
+        "osm_tags": {
+          "highway": "residential",
+          "name": "Controlled north south street 02"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.39976414118806,
+            42.350535932611365
+          ],
+          [
+            13.39976414118806,
+            42.35175764139776
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "nh_road_v_03",
+        "osm_tags": {
+          "highway": "residential",
+          "name": "Controlled north south street 03"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.400153107707464,
+            42.350535932611365
+          ],
+          [
+            13.400153107707464,
+            42.35175764139776
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "nh_road_v_04",
+        "osm_tags": {
+          "highway": "residential",
+          "name": "Controlled north south street 04"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.400542074226866,
+            42.350535932611365
+          ],
+          [
+            13.400542074226866,
+            42.35175764139776
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "nh_road_v_05",
+        "osm_tags": {
+          "highway": "residential",
+          "name": "Controlled north south street 05"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.40093104074627,
+            42.350535932611365
+          ],
+          [
+            13.40093104074627,
+            42.35175764139776
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "nh_road_v_06",
+        "osm_tags": {
+          "highway": "residential",
+          "name": "Controlled north south street 06"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            13.401320007265673,
+            42.350535932611365
+          ],
+          [
+            13.401320007265673,
+            42.35175764139776
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "kind": "road",
+        "osm_id": "nh_road_v_07",
+        "osm_tags": {
+          "highway": "residential",
+          "name": "Controlled north south street 07"
+        },
+        "provenance": "derived_controlled_neighbourhood"
+      },
+      "type": "Feature"
+    }
+  ],
+  "name": "heidata_controlled_neighborhood_context",
+  "properties": {
+    "crs": "EPSG:4326",
+    "license": "project source artifact",
+    "projection": "local east north tangent plane used only for deterministic derived placement",
+    "provenance": "not an OSM extract and not a measured L'Aquila neighbourhood",
+    "schema_version": "osm_context.v1",
+    "snapshot_at": "2026-09-27",
+    "source": "derived controlled neighbourhood layout generated from the full heiDATA benchmark"
+  },
+  "type": "FeatureCollection"
+}

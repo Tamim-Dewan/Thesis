@@ -1,0 +1,17 @@
+{
+  "schema_version": "laquila_georeferenced_layout.v1",
+  "source_context": "/Users/_d-one_/Desktop/Thesis/Simulation/heidata_benchmark/data/sample/osm_context.v1.geojson",
+  "source_manifest": "/Users/_d-one_/Datasets/heiDATA_D3WZID/full_manifest.v1.json",
+  "source_scenario": "/Users/_d-one_/Desktop/Thesis/Simulation/results/heidata_full_realistic_initial_20260927/heidata_full_visual_scenario.v1.json",
+  "layout_rule": "osm_georeferenced_local_enu.v1",
+  "boundary_margin_m": 18.0,
+  "maximum_airspace_m": 50.0,
+  "active_road_geometry": false,
+  "visual_context_only_osm_ids": [
+    "way/503190642",
+    "way/503193496",
+    "way/503974017",
+    "way/503976723"
+  ],
+  "notes": "Curated L'Aquila environment. Focal heiDATA meshes remain generic damage templates, not measured building damage."
+}
