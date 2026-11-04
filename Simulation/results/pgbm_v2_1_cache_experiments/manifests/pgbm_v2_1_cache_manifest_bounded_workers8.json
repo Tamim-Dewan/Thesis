@@ -1,0 +1,68 @@
+{
+  "config": {
+    "arrival_profile": "three_phase",
+    "cache_enabled": true,
+    "cache_item_prior": null,
+    "cache_variant": "matrix",
+    "energy_capacity": 1000.0,
+    "horizon_minutes": 120.0,
+    "max_cache_slots": 1,
+    "max_candidate_plans": 5000,
+    "max_pending_tasks": 4,
+    "name": "pgbm_v2_1_cache_aware_recourse",
+    "payload_capacity": 4,
+    "payload_weight_capacity": 2.0,
+    "phase_weights": [
+      3.0,
+      2.0,
+      1.0
+    ],
+    "reserve_energy": 200.0,
+    "severity": "moderate",
+    "turnaround_minutes": 5.0
+  },
+  "episode_count": 240,
+  "modes": [
+    "synthetic",
+    "du_outdoor"
+  ],
+  "record_count": 720,
+  "schema_version": "pgbm_v2_1_cache_manifest.v1",
+  "seeds": [
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110
+  ],
+  "task_counts": [
+    30,
+    60,
+    90
+  ],
+  "uav_counts": [
+    3,
+    5,
+    8,
+    10
+  ],
+  "variants": [
+    {
+      "item_prior": null,
+      "name": "uniform"
+    },
+    {
+      "item_prior": {
+        "food": 0.1,
+        "medical": 0.1,
+        "water": 1.0
+      },
+      "name": "water_heavy_sensitivity"
+    }
+  ]
+}

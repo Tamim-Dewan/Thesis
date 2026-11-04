@@ -1,0 +1,10 @@
+{
+  "v1_workload_pressure": "Experiment Reports/assets/v1/v1_workload_pressure.pdf",
+  "v1_fleet_sensitivity": "Experiment Reports/assets/v1/v1_fleet_sensitivity.pdf",
+  "v1_runtime_bottleneck": "Experiment Reports/assets/v1/v1_runtime_bottleneck.pdf",
+  "v1_baseline_comparison": "Experiment Reports/assets/v1/v1_baseline_comparison.pdf",
+  "v2_environment_comparison": "Experiment Reports/assets/v2/v2_environment_comparison.pdf",
+  "v2_objective_gain_heatmap": "Experiment Reports/assets/v2/v2_objective_gain_heatmap.pdf",
+  "v2_recourse_decisions": "Experiment Reports/assets/v2/v2_recourse_decisions.pdf",
+  "v2_tradeoff": "Experiment Reports/assets/v2/v2_tradeoff.pdf"
+}

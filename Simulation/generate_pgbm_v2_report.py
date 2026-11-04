@@ -8,6 +8,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Sequence, Tuple
 
+from report_charts import write_all_charts
+
 
 ROOT = Path(__file__).resolve().parents[1]
 METRICS_PATH = ROOT / "Simulation/results/pgbm_v2_recourse_experiments/raw_metrics/pgbm_v2_paired_matrix_metrics_tasks_30_60_90_uavs_3_5_8_10_seeds_101_110.csv"
@@ -427,7 +429,8 @@ def detailed_markdown_sections(
     lines.extend(
         [
             "",
-            "Energy result-এর মূল trade-off হলো: DU outdoor-এ V2 total energy 6142.4 J থেকে 6078.6 J-এ এবং distance 5928.2 m থেকে 5854.1 m-এ কমেছে, কারণ V2 কিছু lower-value task replace/queue করে এবং infeasible বা energy-expensive candidate গ্রহণ করে না। কিন্তু completed task ও parcel কম হওয়ায় প্রতি served task energy 310.2 থেকে 314.7 J এবং প্রতি dropped parcel 199.3 থেকে 224.5 J হয়েছে। Synthetic-এ V2 total energy 5319.7 J থেকে 5368.8 J এবং distance 5041.4 m থেকে 5083.6 m-এ সামান্য বেড়েছে; accepted recourse-এর revised route এই অতিরিক্ত movement তৈরি করেছে। তাই শুধু total energy দিয়ে efficiency বিচার করা যাবে না; cumulative energy, energy per completed service এবং distance একসঙ্গে দেখতে হবে।",
+            "![V2 performance trade-off](../assets/v2/v2_tradeoff.pdf)",
+            "**Energy takeaway:** DU outdoor-এ V2 total energy ও distance সামান্য কমেছে, কিন্তু energy per served task বেড়েছে কারণ completed task কমেছে। Synthetic-এ V2 total energy ও distance সামান্য বেড়েছে। তাই cumulative energy-এর সঙ্গে energy per service এবং distance একসঙ্গে বিচার করতে হবে।",
             "",
             "## Expanded V1 বনাম V2 result matrix",
             "",
@@ -704,9 +707,8 @@ def generate_markdown(
     lines.extend(
         [
             "",
-            "এই table থেকে কয়েকটি ফলাফল পরিষ্কার। DU outdoor-এ V2 objective 10.43 থেকে 11.70 হয়েছে (প্রায় 12.2% বৃদ্ধি), যদিও served task 20.12 থেকে 19.63 এবং parcel rate 36.6% থেকে 33.4%-এ সামান্য কমেছে। Synthetic-এ objective 23.48 থেকে 23.84 (প্রায় 1.5%) বেড়েছে, কিন্তু served task এবং parcel rate-ও সামান্য কমেছে। অর্থাৎ V2-এর লাভ raw task count নয়; active mission-এর মধ্যে কোন task আগে complete করলে time-sensitive service value বেশি হবে, সেটি বেছে নেওয়া।",
-            "সবচেয়ে গুরুত্বপূর্ণ পরিবর্তনটি Delay min-এ। DU outdoor-এ average delay 31.64 থেকে 23.21 মিনিটে (8.43 মিনিট বা প্রায় 26.6%) এবং Synthetic-এ 18.30 থেকে 16.08 মিনিটে (2.22 মিনিট বা প্রায় 12.1%) কমেছে। Delay min হলো task detect হওয়ার সময় থেকে delivery complete হওয়া পর্যন্ত গড় সময়। নতুন task এলে V2 শুধু সেই replacement নেয় যার revised remaining mission value পুরনো mission-এর চেয়ে বেশি; ফলে অপেক্ষমাণ high-value task অনেক ক্ষেত্রে আগের completion position পায়। তবে এটি সব task-এর delay কমেছে—এমন দাবি নয়; কিছু lower-value displaced task queue-তে ফেরত যায়, তাই served count কমেও average completed-task delay কমতে পারে।",
-            "এর বিপরীতে V2 runtime DU outdoor-এ 20.225 থেকে 59.408 s এবং Synthetic-এ 3.733 থেকে 10.355 s হয়েছে। কারণ প্রতিটি recourse trigger-এ সম্ভাব্য active UAV ও displaced task-এর জন্য feasibility এবং revised route পরীক্ষা করা হয়। তাই V2-এর মূল trade-off হলো—priority-weighted service value এবং completion delay উন্নত করার বিনিময়ে অতিরিক্ত computation।",
+            "![V1 versus V2 environment comparison](../assets/v2/v2_environment_comparison.pdf)",
+            "**Core findings:** DU outdoor-এ V2 objective ১০.৪৩ থেকে ১১.৭০ হয়েছে, প্রায় ১২.২% বৃদ্ধি; Synthetic-এ ২৩.৪৮ থেকে ২৩.৮৪, প্রায় ১.৫% বৃদ্ধি। Average delay দুই environment-এই কমেছে। Served task ও parcel rate সামান্য কমলেও objective বেড়েছে, কারণ V2 time-sensitive service value অগ্রাধিকার দেয়। Runtime DU outdoor-এ প্রায় ২.৯৪ গুণ এবং Synthetic-এ প্রায় ২.৭৭ গুণ হয়েছে।",
             "",
             "## Task load পরিবর্তনের প্রভাব",
             "",
@@ -798,8 +800,8 @@ def generate_markdown(
     lines.extend(
         [
             "",
-            "এই matrix-এর প্রধান patternগুলো হলো: (১) DU outdoor-এর ১২টি configuration-এর সবকটিতেই V2 objective V1-এর চেয়ে বেশি। বিশেষ করে ৯০ task-এ gain 1.30 থেকে 2.59 পর্যন্ত, অর্থাৎ load বাড়লে recourse-এর priority benefit বেশি দৃশ্যমান হয়। (২) DU outdoor-এ ৬০ task/৩ UAV ছাড়া served task সামান্য কমেছে বা প্রায় অপরিবর্তিত থেকেছে; parcel rate-ও সব cell-এ কমেছে। কারণ V2 কিছু lower-value active task সরিয়ে বেশি time-sensitive task বসায়—এটি throughput-maximization rule নয়। (৩) Synthetic-এ low load এবং বেশি UAV থাকলে V1-এর capacity প্রায় যথেষ্ট; ৩০ task/১০ UAV-এ accepted replacement গড় ০ এবং objective পরিবর্তন ০.০০। তাই সেখানে V2-এর বাড়তি লাভ সীমিত। (৪) Synthetic-এর ৬০ task/১০ UAV cell-এ একমাত্র সামান্য negative objective change (-0.09) দেখা গেছে—এই configuration-এ replacement-এর লাভ computation/queue trade-off পুরোপুরি offset করতে পারেনি। (৫) ৯০ task-এ accepted replacement এবং runtime সাধারণত বাড়ে; DU outdoor-এ ৯০ task/১০ UAV runtime 134.039 s পর্যন্ত উঠেছে।",
-            "সুতরাং matrix দেখায় যে V2-এর value সবচেয়ে বেশি congestion বা active-mission overlap থাকা configuration-এ। UAV বাড়ালে service capacity বাড়ে, কিন্তু নতুন task idle UAV-তে সরাসরি dispatch হলে replacement দরকার কমে; তাই accepted replacement fleet size-এর সঙ্গে সবসময় monotonic হয় না।",
+            "![V2 objective gain heatmap](../assets/v2/v2_objective_gain_heatmap.pdf)",
+            "**Matrix takeaway:** DU outdoor-এর ১২টি configuration-এই V2 objective V1-এর চেয়ে বেশি; ৯০ task-এ gain ১.৩০ থেকে ২.৫৯ পর্যন্ত। Synthetic-এ gain কম এবং ৬০ task, ১০ UAV cell-এ সামান্য negative change দেখা গেছে। Recourse-এর value congestion এবং active mission overlap-এর সঙ্গে বেশি দৃশ্যমান হয়েছে।",
             "",
             "## Recourse decision এবং rejection evidence",
             "",
@@ -814,8 +816,8 @@ def generate_markdown(
     lines.extend(
         [
             "",
-            "এই অংশটির সহজ অর্থ হলো: নতুন task আসার সময় যদি UAV-গুলো active থাকে, V2 দেখে কোনো চলমান mission-এর একটি uncompleted task সরিয়ে নতুন task বসালে সত্যিই লাভ হবে কি না। একটি trigger-এ একাধিক candidate পরীক্ষা হতে পারে; তাই table-এর সংখ্যা candidate count নয়, trigger-level final outcome। মোট ৬৬৩৯টি trigger-এর মধ্যে ২২৫১টি replacement গৃহীত এবং ৪৩৮৮টি গৃহীত হয়নি—অর্থাৎ acceptance rate প্রায় 33.9%।",
-            "`no_positive_gain` (2113) সবচেয়ে বেশি দেখা গেছে। অর্থাৎ candidate route ও item-এর দিক থেকে সম্ভব হলেও পুরনো task সরিয়ে নতুন task বসালে remaining service value বাড়েনি; তাই বর্তমান mission অপরিবর্তিত রাখা হয়েছে। `no_feasible_candidate` (1842) মানে কোনো candidate-ই item/inventory, route, energy reserve, return বা horizon-এর সব শর্ত একসঙ্গে পূরণ করতে পারেনি। `no_uncompleted_active_task` (433) মানে active mission-এ সরানোর মতো uncompleted task ছিল না। এই rejection-এ নতুন task হারিয়ে যায় না—pending queue-তে থেকে পরবর্তী dispatch-এর জন্য অপেক্ষা করে। Candidate-level কারণগুলো JSON decision trace-এ আলাদা করে রাখা হয়েছে।",
+            "![V2 recourse decision evidence](../assets/v2/v2_recourse_decisions.pdf)",
+            "**Core finding:** মোট ৬৬৩৯টি trigger-এর মধ্যে ২২৫১টি replacement গৃহীত হয়েছে, acceptance rate প্রায় ৩৩.৯%। সবচেয়ে বড় rejection reason ছিল positive gain না পাওয়া; infeasible candidate হলে task queue-তে থেকে যায়।",
             "",
             "## Runtime এবং bottleneck",
             "",
@@ -845,8 +847,7 @@ def generate_markdown(
         [
             "",
             "এখানে Runtime s বলতে simulation program-এর computation time বোঝায়; এটি UAV-এর real flight time বা task delay নয়। Planner s হলো initial assignment search-এর সময়, Route s হলো collision-aware route তৈরি/মূল্যায়নের সময়, আর Recourse s হলো V2-তে নতুন task replacement candidate পরীক্ষা করার অতিরিক্ত সময়।",
-            "Table-এর প্রধান bottleneck হলো route evaluation। V1-এ DU outdoor-এর 20.225 s runtime-এর মধ্যে route অংশ 19.566 s (প্রায় 96.7%); Synthetic-এ 3.561 s (প্রায় 95.4%)। তবে V2-এর Runtime, Planner, Route এবং Recourse timer-গুলো mutually exclusive নয়। Planner-এর মধ্যে route evaluation থাকতে পারে এবং recourse candidate যাচাইয়ের সময়ও route check চলে; তাই এগুলো সরাসরি যোগ করে total runtime ধরা যাবে না। উদাহরণ হিসেবে DU outdoor V2-তে Route 44.692 s + Recourse 12.784 s = 57.476 s, যেখানে total Runtime 59.408 s; বাকি 1.932 s event handling, dispatch bookkeeping এবং অন্যান্য overhead। Synthetic-এ 8.513 + 1.326 = 9.839 s, total 10.355 s; residual 0.516 s। অর্থাৎ breakdown-টি bottleneck বোঝার diagnostic view, additive accounting নয়। এই ফল দেখায় V2-এর বাড়তি computation-এর বড় অংশ repeated route feasibility পরীক্ষা, আর underlying route search-ই এখনও প্রধান cost centre।",
-            "DU outdoor Synthetic-এর তুলনায় অনেক ধীর, কারণ DU-তে polygon obstacle geometry এবং blocked হলে grid A* path search বেশি কাজ করে। V2 runtime V1-এর তুলনায় DU-তে প্রায় 2.94 গুণ এবং Synthetic-এ প্রায় 2.77 গুণ হয়েছে। Safe return 100% মানে simulation-এর feasibility filter পেরিয়ে সব executed mission base-এ ফিরেছে; এটি field-flight reliability-এর প্রমাণ নয়। `Search truncated` হলো যেসব dispatch ৫০,০০০ candidate limit-এ পৌঁছেছে তার গড় সংখ্যা, আর Candidate হলো পরীক্ষিত candidate plan-এর গড় count। তাই পরবর্তী efficiency কাজের প্রধান দিক হবে route reuse/cache hit measurement, early feasibility pruning এবং scalable candidate search।",
+            "**Runtime finding:** V1 ও V2 উভয় version-এ route evaluation প্রধান cost centre। V2-এর অতিরিক্ত সময়ের একটি বড় অংশ recourse candidate-এর repeated route feasibility check থেকে এসেছে। Runtime, planner, route এবং recourse timer overlap করতে পারে, তাই এগুলো সরাসরি যোগ করে total runtime ধরা যাবে না।",
         ]
     )
     lines.extend(detailed_markdown_sections(rows, matrix, traces, validation))
@@ -932,7 +933,8 @@ def detailed_tex_sections(
     lines.extend(
         [
             r"\bottomrule\end{tabular}\end{table}",
-            r"Energy result-এর মূল trade-off হলো: DU outdoor-এ V2 total energy 6142.4 J থেকে 6078.6 J-এ এবং distance 5928.2 m থেকে 5854.1 m-এ কমেছে, কারণ V2 কিছু lower-value task replace বা queue করে এবং infeasible বা energy-expensive candidate গ্রহণ করে না। কিন্তু completed task ও parcel কম হওয়ায় প্রতি served task energy 310.2 থেকে 314.7 J এবং প্রতি dropped parcel 199.3 থেকে 224.5 J হয়েছে। Synthetic-এ V2 total energy 5319.7 J থেকে 5368.8 J এবং distance 5041.4 m থেকে 5083.6 m-এ সামান্য বেড়েছে; accepted recourse-এর revised route এই অতিরিক্ত movement তৈরি করেছে। তাই শুধু total energy দিয়ে efficiency বিচার করা যাবে না; cumulative energy, energy per completed service এবং distance একসঙ্গে দেখতে হবে।",
+            r"\begin{figure}[H]\centering\includegraphics[width=0.98\textwidth]{../assets/v2/v2_tradeoff.pdf}\caption{V2 performance trade-off: objective gain, runtime overhead, energy এবং distance change।}\label{fig:v2-tradeoff}\end{figure}",
+            r"\textbf{Energy takeaway:} DU outdoor-এ V2 total energy ও distance সামান্য কমেছে, কিন্তু energy per served task বেড়েছে কারণ completed task কমেছে। Synthetic-এ V2 total energy ও distance সামান্য বেড়েছে। তাই cumulative energy-এর সঙ্গে energy per service এবং distance একসঙ্গে বিচার করতে হবে।",
             r"\section{Expanded V1 বনাম V2 result matrix}",
             r"নিচের দুইটি matrix-এ প্রতিটি cell-এর ১০টি seed-এর mean $\pm$ standard deviation দেওয়া হয়েছে। ফলে objective, served task, parcel volume, queue, energy, recourse এবং runtime-এর seed variability একই সঙ্গে দেখা যায়।",
             r"\begin{landscape}\begin{longtable}{@{}lrrlrrrrrrrr@{}}",
@@ -1141,11 +1143,12 @@ def generate_tex(
         r"\usepackage{polyglossia}",
         r"\setmainlanguage{bengali}",
         r"\setotherlanguage{english}",
-        r"\setmainfont[Script=Bengali]{Siyam Rupali}",
-        r"\setsansfont[Script=Bengali]{Siyam Rupali}",
-        r"\newfontfamily\bengalifonttt[Script=Bengali]{Siyam Rupali}",
+        r"\setmainfont[Script=Bengali]{Kohinoor Bangla}",
+        r"\setsansfont[Script=Bengali]{Kohinoor Bangla}",
+        r"\newfontfamily\bengalifonttt[Script=Bengali]{Kohinoor Bangla}",
+        r"\newfontfamily\englishfont{Avenir Next}",
         r"\usepackage[a4paper,margin=20mm,headheight=24pt]{geometry}",
-        r"\usepackage{amsmath,array,booktabs,enumitem,fancyhdr,float,longtable,pdflscape,tabularx,titlesec,xcolor,hyperref}",
+        r"\usepackage{amsmath,array,booktabs,enumitem,fancyhdr,float,graphicx,longtable,pdflscape,tabularx,titlesec,xcolor,hyperref}",
         r"\definecolor{navy}{HTML}{17365D}",
         r"\definecolor{bluegray}{HTML}{EAF1F8}",
         r"\definecolor{lightgray}{HTML}{F4F6F8}",
@@ -1172,7 +1175,7 @@ def generate_tex(
         r"\thispagestyle{empty}",
         r"\vspace*{18mm}",
         r"{\color{navy}\rule{\textwidth}{1.5pt}}\\[10mm]",
-        r"{\color{navy}\sffamily\bfseries\fontsize{25}{32}\selectfont Initial Solution V2\\Comparative Simulation Report\par}",
+        r"{\color{navy}\englishfont\bfseries\fontsize{25}{32}\selectfont Initial Solution V2\\Comparative Simulation Report\par}",
         r"\vspace{6mm}",
         r"{\color{midgray}\sffamily\Large Task replacement recourse, paired experiment এবং ফলাফল\par}",
         r"\vfill",
@@ -1239,9 +1242,14 @@ def generate_tex(
     lines.extend(
         [
             r"\bottomrule\end{tabular}\end{table}",
-            r"এই table থেকে কয়েকটি ফলাফল পরিষ্কার। DU outdoor-এ V2 objective 10.43 থেকে 11.70 হয়েছে (প্রায় 12.2\% বৃদ্ধি), যদিও served task 20.12 থেকে 19.63 এবং parcel rate 36.6\% থেকে 33.4\%-এ সামান্য কমেছে। Synthetic-এ objective 23.48 থেকে 23.84 (প্রায় 1.5\%) বেড়েছে, কিন্তু served task এবং parcel rate-ও সামান্য কমেছে। অর্থাৎ V2-এর লাভ raw task count নয়; active mission-এর মধ্যে কোন task আগে complete করলে time-sensitive service value বেশি হবে, সেটি বেছে নেওয়া।",
-            r"সবচেয়ে গুরুত্বপূর্ণ পরিবর্তনটি Delay min-এ। DU outdoor-এ average delay 31.64 থেকে 23.21 মিনিটে (8.43 মিনিট বা প্রায় 26.6\%) এবং Synthetic-এ 18.30 থেকে 16.08 মিনিটে (2.22 মিনিট বা প্রায় 12.1\%) কমেছে। Delay min হলো task detect হওয়ার সময় থেকে delivery complete হওয়া পর্যন্ত গড় সময়। নতুন task এলে V2 শুধু সেই replacement নেয় যার revised remaining mission value পুরনো mission-এর চেয়ে বেশি; ফলে অপেক্ষমাণ high-value task অনেক ক্ষেত্রে আগের completion position পায়। তবে এটি সব task-এর delay কমেছে—এমন দাবি নয়; কিছু lower-value displaced task queue-তে ফেরত যায়, তাই served count কমেও average completed-task delay কমতে পারে।",
-            r"এর বিপরীতে V2 runtime DU outdoor-এ 20.225 থেকে 59.408 s এবং Synthetic-এ 3.733 থেকে 10.355 s হয়েছে। কারণ প্রতিটি recourse trigger-এ সম্ভাব্য active UAV ও displaced task-এর জন্য feasibility এবং revised route পরীক্ষা করা হয়। তাই V2-এর মূল trade-off হলো—priority-weighted service value এবং completion delay উন্নত করার বিনিময়ে অতিরিক্ত computation।",
+            r"\begin{figure}[htbp]\centering\includegraphics[width=0.98\textwidth]{../assets/v2/v2_environment_comparison.pdf}\caption{V1 বনাম V2 environment comparison: objective value এবং average completion delay।}\label{fig:v2-environment-comparison}\end{figure}",
+            r"\textbf{Core findings:}",
+            r"\begin{itemize}",
+            r"\item DU outdoor-এ V2 objective ১০.৪৩ থেকে ১১.৭০ হয়েছে, প্রায় ১২.২\% বৃদ্ধি; Synthetic-এ ২৩.৪৮ থেকে ২৩.৮৪, প্রায় ১.৫\% বৃদ্ধি।",
+            r"\item Average delay DU outdoor-এ ৩১.৬৪ থেকে ২৩.২১ মিনিট এবং Synthetic-এ ১৮.৩০ থেকে ১৬.০৮ মিনিটে কমেছে।",
+            r"\item Served task ও parcel rate সামান্য কমলেও objective বেড়েছে। V2 throughput নয়, time-sensitive service value অগ্রাধিকার দেয়।",
+            r"\item এই gain-এর বিনিময়ে runtime DU outdoor-এ প্রায় ২.৯৪ গুণ এবং Synthetic-এ প্রায় ২.৭৭ গুণ হয়েছে।",
+            r"\end{itemize}",
             r"\section{Task load এবং UAV sensitivity}",
             r"Task load বাড়লে queue pressure বাড়ে এবং V1 ও V2 দুই version-এর service rate সাধারণত কমে। UAV সংখ্যা বাড়ালে available capacity বাড়ে, কিন্তু নতুন task idle UAV-তে dispatch হয়ে গেলে recourse trigger-এর সুযোগ কমতেও পারে। তাই V2 accepted replacement fleet size-এর সঙ্গে monotonic হওয়া আবশ্যক নয়।",
             r"\begin{landscape}\begin{longtable}{@{}llrrrrrrrrrrrr@{}}",
@@ -1274,8 +1282,8 @@ def generate_tex(
     lines.extend(
         [
             r"\bottomrule\end{longtable}\end{landscape}",
-            r"এই matrix-এর প্রধান patternগুলো হলো: (১) DU outdoor-এর ১২টি configuration-এর সবকটিতেই V2 objective V1-এর চেয়ে বেশি। বিশেষ করে ৯০ task-এ gain 1.30 থেকে 2.59 পর্যন্ত, অর্থাৎ load বাড়লে recourse-এর priority benefit বেশি দৃশ্যমান হয়। (২) DU outdoor-এ ৬০ task/৩ UAV ছাড়া served task সামান্য কমেছে বা প্রায় অপরিবর্তিত থেকেছে; parcel rate-ও সব cell-এ কমেছে। কারণ V2 কিছু lower-value active task সরিয়ে বেশি time-sensitive task বসায়—এটি throughput-maximization rule নয়। (৩) Synthetic-এ low load এবং বেশি UAV থাকলে V1-এর capacity প্রায় যথেষ্ট; ৩০ task/১০ UAV-এ accepted replacement গড় ০ এবং objective পরিবর্তন ০.০০। তাই সেখানে V2-এর বাড়তি লাভ সীমিত। (৪) Synthetic-এর ৬০ task/১০ UAV cell-এ একমাত্র সামান্য negative objective change (-0.09) দেখা গেছে—এই configuration-এ replacement-এর লাভ computation/queue trade-off পুরোপুরি offset করতে পারেনি। (৫) ৯০ task-এ accepted replacement এবং runtime সাধারণত বাড়ে; DU outdoor-এ ৯০ task/১০ UAV runtime 134.039 s পর্যন্ত উঠেছে।",
-            r"সুতরাং matrix দেখায় যে V2-এর value সবচেয়ে বেশি congestion বা active-mission overlap থাকা configuration-এ। UAV বাড়ালে service capacity বাড়ে, কিন্তু নতুন task idle UAV-তে সরাসরি dispatch হলে replacement দরকার কমে; তাই accepted replacement fleet size-এর সঙ্গে সবসময় monotonic হয় না।",
+            r"\begin{figure}[htbp]\centering\includegraphics[width=0.98\textwidth]{../assets/v2/v2_objective_gain_heatmap.pdf}\caption{V2 objective gain heatmap: task load এবং fleet size অনুযায়ী V2 minus V1 objective।}\label{fig:v2-objective-gain}\end{figure}",
+            r"\textbf{Matrix takeaway:} DU outdoor-এর ১২টি configuration-এই V2 objective V1-এর চেয়ে বেশি; ৯০ task-এ gain ১.৩০ থেকে ২.৫৯ পর্যন্ত। Synthetic-এ gain কম এবং ৬০ task, ১০ UAV cell-এ সামান্য negative change দেখা গেছে। Recourse-এর value congestion এবং active mission overlap-এর সঙ্গে বেশি দৃশ্যমান হয়েছে।",
             r"\section{Recourse decision এবং rejection evidence}",
             r"প্রতিটি trigger-এর candidate UAV, displaced task, item feasibility, route feasibility, energy feasibility, old value, new value, gain এবং final decision decision trace-এ রাখা হয়েছে। নিচের table-এ trigger-level rejection reason দেওয়া হলো; candidate-level কারণ সম্পূর্ণ JSON trace-এ দেখা যাবে।",
             r"\begin{table}[htbp]\centering\scriptsize\begin{tabular}{@{}lr@{}}\toprule Trigger-level rejection reason & Evidence count\\\midrule",
@@ -1286,8 +1294,8 @@ def generate_tex(
     lines.extend(
         [
             r"\bottomrule\end{tabular}\end{table}",
-            r"এই অংশটির সহজ অর্থ হলো: নতুন task আসার সময় যদি UAV-গুলো active থাকে, V2 দেখে কোনো চলমান mission-এর একটি uncompleted task সরিয়ে নতুন task বসালে সত্যিই লাভ হবে কি না। একটি trigger-এ একাধিক candidate পরীক্ষা হতে পারে; তাই table-এর সংখ্যা candidate count নয়, trigger-level final outcome। মোট ৬৬৩৯টি trigger-এর মধ্যে ২২৫১টি replacement গৃহীত এবং ৪৩৮৮টি গৃহীত হয়নি—অর্থাৎ acceptance rate প্রায় 33.9\%।",
-            r"$\texttt{no\_positive\_gain}$ (2113) সবচেয়ে বেশি দেখা গেছে। অর্থাৎ candidate route ও item-এর দিক থেকে সম্ভব হলেও পুরনো task সরিয়ে নতুন task বসালে remaining service value বাড়েনি; তাই বর্তমান mission অপরিবর্তিত রাখা হয়েছে। $\texttt{no\_feasible\_candidate}$ (1842) মানে কোনো candidate-ই item/inventory, route, energy reserve, return বা horizon-এর সব শর্ত একসঙ্গে পূরণ করতে পারেনি। $\texttt{no\_uncompleted\_active\_task}$ (433) মানে active mission-এ সরানোর মতো uncompleted task ছিল না। এই rejection-এ নতুন task হারিয়ে যায় না—pending queue-তে থেকে পরবর্তী dispatch-এর জন্য অপেক্ষা করে। Candidate-level কারণগুলো JSON decision trace-এ আলাদা করে রাখা হয়েছে।",
+            r"\begin{figure}[htbp]\centering\includegraphics[width=0.98\textwidth]{../assets/v2/v2_recourse_decisions.pdf}\caption{V2 recourse decision evidence: accepted and rejected replacement outcomes এবং rejection reasons।}\label{fig:v2-recourse-decisions}\end{figure}",
+            r"\textbf{Core finding:} মোট ৬৬৩৯টি trigger-এর মধ্যে ২২৫১টি replacement গৃহীত হয়েছে, acceptance rate প্রায় ৩৩.৯\%। সবচেয়ে বড় rejection reason ছিল positive gain না পাওয়া; infeasible candidate হলে task queue-তে থেকে যায় এবং হারিয়ে যায় না।",
             r"\section{Runtime এবং প্রধান bottleneck}",
             r"এখানে Runtime s বলতে simulation program-এর computation time বোঝায়; এটি UAV-এর real flight time বা task delay নয়। Planner s হলো initial assignment search-এর সময়, Route s হলো collision-aware route তৈরি/মূল্যায়নের সময়, আর Recourse s হলো V2-তে নতুন task replacement candidate পরীক্ষা করার অতিরিক্ত সময়।",
             r"\begin{table}[H]\centering\scriptsize\begin{tabular}{@{}llrrrrrrr@{}}\toprule Environment & Algorithm & Runtime s & Planner s & Route s & Recourse s & Candidate & Truncated & Safe return\\\midrule",
@@ -1312,8 +1320,7 @@ def generate_tex(
     lines.extend(
         [
             r"\bottomrule\end{tabular}\end{table}",
-            r"Table-এর প্রধান bottleneck হলো route evaluation। V1-এ DU outdoor-এর 20.225 s runtime-এর মধ্যে route অংশ 19.566 s (প্রায় 96.7\%); Synthetic-এ 3.561 s (প্রায় 95.4\%)। তবে V2-এর Runtime, Planner, Route এবং Recourse timer-গুলো mutually exclusive নয়। Planner-এর মধ্যে route evaluation থাকতে পারে এবং recourse candidate যাচাইয়ের সময়ও route check চলে; তাই এগুলো সরাসরি যোগ করে total runtime ধরা যাবে না। উদাহরণ হিসেবে DU outdoor V2-তে Route 44.692 s + Recourse 12.784 s = 57.476 s, যেখানে total Runtime 59.408 s; বাকি 1.932 s event handling, dispatch bookkeeping এবং অন্যান্য overhead। Synthetic-এ 8.513 + 1.326 = 9.839 s, total 10.355 s; residual 0.516 s। অর্থাৎ breakdown-টি bottleneck বোঝার diagnostic view, additive accounting নয়। এই ফল দেখায় V2-এর বাড়তি computation-এর বড় অংশ repeated route feasibility পরীক্ষা, আর underlying route search-ই এখনও প্রধান cost centre।",
-            r"DU outdoor Synthetic-এর তুলনায় অনেক ধীর, কারণ DU-তে polygon obstacle geometry এবং blocked হলে grid A* path search বেশি কাজ করে। V2 runtime V1-এর তুলনায় DU-তে প্রায় 2.94 গুণ এবং Synthetic-এ প্রায় 2.77 গুণ হয়েছে। Safe return 100\% মানে simulation-এর feasibility filter পেরিয়ে সব executed mission base-এ ফিরেছে; এটি field-flight reliability-এর প্রমাণ নয়। `Search truncated` হলো যেসব dispatch ৫০,০০০ candidate limit-এ পৌঁছেছে তার গড় সংখ্যা, আর Candidate হলো পরীক্ষিত candidate plan-এর গড় count। তাই পরবর্তী efficiency কাজের প্রধান দিক হবে route reuse/cache hit measurement, early feasibility pruning এবং scalable candidate search।",
+            r"\textbf{Runtime finding:} V1 ও V2 উভয় version-এ route evaluation প্রধান cost centre। V2-এর অতিরিক্ত সময়ের একটি বড় অংশ recourse candidate-এর repeated route feasibility check থেকে এসেছে। Runtime, planner, route এবং recourse timer overlap করতে পারে, তাই এগুলো সরাসরি যোগ করে total runtime ধরা যাবে না।",
         ]
     )
     lines.extend(detailed_tex_sections(rows, matrix, traces, validation))
@@ -1355,6 +1362,7 @@ def write_outputs(
 ) -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    write_all_charts()
     markdown = generate_markdown(rows, matrix, traces, validation)
     tex = generate_tex(rows, matrix, traces, validation)
     (OUTPUT_DIR / "pgbm_v2_comparative_findings_bn.md").write_text(markdown, encoding="utf-8")

@@ -1,4 +1,10 @@
-"""Generate the formatted Initial Solution V1 LaTeX report."""
+"""Refresh V1 report assets without overwriting the canonical Bangla source.
+
+The current V1 report is maintained in Bengali at
+``Experiment Reports/V1/pgbm_v1_simulation_findings_bn.tex``.  This older
+English template is retained for reference, but its default output is now
+protected so it cannot replace the canonical report accidentally.
+"""
 
 import argparse
 from collections import defaultdict
@@ -14,6 +20,7 @@ from generate_pgbm_v1_results_report import (
     _sd,
     _service_rate,
 )
+from report_charts import write_all_charts
 
 
 def _fmt(value, digits=3):
@@ -366,6 +373,11 @@ def main():
     args = parser.parse_args()
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
+    write_all_charts()
+    canonical = Path(__file__).resolve().parents[1] / "Experiment Reports/V1/pgbm_v1_simulation_findings_bn.tex"
+    if output.resolve() == canonical.resolve():
+        print("V1 chart assets refreshed; canonical Bengali report source was not overwritten: {}".format(canonical))
+        return
     output.write_text(build_tex(_read(args.metrics)), encoding="utf-8")
     print("LaTeX report: {}".format(output))
 

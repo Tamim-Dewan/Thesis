@@ -4,11 +4,11 @@
 
 ## Executive summary
 
-Initial Solution V1 was evaluated as a seeded, two hour, event driven bounded brute force reference planner. The replacement evidence contains **180 rows**, covering 2 environments, task loads 30, 60, 90, UAV counts 2, 3, 4, and seeds 101 through 110.
+Initial Solution V1 was evaluated as a seeded, two hour, event driven bounded brute force reference planner. The replacement evidence contains **240 rows**, covering 2 environments, task loads 30, 60, 90, UAV counts 3, 5, 8, 10, and seeds 101 through 110.
 
 The workload is intentionally much heavier than the earlier six task report. New tasks are detected in a high, medium, and low phase, remain queued when all UAVs are busy, and are planned only at dispatch opportunities. Active missions are fixed, so recourse and rerouting remain outside V1.
 
-The measured planner bottleneck is route evaluation. Across the complete matrix, route construction accounts for approximately **98.700%** of planner time. Synthetic is the faster environment on average, while DU outdoor is the slower environment. The current heavy run observed **75 dispatches that reached the candidate search limit**; those cases are reported as bounded search evidence, not hidden as optimal results.
+The measured planner bottleneck is route evaluation. Across the complete matrix, route construction accounts for approximately **96.550%** of planner time. Synthetic is the faster environment on average, while DU outdoor is the slower environment. The current heavy run observed **612 dispatches that reached the candidate search limit**; those cases are reported as bounded search evidence, not hidden as optimal results.
 
 ## Scope and formulation
 
@@ -26,9 +26,9 @@ At each dispatch opportunity, V1 enumerates bounded joint assignments and within
 | Arrival phases | High 0 to 40, medium 40 to 80, low 80 to 120 minutes |
 | Relative phase weights | 3:2:1 |
 | Task loads | 30, 60, 90 |
-| UAV counts | 2, 3, 4 |
+| UAV counts | 3, 5, 8, 10 |
 | Seeds | 101 through 110 (10 seeds) |
-| Total rows | 180 |
+| Total rows | 240 |
 | Payload capacity | 2.0 kg and 4 parcels per UAV |
 | Base turnaround | 5 minutes |
 | Search bound | At most 8 pending tasks and 50,000 candidates per dispatch |
@@ -44,8 +44,10 @@ This section gives a readable reference point. Values are means over the availab
 
 | Environment | Served | Service rate | Deferred | Peak queue | Delay min | Distance m | Runtime s |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| DU outdoor | 9.300 ± 3.093 | 31.000% | 20.700 ± 3.093 | 20.700 | 34.614 | 2597.699 | 16.570 |
-| Synthetic | 20.200 ± 0.632 | 67.333% | 9.800 ± 0.632 | 11.200 | 29.647 | 2208.421 | 2.869 |
+| DU outdoor | 10.500 ± 3.100 | 35.000% | 19.500 ± 3.100 | 19.500 | 34.333 | 2832.367 | 11.485 |
+| Synthetic | 22.600 ± 1.776 | 75.333% | 7.400 ± 1.776 | 9.700 | 23.656 | 2521.943 | 2.069 |
+
+[Open the V1 baseline comparison chart](../../Experiment%20Reports/assets/v1/v1_baseline_comparison.pdf)
 
 ## Complete task load and fleet matrix
 
@@ -53,24 +55,30 @@ The following table reports every environment, task load, and UAV count case. Ea
 
 | Environment | Tasks | UAVs | Served | Rate | Deferred | Peak queue | Delay min | Parcel util | Runtime s | Route share |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| DU outdoor | 30 | 2 | 6.700 ± 2.163 | 22.333% | 23.300 ± 2.163 | 23.300 | 34.377 | 43.750% | 12.132 | 99.584% |
-| DU outdoor | 30 | 3 | 9.300 ± 3.093 | 31.000% | 20.700 ± 3.093 | 20.700 | 34.614 | 29.167% | 16.570 | 99.059% |
-| DU outdoor | 30 | 4 | 12.200 ± 3.882 | 40.667% | 17.800 ± 3.882 | 17.800 | 35.194 | 22.500% | 18.067 | 98.805% |
-| DU outdoor | 60 | 2 | 6.700 ± 1.059 | 11.167% | 53.300 ± 1.059 | 53.300 | 36.348 | 48.750% | 11.690 | 99.890% |
-| DU outdoor | 60 | 3 | 9.400 ± 1.506 | 15.667% | 50.600 ± 1.506 | 50.600 | 36.090 | 32.500% | 16.577 | 99.629% |
-| DU outdoor | 60 | 4 | 12.500 ± 1.581 | 20.833% | 47.500 ± 1.581 | 47.500 | 35.306 | 25.000% | 19.721 | 98.612% |
-| DU outdoor | 90 | 2 | 6.900 ± 0.994 | 7.667% | 83.100 ± 0.994 | 83.100 | 34.516 | 48.750% | 12.839 | 99.439% |
-| DU outdoor | 90 | 3 | 9.800 ± 1.619 | 10.889% | 80.200 ± 1.619 | 80.200 | 34.046 | 33.333% | 18.128 | 99.262% |
-| DU outdoor | 90 | 4 | 12.500 ± 2.224 | 13.889% | 77.500 ± 2.224 | 77.500 | 33.538 | 25.000% | 20.423 | 98.665% |
-| Synthetic | 30 | 2 | 14.400 ± 0.966 | 48.000% | 15.600 ± 0.966 | 16.100 | 30.208 | 50.000% | 2.279 | 99.560% |
-| Synthetic | 30 | 3 | 20.200 ± 0.632 | 67.333% | 9.800 ± 0.632 | 11.200 | 29.647 | 33.333% | 2.869 | 99.249% |
-| Synthetic | 30 | 4 | 23.600 ± 1.174 | 78.667% | 6.400 ± 1.174 | 8.600 | 26.333 | 25.000% | 3.319 | 95.836% |
-| Synthetic | 60 | 2 | 14.300 ± 1.947 | 23.833% | 45.700 ± 1.947 | 45.700 | 27.281 | 50.000% | 2.694 | 99.085% |
-| Synthetic | 60 | 3 | 20.800 ± 2.781 | 34.667% | 39.200 ± 2.781 | 39.500 | 26.399 | 33.333% | 4.352 | 95.936% |
-| Synthetic | 60 | 4 | 26.700 ± 2.669 | 44.500% | 33.300 ± 2.669 | 33.400 | 25.317 | 25.000% | 5.500 | 95.360% |
-| Synthetic | 90 | 2 | 15.500 ± 0.850 | 17.222% | 74.500 ± 0.850 | 74.500 | 25.680 | 50.000% | 2.457 | 99.583% |
-| Synthetic | 90 | 3 | 21.600 ± 1.174 | 24.000% | 68.400 ± 1.174 | 68.400 | 24.910 | 33.333% | 4.452 | 98.168% |
-| Synthetic | 90 | 4 | 27.700 ± 1.636 | 30.778% | 62.300 ± 1.636 | 62.300 | 24.647 | 25.000% | 6.951 | 94.429% |
+| DU outdoor | 30 | 3 | 10.500 ± 3.100 | 35.000% | 19.500 ± 3.100 | 19.500 | 34.333 | 31.667% | 11.485 | 99.266% |
+| DU outdoor | 30 | 5 | 15.900 ± 3.315 | 53.000% | 14.100 ± 3.315 | 14.300 | 33.314 | 19.000% | 13.509 | 97.982% |
+| DU outdoor | 30 | 8 | 20.200 ± 3.120 | 67.333% | 9.800 ± 3.120 | 10.200 | 28.357 | 12.188% | 15.143 | 95.013% |
+| DU outdoor | 30 | 10 | 21.200 ± 2.741 | 70.667% | 8.800 ± 2.741 | 9.200 | 25.973 | 9.500% | 14.422 | 93.954% |
+| DU outdoor | 60 | 3 | 10.800 ± 1.619 | 18.000% | 49.200 ± 1.619 | 49.200 | 33.638 | 33.333% | 12.684 | 99.316% |
+| DU outdoor | 60 | 5 | 17.800 ± 1.989 | 29.667% | 42.200 ± 1.989 | 42.200 | 33.207 | 20.000% | 18.059 | 97.141% |
+| DU outdoor | 60 | 8 | 26.900 ± 3.035 | 44.833% | 33.100 ± 3.035 | 33.100 | 32.947 | 12.500% | 23.971 | 96.671% |
+| DU outdoor | 60 | 10 | 32.600 ± 4.993 | 54.333% | 27.400 ± 4.993 | 27.400 | 32.623 | 10.000% | 30.386 | 96.158% |
+| DU outdoor | 90 | 3 | 11.200 ± 1.687 | 12.444% | 78.800 ± 1.687 | 78.800 | 32.996 | 33.333% | 15.823 | 99.210% |
+| DU outdoor | 90 | 5 | 17.600 ± 2.875 | 19.556% | 72.400 ± 2.875 | 72.400 | 31.723 | 20.000% | 20.151 | 97.796% |
+| DU outdoor | 90 | 8 | 25.600 ± 3.502 | 28.444% | 64.400 ± 3.502 | 64.400 | 30.099 | 12.500% | 30.704 | 96.515% |
+| DU outdoor | 90 | 10 | 31.200 ± 4.237 | 34.667% | 58.800 ± 4.237 | 58.800 | 30.517 | 10.000% | 36.365 | 95.366% |
+| Synthetic | 30 | 3 | 22.600 ± 1.776 | 75.333% | 7.400 ± 1.776 | 9.700 | 23.656 | 33.333% | 2.069 | 96.483% |
+| Synthetic | 30 | 5 | 27.200 ± 1.398 | 90.667% | 2.800 ± 1.398 | 5.500 | 16.152 | 20.000% | 1.118 | 99.377% |
+| Synthetic | 30 | 8 | 27.500 ± 1.434 | 91.667% | 2.500 ± 1.434 | 3.400 | 11.406 | 11.562% | 1.102 | 98.288% |
+| Synthetic | 30 | 10 | 27.500 ± 1.434 | 91.667% | 2.500 ± 1.434 | 2.700 | 10.370 | 7.750% | 1.078 | 97.587% |
+| Synthetic | 60 | 3 | 25.400 ± 2.459 | 42.333% | 34.600 ± 2.459 | 35.000 | 21.600 | 33.333% | 2.862 | 99.258% |
+| Synthetic | 60 | 5 | 39.900 ± 3.843 | 66.500% | 20.100 ± 3.843 | 22.000 | 21.642 | 20.000% | 4.039 | 96.426% |
+| Synthetic | 60 | 8 | 53.300 ± 3.199 | 88.833% | 6.700 ± 3.199 | 11.000 | 18.928 | 12.500% | 4.663 | 94.019% |
+| Synthetic | 60 | 10 | 55.300 ± 1.767 | 92.167% | 4.700 ± 1.767 | 8.700 | 15.013 | 10.000% | 3.644 | 94.788% |
+| Synthetic | 90 | 3 | 27.700 ± 2.406 | 30.778% | 62.300 ± 2.406 | 62.300 | 20.887 | 33.333% | 3.246 | 99.802% |
+| Synthetic | 90 | 5 | 41.800 ± 3.824 | 46.444% | 48.200 ± 3.824 | 48.500 | 20.039 | 20.000% | 5.201 | 96.675% |
+| Synthetic | 90 | 8 | 62.300 ± 5.498 | 69.222% | 27.700 ± 5.498 | 29.300 | 19.906 | 12.500% | 7.286 | 93.854% |
+| Synthetic | 90 | 10 | 74.300 ± 4.218 | 82.556% | 15.700 ± 4.218 | 19.600 | 19.960 | 10.000% | 8.488 | 92.269% |
 
 ## Task load effect
 
@@ -78,12 +86,16 @@ These values average across all three fleet sizes and all seeds. They show how t
 
 | Environment | Tasks | Served | Rate | Peak queue | Candidates | Planner s | Route share | Truncated dispatches |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| DU outdoor | 30 | 9.400 ± 3.784 | 31.333% | 20.600 | 41212.567 | 15.589 | 99.097% | 15 |
-| DU outdoor | 60 | 9.533 ± 2.763 | 15.889% | 50.467 | 34163.733 | 15.994 | 99.275% | 15 |
-| DU outdoor | 90 | 9.733 ± 2.840 | 10.815% | 80.267 | 46910.800 | 17.128 | 99.069% | 15 |
-| Synthetic | 30 | 19.400 ± 3.971 | 64.667% | 11.967 | 14694.100 | 2.821 | 97.995% | 4 |
-| Synthetic | 60 | 20.600 ± 5.685 | 34.333% | 39.533 | 39772.167 | 4.180 | 96.360% | 11 |
-| Synthetic | 90 | 21.600 ± 5.210 | 24.000% | 68.400 | 46214.600 | 4.618 | 96.544% | 15 |
+| DU outdoor | 30 | 16.950 ± 5.198 | 56.500% | 13.300 | 204896.575 | 13.639 | 96.364% | 137 |
+| DU outdoor | 60 | 22.025 ± 9.003 | 36.708% | 37.975 | 240482.700 | 21.273 | 96.981% | 155 |
+| DU outdoor | 90 | 21.400 ± 8.311 | 23.778% | 68.600 | 303050.825 | 25.757 | 96.774% | 205 |
+| Synthetic | 30 | 26.200 ± 2.564 | 87.333% | 5.325 | 11244.350 | 1.340 | 97.678% | 6 |
+| Synthetic | 60 | 43.475 ± 12.471 | 72.458% | 19.175 | 60237.950 | 3.800 | 95.829% | 34 |
+| Synthetic | 90 | 51.525 ± 18.664 | 57.250% | 39.925 | 124149.525 | 6.053 | 94.701% | 75 |
+
+[Open the V1 workload pressure chart](../../Experiment%20Reports/assets/v1/v1_workload_pressure.pdf)
+
+**Core findings:** Higher task load lowers service rate and raises queue pressure in both environments. DU outdoor remains more constrained than Synthetic across the tested loads.
 
 ## Fleet size effect
 
@@ -91,12 +103,18 @@ These values average across all three task loads and all seeds. They isolate the
 
 | Environment | UAVs | Served | Rate | Deferred | Peak queue | Runtime s | Parcel util |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| DU outdoor | 2 | 6.767 ± 1.455 | 11.278% | 53.233 | 53.233 | 12.220 | 47.083% |
-| DU outdoor | 3 | 9.500 ± 2.129 | 15.833% | 50.500 | 50.500 | 17.092 | 31.667% |
-| DU outdoor | 4 | 12.400 ± 2.647 | 20.667% | 47.600 | 47.600 | 19.404 | 24.167% |
-| Synthetic | 2 | 14.733 ± 1.413 | 24.556% | 45.267 | 45.433 | 2.477 | 50.000% |
-| Synthetic | 3 | 20.867 ± 1.814 | 34.778% | 39.133 | 39.700 | 3.891 | 33.333% |
-| Synthetic | 4 | 26.000 ± 2.573 | 43.333% | 34.000 | 34.767 | 5.257 | 25.000% |
+| DU outdoor | 3 | 10.833 ± 2.183 | 18.056% | 49.167 | 49.167 | 13.331 | 32.778% |
+| DU outdoor | 5 | 17.100 ± 2.820 | 28.500% | 42.900 | 42.967 | 17.240 | 19.667% |
+| DU outdoor | 8 | 24.233 ± 4.289 | 40.389% | 35.767 | 35.900 | 23.273 | 12.396% |
+| DU outdoor | 10 | 28.333 ± 6.504 | 47.222% | 31.667 | 31.800 | 27.058 | 9.833% |
+| Synthetic | 3 | 25.233 ± 3.025 | 42.056% | 34.767 | 35.667 | 2.726 | 33.333% |
+| Synthetic | 5 | 36.300 ± 7.293 | 60.500% | 23.700 | 25.333 | 3.453 | 20.000% |
+| Synthetic | 8 | 47.700 ± 15.434 | 79.500% | 12.300 | 14.567 | 4.351 | 12.188% |
+| Synthetic | 10 | 52.367 ± 19.728 | 87.278% | 7.633 | 10.333 | 4.403 | 9.250% |
+
+[Open the V1 fleet sensitivity chart](../../Experiment%20Reports/assets/v1/v1_fleet_sensitivity.pdf)
+
+**Core finding:** More UAVs improve service rate, but runtime also increases because the bounded assignment search has more combinations to evaluate.
 
 ## Arrival phase verification
 
@@ -104,9 +122,9 @@ Every row should contain the exact configured phase counts. This is a generation
 
 | Tasks | High | Medium | Low | Rows with this split |
 | --- | ---: | ---: | ---: | ---: |
-| 30 | 15 | 10 | 5 | 60 |
-| 60 | 30 | 20 | 10 | 60 |
-| 90 | 45 | 30 | 15 | 60 |
+| 30 | 15 | 10 | 5 | 80 |
+| 60 | 30 | 20 | 10 | 80 |
+| 90 | 45 | 30 | 15 | 80 |
 
 ## Runtime and search bottleneck evidence
 
@@ -114,33 +132,33 @@ Route share is computed as total route evaluation time divided by total planner 
 
 | Environment | Mean planner s | Min s | Max s | Mean candidates | Max dispatch candidates | Route share | Truncated dispatches |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| DU outdoor | 16.237 | 1.943 | 44.615 | 40762.367 | 50000.000 | 99.146% | 45 |
-| Synthetic | 3.873 | 0.574 | 12.782 | 33560.289 | 50000.000 | 96.830% | 30 |
+| DU outdoor | 20.223 | 3.325 | 62.198 | 249476.700 | 50000.000 | 96.754% | 497 |
+| Synthetic | 3.731 | 0.157 | 14.430 | 65210.608 | 50000.000 | 95.440% | 115 |
+
+[Open the V1 runtime bottleneck chart](../../Experiment%20Reports/assets/v1/v1_runtime_bottleneck.pdf)
 
 ### Ten slowest individual runs
 
 | Environment | Seed | Tasks | UAVs | Served | Runtime s | Planner s | Candidates | Truncated |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| DU outdoor | 108 | 30 | 4 | 6.000 | 44.617 | 44.615 | 212147.000 | 3 |
-| DU outdoor | 108 | 90 | 4 | 13.000 | 43.291 | 43.287 | 39034.000 | 0 |
-| DU outdoor | 108 | 30 | 3 | 5.000 | 41.922 | 41.921 | 111556.000 | 2 |
-| DU outdoor | 108 | 30 | 2 | 4.000 | 33.666 | 33.665 | 15661.000 | 0 |
-| DU outdoor | 108 | 60 | 3 | 10.000 | 33.041 | 33.039 | 861.000 | 0 |
-| DU outdoor | 108 | 60 | 4 | 14.000 | 31.730 | 31.729 | 15618.000 | 0 |
-| DU outdoor | 108 | 90 | 3 | 9.000 | 31.644 | 31.642 | 1936.000 | 0 |
-| DU outdoor | 108 | 90 | 2 | 6.000 | 30.801 | 30.799 | 1375.000 | 0 |
-| DU outdoor | 102 | 60 | 4 | 13.000 | 30.715 | 30.710 | 70314.000 | 1 |
-| DU outdoor | 104 | 30 | 4 | 13.000 | 29.156 | 29.155 | 49163.000 | 0 |
+| DU outdoor | 108 | 60 | 10 | 34.000 | 62.203 | 62.198 | 229572.000 | 4 |
+| DU outdoor | 108 | 90 | 8 | 25.000 | 59.444 | 59.439 | 345304.000 | 6 |
+| DU outdoor | 108 | 90 | 10 | 31.000 | 50.290 | 50.287 | 268368.000 | 5 |
+| DU outdoor | 108 | 60 | 8 | 27.000 | 47.610 | 47.607 | 278638.000 | 5 |
+| DU outdoor | 104 | 90 | 10 | 30.000 | 44.352 | 44.346 | 625025.000 | 12 |
+| DU outdoor | 102 | 90 | 10 | 31.000 | 42.033 | 42.028 | 500035.000 | 9 |
+| DU outdoor | 103 | 90 | 10 | 31.000 | 41.340 | 41.334 | 568571.000 | 11 |
+| DU outdoor | 108 | 90 | 5 | 20.000 | 41.187 | 41.185 | 174027.000 | 3 |
+| DU outdoor | 110 | 60 | 10 | 23.000 | 41.068 | 41.058 | 705859.000 | 6 |
+| DU outdoor | 108 | 90 | 3 | 12.000 | 39.521 | 39.519 | 6228.000 | 0 |
 
-## Findings
+## Core findings
 
-1. The previous six task experiment was too small to characterize queue pressure. The replacement matrix raises the task load to 30, 60, and 90 and produces a much wider range of deferred work and runtime.
-2. The 3:2:1 high, medium, and low arrival structure is reproduced exactly for every task load. The high phase therefore creates the initial queue pressure that the event runner must absorb.
-3. More UAVs generally improve service rate and reduce queue pressure, but the improvement is environment and workload dependent. Additional UAVs also create more candidate assignment combinations, so fleet growth is not computationally free.
-4. DU outdoor runs are expected to be slower and less serviceable than Synthetic runs in this implementation because the mapped polygon geometry creates more difficult route searches and longer travel paths. The matrix reports the magnitude rather than treating that difference as a universal real world law.
-5. Route evaluation is the dominant measured cost. This makes route caching, reuse of fixed leg paths, early feasibility pruning, and a scalable candidate search the immediate targets for the next solution.
-6. Search truncation is reported explicitly. If a case reaches the 50,000 candidate limit, its result demonstrates bounded V1 behavior under load and must not be interpreted as a global optimum.
-7. Safe return rate is a model feasibility result. It is not a field reliability estimate because the current energy coefficients, speed, turnaround time, and base supply policy are research assumptions.
+1. Higher task load lowers service rate and increases queue pressure in both environments.
+2. More UAVs improve service rate, but the larger fleet also increases bounded search cost and runtime.
+3. DU outdoor is the harder tested environment, with lower service and higher runtime than Synthetic.
+4. Route evaluation is the dominant measured planner cost, so route reuse and early feasibility pruning are the clearest optimization targets.
+5. Search truncation is reported explicitly. A run that reaches the candidate limit demonstrates bounded V1 behavior, not a global optimum.
 
 ## Limitations and next step
 

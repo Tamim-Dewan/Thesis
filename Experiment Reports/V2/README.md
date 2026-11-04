@@ -7,3 +7,6 @@ and V2 on the same seeded scenarios.
 
 The report is generated only after the paired experiment matrix, decision
 traces, aggregation, and LaTeX compilation have been verified.
+
+The report uses four vector PDF figures under `../assets/v2/`. They are built
+from the paired metrics and decision evidence by `Simulation/report_charts.py`.

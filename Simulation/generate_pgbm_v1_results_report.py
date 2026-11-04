@@ -169,6 +169,10 @@ def build_report(rows):
             _fmt(_mean(group, "runtime_seconds")),
         ])
     _table(lines, ["Environment", "Served", "Service rate", "Deferred", "Peak queue", "Delay min", "Distance m", "Runtime s"], baseline_rows)
+    lines.extend([
+        "[Open the V1 baseline comparison chart](../../Experiment%20Reports/assets/v1/v1_baseline_comparison.pdf)",
+        "",
+    ])
 
     lines.extend([
         "## Complete task load and fleet matrix",
@@ -219,6 +223,12 @@ def build_report(rows):
             _fmt_int(sum(int(row.get("search_truncated_dispatches", 0)) for row in group)),
         ])
     _table(lines, ["Environment", "Tasks", "Served", "Rate", "Peak queue", "Candidates", "Planner s", "Route share", "Truncated dispatches"], task_effect_rows)
+    lines.extend([
+        "[Open the V1 workload pressure chart](../../Experiment%20Reports/assets/v1/v1_workload_pressure.pdf)",
+        "",
+        "**Core findings:** Higher task load lowers service rate and raises queue pressure in both environments. DU outdoor remains more constrained than Synthetic across the tested loads.",
+        "",
+    ])
 
     lines.extend([
         "## Fleet size effect",
@@ -241,6 +251,12 @@ def build_report(rows):
             _fmt(100.0 * _mean(group, "payload_utilization")) + "%",
         ])
     _table(lines, ["Environment", "UAVs", "Served", "Rate", "Deferred", "Peak queue", "Runtime s", "Parcel util"], fleet_effect_rows)
+    lines.extend([
+        "[Open the V1 fleet sensitivity chart](../../Experiment%20Reports/assets/v1/v1_fleet_sensitivity.pdf)",
+        "",
+        "**Core finding:** More UAVs improve service rate, but runtime also increases because the bounded assignment search has more combinations to evaluate.",
+        "",
+    ])
 
     lines.extend([
         "## Arrival phase verification",
@@ -276,6 +292,10 @@ def build_report(rows):
             _fmt_int(sum(int(row.get("search_truncated_dispatches", 0)) for row in group)),
         ])
     _table(lines, ["Environment", "Mean planner s", "Min s", "Max s", "Mean candidates", "Max dispatch candidates", "Route share", "Truncated dispatches"], runtime_rows)
+    lines.extend([
+        "[Open the V1 runtime bottleneck chart](../../Experiment%20Reports/assets/v1/v1_runtime_bottleneck.pdf)",
+        "",
+    ])
 
     top_runtime = sorted(rows, key=lambda row: float(row["runtime_seconds"]), reverse=True)[:10]
     lines.extend(["### Ten slowest individual runs", ""])
@@ -290,15 +310,13 @@ def build_report(rows):
     _table(lines, ["Environment", "Seed", "Tasks", "UAVs", "Served", "Runtime s", "Planner s", "Candidates", "Truncated"], slow_rows)
 
     lines.extend([
-        "## Findings",
+        "## Core findings",
         "",
-        "1. The previous six task experiment was too small to characterize queue pressure. The replacement matrix raises the task load to 30, 60, and 90 and produces a much wider range of deferred work and runtime.",
-        "2. The 3:2:1 high, medium, and low arrival structure is reproduced exactly for every task load. The high phase therefore creates the initial queue pressure that the event runner must absorb.",
-        "3. More UAVs generally improve service rate and reduce queue pressure, but the improvement is environment and workload dependent. Additional UAVs also create more candidate assignment combinations, so fleet growth is not computationally free.",
-        "4. DU outdoor runs are expected to be slower and less serviceable than Synthetic runs in this implementation because the mapped polygon geometry creates more difficult route searches and longer travel paths. The matrix reports the magnitude rather than treating that difference as a universal real world law.",
-        "5. Route evaluation is the dominant measured cost. This makes route caching, reuse of fixed leg paths, early feasibility pruning, and a scalable candidate search the immediate targets for the next solution.",
-        "6. Search truncation is reported explicitly. If a case reaches the 50,000 candidate limit, its result demonstrates bounded V1 behavior under load and must not be interpreted as a global optimum.",
-        "7. Safe return rate is a model feasibility result. It is not a field reliability estimate because the current energy coefficients, speed, turnaround time, and base supply policy are research assumptions.",
+        "1. Higher task load lowers service rate and increases queue pressure in both environments.",
+        "2. More UAVs improve service rate, but the larger fleet also increases bounded search cost and runtime.",
+        "3. DU outdoor is the harder tested environment, with lower service and higher runtime than Synthetic.",
+        "4. Route evaluation is the dominant measured planner cost, so route reuse and early feasibility pruning are the clearest optimization targets.",
+        "5. Search truncation is reported explicitly. A run that reaches the candidate limit demonstrates bounded V1 behavior, not a global optimum.",
         "",
         "## Limitations and next step",
         "",

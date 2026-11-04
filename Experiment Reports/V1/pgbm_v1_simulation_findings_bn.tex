@@ -8,12 +8,14 @@
 \setmainfont[Script=Bengali]{Kohinoor Bangla}
 \setsansfont[Script=Bengali]{Kohinoor Bangla}
 \newfontfamily\bengalifonttt[Script=Bengali]{Kohinoor Bangla}
+\newfontfamily\englishfont{Avenir Next}
 \usepackage[a4paper,margin=22mm,headheight=24pt]{geometry}
 \usepackage{amsmath}
 \usepackage{array}
 \usepackage{booktabs}
 \usepackage{enumitem}
 \usepackage{fancyhdr}
+\usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{pdflscape}
 \usepackage{tabularx}
@@ -52,7 +54,7 @@
 \thispagestyle{empty}
 \vspace*{18mm}
 {\color{navy}\rule{\textwidth}{1.5pt}}\\[10mm]
-{\color{navy}\sffamily\bfseries\fontsize{25}{32}\selectfont Initial Solution V1\\Simulation Report\par}
+{\color{navy}\englishfont\bfseries\fontsize{25}{32}\selectfont Initial Solution V1\\Simulation Report\par}
 \vspace{6mm}
 {\color{midgray}\sffamily\Large Simulation-এর core feature, algorithm, experiment এবং ফলাফল\par}
 \vfill
@@ -392,9 +394,11 @@ Synthetic & 5319.7 $\pm$ 2101.8 & 134.4 & 84.3 & 5041.4 \\
 \end{tabular}
 \end{table}
 
-এই summary-তে প্রতিটি environment-এর ১২০টি run-এর average ব্যবহার করা হয়েছে। Total energy-এর পাশে $\pm$ value standard deviation; energy/task এবং energy/parcel হলো run-level ratio-এর average। DU outdoor-এ Synthetic-এর তুলনায় cumulative energy প্রায় ১৫.৫ শতাংশ বেশি এবং delivered parcel প্রতি energy প্রায় ২.৪ গুণ বেশি। এর প্রধান কারণ DU outdoor-এ route distance ও route geometry কঠিন, এবং কম parcel deliver হওয়ায় একই ধরনের mission energy কম completed service-এর মধ্যে ভাগ হয়।
-
-Task load ৩০ থেকে ৯০ করলে average total energy Synthetic-এ ৪২১৫.৭ J থেকে ৬১১৫.১ J এবং DU outdoor-এ ৫৫১০.৪ J থেকে ৬৫২২.৮ J হয়েছে। একইভাবে UAV সংখ্যা ৩ থেকে ১০ করলে cumulative system energy Synthetic-এ ২৮১৯.১ J থেকে ৭৪৯৬.০ J এবং DU outdoor-এ ৩০৪৮.৭ J থেকে ৯০৫৬.৯ J হয়েছে। এই বৃদ্ধি বেশি mission এবং বেশি completed service-এর cumulative effect; এটিকে একটি UAV-এর battery depletion হিসেবে interpret করা যাবে না।
+এই summary-তে প্রতিটি environment-এর ১২০টি run-এর average এবং standard deviation দেওয়া হয়েছে। Energy এখানে cumulative accounting metric; এটি কোনো একক UAV-এর battery depletion নয়।
+\begin{itemize}
+\item DU outdoor-এ মোট energy এবং energy per delivered parcel Synthetic-এর চেয়ে বেশি, কারণ DU route সাধারণত দীর্ঘ এবং কম parcel complete হয়।
+\item Task load বা UAV সংখ্যা বাড়লে cumulative energy বাড়ে, কারণ mission এবং completed service-এর সংখ্যা বাড়ে।
+\end{itemize}
 
 \section{Simulation-এর ফলাফল}
 
@@ -418,7 +422,13 @@ Synthetic & 11.981 $\pm$ 1.484 & 22.600 $\pm$ 1.776 & 75.333\% & 48.6 & 34.5 & 7
 \end{tabular}
 \end{table}
 
-এই baseline-এ Synthetic-এ গড়ে ২২.৬টি task এবং ৩৪.৫টি parcel complete হয়েছে, যেখানে DU outdoor-এ হয়েছে ১০.৫টি task এবং ১৪.৯টি parcel। ফলে Synthetic-এর task rate ও parcel delivery rate যথাক্রমে ৭৫.৩৩% ও ৭০.৯৯%, কিন্তু DU outdoor-এ তা ৩৫.০০% ও ৩০.৫৩%। একই সঙ্গে DU outdoor-এ delay এবং runtime বেশি—বর্তমান geometry ও route search-এর কারণে এই case-টি বেশি কঠিন।
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.98\textwidth]{../assets/v1/v1_baseline_comparison.pdf}
+\caption{V1 baseline: ৩০ task এবং ৩ UAV configuration-এ service, delay এবং runtime-এর environment comparison।}
+\label{fig:v1-baseline-comparison}
+\end{figure}
+\textbf{Core finding:} Synthetic-এ task service rate ৭৫.৩৩\% এবং DU outdoor-এ ৩৫.০০\%। DU outdoor-এ delay এবং runtime দুটিই বেশি, তাই একই fleet ও task load-এ mapped geometry এবং route search বেশি কঠিন হয়েছে।
 
 \subsection{Task load বাড়ালে কী হয়}
 
@@ -445,8 +455,18 @@ Synthetic & 90 & 30.430 $\pm$ 9.562 & 51.525 $\pm$ 18.664 & 57.250\% & 81.6 & 52
 \end{table}
 
 Task load বাড়ার সঙ্গে সঙ্গে peak queue দ্রুত বেড়েছে এবং task ও parcel service rate কমেছে। DU outdoor-এ ৩০ task থেকে ৯০ task-এ task service rate ৫৬.৫০ শতাংশ থেকে ২৩.৭৮ শতাংশে এবং parcel delivery rate ৫২.২৫ শতাংশ থেকে ২২.৪৯ শতাংশে নেমেছে। Synthetic-এ একই পরিবর্তনে task service rate ৮৭.৩৩ শতাংশ থেকে ৫৭.২৫ শতাংশে এবং parcel delivery rate ৮৫.৭৫ শতাংশ থেকে ৫২.১৯ শতাংশে নেমেছে। Objective value বাড়লেও তা বেশি task load-এর কারণে মোট accumulated value; এটি service quality বাড়ার সরাসরি প্রমাণ নয়।
-
-এখানে dropped parcel-এর average সবসময় served task-এর সঙ্গে একই অনুপাতে বাড়েনি, কারণ প্রতিটি task-এ parcel সংখ্যা এক নয়। তাই task rate-এর পাশাপাশি parcel delivery rate report করা জরুরি। মোট task বাড়ায় deferred task এবং parcel backlog-এর উপর চাপ স্পষ্টভাবে বেড়েছে।
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.98\textwidth]{../assets/v1/v1_workload_pressure.pdf}
+\caption{V1 workload pressure: task load বাড়লে service rate কমে এবং peak queue বাড়ে। Error bar দশটি seed-এর standard deviation দেখায়।}
+\label{fig:v1-workload-pressure}
+\end{figure}
+\textbf{Core findings:}
+\begin{itemize}
+\item Task load বাড়লে দুই environment-এই service rate কমে এবং queue pressure বাড়ে।
+\item DU outdoor-এ ৩০ থেকে ৯০ task-এ task service rate ৫৬.৫০\% থেকে ২৩.৭৮\%-এ নেমেছে; Synthetic-এ ৮৭.৩৩\% থেকে ৫৭.২৫\%-এ নেমেছে।
+\item Objective বাড়া এখানে service quality বাড়ার প্রমাণ নয়; বেশি task-এর accumulated value-এর ফলও হতে পারে।
+\end{itemize}
 
 \subsection{UAV সংখ্যা বাড়ালে কী হয়}
 
@@ -474,7 +494,13 @@ Synthetic & 10 & 29.941 $\pm$ 10.681 & 52.367 $\pm$ 19.728 & 87.278\% & 88.1 & 8
 \end{tabular}
 \end{table}
 
-UAV সংখ্যা ৩ থেকে ১০ করলে দুই environment-এই task service এবং parcel delivery rate বাড়ে, deferred queue কমে। DU outdoor-এ parcel delivery rate ১৬.১০ শতাংশ থেকে ৪৫.২০ শতাংশে এবং Synthetic-এ ৩৬.৪১ শতাংশ থেকে ৮৫.২৩ শতাংশে বেড়েছে। তবে computation time ও candidate search চাপও বেড়েছে, কারণ বেশি UAV থাকলে assignment এবং task order-এর সম্ভাব্য combination সংখ্যাও বেড়ে যায়। তাই UAV বাড়ানো service-এর জন্য উপকারী হলেও এটি computationally free নয়।
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.98\textwidth]{../assets/v1/v1_fleet_sensitivity.pdf}
+\caption{V1 fleet sensitivity: UAV সংখ্যা বাড়লে service rate বাড়ে, কিন্তু runtime-ও বাড়ে।}
+\label{fig:v1-fleet-sensitivity}
+\end{figure}
+\textbf{Core findings:} UAV সংখ্যা ৩ থেকে ১০ করলে DU outdoor-এ parcel delivery rate ১৬.১০\% থেকে ৪৫.২০\% এবং Synthetic-এ ৩৬.৪১\% থেকে ৮৫.২৩\%-এ বেড়েছে। একই সঙ্গে runtime বেড়েছে, কারণ fleet বড় হলে assignment এবং task order-এর candidate combination বাড়ে।
 
 \clearpage
 \begin{landscape}
@@ -520,7 +546,7 @@ Synthetic & 90 & 10 & 41.525 $\pm$ 2.748 & 74.300 $\pm$ 4.218 & 82.556\% & 156.4
 \bottomrule
 \end{longtable}
 
-\textbf{এই matrix-এর key finding:} Synthetic ৩০-task case-এ ৫ বা তার বেশি UAV ব্যবহার করলে parcel delivery rate প্রায় ৯০\% হয়, কিন্তু DU outdoor-এ ৯০ task এবং ১০ UAV থাকলেও তা ৩৩.৩৩\%-এ সীমিত থাকে। UAV বাড়ালে service বাড়ে, তবে বিশেষ করে DU outdoor-এ runtime-ও বাড়ে; তাই workload, fleet size এবং environment একসাথে বিবেচনা করা জরুরি।
+\textbf{Matrix takeaway:} Synthetic ৩০-task case-এ ৫ বা তার বেশি UAV থাকলে parcel delivery rate প্রায় ৯০\% হয়। DU outdoor-এ ৯০ task এবং ১০ UAV থাকলেও parcel delivery rate ৩৩.৩৩\%-এ সীমিত থাকে। তাই workload, fleet size এবং environment একসঙ্গে বিবেচনা করতে হবে।
 \end{landscape}
 
 \section{Runtime এবং প্রধান bottleneck}
@@ -543,37 +569,24 @@ Synthetic & 3.731 & 0.157 & 14.430 & 65210.608 & 50000 & 95.440\% \\
 \end{tabular}
 \end{table}
 
-সম্পূর্ণ experiment-এ ৬১২টি dispatch ৫০,০০০ candidate search limit-এ পৌঁছেছে। এর অর্থ হলো ওই dispatch-গুলোতে V1 নির্ধারিত bound-এর মধ্যে search থামিয়েছে; এগুলোকে global optimum হিসেবে দাবি করা যাবে না। বিশেষ করে ১০ UAV এবং বড় task load case-এ এই truncation বেশি হয়েছে।
-
-এই evidence থেকে V2-এর জন্য সবচেয়ে গুরুত্বপূর্ণ improvement target হলো:
-
-\begin{itemize}
-\item V1-এর basic route cache-এর hit rate এবং reuse record করা, এবং cache key ও lifetime আরও নির্ভরযোগ্য করা;
-\item infeasible candidate শুরুতেই বাদ দেওয়া;
-\item task এবং UAV selection-এর search space ছোট করা;
-\item fixed active route-এর information পরবর্তী dispatch-এ reuse করা;
-\item bounded brute-force-এর পরিবর্তে scalable candidate selection ব্যবহার করা।
-\end{itemize}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.98\textwidth]{../assets/v1/v1_runtime_bottleneck.pdf}
+\caption{V1 computational bottleneck: route evaluation planner time-এর প্রধান অংশ এবং search truncation bounded search-এর সীমা দেখায়।}
+\label{fig:v1-runtime-bottleneck}
+\end{figure}
+\textbf{Core finding:} Route evaluation planner time-এর প্রায় ৯৫\% থেকে ৯৭\% নিয়েছে। মোট ৬১২টি dispatch ৫০,০০০ candidate limit-এ পৌঁছেছে, তাই ওই result-গুলো bounded reference behaviour, global optimum নয়।
 
 \section{V1 result-এর অর্থ এবং limitation}
 
-এই experiment থেকে প্রধান findings হলো:
-
-\begin{enumerate}
-\item আগের ছয় task-এর ছোট experiment queue pressure বোঝার জন্য যথেষ্ট ছিল না। ৩০, ৬০ এবং ৯০ task এবং ৩, ৫, ৮ ও ১০ UAV-এর heavy matrix-এ queue এবং deferred work স্পষ্টভাবে দেখা গেছে।
-\item High, medium এবং low phase-এর ৩:২:১ structure প্রতিটি run-এ সঠিকভাবে reproduce হয়েছে।
-\item Synthetic এবং DU outdoor result-এর পার্থক্য environment provenance-এর সঙ্গে পড়তে হবে: DU case-এ OSM-derived layout-এর উপর derived damage geometry ব্যবহৃত হয়েছে, actual post-earthquake field reconstruction নয়।
-\item Task demand individual request হিসেবে তৈরি হয়েছে এবং item weight, parcel count, damaged-footprint location ও accessible drop-off waypoint-এর নিয়ম result-কে প্রভাবিত করেছে। তাই task এবং parcel rate আলাদা করে দেখা প্রয়োজন।
-\item UAV সংখ্যা বাড়ালে objective value, task service rate এবং parcel delivery rate বাড়ে এবং queue কমে, কিন্তু planner-এর search space এবং runtime বাড়ে।
-\item Task count একা delivered service বোঝানোর জন্য যথেষ্ট নয়। একটি task-এ একাধিক parcel থাকতে পারে, তাই dropped parcel count এবং parcel delivery rate আলাদা করে report করা হয়েছে।
-\item প্রতি parcel-এর জন্য fixed ৩০ second drop-off time V1-এর একটি স্পষ্ট timing এবং visualization assumption। এটি field-calibrated unloading measurement নয়।
-\item DU outdoor environment এই implementation-এ Synthetic-এর তুলনায় ধীর এবং কম serviceable হয়েছে। এটিকে universal real-world law হিসেবে interpret করা যাবে না; এটি বর্তমান geometry এবং routing model-এর measured ফলাফল।
-\item Route evaluation V1-এর প্রধান runtime bottleneck।
-\item সব ২৪০টি run-এ planned safe-return rate ১০০ শতাংশ হয়েছে। এটি planner-এর return এবং reserve-energy feasibility filter-এর ফল; real-world flight reliability-এর estimate নয়।
-\item V1-এর basic route cache ইতিমধ্যে repeated route-leg construction কমাতে ব্যবহৃত হয়েছে; V2-তে cache reuse এবং hit-rate আলাদাভাবে evaluate করা উচিত।
-\item Energy V1-এ route feasibility এবং reserve check-এ ব্যবহৃত হয়েছে, কিন্তু current energy coefficients field-calibrated নয় এবং event-by-event battery trajectory আলাদাভাবে record করা হয়নি।
-\item V1 service এবং computational behaviour বোঝার জন্য একটি useful reference baseline, কিন্তু এটি final mathematical optimizer নয়।
-\end{enumerate}
+এই experiment-এর core findings হলো:
+\begin{itemize}
+\item Higher task load queue pressure বাড়ায় এবং service rate কমায়; বেশি UAV service improve করে, কিন্তু computation cost বাড়ায়।
+\item DU outdoor এই implementation-এ Synthetic-এর চেয়ে ধীর এবং কম serviceable। এটি বর্তমান derived geometry ও routing model-এর measured ফল, universal real world claim নয়।
+\item Route evaluation প্রধান runtime bottleneck এবং search truncation bounded planner-এর limitation প্রকাশ করে।
+\item Safe return rate ১০০\% simulation feasibility result; field flight reliability নয়।
+\item V1 একটি transparent reference planner, final mathematical PGBM optimizer নয়।
+\end{itemize}
 
 V1-এর সীমাবদ্ধতা:
 

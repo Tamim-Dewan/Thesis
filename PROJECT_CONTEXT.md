@@ -2,13 +2,13 @@
 
 ## Objective
 
-Complete the formulation-aligned PGBM simulation study through Initial Solution V1 and Version 2. V1 is the preserved no-recourse reference. V2 will implement one-for-one active-mission task-replacement recourse, run paired with V1 on the same seeded 120-minute DU and synthetic scenarios, and produce a comparative findings report. Target phase start: 2026-09-28.
+Complete the formulation-aligned PGBM simulation study through Initial Solution V1, Version 2, and the first Version 2.1 cache-aware recourse slice. V1 is the preserved no-recourse reference. V2 implements one-for-one active-mission task-replacement recourse, and V2.1 adds a bounded one-slot reserve-parcel policy with paired evidence. Both run on the same seeded 120-minute DU and synthetic scenarios and produce separate findings reports. Target phase start: 2026-09-28.
 
 ## Scope and Non-goals
 
-In scope: the preserved V1 reference, formulation-faithful V2 one-for-one task replacement recourse, reproducible 120-minute event-driven runs, paired multiple-seed comparisons, UAV/task-load sensitivity experiments, recourse decision traces, runtime profiling, and the V2 comparative report. V2 must follow the full report and `problem_formulation_v5.tex` recourse rule rather than introduce a new routing interpretation.
+In scope: the preserved V1 reference, formulation-faithful V2 one-for-one task replacement recourse, the V2.1 one-slot cache-aware recourse slice, reproducible 120-minute event-driven runs, paired multiple-seed comparisons, UAV/task-load sensitivity experiments, recourse decision traces, runtime profiling, and separate V2 and V2.1 findings reports. V2 and V2.1 must follow the full report and `problem_formulation_v5.tex` recourse rule rather than introduce a new routing interpretation.
 
-Non-goal for this phase: reserve inventory or speculative future inventory, multiple-task replacement, full fleet reoptimization, base reload during an active mission, an exact mathematical optimizer, L’Aquila execution, heiDATA mission planning, and high fidelity physical modelling.
+Non-goal for this phase: speculative future demand, multiple-task replacement, more than one reserve slot, adaptive cache priors, full fleet reoptimization, base reload during an active mission, an exact mathematical optimizer, L’Aquila execution, heiDATA mission planning, and high fidelity physical modelling.
 
 ## Success Criteria
 
@@ -25,6 +25,9 @@ Non-goal for this phase: reserve inventory or speculative future inventory, mult
 - Completed route prefixes, completed tasks, current onboard inventory, payload, energy reserve, collision-aware routing, and return-to-base feasibility are respected in every recourse decision.
 - Paired V1 and V2 results use identical environment, task-load, fleet-size, and seed combinations so improvements are attributable to recourse.
 - The V2 report explains the recourse mechanism before presenting comparative results and separates operational gains from runtime overhead.
+- V2.1 reserve loading is bounded by payload slots, payload mass, route return, energy reserve, and horizon feasibility.
+- V2.1 cache hits are reported separately from ordinary recourse, with paired control metrics, decision traces, and cache energy overhead.
+- The V2.1 evidence decides whether the one-slot policy should be extended; a second slot or adaptive prior is not added without a measured benefit.
 
 ## Constraints
 
@@ -111,6 +114,22 @@ Run date: 2026-09-26
   - [x] Add unit and integration tests for accepted, rejected, infeasible, tied, and deterministic recourse cases.
   - [x] Run the paired 240-configuration matrix: two environments, three task loads (30, 60, 90), four fleet sizes (3, 5, 8, 10), and ten seeds (101 through 110), for V1 and V2; merge 480 metrics rows and 240 decision traces.
   - [x] Produce, compile, and visually verify the V2 report in the V1 report flow with V2 core features at the top and V1 versus V2 comparison tables and findings.
+- [x] 11. Implement PGBM Version 2.1 cache aware recourse first slice. Completed on 2026-10-07.
+  - [x] Preserve canonical V1 and V2 code paths and evidence.
+  - [x] Load at most one configured high probability reserve parcel only at mission dispatch.
+  - [x] Check payload slots, payload mass, route return, horizon, and energy reserve before loading.
+  - [x] Use reserve and releasable displaced inventory to classify cache matches without looking at future tasks.
+  - [x] Keep the existing one for one positive gain replacement rule unchanged.
+  - [x] Record cache load, hit, use, miss, and return evidence separately from ordinary recourse.
+  - [x] Add deterministic unit and episode tests, then run a small pilot before any heavy matrix.
+- [x] 12. Complete the V2.1 evidence and evaluation package. Completed on 2026-10-07.
+  - [x] Add a paired V2 control and V2.1 variant experiment runner that reuses each scenario in memory.
+  - [x] Compare the canonical uniform prior with an explicitly labelled water heavy sensitivity prior.
+  - [x] Export metrics, cache enriched decision traces, configuration manifest, and summary findings without overwriting V1 or V2 evidence.
+  - [x] Add focused tests for the runner and output contract, including deterministic worker ordering.
+  - [x] Run the full paired matrix with identical environments, task loads, fleet sizes, and seeds: 240 scenarios, 720 metric rows, and 240 traces.
+  - [x] Report cache hit rate, cache assisted acceptance, unused return rate, energy overhead, service value, and queue impact.
+  - [x] Decide whether a second slot or adaptive prior is justified by evidence: retain one slot; defer both extensions because most loaded parcels returned unused and the water-heavy sensitivity increased energy overhead.
 
 ## Active Decisions
 
@@ -127,6 +146,8 @@ Run date: 2026-09-26
 - D-012 — 2026-09-28 — V2 is a separate strangler implementation and must not modify V1 behavior or overwrite V1 evidence. The V2 contract is the one-for-one active-mission replacement rule from the full report and `problem_formulation_v5.tex`. Status: Active.
 - D-013 — 2026-09-28 — V2 uses only current committed onboard inventory when checking a replacement task. It does not add reserve inventory, base reload, or speculative future demand; those are deferred to V3. Status: Active.
 - D-014 — 2026-09-28 — The paired V2 comparison uses the current heavy V1 matrix protocol: Synthetic and DU outdoor, task loads 30, 60, and 90, fleet sizes 3, 5, 8, and 10, seeds 101 through 110. Each configuration runs once with V1 and once with V2. Status: Active.
+- D-015 — 2026-10-07 — V2.1 is a separate cache aware recourse path. At dispatch, after the ordinary route is selected, it may load at most one reserve parcel selected from a configured item prior. Loading is accepted only when parcel count, payload mass, full route energy plus reserve, and horizon remain feasible. The reserve is never selected from future task arrivals, never reloaded during a mission, and never changes the V2 one for one positive gain acceptance rule. Status: Active.
+- D-016 — 2026-10-07 — The completed V2.1 bounded paired matrix supports retaining one reserve slot but not extending the policy yet. Uniform produced a mean objective delta of +0.238 and +0.288 served tasks per episode with a 0.143 hit rate; the water-heavy sensitivity produced +0.328 and +0.454 with a 0.148 hit rate, while adding more cache energy overhead. Most loaded parcels returned unused. A second slot and adaptive prior remain deferred. Status: Active.
 
 ## Superseded Decisions
 
@@ -137,6 +158,7 @@ Run date: 2026-09-26
 - `Simulation/README.md`
 - `Simulation/AGENTS.md`
 - `Simulation/pgbm_sim/`
+- `docs/specs/0008-pgbm-v2-1-cache-aware-recourse.md`
 - `Simulation/heidata_benchmark/`
 - `docs/scope/`
 - `docs/specs/`
@@ -182,8 +204,18 @@ current onboard inventory and energy reserve, and accepts only the largest
 positive service-value gain. The displaced task returns to the waiting queue.
 The displaced task returns to the waiting queue. The paired heavy matrix has
 480 validated metrics rows and 240 deterministic decision traces; the Bangla
-comparative report is compiled and visually verified. The full Simulation test
-suite passes with 121 tests.
+comparative report is compiled and visually verified. The V2-era Simulation
+test suite passed with 121 tests; the current suite includes the V2.1 tests.
+
+V2.1 first slice is implemented in a separate `Simulation/pgbm_sim/v2_1/`
+namespace. It reuses the V2 route, inventory, energy, horizon, and recourse
+contracts while adding only dispatch time reserve loading and cache specific
+evidence. The paired matrix runner supports deterministic scenario-level
+workers and exports 720 metrics rows, 240 decision traces, and a manifest.
+The canonical report package now follows the V1 and V2 layout under
+`Experiment Reports/V2.1/`, with Bengali Markdown, XeLaTeX, compiled PDF,
+build files, and four vector PDF charts under `Experiment Reports/assets/v2_1/`.
+Focused tests and the full Simulation suite pass with 135 tests.
 
 ## Simulation Direction
 
@@ -195,8 +227,11 @@ The approved single snapshot phase, visual replay improvements, separated
 initial experiment comparison, Initial Solution V1 implementation, the heavy
 V1 experiment report, and the V2 one-for-one task replacement recourse study
 are complete. The current evidence includes the paired V1 versus V2 matrix,
-decision traces, and the compiled comparative report. V3 reserve inventory and
-broader reassignment remain deferred.
+decision traces, and the compiled comparative report. V2.1 cache aware
+recourse implementation is complete for the first slice. Its paired matrix
+evaluation and separate findings note are complete. The evidence supports
+retaining one cache slot; broader reassignment, multiple reserve slots, and
+adaptive cache policies remain deferred.
 
 ## Open Questions and Blockers
 
@@ -212,7 +247,7 @@ broader reassignment remain deferred.
 
 ## Session Handoff
 
-Environment readiness, the approved `t = 30` snapshot rule, the fixed manifest, the original planner, the report runner, the route renderer, and the improved step by step replay renderer are complete. Initial Solution V1 is implemented as a two hour event driven bounded brute force planner. The earlier small experiment and report are treated as historical evidence only. The canonical 240-row V1 matrix and the paired 480-row V1/V2 matrix ran successfully in both environments; raw parts, merged CSVs, manifests, Markdown reports, LaTeX sources, and the verified V2 PDF are preserved. The full Simulation suite passes with 121 tests. V2 recourse is complete; reserve inventory and broader reassignment remain deferred to V3.
+Environment readiness, the approved `t = 30` snapshot rule, the fixed manifest, the original planner, the report runner, the route renderer, and the improved step by step replay renderer are complete. Initial Solution V1 is implemented as a two hour event driven bounded brute force planner. The earlier small experiment and report are treated as historical evidence only. The canonical 240-row V1 matrix and the paired 480-row V1/V2 matrix ran successfully in both environments; raw parts, merged CSVs, manifests, Markdown reports, LaTeX sources, and the verified V2 PDF are preserved. The full Simulation suite now passes with 135 tests. V2 recourse and the V2.1 one-slot cache evidence package are complete; broader reassignment, a second cache slot, and adaptive priors remain deferred.
 
 The researcher selected the full report and `problem_formulation_v5.tex` as the
 only formulation sources for Initial Solution V1. The next build must use
@@ -235,9 +270,13 @@ confirmed that the V2 report should follow the V1 report flow, put the V2 core
 features at the top, and compare V1 and V2 using the same scenarios. The V2
 specification was cross-checked and accepted. The implementation, paired heavy
 matrix, decision traces, comparative report, local LaTeX compilation, visual
-QA, and full test suite are complete. Reserve inventory and broader active
-reassignment remain the next V3 design decision.
+QA, and full test suite are complete. V2.1 cache aware recourse first slice is
+implemented and validated with focused tests, a full 240-scenario paired
+matrix, 720 metrics rows, 240 traces, a manifest, summary CSV, and a canonical
+V1/V2-style report package under `Experiment Reports/V2.1/` with four vector
+charts. The evidence supports retaining one cache slot
+and deferring a second slot or adaptive prior.
 
 ## Last Updated
 
-2026-09-28
+2026-10-07

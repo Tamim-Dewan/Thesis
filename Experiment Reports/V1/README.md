@@ -8,6 +8,7 @@ bottlenecks, and next steps. It is based on 240 seeded runs.
 - `pgbm_v1_simulation_findings_bn.tex`: editable Bengali LaTeX source.
 - `pgbm_v1_simulation_findings_bn.pdf`: compiled report.
 - `build_bn/`: XeLaTeX auxiliary files used during Bengali compilation.
+- `../assets/v1/`: four vector PDF figures used in the report.
 
 The source requires XeLaTeX and the `Kohinoor Bangla` font. The built in
 editor compiler may need network access to download its Tectonic bundle, so
@@ -19,3 +20,6 @@ The matrix covers Synthetic and DU outdoor environments, 30, 60, and 90
 tasks, 3, 5, 8, and 10 UAVs, and seeds 101 through 110. The Markdown summary
 is `docs/reports/pgbm_v1_simulation_findings.md`, and the run manifest is
 `Simulation/results/pgbm_v1_two_hour_experiments/manifests/pgbm_v1_two_hour_matrix_manifest.json`.
+
+The shared chart builder is `Simulation/report_charts.py`. It regenerates the
+four V1 figures from the canonical matrix without changing simulation results.
