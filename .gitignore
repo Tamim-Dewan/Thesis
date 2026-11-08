@@ -8,4 +8,20 @@
 *.toc
 *.bbl
 *.blg
+*.xdv
 .DS_Store
+
+# Local/generated presentation build artifacts
+**/node_modules/
+**/node_modules
+Supervisor Presentation/.build/
+Supervisor Presentation/.chart-data-*/
+archive/Supervisor Presentation/.build/
+archive/Supervisor Presentation/.chart-data-*/
+archive/tmp/
+
+# Large generated simulation traces and HTML snapshots
+Simulation/results/pgbm_v2_1_cache_experiments/decision_traces/
+archive/Simulation/results/heidata_controlled_neighborhood_initial_20260927/heidata_controlled_neighborhood_damage_view.html
+archive/Simulation/results/heidata_controlled_neighborhood_initial_20260927/heidata_controlled_neighborhood_environment.html
+archive/Simulation/results/heidata_controlled_neighborhood_initial_20260927/heidata_controlled_neighborhood_initial_step_by_step.html

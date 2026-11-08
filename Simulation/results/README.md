@@ -4,6 +4,10 @@ This directory contains generated outputs. The canonical PGBM V1 experiment
 artifacts are grouped under `pgbm_v1_two_hour_experiments/` so that each file
 name identifies its experiment content.
 
+Generated views and exploratory outputs that are not part of the active thesis
+workflow are kept under the repository-root `archive/` directory. The active
+environment demos and canonical V1/V2/V2.1 evidence remain here.
+
 ## Artifact groups
 
 - `du_*`: University of Dhaka outdoor source, damage, collision, preview, and
@@ -12,10 +16,9 @@ name identifies its experiment content.
   scenario artifacts.
 - `laquila_*`: the separate L’Aquila informed source reconstruction outputs.
 - `heidata_*`: source mesh and OSM benchmark outputs.
-- `phase1_*`: the original experiment contract manifest and empty metrics file.
-- `research_metrics*`: repeated planner comparison metrics. New initial
-  comparisons use `research_metrics_initial.csv`; the current one replacement
-  fixture is explicitly labelled `research_metrics_recourse.csv`.
+- Historical `phase1_*` and `research_metrics*` outputs are preserved under
+  `archive/Simulation/results/legacy_metrics/`; the canonical V1/V2/V2.1
+  matrices are kept in their dedicated experiment folders.
 - `pgbm_v1_two_hour_experiments/raw_metrics/`: the complete 240 row matrix,
   baseline, pilot, and historical sensitivity CSV files.
 - `pgbm_v1_two_hour_experiments/metrics_by_configuration/`: six environment

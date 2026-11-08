@@ -167,7 +167,7 @@ V1 is a transparent bounded reference planner, not the final mathematical PGBM o
 ## Reproducibility artifacts
 
 - `Simulation/results/pgbm_v1_two_hour_experiments/raw_metrics/pgbm_v1_two_hour_matrix_metrics_tasks_30_60_90_uavs_3_5_8_10_seeds_101_110.csv` contains all raw rows.
-- `Simulation/run_pgbm_v1_experiment_matrix.py` runs the default heavy matrix.
+- `Simulation/experiments/run_pgbm_v1_experiment_matrix.py` runs the default heavy matrix.
 - `Simulation/pgbm_sim/experiment.py` contains the matrix runner and metric assembly.
 - `Simulation/pgbm_sim/event_simulation.py` contains the 120 minute event clock and queue execution.
 - `Experiment Reports/V1/pgbm_v1_simulation_findings_bn.tex` is the PDF source for the formatted report.

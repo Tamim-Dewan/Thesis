@@ -7,7 +7,8 @@ import sys
 from pathlib import Path
 
 
-DEFAULT_CONFIG = Path(__file__).with_name("configs") / "initial_snapshot.json"
+SIMULATION_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_CONFIG = SIMULATION_ROOT / "configs" / "initial_snapshot.json"
 
 
 def load_config(path: Path):
@@ -34,7 +35,7 @@ def build_command(config, run):
     scenario = config["scenario"]
     return [
         sys.executable,
-        str(Path(__file__).with_name("run_simulation.py")),
+        str(SIMULATION_ROOT / "run_simulation.py"),
         "--mode",
         run["mode"],
         "--severity",
@@ -65,7 +66,7 @@ def main() -> None:
         command = build_command(config, run)
         print(" ".join(command))
         if not args.dry_run:
-            subprocess.run(command, check=True, cwd=str(Path(__file__).parent))
+            subprocess.run(command, check=True, cwd=str(SIMULATION_ROOT))
 
 
 if __name__ == "__main__":

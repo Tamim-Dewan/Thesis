@@ -3,6 +3,9 @@
 This directory contains the reproducible Python simulation and the separate
 heiDATA mesh benchmark reference.
 
+The executable V1, V2, and V2.1 experiment runners live under
+`experiments/`; `run_simulation.py` remains the primary single-episode CLI.
+
 ## Commands
 
 Run the complete test suite from the thesis root with:
@@ -28,7 +31,7 @@ Generate a scene preview with task and vertical drop off layers using
 reference with `PYTHONPATH=. python3 -m heidata_benchmark.cli` and its manifest.
 
 Run the formulation aligned V2 paired recourse matrix with
-`PYTHONPATH=. python3 run_pgbm_v2_experiment_matrix.py`; use the task loads,
+`PYTHONPATH=. python3 experiments/run_pgbm_v2_experiment_matrix.py`; use the task loads,
 fleet sizes, and seeds documented in `pgbm_sim/v2/AGENTS.md` for the canonical
 comparison.
 

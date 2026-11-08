@@ -32,7 +32,7 @@ optimization solver. Active mission recourse and rerouting remain deferred.
   return-to-base events.
 - `apply_recourse` adds uniquely identified newly detected tasks and replans;
   duplicate task identifiers are rejected explicitly.
-- `run_experiments.py` writes one comparable metrics row per seed and method.
+- `experiments/run_experiments.py` writes one comparable metrics row per seed and method.
   Initial comparisons disable recourse by default. The current one replacement
   fixture is enabled only with `--with-recourse` and each metrics row records
   `recourse_enabled`.

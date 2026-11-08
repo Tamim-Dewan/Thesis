@@ -7,14 +7,14 @@ initial solution visualization work.
 
 - `du_outdoor_initial_solution_report.json`: DU execution report.
 - `du_outdoor_initial_solution_scenario.json`: DU scenario input.
-- `du_outdoor_initial_solution_static_view.html`: DU static initial solution view.
 - `du_outdoor_initial_solution_step_by_step_replay.html`: DU replay with movement, arrival
   holds, and serving popups.
 - `synthetic_initial_solution_report.json`: Synthetic execution report.
 - `synthetic_initial_solution_scenario.json`: Synthetic scenario input.
-- `synthetic_initial_solution_static_view.html`: Synthetic static initial solution view.
 - `synthetic_initial_solution_step_by_step_replay.html`: Synthetic replay with movement,
   arrival holds, and serving popups.
+
+The superseded static views are preserved under the root `archive/` directory.
 
 The run uses the approved `t = 30` snapshot, no recourse, and the initial
 heuristic planner. Each task arrival holds the replay for five seconds and

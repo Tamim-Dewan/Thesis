@@ -876,7 +876,7 @@ def generate_markdown(
             "",
             "* `Simulation/results/pgbm_v2_recourse_experiments/raw_metrics/pgbm_v2_paired_matrix_metrics_tasks_30_60_90_uavs_3_5_8_10_seeds_101_110.csv`: V1 এবং V2-এর ৪৮০টি metrics row।",
             "* `Simulation/results/pgbm_v2_recourse_experiments/decision_traces/pgbm_v2_decision_traces.jsonl`: প্রতি V2 episode-এর complete recourse trace।",
-            "* `Simulation/run_pgbm_v2_experiment_matrix.py`: paired matrix execution script।",
+            "* `Simulation/experiments/run_pgbm_v2_experiment_matrix.py`: paired matrix execution script।",
             "* `Simulation/pgbm_sim/v2/`: V2 runtime state, recourse evaluator, event runner এবং paired experiment logic।",
             "* `docs/specs/0007-pgbm-v2-task-replacement-recourse.md`: accepted formulation-aligned design specification।",
         ]
@@ -1344,7 +1344,7 @@ def generate_tex(
             r"\scriptsize\sloppy",
             r"\item \code{Simulation/results/pgbm_v2_recourse_experiments/raw_metrics/pgbm_v2_paired_matrix_metrics_tasks_30_60_90_uavs_3_5_8_10_seeds_101_110.csv}: ৪৮০টি metrics row।",
             r"\item \code{Simulation/results/pgbm_v2_recourse_experiments/decision_traces/pgbm_v2_decision_traces.jsonl}: ২৪০টি V2 decision trace।",
-            r"\item \code{Simulation/run_pgbm_v2_experiment_matrix.py}: matrix execution script।",
+            r"\item \code{Simulation/experiments/run_pgbm_v2_experiment_matrix.py}: matrix execution script।",
             r"\item \code{Simulation/pgbm_sim/v2/}: V2 runtime, recourse এবং experiment modules।",
             r"\item \code{docs/specs/0007-pgbm-v2-task-replacement-recourse.md}: accepted design specification।",
             r"\end{itemize}",

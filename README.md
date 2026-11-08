@@ -9,12 +9,15 @@ and a separate heiDATA reference benchmark.
   figures, and working drafts.
 - `docs/` contains project scope and implementation specifications.
 - `Simulation/pgbm_sim/` contains the main deterministic simulator.
+- `Simulation/experiments/` contains the V1, V2, and V2.1 experiment runners.
 - `Simulation/heidata_benchmark/` contains the separate source faithful mesh
   and OSM benchmark. It does not modify the main simulator.
 - `Simulation/data/` contains local templates and benchmark assets.
 - `Simulation/tests/` contains tests for the main simulator and benchmark.
 - `Simulation/results/` contains generated scenarios, reports, metrics, and
   visual previews. See its README for the artifact groups.
+- `archive/` contains generated artifacts that are not part of the active
+  workflow but may be restored later.
 - `PROJECT_CONTEXT.md` records the current working plan and decisions.
 
 ## Initial no recourse run
@@ -37,7 +40,7 @@ The approved DU and synthetic snapshot inputs are also available as one
 reproducible run manifest:
 
 ~~~bash
-python3 Simulation/run_initial_snapshot.py
+python3 Simulation/experiments/run_initial_snapshot.py
 ~~~
 
 ## Tests

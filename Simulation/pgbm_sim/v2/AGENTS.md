@@ -10,7 +10,7 @@ energy, and service value contracts.
 Run the full V2 paired matrix from `Simulation/` with:
 
 ```bash
-PYTHONPATH=. python3 run_pgbm_v2_experiment_matrix.py \
+PYTHONPATH=. python3 experiments/run_pgbm_v2_experiment_matrix.py \
   --modes synthetic du_outdoor \
   --task-counts 30 60 90 \
   --uav-counts 3 5 8 10 \

@@ -7,7 +7,7 @@ obstacles. The scene is a reusable Python object, not a notebook project.
 Run the Phase 1 validation from this directory:
 
 ```bash
-python3 run_phase1.py --config configs/phase1_default.json
+python3 experiments/run_phase1.py --config configs/phase1_default.json
 python3 -m pytest -q
 ```
 
@@ -185,7 +185,7 @@ execution events. Its `recourse` field is `null` by design.
 Run both approved cases from the manifest with:
 
 ~~~bash
-python3 run_initial_snapshot.py
+python3 experiments/run_initial_snapshot.py
 ~~~
 
 After a report is created, render its assignment and routes with:
@@ -255,7 +255,7 @@ Run the PGBM heuristic and nearest task baseline over repeated seeds without
 recourse with:
 
 ```bash
-python3 run_experiments.py --mode du_outdoor --severity moderate \
+python3 experiments/run_experiments.py --mode du_outdoor --severity moderate \
   --seeds 101 102 103 104 105 \
   --start-time 30 --output results/research_metrics_initial.csv
 ```
@@ -270,7 +270,7 @@ The completed matrix covers Synthetic and DU outdoor, task loads 30, 60, and
 Run one event episode:
 
 ```bash
-python3 run_pgbm_v1_single_simulation.py --mode du_outdoor --severity moderate \
+python3 experiments/run_pgbm_v1_single_simulation.py --mode du_outdoor --severity moderate \
   --seed 20260924 --task-count 30 --uav-count 3 \
   --output results/pgbm_v1_two_hour_experiments/visualizations/single_run/pgbm_v1_single_run_report.json
 ```
@@ -278,7 +278,7 @@ python3 run_pgbm_v1_single_simulation.py --mode du_outdoor --severity moderate \
 Run the complete matrix with the descriptive default output path:
 
 ```bash
-python3 run_pgbm_v1_experiment_matrix.py
+python3 experiments/run_pgbm_v1_experiment_matrix.py
 ```
 
 The matrix output is
@@ -302,7 +302,7 @@ The current replacement fixture is opt in, so it cannot silently change an
 initial planning comparison:
 
 ```bash
-python3 run_experiments.py --mode du_outdoor --severity moderate \
+python3 experiments/run_experiments.py --mode du_outdoor --severity moderate \
   --seeds 101 102 103 104 105 \
   --start-time 30 --with-recourse \
   --output results/research_metrics_recourse.csv
@@ -326,7 +326,7 @@ service value gain is positive.
 Run the paired heavy matrix from this directory with:
 
 ```bash
-PYTHONPATH=. python3 run_pgbm_v2_experiment_matrix.py
+PYTHONPATH=. python3 experiments/run_pgbm_v2_experiment_matrix.py
 ```
 
 The command reuses the preserved V1 heavy matrix as comparison evidence and

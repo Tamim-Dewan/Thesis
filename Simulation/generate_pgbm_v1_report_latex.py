@@ -348,7 +348,7 @@ def build_tex(rows):
         r"The report is supported by the following local artifacts:",
         r"\begin{itemize}",
         r"\item \code{Simulation/results/pgbm_v1_two_hour_experiments/raw_metrics/pgbm_v1_two_hour_matrix_metrics_tasks_30_60_90_uavs_3_5_8_10_seeds_101_110.csv}, containing all raw rows.",
-        r"\item \code{Simulation/run_pgbm_v1_experiment_matrix.py}, which runs the default heavy matrix.",
+        r"\item \code{Simulation/experiments/run_pgbm_v1_experiment_matrix.py}, which runs the default heavy matrix.",
         r"\item \code{Simulation/pgbm_sim/experiment.py}, which assembles the experiment rows.",
         r"\item \code{Simulation/pgbm_sim/event_simulation.py}, which implements the 120 minute event clock and queue execution.",
         r"\item \code{Experiment Reports/V1/pgbm_v1_simulation_findings_bn.tex}, this report source.",

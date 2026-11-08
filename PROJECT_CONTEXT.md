@@ -171,7 +171,7 @@ Run date: 2026-09-26
 
 The repository was inventoried on 2026-09-26. The current source, specifications, thesis material, tests, generated artifacts, and Git state are known well enough to begin the initial run preparation. A correctness and organization pass then added task eligibility filtering, battery reserve enforcement, scenario execution time propagation, a no recourse run option, a root project map, and a results index.
 
-Task 1 completed on 2026-09-26. The inventory found 161 files under `Simulation`, 15 documentation files, 48 research-source files, 14 simulation test modules, and 62 result artifacts. The main entry points are `run_simulation.py`, `run_experiments.py`, `run_phase1.py`, and the rendering scripts. The complete-episode CLI exposes `synthetic`, `du_outdoor`, `real_building`, and `laquila_informed`; the experiment CLI supports `synthetic`, `du_outdoor`, and `laquila_informed`. The worktree remains dirty with tracked mathematical-model deletions and untracked current project material.
+Task 1 completed on 2026-09-26. The inventory found 161 files under `Simulation`, 15 documentation files, 48 research-source files, 14 simulation test modules, and 62 result artifacts. The main entry points are `run_simulation.py`, the runners under `experiments/`, and the rendering scripts. The complete-episode CLI exposes `synthetic`, `du_outdoor`, `real_building`, and `laquila_informed`; the experiment CLI supports `synthetic`, `du_outdoor`, and `laquila_informed`. The worktree remains dirty with tracked mathematical-model deletions and untracked current project material.
 
 ## Current Implementation
 
